@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Exo_2 } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 
 const exo2 = Exo_2({
   subsets: ["latin"],
@@ -16,15 +15,14 @@ export const metadata: Metadata = {
   description: "Full-Stack Game Store App Powered by Next.js 16",
 };
 
-export default function RootLayout({
+export default function MainLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${exo2.variable} ${exo2.className}`}>
-        <Navbar />
         <main>{children}</main>
       </body>
     </html>

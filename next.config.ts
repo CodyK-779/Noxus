@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
-  cacheComponents: true
+  cacheComponents: true,
+  images: {
+    domains: ['media.rawg.io'],
+  }
 };
 
 export default nextConfig;

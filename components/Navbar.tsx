@@ -1,27 +1,5 @@
 import Image from "next/image";
-
-const navLinks = [
-  {
-    title: "Home",
-    link: "/",
-  },
-  {
-    title: "Browse",
-    link: "/browse",
-  },
-  {
-    title: "Genres",
-    link: "/genres",
-  },
-  {
-    title: "Platforms",
-    link: "/platforms",
-  },
-  {
-    title: "/Publishers",
-    link: "/publishers",
-  },
-];
+import Navlinks from "./Navlinks";
 
 const Navbar = () => {
   return (
@@ -29,14 +7,20 @@ const Navbar = () => {
       <div className="max-container flex items-center justify-between">
         {/* First Row */}
         <div className="flex items-center gap-3">
-          <div className="relative size-11 overflow-hidden">
+          <div className="relative size-10 overflow-hidden">
             <Image src="/logo.webp" alt="Logo" fill className="object-cover" />
           </div>
-          <h1 className="text-3xl font-semibold">Noxus</h1>
+          <h1 className="text-[26px] font-semibold">Noxus</h1>
         </div>
+        {/* Second Row */}
+        <Navlinks />
+        {/* Third Row */}
+        <p className="font-medium">Account</p>
       </div>
     </nav>
   );
 };
 
 export default Navbar;
+// npx shadcn mcp init
+// npx shadcn@latest add @efferd/header-10
