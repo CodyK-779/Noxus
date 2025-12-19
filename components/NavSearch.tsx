@@ -11,7 +11,7 @@ const NavSearch = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { closeSearch, setCloseSearch } = useMenu();
+  const { openSearch, setOpenSearch } = useMenu();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -40,6 +40,8 @@ const NavSearch = () => {
     router.push(pathname, { scroll: false });
   };
 
+  const selectedSearch = searchParams.get("search") || "";
+
   return (
     <div className="flex items-center">
       <div className="hidden min-[580px]:block cm:w-50 lg:w-72">
@@ -48,6 +50,7 @@ const NavSearch = () => {
             type="text"
             ref={inputRef}
             onChange={(e) => setSearch(e.target.value)}
+            defaultValue={selectedSearch}
             placeholder="Search Games"
             enterKeyHint="search"
             className="w-full rounded-full font-medium text-[15px] bg-neutral-800 text-neutral-100 pl-4 pr-10 py-2 focus:outline-none"
@@ -69,7 +72,10 @@ const NavSearch = () => {
           )}
         </form>
       </div>
-      <div className="min-[580px]:hidden cursor-pointer">
+      <div
+        className="min-[580px]:hidden cursor-pointer"
+        onClick={() => setOpenSearch(true)}
+      >
         <Search className="min-[400px]:size-6 size-5" />
       </div>
     </div>

@@ -15,9 +15,9 @@ interface Props {
 
 interface MenuContextType {
   openMenu: boolean;
-  closeSearch: boolean;
+  openSearch: boolean;
   setOpenMenu: Dispatch<SetStateAction<boolean>>;
-  setCloseSearch: Dispatch<SetStateAction<boolean>>;
+  setOpenSearch: Dispatch<SetStateAction<boolean>>;
 }
 
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
@@ -34,11 +34,11 @@ export const useMenu = () => {
 
 const MenuProvider = ({ children }: Props) => {
   const [openMenu, setOpenMenu] = useState(false);
-  const [closeSearch, setCloseSearch] = useState(false);
+  const [openSearch, setOpenSearch] = useState(false);
 
   return (
     <MenuContext.Provider
-      value={{ openMenu, closeSearch, setOpenMenu, setCloseSearch }}
+      value={{ openMenu, openSearch, setOpenMenu, setOpenSearch }}
     >
       {children}
     </MenuContext.Provider>
