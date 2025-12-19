@@ -69,4 +69,12 @@
   .max-container {
     @apply max-w-7xl mx-auto px-4
   }
+
+  .nox-btn {
+    @apply relative font-orbitron py-2 bg-[#e91e3f] hover:bg-[#960f26] overflow-hidden hover:shadow-[0_0_20px_rgba(220,38,38,0.8)] transition-colors duration-300 ease-custom-ease [clip-path:polygon(10px_0,100%_0,100%_calc(100%_-_10px),calc(100%_-_10px)_100%,0_100%,0_10px)] cursor-pointer
+  }
+
+  .nox-hollow {
+    @apply relative font-orbitron py-2 bg-transparent border border-[#e91e3f] text-[#e91e3f] hover:bg-[#e91e3f] hover:text-white hover:shadow-[0_0_20px_rgba(233,30,63,0.5)] transition-colors duration-300 ease-custom-ease [clip-path:polygon(10px_0,100%_0,100%_calc(100%_-_10px),calc(100%_-_10px)_100%,0_100%,0_10px)] overflow-hidden cursor-pointer
+  }
 }

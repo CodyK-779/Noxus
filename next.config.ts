@@ -4,7 +4,20 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   cacheComponents: true,
   images: {
-    domains: ['media.rawg.io'],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "media.rawg.io"
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+      },
+    ]
   }
 };
 

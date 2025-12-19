@@ -1,6 +1,6 @@
 const navLinks = [
   {
-    title: "Home",
+    title: "Discover",
     link: "/",
   },
   {
@@ -8,24 +8,19 @@ const navLinks = [
     link: "/browse",
   },
   {
-    title: "Genres",
-    link: "/genres",
-  },
-  {
-    title: "Platforms",
-    link: "/platforms",
-  },
-  {
-    title: "Publishers",
-    link: "/publishers",
+    title: "Stores",
+    link: "/stores",
   },
 ];
 
 const Navlinks = () => {
   return (
-    <ul className="flex items-center text-center gap-8">
+    <ul className="hidden min-[800px]:flex items-center text-center gap-10">
       {navLinks.map((link) => (
-        <li key={link.title} className="font-medium">
+        <li
+          key={link.title}
+          className="font-semibold hover:text-[#e91e3f] transition-colors duration-200 ease-in cursor-pointer"
+        >
           {link.title}
         </li>
       ))}

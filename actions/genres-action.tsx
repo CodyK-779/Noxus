@@ -9,7 +9,7 @@ interface GenreResults {
   image_background: string;
 }
 
-interface RAWGResponse<T> {
+export interface RAWGResponse<T> {
   count: number;
   next: string | null;
   previous: string | null;
