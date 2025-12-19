@@ -42,7 +42,7 @@ const NavSearch = () => {
 
   return (
     <div className="flex items-center">
-      <div className="hidden min-[560px]:block cm:w-50 lg:w-72">
+      <div className="hidden min-[580px]:block cm:w-50 lg:w-72">
         <form className="relative" onSubmit={handleSubmit}>
           <input
             type="text"
@@ -69,8 +69,8 @@ const NavSearch = () => {
           )}
         </form>
       </div>
-      <div className="min-[560px]:hidden cursor-pointer">
-        <Search className="size-6" />
+      <div className="min-[580px]:hidden cursor-pointer">
+        <Search className="min-[400px]:size-6 size-5" />
       </div>
     </div>
   );

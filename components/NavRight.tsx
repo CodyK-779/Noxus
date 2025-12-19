@@ -19,7 +19,7 @@ const NavRight = () => {
   };
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center min-[350px]:gap-4 gap-3.5">
       <Suspense fallback={<NavSearchShell />}>
         <NavSearch />
       </Suspense>
@@ -27,11 +27,13 @@ const NavRight = () => {
         <ProfileDropdown />
       ) : (
         <Link href="/signIn">
-          <button className="text-sm px-5 font-bold nox-btn">Sign In</button>
+          <button className="min-[400px]:text-sm text-xs sm:px-5 px-4 font-bold nox-btn">
+            Sign In
+          </button>
         </Link>
       )}
       <div className="min-[800px]:hidden" onClick={() => setOpenMenu(true)}>
-        <Menu className="size-8" />
+        <Menu className="min-[400px]:size-8 size-7" />
       </div>
     </div>
   );

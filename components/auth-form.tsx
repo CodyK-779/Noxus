@@ -23,7 +23,7 @@ export function AuthForm() {
         </Button>
 
         <div className="mx-auto space-y-4 sm:w-sm">
-          <div className="flex items-center gap-2 -mb-2">
+          <div className="flex items-center gap-2.5 -mb-2">
             <div className="relative size-8">
               <Image
                 src="/logo-red.png"
@@ -32,7 +32,10 @@ export function AuthForm() {
                 className="object-cover"
               />
             </div>
-            <p className="text-[22px] font-bold">Noxus</p>
+            {/* <p className="text-[22px] font-bold">Noxus</p> */}
+            <p className="text-[22px] font-orbitron tracking-wide font-bold">
+              Noxus
+            </p>
           </div>
           <div className="flex flex-col space-y-1">
             <h1 className="font-bold text-2xl tracking-wide">

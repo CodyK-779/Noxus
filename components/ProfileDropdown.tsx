@@ -20,7 +20,7 @@ const ProfileDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="relative size-[38px] rounded-full overflow-hidden cursor-pointer flex items-center justify-center bg-[#e91e3f] text-white">
+        <div className="relative min-[400px]:size-[38px] size-[35px] rounded-full overflow-hidden cursor-pointer flex items-center justify-center bg-[#e91e3f] text-white">
           {session.user.image ? (
             <Image
               src={session.user.image}

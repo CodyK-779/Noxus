@@ -10,7 +10,7 @@ const Navbar = () => {
         {/* First Row */}
         <div className="flex items-center gap-10">
           <Link href="/" className="flex items-center gap-3">
-            <div className="relative size-9 overflow-hidden">
+            <div className="relative min-[400px]:size-9 size-8 overflow-hidden">
               <Image
                 src="/logo-red.png"
                 alt="Logo"
@@ -18,7 +18,9 @@ const Navbar = () => {
                 className="object-cover"
               />
             </div>
-            <h1 className="text-[26px] font-semibold">Noxus</h1>
+            <h1 className="min-[400px]:text-2xl text-xl font-bold font-orbitron tracking-wide">
+              Noxus
+            </h1>
           </Link>
           {/* Second Row */}
           <Navlinks />
