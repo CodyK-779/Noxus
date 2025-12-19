@@ -8,7 +8,7 @@ import { useMenu } from "./MenuProvider";
 import MobileNavSearch from "./MobileNavSearch";
 
 const NavContent = () => {
-  const { openSearch, setOpenSearch } = useMenu();
+  const { openSearch } = useMenu();
 
   return (
     <>
@@ -25,6 +25,7 @@ const NavContent = () => {
                 src="/logo-red.png"
                 alt="Logo"
                 fill
+                sizes="(min-width: 400px) 36px, 32px"
                 className="object-cover"
               />
             </div>

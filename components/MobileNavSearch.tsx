@@ -27,12 +27,12 @@ const MobileNavSearch = () => {
 
     if (query) {
       params.set("search", query);
+      router.push(`/browse?${params.toString()}`, { scroll: false });
     } else {
       params.delete("search");
       setSearch("");
+      router.push(pathname);
     }
-
-    router.push(`/browse?${params.toString()}`, { scroll: false });
   };
 
   const clearSearch = () => {

@@ -21,12 +21,12 @@ const NavSearch = () => {
 
     if (query) {
       params.set("search", query);
+      router.push(`/browse?${params.toString()}`);
     } else {
       params.delete("search");
       setSearch("");
+      router.push(pathname);
     }
-
-    router.push(`/browse?${params.toString()}`);
   };
 
   const clearSearch = () => {
@@ -65,10 +65,7 @@ const NavSearch = () => {
               <XIcon className="size-[22px]" />
             </button>
           ) : (
-            <Search
-              onClick={handleSubmit}
-              className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-neutral-200 cursor-pointer"
-            />
+            <Search className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-neutral-200 cursor-pointer" />
           )}
         </form>
       </div>
