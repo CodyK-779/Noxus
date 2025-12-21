@@ -8,10 +8,9 @@ const HeroSection = () => {
   const [showGame, setShowGame] = useState(3);
 
   return (
-    <section className="flex gap-6">
+    <section className="grid grid-cols-5 items-center gap-6">
       <HeroLeft showGame={showGame} />
       <HeroRight setShowGame={setShowGame} />
-      {/* <div className="w-[325px] border border-white"></div> */}
     </section>
   );
 };

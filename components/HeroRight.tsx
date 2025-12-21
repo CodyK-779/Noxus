@@ -1,7 +1,6 @@
 import { heroRight } from "@/data/hero-data";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
-import { AspectRatio } from "./ui/aspect-ratio";
 
 interface Props {
   setShowGame: Dispatch<SetStateAction<number>>;
@@ -9,22 +8,13 @@ interface Props {
 
 const HeroRight = ({ setShowGame }: Props) => {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="col-span-1 flex flex-col gap-0.5">
       {heroRight.map((data, index) => (
         <div
           key={data.name}
-          className="flex items-center gap-4 border border-white px-3 py-4 rounded-md hover:bg-neutral-800"
+          className="flex items-center gap-4 px-3 py-2 rounded-md hover:bg-neutral-800"
         >
-          {/* <AspectRatio ratio={2 / 3} className="overflow-hidden rounded-md">
-            <Image
-              src={data.img}
-              alt={data.name}
-              fill
-              // sizes="(max-width: 768px) 100vw, 200px"
-              className="object-cover"
-            />
-          </AspectRatio> */}
-          <div className="relative w-12 aspect-[2/3] rounded-md overflow-hidden">
+          <div className="relative min-w-[50px] aspect-[2/3] rounded-md overflow-hidden">
             <Image
               src={data.img}
               alt={data.name}
