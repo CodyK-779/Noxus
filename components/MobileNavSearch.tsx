@@ -66,7 +66,7 @@ const MobileNavSearch = () => {
         <Search className="absolute text-neutral-300 min-[350px]:top-[8.5px] top-[9px] min-[350px]:left-3 left-2.5 min-[350px]:size-5 size-4" />
         {search && (
           <div
-            className="absolute min-[350px]:top-1.5 top-[5.5px] min-[350px]:right-2 right-[7px]"
+            className="absolute min-[350px]:top-1.5 top-[5.5px] min-[350px]:right-2 right-[7px] cursor-pointer"
             onClick={clearSearch}
           >
             <div className="min-[350px]:size-6 size-5 font-orbitron rounded-full min-[350px]:text-sm text-xs bg-neutral-700 grid place-content-center">

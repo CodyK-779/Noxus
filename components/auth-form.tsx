@@ -29,6 +29,7 @@ export function AuthForm() {
                 src="/logo-red.png"
                 alt="logo"
                 fill
+                sizes="(min-width: 400px) 36px, 32px"
                 className="object-cover"
               />
             </div>

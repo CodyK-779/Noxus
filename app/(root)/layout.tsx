@@ -7,7 +7,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <div>
       <MenuProvider>
         <Navbar />
-        <main className="overflow-hidden">{children}</main>
+        <main className="overflow-hidden pb-20">{children}</main>
       </MenuProvider>
     </div>
   );
