@@ -17,7 +17,7 @@ const navLinks = [
 
 const Navlinks = () => {
   return (
-    <ul className="hidden min-[800px]:flex items-center text-center gap-10">
+    <ul className="hidden min-[850px]:flex items-center text-center gap-10">
       {navLinks.map((link) => (
         <li key={link.title}>
           <Link href={link.link} className="nox-link">

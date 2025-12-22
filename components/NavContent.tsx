@@ -18,7 +18,7 @@ const NavContent = () => {
         } items-center justify-between`}
       >
         {/* First Row */}
-        <div className="flex items-center gap-10">
+        <div className="flex items-center lg:gap-10 gap-8">
           <Link href="/" className="flex items-center gap-3">
             <div className="relative min-[400px]:size-9 size-8 overflow-hidden">
               <Image
