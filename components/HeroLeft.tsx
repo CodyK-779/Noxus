@@ -1,6 +1,7 @@
 import { heroData } from "@/data/hero-data";
 import { Bookmark } from "lucide-react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 
 interface Props {
@@ -27,27 +28,49 @@ const logoStyles = (logo: string) => {
 const HeroLeft = ({ showGame }: Props) => {
   return (
     <div className="col-span-4 relative overflow-hidden rounded-2xl w-full aspect-video">
-      <div className="absolute inset-0">
-        <Image
-          src={heroData[showGame].img}
-          alt="Game_Background"
-          fill
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent" />
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={showGame}
+          className="absolute inset-0"
+          initial={{ x: 80, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -80, opacity: 0 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
+          <Image
+            src={heroData[showGame].img}
+            alt="Game_Background"
+            fill
+            className="object-cover"
+            priority
+          />
+
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent" />
+        </motion.div>
+      </AnimatePresence>
       <div className="absolute min-[1014px]:bottom-10 bottom-8 min-[1014px]:left-12 left-10 z-10">
         <div className="flex flex-col">
-          <div className={`relative ${logoStyles(heroData[showGame].logo)}`}>
-            <Image
-              src={heroData[showGame].logo}
-              alt="Game Logo"
-              fill
-              sizes="(min-width: 1014px) 240px, 208px"
-              className="object-contain z-10"
-            />
-          </div>
-
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={heroData[showGame].logo}
+              className={`relative ${logoStyles(heroData[showGame].logo)}`}
+              initial={{ x: 200, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+              }}
+            >
+              <Image
+                src={heroData[showGame].logo}
+                alt="Game Logo"
+                fill
+                sizes="(min-width: 1014px) 240px, 208px"
+                className="object-contain z-10"
+              />
+            </motion.div>
+          </AnimatePresence>
           <p className="mb-2 min-[1014px]:text-lg text-base font-bold">
             {heroData[showGame].award}
           </p>
