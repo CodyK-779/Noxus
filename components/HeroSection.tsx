@@ -1,20 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import HeroLeft from "./HeroLeft";
 import HeroRight from "./HeroRight";
-import { heroRight } from "@/data/hero-data";
 
 const HeroSection = () => {
-  const [showGame, setShowGame] = useState(3);
-
-  useEffect(() => {
-    const timeOut = setTimeout(() => {
-      setShowGame((prev) => (prev + 1) % heroRight.length);
-    }, 9000);
-
-    return () => clearTimeout(timeOut);
-  }, [showGame]);
+  const [showGame, setShowGame] = useState(0);
 
   return (
     <>
