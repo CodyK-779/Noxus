@@ -29,7 +29,7 @@ const HeroRight = ({ showGame, setShowGame }: Props) => {
               sizes="(max-width: 768px) 100vw, 200px"
             />
           </div>
-          <p className="min-[1014px]:text-base min-[888px]:text-sm min-[784px]:text-[13px] text-[12.5px] font-medium">
+          <p className="min-[1014px]:text-base min-[888px]:text-sm min-[800px]:text-[13px] text-[12px] font-medium">
             {data.name}
           </p>
         </div>
