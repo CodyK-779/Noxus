@@ -3,6 +3,7 @@
 import { useState } from "react";
 import HeroLeft from "./HeroLeft";
 import HeroRight from "./HeroRight";
+import MBHeroSection from "./MBHeroSection";
 
 const HeroSection = () => {
   const [showGame, setShowGame] = useState(0);
@@ -13,6 +14,8 @@ const HeroSection = () => {
         <HeroLeft showGame={showGame} />
         <HeroRight showGame={showGame} setShowGame={setShowGame} />
       </section>
+
+      <MBHeroSection />
     </>
   );
 };
