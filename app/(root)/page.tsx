@@ -2,9 +2,9 @@ import HeroSection from "@/components/HeroSection";
 
 export default async function Home() {
   return (
-    <div className="max-container pt-[90px]">
+    <>
       <HeroSection />
-      <p className="mt-10">
+      {/* <p className="mt-10">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam nam
         tempore qui, et atque assumenda excepturi voluptatibus nostrum corrupti
         repellat alias, autem aperiam. Eligendi eaque ab alias? Optio, suscipit
@@ -114,7 +114,7 @@ export default async function Home() {
         explicabo, illo itaque eligendi officiis veritatis commodi voluptate?
         Nemo natus optio eos ipsam adipisci velit a dignissimos sequi alias rem
         provident eius molestias officia illo, labore mollitia asperiores?
-      </p>
-    </div>
+      </p> */}
+    </>
   );
 }

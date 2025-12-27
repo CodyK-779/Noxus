@@ -32,9 +32,9 @@ const HeroLeft = ({ showGame }: Props) => {
         <motion.div
           key={showGame}
           className="absolute inset-0"
-          initial={{ x: 80, opacity: 0 }}
+          initial={{ x: 60, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -80, opacity: 0 }}
+          exit={{ x: -60, opacity: 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
           <Image
@@ -49,18 +49,22 @@ const HeroLeft = ({ showGame }: Props) => {
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent" />
         </motion.div>
       </AnimatePresence>
-      <div className="absolute min-[1014px]:bottom-10 bottom-8 min-[1014px]:left-12 left-10 z-10">
-        <div className="flex flex-col">
-          <AnimatePresence mode="wait">
+      <div className=" absolute min-[1014px]:bottom-10 bottom-8 min-[1014px]:left-12 left-10 z-10">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={showGame}
+            className="flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* LOGO */}
             <motion.div
-              key={heroData[showGame].logo}
               className={`relative ${logoStyles(heroData[showGame].logo)}`}
               initial={{ x: 200, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{
-                duration: 0.6,
-                ease: "easeOut",
-              }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <Image
                 src={heroData[showGame].logo}
@@ -70,24 +74,35 @@ const HeroLeft = ({ showGame }: Props) => {
                 className="object-contain z-10"
               />
             </motion.div>
-          </AnimatePresence>
-          <p className="mb-2 min-[1014px]:text-lg text-base font-bold">
-            {heroData[showGame].award}
-          </p>
-          <p className="min-[1014px]:mb-9 mb-7 font-medium max-w-[420px] min-[1014px]:text-base text-sm">
-            {heroData[showGame].desc}
-          </p>
-          <div className="flex items-center gap-4">
-            <Link href={heroData[showGame].link}>
-              <button className="nox-btn font-medium px-6 min-[1170px]:py-3 min-[1014px]:py-2.5 py-2 min-[1170px]:text-base min-[800px]:text-sm text-xs">
-                Learn More
-              </button>
-            </Link>
-            <button className="min-[1170px]:size-11 min-[1014px]:size-10 min-[800px]:size-9 size-8 bg-white rounded-md flex items-center justify-center">
-              <Bookmark className="min-[1170px]:size-5 size-4 text-neutral-900" />
-            </button>
-          </div>
-        </div>
+
+            {/* TEXT + BUTTONS */}
+            <motion.div
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            >
+              <p className="mb-2 min-[1014px]:text-lg text-base font-bold">
+                {heroData[showGame].saleText}
+              </p>
+
+              <p className="min-[1014px]:mb-9 mb-7 font-medium max-w-[420px] min-[1014px]:text-base text-sm">
+                {heroData[showGame].desc}
+              </p>
+
+              <div className="flex items-center gap-4">
+                <Link href={heroData[showGame].link}>
+                  <button className="nox-btn font-medium px-6 py-2">
+                    Learn More
+                  </button>
+                </Link>
+
+                <button className="size-9 bg-white rounded-md flex items-center justify-center">
+                  <Bookmark className="size-4 text-neutral-900" />
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
