@@ -3,7 +3,7 @@
 import { cacheLife } from "next/cache";
 import { RAWGResponse } from "./genres-action";
 
-interface GamePlatforms {
+export interface GamePlatforms {
   platform: {
     id: number;
     slug: string;
@@ -18,6 +18,7 @@ export interface GamesType {
   released: Date;
   background_image: string;
   rating: number;
+  metacritic: number;
   platforms: GamePlatforms[];
 }
 
@@ -44,7 +45,7 @@ export async function getGames(): Promise<RAWGResponse<GamesType>> {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch genres");
+    throw new Error("Failed to fetch games");
   }
 
   return res.json();
@@ -65,6 +66,34 @@ export async function getGameDetails(): Promise<GameDetails> {
 
   if (!res.ok) {
     throw new Error("Failed to fetch game details");
+  }
+
+  return res.json();
+}
+
+export async function getNewGames(): Promise<RAWGResponse<GamesType>> {
+  "use cache";
+  cacheLife("hours");
+
+  const today = new Date();
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(today.getDate() - 30);
+
+  const formatDate = (date: Date) => date.toISOString().split("T")[0];
+
+  const dates = `${formatDate(thirtyDaysAgo)},${formatDate(today)}`;
+
+  const res = await fetch(
+    `https://api.rawg.io/api/games?&page_size=40&dates=${dates}&key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["new", "games"],
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch new games");
   }
 
   return res.json();

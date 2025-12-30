@@ -10,10 +10,11 @@ import HeroGameCard from "./HeroGameCard";
 import { heroMobile } from "@/data/hero-data";
 import { Suspense } from "react";
 import { Skeleton } from "./ui/skeleton";
+import { CarouselNext } from "./ui/carousel";
 
 const MBHeroSection = () => {
   return (
-    <section className="min-[768px]:hidden pt-[90px] pb-10">
+    <section className="min-[768px]:hidden pt-[90px]">
       <Suspense
         fallback={<Skeleton className="aspect-[3/4] rounded-xl mx-12" />}
       >
@@ -26,17 +27,21 @@ const MBHeroSection = () => {
             clickable: true,
             bulletClass: "swiper-pagination-bullet",
             bulletActiveClass: "swiper-pagination-bullet-active",
+            el: ".swiper-pagination-container",
           }}
           autoplay={{
             delay: 5000,
             disableOnInteraction: false,
           }}
+          className="mb-2"
         >
           {heroMobile.map((data) => (
             <SwiperSlide key={data.link}>
               <HeroGameCard data={data} />
             </SwiperSlide>
           ))}
+
+          <div className="swiper-pagination-container flex gap-1.5 items-center justify-center py-5"></div>
         </Swiper>
       </Suspense>
     </section>

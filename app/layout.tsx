@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "remixicon/fonts/remixicon.css";
 import { Toaster } from "sonner";
 import { exo2, orbitron } from "./font";
 
