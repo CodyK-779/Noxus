@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewReleases from "./NewReleases";
 import NewGames from "./NewGames";
 import { RAWGResponse } from "@/actions/genres-action";
@@ -15,6 +15,22 @@ const NewReleasesContainer = ({ newGames }: Props) => {
     start: 0,
     end: 5,
   });
+
+  useEffect(() => {
+    const updateEndValue = () => {
+      const screenWidth = window.innerWidth >= 1024;
+      setPaginate((prev) => ({
+        start: prev.start,
+        end: screenWidth ? prev.start + 5 : prev.start + 4,
+      }));
+    };
+
+    updateEndValue();
+
+    window.addEventListener("resize", updateEndValue);
+
+    return () => window.removeEventListener("resize", updateEndValue);
+  }, []);
 
   return (
     <>

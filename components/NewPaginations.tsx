@@ -2,13 +2,27 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Pagination } from "./NewReleases";
+import { useEffect, useState } from "react";
 
 const NewPaginations = ({ paginate, setPaginate }: Pagination) => {
+  const [screenWidth, setScreenWidth] = useState(0);
+
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const itemsPerSlide = screenWidth >= 1024 ? 5 : 4;
+
   const handleNext = () => {
     if (paginate.end < 40) {
       setPaginate((prev) => ({
-        start: prev.start + 5,
-        end: prev.end + 5,
+        start: prev.start + itemsPerSlide,
+        end: prev.end + itemsPerSlide,
       }));
     }
 
@@ -18,8 +32,8 @@ const NewPaginations = ({ paginate, setPaginate }: Pagination) => {
   const handlePrevious = () => {
     if (paginate.start > 0) {
       setPaginate((prev) => ({
-        start: prev.start - 5,
-        end: prev.end - 5,
+        start: prev.start - itemsPerSlide,
+        end: prev.end - itemsPerSlide,
       }));
     }
 
