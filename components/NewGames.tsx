@@ -1,4 +1,4 @@
-import { GamePlatforms, GamesType } from "@/actions/games-action";
+import { GamesType } from "@/actions/games-action";
 import { RAWGResponse } from "@/actions/genres-action";
 import Image from "next/image";
 import { PaginateType } from "./NewReleases";
@@ -6,68 +6,18 @@ import { Dispatch, SetStateAction } from "react";
 import { Bookmark } from "lucide-react";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import {
+  gameRating,
+  platformIconByKey,
+  platformIcons,
+  ratingBadge,
+} from "@/utils/utils";
 
 interface Props {
   paginate: PaginateType;
   setPaginate: Dispatch<SetStateAction<PaginateType>>;
   newGames: RAWGResponse<GamesType>;
 }
-
-const getPlatformKey = (name: string) => {
-  if (name.includes("PC")) return "pc";
-  if (name.includes("PlayStation") || name.includes("PS")) return "playstation";
-  if (name.includes("Nintendo")) return "nintendo";
-  if (name.includes("Xbox")) return "xbox";
-  if (name.includes("macOs") || name.includes("iOs")) return "ios";
-  if (name.includes("Android")) return "android";
-  if (name.includes("Game Boy")) return "gameboy";
-  return null;
-};
-
-const platformIconByKey = (key: string | null) => {
-  switch (key) {
-    case "pc":
-      return <i className="ri-windows-fill"></i>;
-    case "playstation":
-      return <i className="ri-playstation-line"></i>;
-    case "nintendo":
-      return <i className="ri-switch-line"></i>;
-    case "xbox":
-      return <i className="ri-xbox-fill"></i>;
-    case "ios":
-      return <i className="ri-apple-fill"></i>;
-    case "android":
-      return <i className="ri-android-fill"></i>;
-    case "gameboy":
-      return <i className="ri-gamepad-fill"></i>;
-    default:
-      return null;
-  }
-};
-
-const platformIcons = (platform: GamePlatforms[]) => {
-  const uniquePlatforms = Array.from(
-    new Set(
-      platform.map((p) => getPlatformKey(p.platform.name)).filter(Boolean)
-    )
-  );
-
-  return uniquePlatforms;
-};
-
-const gameRating = (rating: number) => {
-  if (rating < 1) {
-    return rating.toFixed(0);
-  }
-
-  return rating.toFixed(1);
-};
-
-const ratingBadge = (rating: number) => {
-  if (rating < 3) return "bg-red-500";
-  if (rating < 4) return "bg-orange-500";
-  return "bg-green-500";
-};
 
 const NewGames = ({ newGames, paginate, setPaginate }: Props) => {
   return (

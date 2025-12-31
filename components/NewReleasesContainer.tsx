@@ -5,6 +5,7 @@ import NewReleases from "./NewReleases";
 import NewGames from "./NewGames";
 import { RAWGResponse } from "@/actions/genres-action";
 import { GamesType } from "@/actions/games-action";
+import MBNewGamesSwiper from "./MBNewGamesSwiper";
 
 interface Props {
   newGames: RAWGResponse<GamesType>;
@@ -40,6 +41,7 @@ const NewReleasesContainer = ({ newGames }: Props) => {
         paginate={paginate}
         setPaginate={setPaginate}
       />
+      <MBNewGamesSwiper newGames={newGames} />
     </>
   );
 };
