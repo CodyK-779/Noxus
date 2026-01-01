@@ -2,7 +2,7 @@
 
 import { cacheLife } from "next/cache";
 
-interface GenreResults {
+export interface GenreResults {
   id: number;
   name: string;
   games_count: number;
@@ -21,7 +21,7 @@ export async function getGenres(): Promise<RAWGResponse<GenreResults>> {
   cacheLife("hours");
 
   const res = await fetch(
-    `https://api.rawg.io/api/genres?key=${process.env.RAWG_API_KEY}`,
+    `https://api.rawg.io/api/genres?page_size=18&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["genres"],

@@ -3,17 +3,18 @@ import { RAWGResponse } from "@/actions/genres-action";
 import Image from "next/image";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Bookmark } from "lucide-react";
-import {
-  gameRating,
-  platformIconByKey,
-  platformIcons,
-  ratingBadge,
-} from "@/utils/utils";
+import { gameRating, platformIconByKey, platformIcons } from "@/utils/utils";
 import Link from "next/link";
 
 interface Props {
   games: RAWGResponse<GamesType>;
 }
+
+const ratingBadge = (rating: number) => {
+  if (rating < 3) return "bg-red-500";
+  if (rating < 4) return "bg-orange-500";
+  return "bg-green-500";
+};
 
 const NewGamesGrid = ({ games }: Props) => {
   return (

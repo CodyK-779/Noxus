@@ -3,17 +3,18 @@ import { Bookmark } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import {
-  gameRating,
-  platformIconByKey,
-  platformIcons,
-  ratingBadge,
-} from "@/utils/utils";
+import { gameRating, platformIconByKey, platformIcons } from "@/utils/utils";
 import { useSwiperSlide } from "swiper/react";
 
 interface Props {
   data: GamesType;
 }
+
+const ratingBadge = (rating: number) => {
+  if (rating < 3) return "bg-red-500";
+  if (rating < 4) return "bg-orange-500";
+  return "bg-green-500";
+};
 
 const MBNewGameCard = ({ data }: Props) => {
   const swiper = useSwiperSlide();

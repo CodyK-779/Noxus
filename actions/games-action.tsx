@@ -36,7 +36,7 @@ export async function getGames(): Promise<RAWGResponse<GamesType>> {
   cacheLife("hours");
 
   const res = await fetch(
-    `https://api.rawg.io/api/games?page_size=50&key=${process.env.RAWG_API_KEY}`,
+    `https://api.rawg.io/api/games?&page_size=50&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["games"],
@@ -94,6 +94,26 @@ export async function getNewGames(): Promise<RAWGResponse<GamesType>> {
 
   if (!res.ok) {
     throw new Error("Failed to fetch new games");
+  }
+
+  return res.json();
+}
+
+export async function getHighRatedGames(): Promise<RAWGResponse<GamesType>> {
+  "use cache";
+  cacheLife("hours");
+
+  const res = await fetch(
+    `https://api.rawg.io/api/games?metacritic=80,100&page_size=50&key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["top", "games"],
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to get High rated games");
   }
 
   return res.json();

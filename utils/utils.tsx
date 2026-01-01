@@ -49,9 +49,3 @@ export const gameRating = (rating: number) => {
 
   return rating.toFixed(1);
 };
-
-export const ratingBadge = (rating: number) => {
-  if (rating < 3) return "bg-red-500";
-  if (rating < 4) return "bg-orange-500";
-  return "bg-green-500";
-};
