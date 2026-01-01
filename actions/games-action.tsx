@@ -2,6 +2,7 @@
 
 import { cacheLife } from "next/cache";
 import { RAWGResponse } from "./genres-action";
+import { exo2 } from "@/app/font";
 
 export interface GamePlatforms {
   platform: {
@@ -94,6 +95,33 @@ export async function getNewGames(): Promise<RAWGResponse<GamesType>> {
 
   if (!res.ok) {
     throw new Error("Failed to fetch new games");
+  }
+
+  return res.json();
+}
+
+export async function getUpcomingGames(): Promise<RAWGResponse<GamesType>> {
+  "use cache";
+  cacheLife("hours");
+
+  const today = new Date();
+  const nextMonth = new Date(today);
+  nextMonth.setMonth(nextMonth.getMonth() + 6);
+
+  const formatDate = (date: Date) => date.toISOString().split("T")[0];
+  const dates = `${formatDate(today)},${formatDate(nextMonth)}`;
+
+  const res = await fetch(
+    `https://api.rawg.io/api/games?page=1&page_size=50&dates=${dates}&key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["upcoming", "games"],
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to get upcoming games.");
   }
 
   return res.json();

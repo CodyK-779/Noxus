@@ -1,17 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import NewGames from "./NewGames";
+import SectionHeader from "./SectionHeader";
+import UpcomingGames from "./UpcomingGames";
 import { RAWGResponse } from "@/actions/genres-action";
 import { GamesType } from "@/actions/games-action";
-import MBNewGamesSwiper from "./MBNewGamesSwiper";
-import SectionHeader from "./SectionHeader";
 
 interface Props {
-  newGames: RAWGResponse<GamesType>;
+  games: RAWGResponse<GamesType>;
 }
 
-const NewReleasesContainer = ({ newGames }: Props) => {
+const UpcomingContainer = ({ games }: Props) => {
   const [paginate, setPaginate] = useState({
     start: 0,
     end: 5,
@@ -19,33 +18,31 @@ const NewReleasesContainer = ({ newGames }: Props) => {
 
   useEffect(() => {
     const updateEndValue = () => {
-      const screenWidth = window.innerWidth >= 1024;
+      const isLargeScreen = window.innerWidth >= 1024;
       setPaginate((prev) => ({
         start: prev.start,
-        end: screenWidth ? prev.start + 5 : prev.start + 4,
+        end: isLargeScreen ? prev.start + 5 : prev.start + 4,
       }));
     };
 
     updateEndValue();
 
     window.addEventListener("resize", updateEndValue);
-
     return () => window.removeEventListener("resize", updateEndValue);
   }, []);
 
   return (
     <>
       <SectionHeader
-        header="Discover New Releases"
-        link="/discover/new-releases"
-        gamesCount={newGames.results.length}
+        header="Discover Upcoming Games"
+        link="/discover/upcoming_games"
+        gamesCount={games.results.length}
         paginate={paginate}
         setPaginate={setPaginate}
       />
-      <NewGames newGames={newGames} paginate={paginate} />
-      <MBNewGamesSwiper newGames={newGames} />
+      <UpcomingGames paginate={paginate} games={games} />
     </>
   );
 };
 
-export default NewReleasesContainer;
+export default UpcomingContainer;

@@ -1,6 +1,6 @@
 import { GenreResults, RAWGResponse } from "@/actions/genres-action";
 import GameGenres from "./GameGenres";
-import GameGenresHeader from "./GameGenresHeader";
+import SectionHeaderTwo from "./SectionHeaderTwo";
 import MBGameGenres from "./MBGameGenres";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 const GameGenresContainer = ({ genres }: Props) => {
   return (
     <section className="max-container mt-24">
-      <GameGenresHeader />
+      <SectionHeaderTwo header="Discover Different Genres" />
       <GameGenres genres={genres} />
       <MBGameGenres genres={genres} />
     </section>

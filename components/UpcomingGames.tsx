@@ -1,27 +1,21 @@
 import { GamesType } from "@/actions/games-action";
 import { RAWGResponse } from "@/actions/genres-action";
+import { PaginateType } from "@/utils/paginationInterface";
 import Image from "next/image";
-import { Bookmark } from "lucide-react";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { gameRating, platformIconByKey, platformIcons } from "@/utils/utils";
-import { PaginateType } from "@/utils/paginationInterface";
+import { Bookmark } from "lucide-react";
+import { platformIcons, platformIconByKey } from "@/utils/utils";
 
 interface Props {
   paginate: PaginateType;
-  newGames: RAWGResponse<GamesType>;
+  games: RAWGResponse<GamesType>;
 }
 
-const ratingBadge = (rating: number) => {
-  if (rating < 3) return "bg-red-500";
-  if (rating < 4) return "bg-orange-500";
-  return "bg-green-500";
-};
-
-const NewGames = ({ newGames, paginate }: Props) => {
+const UpcomingGames = ({ paginate, games }: Props) => {
   return (
     <div className="hidden max-container min-[768px]:grid lg:grid-cols-5 grid-cols-4 gap-4">
-      {newGames.results.slice(paginate.start, paginate.end).map((game) => (
+      {games.results.slice(paginate.start, paginate.end).map((game) => (
         <div key={game.id} className="relative group">
           <Link href={`/browse/${game.slug}`}>
             <div className="relative aspect-[3/4] rounded-md overflow-hidden ">
@@ -57,33 +51,26 @@ const NewGames = ({ newGames, paginate }: Props) => {
           </Tooltip>
 
           <p className="mt-2 mb-0.5 font-medium lg:text-sm text-xs text-neutral-400">
+            Available in{" "}
             {new Date(game.released).toLocaleDateString("en-US", {
-              month: "short",
+              month: "long",
+              day: "numeric",
               year: "numeric",
             })}
           </p>
 
           <p className="lg:text-base text-sm font-bold">{game.name}</p>
-          <div className="flex items-center justify-between">
-            {game.platforms && (
-              <div className="flex items-center gap-1">
-                {platformIcons(game.platforms).map((p) => (
-                  <div key={p}>{platformIconByKey(p)}</div>
-                ))}
-              </div>
-            )}
-            <div
-              className={`px-1.5 py-0.5 rounded ${ratingBadge(
-                game.rating
-              )} text-white font-semibold text-xs`}
-            >
-              {gameRating(game.rating)}
+          {game.platforms && (
+            <div className="flex items-center gap-1 mt-1">
+              {platformIcons(game.platforms).map((p) => (
+                <div key={p}>{platformIconByKey(p)}</div>
+              ))}
             </div>
-          </div>
+          )}
         </div>
       ))}
     </div>
   );
 };
 
-export default NewGames;
+export default UpcomingGames;
