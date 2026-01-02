@@ -1,11 +1,13 @@
 import { heroData } from "@/data/hero-data";
-import { Bookmark } from "lucide-react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { WishlistItemType } from "@/utils/interfaceTypes";
+import HeroWishlist from "./HeroWishlist";
 
 interface Props {
   showGame: number;
+  wishlistItems: WishlistItemType[] | undefined;
 }
 
 const logoStyles = (logo: string) => {
@@ -25,7 +27,7 @@ const logoStyles = (logo: string) => {
   }
 };
 
-const HeroLeft = ({ showGame }: Props) => {
+const HeroLeft = ({ showGame, wishlistItems }: Props) => {
   return (
     <div className="col-span-4 relative overflow-hidden rounded-2xl w-full aspect-video">
       <AnimatePresence mode="wait">
@@ -90,15 +92,16 @@ const HeroLeft = ({ showGame }: Props) => {
               </p>
 
               <div className="flex items-center gap-4">
-                <Link href={heroData[showGame].link}>
+                <Link href={`/browse/${heroData[showGame].link}`}>
                   <button className="nox-btn font-medium px-6 py-2">
                     Learn More
                   </button>
                 </Link>
 
-                <button className="size-9 bg-white rounded-md flex items-center justify-center">
-                  <Bookmark className="size-4 text-neutral-900" />
-                </button>
+                <HeroWishlist
+                  slug={heroData[showGame].link}
+                  wishlistItems={wishlistItems}
+                />
               </div>
             </motion.div>
           </motion.div>

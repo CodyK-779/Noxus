@@ -10,7 +10,6 @@ import HeroGameCard from "./HeroGameCard";
 import { heroMobile } from "@/data/hero-data";
 import { Suspense } from "react";
 import { Skeleton } from "./ui/skeleton";
-import { CarouselNext } from "./ui/carousel";
 
 const MBHeroSection = () => {
   return (

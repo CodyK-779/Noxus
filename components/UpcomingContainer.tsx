@@ -5,6 +5,7 @@ import SectionHeader from "./SectionHeader";
 import UpcomingGames from "./UpcomingGames";
 import { RAWGResponse } from "@/actions/genres-action";
 import { GamesType } from "@/actions/games-action";
+import MBUpcomingGamesSwiper from "./MBUpcomingGamesSwiper";
 
 interface Props {
   games: RAWGResponse<GamesType>;
@@ -41,6 +42,7 @@ const UpcomingContainer = ({ games }: Props) => {
         setPaginate={setPaginate}
       />
       <UpcomingGames paginate={paginate} games={games} />
+      <MBUpcomingGamesSwiper games={games} />
     </>
   );
 };

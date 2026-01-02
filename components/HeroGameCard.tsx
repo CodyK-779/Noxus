@@ -31,7 +31,7 @@ const HeroGameCard = ({ data }: Props) => {
 
   return (
     <div className="min-[768px]:hidden relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer group">
-      <Link href={data.link}>
+      <Link href={`/browse/${data.link}`}>
         <Image
           src={data.img}
           alt="Game Cover"

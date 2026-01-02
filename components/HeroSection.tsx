@@ -4,14 +4,19 @@ import { useState } from "react";
 import HeroLeft from "./HeroLeft";
 import HeroRight from "./HeroRight";
 import MBHeroSection from "./MBHeroSection";
+import { WishlistItemType } from "@/utils/interfaceTypes";
 
-const HeroSection = () => {
+interface Props {
+  wishlistItems: WishlistItemType[] | undefined;
+}
+
+const HeroSection = ({ wishlistItems }: Props) => {
   const [showGame, setShowGame] = useState(0);
 
   return (
     <>
       <section className="hidden max-container pt-[90px] min-[768px]:grid grid-cols-5 items-center min-[1170px]:gap-6 gap-3">
-        <HeroLeft showGame={showGame} />
+        <HeroLeft showGame={showGame} wishlistItems={wishlistItems} />
         <HeroRight showGame={showGame} setShowGame={setShowGame} />
       </section>
 

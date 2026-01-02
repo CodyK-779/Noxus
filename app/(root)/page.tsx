@@ -1,10 +1,10 @@
 import {
-  getGames,
   getHighRatedGames,
   getNewGames,
   getUpcomingGames,
 } from "@/actions/games-action";
 import { getGenres } from "@/actions/genres-action";
+import { getUser } from "@/actions/user-action";
 import GameGenresContainer from "@/components/GameGenresContainer";
 import HeroSection from "@/components/HeroSection";
 import NewReleasesContainer from "@/components/NewReleasesContainer";
@@ -12,14 +12,16 @@ import UpcomingContainer from "@/components/UpcomingContainer";
 import Image from "next/image";
 
 export default async function Home() {
+  const user = await getUser();
   const newGames = await getNewGames();
   // const games = await getHighRatedGames();
   const genres = await getGenres();
   const upcomingGames = await getUpcomingGames();
+  const wishlistItems = user?.wishlist?.items;
 
   return (
     <>
-      <HeroSection />
+      <HeroSection wishlistItems={wishlistItems} />
       <NewReleasesContainer newGames={newGames} />
       <GameGenresContainer genres={genres} />
       <UpcomingContainer games={upcomingGames} />
