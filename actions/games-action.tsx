@@ -30,6 +30,9 @@ export interface GameDetails {
   description: string;
   background_image: string;
   rating: number;
+  metacritic: number;
+  released: Date;
+  platforms: GamePlatforms[];
 }
 
 export async function getGames(): Promise<RAWGResponse<GamesType>> {
@@ -57,7 +60,7 @@ export async function getGameDetails(): Promise<GameDetails> {
   cacheLife("hours");
 
   const res = await fetch(
-    `https://api.rawg.io/api/games/ghost-of-yotei?key=${process.env.RAWG_API_KEY}`,
+    `https://api.rawg.io/api/games/hollow-knight-silksong?key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["games", "details"],

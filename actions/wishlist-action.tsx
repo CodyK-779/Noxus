@@ -1,44 +1,69 @@
-// "use server";
+"use server";
 
-// import { auth } from "@/app/lib/auth";
-// import { prisma } from "@/lib/prisma";
-// import { headers } from "next/headers";
+import { auth } from "@/app/lib/auth";
+import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 
-// export async function toggleWishList(slug: string, path: string) {
-//   try {
-//     const session = await auth.api.getSession({
-//       headers: await headers(),
-//     });
+export async function toggleWishList(
+  gameId: number,
+  name: string,
+  image: string | undefined,
+  slug: string,
+  createdAt: string,
+  path: string
+) {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
-//     if (!session) throw new Error("Unauthorized");
+    if (!session) throw new Error("Unauthorized");
 
-//     const wishlist = await prisma.wishlist.upsert({
-//       where: { id: session.user.id },
-//       update: {},
-//       create: { userId: session.user.id },
-//       include: {
-//         items: {
-//           include: {
-//             game: true,
-//           },
-//         },
-//       },
-//     });
+    const wishlist = await prisma.wishlist.upsert({
+      where: { userId: session.user.id },
+      update: {},
+      create: { userId: session.user.id },
+      include: { items: true },
+    });
 
-//     const existingGame = wishlist.items.find((i) => i.game.slug === slug);
+    const existingItem = wishlist.items.find((i) => i.gameId === gameId);
 
-//     if (existingGame) {
-//       await prisma.wishlistItem.delete({
-//         where: {
-//           id: existingGame.id,
-//         },
-//       });
-//     } else {
-//       await prisma.wishlistItem.create({
-//         data: {
-//           wishlistId: wishlist.id,
-//         },
-//       });
-//     }
-//   } catch (error) {}
-// }
+    if (existingItem) {
+      await prisma.wishlistItem.delete({
+        where: { id: existingItem.id },
+      });
+    } else {
+      await prisma.$transaction([
+        prisma.game.upsert({
+          where: { id: gameId },
+          update: {},
+          create: {
+            id: gameId,
+            name,
+            image,
+            slug,
+            createdAt: new Date(createdAt),
+          },
+        }),
+
+        prisma.wishlistItem.create({
+          data: {
+            wishlistId: wishlist.id,
+            gameId,
+          },
+        }),
+      ]);
+    }
+
+    revalidatePath(path);
+    return { success: true };
+  } catch (error) {
+    console.error("Error toggling wishlist:", error);
+    return {
+      success: false,
+      error:
+        error instanceof Error ? error.message : "Failed to update wishlist",
+    };
+  }
+}

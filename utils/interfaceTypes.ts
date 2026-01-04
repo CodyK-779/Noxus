@@ -29,6 +29,6 @@ export interface WishlistItemType {
   createdAt: Date;
   updatedAt: Date;
   wishlistId: string;
-  gameId: string;
+  gameId: number;
   game: Game
 }

@@ -4,10 +4,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { WishlistItemType } from "@/utils/interfaceTypes";
 import HeroWishlist from "./HeroWishlist";
+import { Dispatch, SetStateAction } from "react";
 
 interface Props {
   showGame: number;
   wishlistItems: WishlistItemType[] | undefined;
+  setIsPaused: Dispatch<SetStateAction<boolean>>;
 }
 
 const logoStyles = (logo: string) => {
@@ -27,9 +29,13 @@ const logoStyles = (logo: string) => {
   }
 };
 
-const HeroLeft = ({ showGame, wishlistItems }: Props) => {
+const HeroLeft = ({ showGame, wishlistItems, setIsPaused }: Props) => {
   return (
-    <div className="col-span-4 relative overflow-hidden rounded-2xl w-full aspect-video">
+    <div
+      className="col-span-4 relative overflow-hidden rounded-2xl w-full aspect-video"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={showGame}
@@ -99,7 +105,11 @@ const HeroLeft = ({ showGame, wishlistItems }: Props) => {
                 </Link>
 
                 <HeroWishlist
+                  gameId={heroData[showGame].id}
+                  name={heroData[showGame].name}
+                  image={heroData[showGame].image}
                   slug={heroData[showGame].link}
+                  createdAt={heroData[showGame].date}
                   wishlistItems={wishlistItems}
                 />
               </div>

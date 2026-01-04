@@ -2,36 +2,75 @@
 
 import { heroRight } from "@/data/hero-data";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 
 interface Props {
   showGame: number;
+  isPaused: boolean;
   setShowGame: Dispatch<SetStateAction<number>>;
+  setIsPaused: Dispatch<SetStateAction<boolean>>;
 }
 
-const HeroRight = ({ showGame, setShowGame }: Props) => {
+const HeroRight = ({ showGame, isPaused, setShowGame, setIsPaused }: Props) => {
   const [progress, setProgress] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setProgress(0);
+
+    if (isPaused) {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      return;
+    }
 
     const duration = 9000;
     const intervalTime = 100;
     const increment = 100 / (duration / intervalTime);
 
-    const interval = setInterval(() => {
-      setProgress((prev) => (prev >= 100 ? 100 : prev + increment));
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+    // const interval = setInterval(() => {
+    //   setProgress((prev) => (prev >= 100 ? 100 : prev + increment));
+    // }, intervalTime);
+
+    // const timeOut = setTimeout(() => {
+    //   setShowGame((prev) => (prev + 1) % heroRight.length);
+    // }, duration);
+
+    // return () => {
+    //   clearTimeout(timeOut);
+    //   clearInterval(interval);
+    // };
+
+    intervalRef.current = setInterval(() => {
+      setProgress((prev) => {
+        const newProgress = prev + increment;
+        if (newProgress >= 100) {
+          clearInterval(intervalRef.current!);
+          return 100;
+        }
+        return newProgress;
+      });
     }, intervalTime);
 
-    const timeOut = setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       setShowGame((prev) => (prev + 1) % heroRight.length);
     }, duration);
 
     return () => {
-      clearTimeout(timeOut);
-      clearInterval(interval);
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [showGame, setShowGame]);
+  }, [showGame, setShowGame, isPaused]);
 
   return (
     <div className="col-span-1 flex flex-col gap-0.5">

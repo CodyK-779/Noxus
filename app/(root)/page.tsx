@@ -1,4 +1,5 @@
 import {
+  getGameDetails,
   getHighRatedGames,
   getNewGames,
   getUpcomingGames,
@@ -15,6 +16,7 @@ export default async function Home() {
   const user = await getUser();
   const newGames = await getNewGames();
   // const games = await getHighRatedGames();
+  const game = await getGameDetails();
   const genres = await getGenres();
   const upcomingGames = await getUpcomingGames();
   const wishlistItems = user?.wishlist?.items;
