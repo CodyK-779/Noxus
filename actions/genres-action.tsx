@@ -18,7 +18,7 @@ export interface RAWGResponse<T> {
 
 export async function getGenres(): Promise<RAWGResponse<GenreResults>> {
   "use cache";
-  cacheLife("hours");
+  cacheLife("days");
 
   const res = await fetch(
     `https://api.rawg.io/api/genres?page_size=18&key=${process.env.RAWG_API_KEY}`,

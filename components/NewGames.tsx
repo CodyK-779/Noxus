@@ -1,11 +1,10 @@
 import { GamesType } from "@/actions/games-action";
 import { RAWGResponse } from "@/actions/genres-action";
 import Image from "next/image";
-import { Bookmark } from "lucide-react";
 import Link from "next/link";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { gameRating, platformIconByKey, platformIcons } from "@/utils/utils";
 import { PaginateType } from "@/utils/paginationInterface";
+import WishlistButton from "./WishlistButton";
 
 interface Props {
   paginate: PaginateType;
@@ -45,16 +44,10 @@ const NewGames = ({ newGames, paginate }: Props) => {
             </div>
           </Link>
 
-          <Tooltip delayDuration={0}>
-            <TooltipTrigger asChild>
-              <div className="absolute top-2.5 right-2.5 hidden group-hover:flex items-center justify-center bg-black border border-white p-1 rounded-full cursor-pointer">
-                <Bookmark className="size-4" />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="font-semibold">Add to Wishlist</p>
-            </TooltipContent>
-          </Tooltip>
+          <WishlistButton
+            position="top-2.5 right-2.5 hidden group-hover:flex"
+            size="size-4"
+          />
 
           <p className="mt-2 mb-0.5 font-medium lg:text-sm text-xs text-neutral-400">
             {new Date(game.released).toLocaleDateString("en-US", {

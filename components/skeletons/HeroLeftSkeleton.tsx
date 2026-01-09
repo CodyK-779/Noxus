@@ -2,13 +2,11 @@ import { heroData } from "@/data/hero-data";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { WishlistItemType } from "@/utils/interfaceTypes";
-import HeroWishlist from "./HeroWishlist";
 import { Dispatch, SetStateAction } from "react";
+import { Bookmark } from "lucide-react";
 
 interface Props {
   showGame: number;
-  wishlistItems: WishlistItemType[] | undefined;
   setIsPaused: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -29,7 +27,7 @@ const logoStyles = (logo: string) => {
   }
 };
 
-const HeroLeft = ({ showGame, wishlistItems, setIsPaused }: Props) => {
+const HeroLeftSkeleton = ({ showGame, setIsPaused }: Props) => {
   return (
     <div
       className="col-span-4 relative overflow-hidden rounded-2xl w-full aspect-video"
@@ -72,7 +70,7 @@ const HeroLeft = ({ showGame, wishlistItems, setIsPaused }: Props) => {
               className={`relative ${logoStyles(heroData[showGame].logo)}`}
               initial={{ x: 200, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <Image
                 src={heroData[showGame].logo}
@@ -104,14 +102,9 @@ const HeroLeft = ({ showGame, wishlistItems, setIsPaused }: Props) => {
                   </button>
                 </Link>
 
-                <HeroWishlist
-                  gameId={heroData[showGame].id}
-                  name={heroData[showGame].name}
-                  image={heroData[showGame].image}
-                  slug={heroData[showGame].link}
-                  createdAt={heroData[showGame].date}
-                  wishlistItems={wishlistItems}
-                />
+                <button className="size-9 bg-white rounded-md flex items-center justify-center">
+                  <Bookmark className={`size-4 text-neutral-900 `} />
+                </button>
               </div>
             </motion.div>
           </motion.div>
@@ -121,4 +114,4 @@ const HeroLeft = ({ showGame, wishlistItems, setIsPaused }: Props) => {
   );
 };
 
-export default HeroLeft;
+export default HeroLeftSkeleton;

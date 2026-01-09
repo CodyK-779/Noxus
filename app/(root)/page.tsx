@@ -1,31 +1,27 @@
 import {
   getGameDetails,
   getHighRatedGames,
-  getNewGames,
   getUpcomingGames,
 } from "@/actions/games-action";
-import { getGenres } from "@/actions/genres-action";
-import { getUser } from "@/actions/user-action";
 import GameGenresContainer from "@/components/GameGenresContainer";
-import HeroSection from "@/components/HeroSection";
-import NewReleasesContainer from "@/components/NewReleasesContainer";
+import HeroAndNewReleases from "@/components/HeroAndNewReleases";
+import HeroAndNewSkeleton from "@/components/skeletons/HeroAndNewSkeleton";
 import UpcomingContainer from "@/components/UpcomingContainer";
 import Image from "next/image";
+import { Suspense } from "react";
 
 export default async function Home() {
-  const user = await getUser();
-  const newGames = await getNewGames();
-  // const games = await getHighRatedGames();
   const game = await getGameDetails();
-  const genres = await getGenres();
+
   const upcomingGames = await getUpcomingGames();
-  const wishlistItems = user?.wishlist?.items;
 
   return (
     <>
-      <HeroSection wishlistItems={wishlistItems} />
-      <NewReleasesContainer newGames={newGames} />
-      <GameGenresContainer genres={genres} />
+      <Suspense fallback={<HeroAndNewSkeleton />}>
+        <HeroAndNewReleases />
+      </Suspense>
+
+      <GameGenresContainer />
       <UpcomingContainer games={upcomingGames} />
       {/* <ul className="flex flex-col gap-4">
         {games.results.map((game) => (

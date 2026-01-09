@@ -1,8 +1,8 @@
 import { HeroMobile } from "@/data/hero-data";
-import { Bookmark } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSwiperSlide } from "swiper/react";
+import WishlistButton from "./WishlistButton";
 
 interface Props {
   data: HeroMobile;
@@ -64,9 +64,10 @@ const HeroGameCard = ({ data }: Props) => {
           </p>
         </div>
       </Link>
-      <div className="absolute min-[350px]:top-5 min-[350px]:right-5 top-4 right-4 bg-black border border-white rounded-full flex items-center justify-center p-1 z-10">
-        <Bookmark className="sm:size-5 min-[350px]:size-4 size-3.5" />
-      </div>
+      <WishlistButton
+        position="min-[350px]:top-5 min-[350px]:right-5 top-4 right-4 flex"
+        size="sm:size-5 min-[350px]:size-4 size-3.5"
+      />
     </div>
   );
 };

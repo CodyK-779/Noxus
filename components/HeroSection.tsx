@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import HeroLeft from "./HeroLeft";
 import HeroRight from "./HeroRight";
 import MBHeroSection from "./MBHeroSection";
@@ -13,10 +13,6 @@ interface Props {
 const HeroSection = ({ wishlistItems }: Props) => {
   const [showGame, setShowGame] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [remainingTime, setRemainingTime] = useState(9000);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const startTimeRef = useRef<number>(Date.now());
 
   return (
     <>
@@ -26,11 +22,11 @@ const HeroSection = ({ wishlistItems }: Props) => {
           wishlistItems={wishlistItems}
           setIsPaused={setIsPaused}
         />
+
         <HeroRight
           showGame={showGame}
           isPaused={isPaused}
           setShowGame={setShowGame}
-          setIsPaused={setIsPaused}
         />
       </section>
 

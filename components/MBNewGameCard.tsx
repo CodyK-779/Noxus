@@ -1,10 +1,9 @@
 import { GamesType } from "@/actions/games-action";
-import { Bookmark } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { gameRating, platformIconByKey, platformIcons } from "@/utils/utils";
 import { useSwiperSlide } from "swiper/react";
+import WishlistButton from "./WishlistButton";
 
 interface Props {
   data: GamesType;
@@ -43,20 +42,11 @@ const MBNewGameCard = ({ data }: Props) => {
           )}
         </div>
       </Link>
-      <Tooltip delayDuration={0}>
-        <TooltipTrigger asChild>
-          <div
-            className={`absolute top-2.5 right-2.5 ${
-              isActive ? "flex" : "hidden"
-            }  items-center justify-center bg-black border border-white p-1 rounded-full cursor-pointer`}
-          >
-            <Bookmark className="sm:size-4 size-3.5" />
-          </div>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p className="font-semibold">Add to Wishlist</p>
-        </TooltipContent>
-      </Tooltip>
+
+      <WishlistButton
+        position={`top-2.5 right-2.5 ${isActive ? "flex" : "hidden"}`}
+        size="sm:size-4 size-3.5"
+      />
 
       <p className="mt-2 mb-0.5 font-medium sm:text-sm text-xs text-neutral-400">
         {new Date(data.released).toLocaleDateString("en-US", {

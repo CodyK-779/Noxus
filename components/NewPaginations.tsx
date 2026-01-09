@@ -1,7 +1,7 @@
 "use client";
 
+import { Pagination } from "@/utils/paginationInterface";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Pagination } from "./NewReleases";
 import { useEffect, useState } from "react";
 
 const NewPaginations = ({ paginate, setPaginate }: Pagination) => {

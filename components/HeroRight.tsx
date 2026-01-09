@@ -8,10 +8,9 @@ interface Props {
   showGame: number;
   isPaused: boolean;
   setShowGame: Dispatch<SetStateAction<number>>;
-  setIsPaused: Dispatch<SetStateAction<boolean>>;
 }
 
-const HeroRight = ({ showGame, isPaused, setShowGame, setIsPaused }: Props) => {
+const HeroRight = ({ showGame, isPaused, setShowGame }: Props) => {
   const [progress, setProgress] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -37,19 +36,6 @@ const HeroRight = ({ showGame, isPaused, setShowGame, setIsPaused }: Props) => {
 
     if (intervalRef.current) clearInterval(intervalRef.current);
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-
-    // const interval = setInterval(() => {
-    //   setProgress((prev) => (prev >= 100 ? 100 : prev + increment));
-    // }, intervalTime);
-
-    // const timeOut = setTimeout(() => {
-    //   setShowGame((prev) => (prev + 1) % heroRight.length);
-    // }, duration);
-
-    // return () => {
-    //   clearTimeout(timeOut);
-    //   clearInterval(interval);
-    // };
 
     intervalRef.current = setInterval(() => {
       setProgress((prev) => {
