@@ -1,7 +1,7 @@
 import HeroSectionSkeleton from "./HeroSectionSkeleton";
 import NewReleasesSkeleton from "./NewReleasesSkeleton";
 
-const HeroAndNewSkeleton = async () => {
+const HeroAndNewSkeleton = () => {
   return (
     <>
       <HeroSectionSkeleton />

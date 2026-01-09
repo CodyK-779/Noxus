@@ -11,6 +11,8 @@ export async function toggleWishList(
   image: string | undefined,
   slug: string,
   createdAt: string,
+  rating: number,
+  platforms: string[],
   path: string
 ) {
   try {
@@ -43,6 +45,8 @@ export async function toggleWishList(
             name,
             image,
             slug,
+            rating,
+            platforms,
             createdAt: new Date(createdAt),
           },
         }),

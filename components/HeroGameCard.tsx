@@ -30,38 +30,40 @@ const HeroGameCard = ({ data }: Props) => {
   const isActive = slide.isActive;
 
   return (
-    <div className="min-[768px]:hidden relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer group">
+    <div className="min-[768px]:hidden">
       <Link href={`/browse/${data.link}`}>
-        <Image
-          src={data.img}
-          alt="Game Cover"
-          fill
-          sizes="(max-width: 768px) 80vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent" />
-        <div
-          className={`absolute min-[450px]:bottom-7 min-[450px]:left-7 bottom-6 left-6 z-10 pr-4 transition-all duration-300 ${
-            isActive
-              ? "opacity-100 translate-y-0 delay-100"
-              : "opacity-0 translate-y-8 invisible"
-          }`}
-        >
-          <div className={`relative ${logoStyles(data.logo)}`}>
-            <Image
-              src={data.logo}
-              alt="Game Logo"
-              fill
-              sizes="(min-width: 1014px) 240px, 208px"
-              className="object-contain"
-            />
+        <div className="relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer group">
+          <Image
+            src={data.img}
+            alt="Game Cover"
+            fill
+            sizes="(max-width: 768px) 80vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent" />
+          <div
+            className={`absolute min-[450px]:bottom-7 min-[450px]:left-7 bottom-6 left-6 z-10 pr-4 transition-all duration-300 ${
+              isActive
+                ? "opacity-100 translate-y-0 delay-100"
+                : "opacity-0 translate-y-8 invisible"
+            }`}
+          >
+            <div className={`relative ${logoStyles(data.logo)}`}>
+              <Image
+                src={data.logo}
+                alt="Game Logo"
+                fill
+                sizes="(min-width: 1014px) 240px, 208px"
+                className="object-contain"
+              />
+            </div>
+            <p className="mb-2.5 sm:text-xl min-[450px]:text-lg min-[350px]:text-base text-sm font-semibold">
+              {data.saleText}
+            </p>
+            <p className="font-medium sm:w-[300px] w-full sm:text-lg min-[450px]:text-base min-[350px]:text-sm text-xs">
+              {data.desc}
+            </p>
           </div>
-          <p className="mb-2.5 sm:text-xl min-[450px]:text-lg min-[350px]:text-base text-sm font-semibold">
-            {data.saleText}
-          </p>
-          <p className="font-medium sm:w-[300px] w-full sm:text-lg min-[450px]:text-base min-[350px]:text-sm text-xs">
-            {data.desc}
-          </p>
         </div>
       </Link>
       <WishlistButton

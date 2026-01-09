@@ -14,6 +14,8 @@ interface Props {
   image?: string;
   slug: string;
   createdAt: string;
+  rating: number;
+  platforms: string[];
   wishlistItems: WishlistItemType[] | undefined;
 }
 
@@ -23,6 +25,8 @@ const HeroWishlist = ({
   image,
   slug,
   createdAt,
+  rating,
+  platforms,
   wishlistItems,
 }: Props) => {
   const { data: session } = useSession();
@@ -47,6 +51,8 @@ const HeroWishlist = ({
         image,
         slug,
         createdAt,
+        rating,
+        platforms,
         "/"
       );
 

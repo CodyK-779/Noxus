@@ -110,6 +110,8 @@ const HeroLeft = ({ showGame, wishlistItems, setIsPaused }: Props) => {
                   image={heroData[showGame].image}
                   slug={heroData[showGame].link}
                   createdAt={heroData[showGame].date}
+                  rating={heroData[showGame].rating}
+                  platforms={heroData[showGame].platforms}
                   wishlistItems={wishlistItems}
                 />
               </div>
