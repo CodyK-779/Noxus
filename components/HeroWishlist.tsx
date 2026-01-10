@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/app/lib/auth-client";
 import { toggleWishList } from "@/actions/wishlist-action";
+import { useMenu } from "./MenuProvider";
 
 interface Props {
   gameId: number;

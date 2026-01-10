@@ -10,8 +10,13 @@ import HeroGameCard from "./HeroGameCard";
 import { heroMobile } from "@/data/hero-data";
 import { Suspense } from "react";
 import { Skeleton } from "./ui/skeleton";
+import { WishlistItemType } from "@/utils/interfaceTypes";
 
-const MBHeroSection = () => {
+interface Props {
+  wishlistItems: WishlistItemType[] | undefined;
+}
+
+const MBHeroSection = ({ wishlistItems }: Props) => {
   return (
     <section className="min-[768px]:hidden pt-[90px]">
       <Suspense
@@ -36,7 +41,7 @@ const MBHeroSection = () => {
         >
           {heroMobile.map((data) => (
             <SwiperSlide key={data.link}>
-              <HeroGameCard data={data} />
+              <HeroGameCard data={data} wishlistItems={wishlistItems} />
             </SwiperSlide>
           ))}
 

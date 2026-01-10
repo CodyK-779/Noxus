@@ -6,12 +6,14 @@ import UpcomingGames from "./UpcomingGames";
 import { RAWGResponse } from "@/actions/genres-action";
 import { GamesType } from "@/actions/games-action";
 import MBUpcomingGamesSwiper from "./MBUpcomingGamesSwiper";
+import { WishlistItemType } from "@/utils/interfaceTypes";
 
 interface Props {
   games: RAWGResponse<GamesType>;
+  wishlistItems: WishlistItemType[] | undefined;
 }
 
-const UpcomingContainer = ({ games }: Props) => {
+const UpcomingContainer = ({ games, wishlistItems }: Props) => {
   const [paginate, setPaginate] = useState({
     start: 0,
     end: 5,
@@ -41,7 +43,11 @@ const UpcomingContainer = ({ games }: Props) => {
         paginate={paginate}
         setPaginate={setPaginate}
       />
-      <UpcomingGames paginate={paginate} games={games} />
+      <UpcomingGames
+        paginate={paginate}
+        games={games}
+        wishlistItems={wishlistItems}
+      />
       <MBUpcomingGamesSwiper games={games} />
     </>
   );

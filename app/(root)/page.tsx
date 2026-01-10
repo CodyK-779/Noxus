@@ -1,19 +1,14 @@
-import {
-  getGameDetails,
-  getHighRatedGames,
-  getUpcomingGames,
-} from "@/actions/games-action";
+import { getGameDetails, getHighRatedGames } from "@/actions/games-action";
 import GameGenresContainer from "@/components/GameGenresContainer";
 import HeroAndNewReleases from "@/components/HeroAndNewReleases";
+import GameSkeletonContainer from "@/components/skeletons/GameSkeletonContainer";
 import HeroAndNewSkeleton from "@/components/skeletons/HeroAndNewSkeleton";
-import UpcomingContainer from "@/components/UpcomingContainer";
+import UpcomingGameWrapper from "@/components/UpcomingGameWrapper";
 import Image from "next/image";
 import { Suspense } from "react";
 
 export default async function Home() {
   const game = await getGameDetails();
-
-  const upcomingGames = await getUpcomingGames();
 
   return (
     <>
@@ -22,7 +17,13 @@ export default async function Home() {
       </Suspense>
 
       <GameGenresContainer />
-      <UpcomingContainer games={upcomingGames} />
+
+      <Suspense
+        fallback={<GameSkeletonContainer header="Discover Upcoming Games" />}
+      >
+        <UpcomingGameWrapper />
+      </Suspense>
+
       {/* <ul className="flex flex-col gap-4">
         {games.results.map((game) => (
           <li key={game.id} className="flex flex-col gap-1">

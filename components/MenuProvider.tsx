@@ -38,7 +38,12 @@ const MenuProvider = ({ children }: Props) => {
 
   return (
     <MenuContext.Provider
-      value={{ openMenu, openSearch, setOpenMenu, setOpenSearch }}
+      value={{
+        openMenu,
+        openSearch,
+        setOpenMenu,
+        setOpenSearch,
+      }}
     >
       {children}
     </MenuContext.Provider>

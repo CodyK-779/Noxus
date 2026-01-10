@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSwiperSlide } from "swiper/react";
 import WishlistButton from "./WishlistButton";
+import { WishlistItemType } from "@/utils/interfaceTypes";
 
 interface Props {
   data: HeroMobile;
+  wishlistItems: WishlistItemType[] | undefined;
 }
 
 const logoStyles = (logo: string) => {
@@ -25,7 +27,7 @@ const logoStyles = (logo: string) => {
   }
 };
 
-const HeroGameCard = ({ data }: Props) => {
+const HeroGameCard = ({ data, wishlistItems }: Props) => {
   const slide = useSwiperSlide();
   const isActive = slide.isActive;
 
@@ -69,6 +71,14 @@ const HeroGameCard = ({ data }: Props) => {
       <WishlistButton
         position="min-[350px]:top-5 min-[350px]:right-5 top-4 right-4 flex"
         size="sm:size-5 min-[350px]:size-4 size-3.5"
+        gameId={data.id}
+        name={data.name}
+        image={data.image}
+        slug={data.link}
+        rating={data.rating}
+        platforms={data.platforms}
+        createdAt={data.date}
+        wishlistItems={wishlistItems}
       />
     </div>
   );

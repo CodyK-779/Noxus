@@ -5,14 +5,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Bookmark } from "lucide-react";
-import { platformIcons, platformIconByKey } from "@/utils/utils";
+import {
+  platformIcons,
+  platformIconByKey,
+  convertPlatformArray,
+} from "@/utils/utils";
+import { WishlistItemType } from "@/utils/interfaceTypes";
+import WishlistButton from "./WishlistButton";
 
 interface Props {
   paginate: PaginateType;
   games: RAWGResponse<GamesType>;
+  wishlistItems: WishlistItemType[] | undefined;
 }
 
-const UpcomingGames = ({ paginate, games }: Props) => {
+const UpcomingGames = ({ paginate, games, wishlistItems }: Props) => {
   return (
     <div className="hidden max-container min-[768px]:grid lg:grid-cols-5 grid-cols-4 gap-4">
       {games.results.slice(paginate.start, paginate.end).map((game) => (
@@ -39,16 +46,18 @@ const UpcomingGames = ({ paginate, games }: Props) => {
             </div>
           </Link>
 
-          <Tooltip delayDuration={0}>
-            <TooltipTrigger asChild>
-              <div className="absolute top-2.5 right-2.5 hidden group-hover:flex items-center justify-center bg-black border border-white p-1 rounded-full cursor-pointer">
-                <Bookmark className="size-4" />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="font-semibold">Add to Wishlist</p>
-            </TooltipContent>
-          </Tooltip>
+          <WishlistButton
+            position="top-2.5 right-2.5 hidden group-hover:flex"
+            size="size-4"
+            gameId={game.id}
+            name={game.name}
+            image={game.background_image}
+            slug={game.slug}
+            rating={game.rating}
+            createdAt={game.released.toString()}
+            platforms={convertPlatformArray(game.platforms)}
+            wishlistItems={wishlistItems}
+          />
 
           <p className="mt-2 mb-0.5 font-medium lg:text-sm text-xs text-neutral-400">
             Available in{" "}

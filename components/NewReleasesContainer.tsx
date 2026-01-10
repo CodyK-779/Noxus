@@ -6,12 +6,15 @@ import { RAWGResponse } from "@/actions/genres-action";
 import { GamesType } from "@/actions/games-action";
 import MBNewGamesSwiper from "./MBNewGamesSwiper";
 import SectionHeader from "./SectionHeader";
+import { WishlistItemType } from "@/utils/interfaceTypes";
+import MBGameSectionSkeletons from "./skeletons/MBGameSectionSkeletons";
 
 interface Props {
   newGames: RAWGResponse<GamesType>;
+  wishlistItems: WishlistItemType[] | undefined;
 }
 
-const NewReleasesContainer = ({ newGames }: Props) => {
+const NewReleasesContainer = ({ newGames, wishlistItems }: Props) => {
   const [paginate, setPaginate] = useState({
     start: 0,
     end: 5,
@@ -42,8 +45,12 @@ const NewReleasesContainer = ({ newGames }: Props) => {
         paginate={paginate}
         setPaginate={setPaginate}
       />
-      <NewGames newGames={newGames} paginate={paginate} />
-      <MBNewGamesSwiper newGames={newGames} />
+      <NewGames
+        newGames={newGames}
+        paginate={paginate}
+        wishlistItems={wishlistItems}
+      />
+      <MBNewGamesSwiper newGames={newGames} wishlistItems={wishlistItems} />
     </>
   );
 };

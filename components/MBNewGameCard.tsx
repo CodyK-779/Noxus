@@ -1,12 +1,19 @@
 import { GamesType } from "@/actions/games-action";
 import Image from "next/image";
 import Link from "next/link";
-import { gameRating, platformIconByKey, platformIcons } from "@/utils/utils";
+import {
+  convertPlatformArray,
+  gameRating,
+  platformIconByKey,
+  platformIcons,
+} from "@/utils/utils";
 import { useSwiperSlide } from "swiper/react";
 import WishlistButton from "./WishlistButton";
+import { WishlistItemType } from "@/utils/interfaceTypes";
 
 interface Props {
   data: GamesType;
+  wishlistItems: WishlistItemType[] | undefined;
 }
 
 const ratingBadge = (rating: number) => {
@@ -15,7 +22,7 @@ const ratingBadge = (rating: number) => {
   return "bg-green-500";
 };
 
-const MBNewGameCard = ({ data }: Props) => {
+const MBNewGameCard = ({ data, wishlistItems }: Props) => {
   const swiper = useSwiperSlide();
   const isActive = swiper.isActive;
 
@@ -46,6 +53,14 @@ const MBNewGameCard = ({ data }: Props) => {
       <WishlistButton
         position={`top-2.5 right-2.5 ${isActive ? "flex" : "hidden"}`}
         size="sm:size-4 size-3.5"
+        gameId={data.id}
+        name={data.name}
+        image={data.background_image}
+        slug={data.slug}
+        rating={data.rating}
+        platforms={convertPlatformArray(data.platforms)}
+        createdAt={data.released.toString()}
+        wishlistItems={wishlistItems}
       />
 
       <p className="mt-2 mb-0.5 font-medium sm:text-sm text-xs text-neutral-400">

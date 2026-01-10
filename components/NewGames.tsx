@@ -2,13 +2,20 @@ import { GamesType } from "@/actions/games-action";
 import { RAWGResponse } from "@/actions/genres-action";
 import Image from "next/image";
 import Link from "next/link";
-import { gameRating, platformIconByKey, platformIcons } from "@/utils/utils";
+import {
+  convertPlatformArray,
+  gameRating,
+  platformIconByKey,
+  platformIcons,
+} from "@/utils/utils";
 import { PaginateType } from "@/utils/paginationInterface";
 import WishlistButton from "./WishlistButton";
+import { WishlistItemType } from "@/utils/interfaceTypes";
 
 interface Props {
   paginate: PaginateType;
   newGames: RAWGResponse<GamesType>;
+  wishlistItems: WishlistItemType[] | undefined;
 }
 
 const ratingBadge = (rating: number) => {
@@ -17,7 +24,7 @@ const ratingBadge = (rating: number) => {
   return "bg-green-500";
 };
 
-const NewGames = ({ newGames, paginate }: Props) => {
+const NewGames = ({ newGames, paginate, wishlistItems }: Props) => {
   return (
     <div className="hidden max-container min-[768px]:grid lg:grid-cols-5 grid-cols-4 gap-4">
       {newGames.results.slice(paginate.start, paginate.end).map((game) => (
@@ -47,6 +54,14 @@ const NewGames = ({ newGames, paginate }: Props) => {
           <WishlistButton
             position="top-2.5 right-2.5 hidden group-hover:flex"
             size="size-4"
+            gameId={game.id}
+            name={game.name}
+            image={game.background_image}
+            slug={game.slug}
+            rating={game.rating}
+            createdAt={game.released.toString()}
+            platforms={convertPlatformArray(game.platforms)}
+            wishlistItems={wishlistItems}
           />
 
           <p className="mt-2 mb-0.5 font-medium lg:text-sm text-xs text-neutral-400">

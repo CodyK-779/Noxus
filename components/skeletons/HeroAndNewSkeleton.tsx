@@ -1,11 +1,11 @@
 import HeroSectionSkeleton from "./HeroSectionSkeleton";
-import NewReleasesSkeleton from "./NewReleasesSkeleton";
+import GameSkeletonContainer from "./GameSkeletonContainer";
 
 const HeroAndNewSkeleton = () => {
   return (
     <>
       <HeroSectionSkeleton />
-      <NewReleasesSkeleton />
+      <GameSkeletonContainer header="Discover New Releases" />
     </>
   );
 };

@@ -30,7 +30,7 @@ const HeroSection = ({ wishlistItems }: Props) => {
         />
       </section>
 
-      <MBHeroSection />
+      <MBHeroSection wishlistItems={wishlistItems} />
     </>
   );
 };

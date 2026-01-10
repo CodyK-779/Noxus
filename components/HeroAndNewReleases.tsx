@@ -10,7 +10,7 @@ const HeroAndNewReleases = async () => {
   return (
     <>
       <HeroSection wishlistItems={wishlistItems} />
-      <NewReleasesContainer newGames={newGames} />
+      <NewReleasesContainer newGames={newGames} wishlistItems={wishlistItems} />
     </>
   );
 };

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { WishlistItemType } from "@/utils/interfaceTypes";
 import HeroWishlist from "./HeroWishlist";
 import { Dispatch, SetStateAction } from "react";
+import WishlistButton from "./WishlistButton";
 
 interface Props {
   showGame: number;

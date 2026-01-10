@@ -188,9 +188,15 @@ export const heroMobile = [
 ]
 
 export interface HeroMobile {
+  id: number;
+  name: string;
   link: string;
   logo: string;
   img: string;
+  image: string;
+  rating: number;
+  platforms: string[];
+  date: string;
   saleText: string;
   desc: string;
 }

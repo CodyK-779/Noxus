@@ -2,7 +2,6 @@
 
 import { cacheLife } from "next/cache";
 import { RAWGResponse } from "./genres-action";
-import { exo2 } from "@/app/font";
 
 export interface GamePlatforms {
   platform: {

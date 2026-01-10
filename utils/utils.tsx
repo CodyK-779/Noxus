@@ -49,3 +49,7 @@ export const gameRating = (rating: number) => {
 
   return rating.toFixed(1);
 };
+
+export const convertPlatformArray = (platforms: GamePlatforms[]) => {
+  return platforms?.map((p) => p.platform.name);
+};
