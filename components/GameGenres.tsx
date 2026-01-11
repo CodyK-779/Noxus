@@ -1,5 +1,6 @@
-import { GenreResults, RAWGResponse } from "@/actions/genres-action";
+import { GenreResults } from "@/actions/genres-action";
 import GenreList from "./GenreList";
+import { RAWGResponse } from "@/utils/interfaceTypes";
 
 interface Props {
   genres: RAWGResponse<GenreResults>;

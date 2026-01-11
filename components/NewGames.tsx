@@ -1,5 +1,4 @@
 import { GamesType } from "@/actions/games-action";
-import { RAWGResponse } from "@/actions/genres-action";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -10,7 +9,7 @@ import {
 } from "@/utils/utils";
 import { PaginateType } from "@/utils/paginationInterface";
 import WishlistButton from "./WishlistButton";
-import { WishlistItemType } from "@/utils/interfaceTypes";
+import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
 
 interface Props {
   paginate: PaginateType;

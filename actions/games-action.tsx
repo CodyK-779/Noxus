@@ -1,7 +1,7 @@
 "use server";
 
+import { RAWGResponse } from "@/utils/interfaceTypes";
 import { cacheLife } from "next/cache";
-import { RAWGResponse } from "./genres-action";
 
 export interface GamePlatforms {
   platform: {

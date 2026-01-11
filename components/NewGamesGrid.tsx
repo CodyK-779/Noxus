@@ -1,10 +1,10 @@
 import { GamesType } from "@/actions/games-action";
-import { RAWGResponse } from "@/actions/genres-action";
 import Image from "next/image";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Bookmark } from "lucide-react";
 import { gameRating, platformIconByKey, platformIcons } from "@/utils/utils";
 import Link from "next/link";
+import { RAWGResponse } from "@/utils/interfaceTypes";
 
 interface Props {
   games: RAWGResponse<GamesType>;

@@ -9,7 +9,7 @@ import Image from "next/image";
 import { Suspense } from "react";
 
 export default async function Home() {
-  const game = await getGameDetails();
+  // const game = await getGameDetails();
 
   return (
     <>

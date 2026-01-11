@@ -1,5 +1,12 @@
 import { Game } from "@/lib/generated/prisma/client";
 
+export interface RAWGResponse<T> {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T[];
+}
+
 export interface UserType {
   id: string;
   email: string;

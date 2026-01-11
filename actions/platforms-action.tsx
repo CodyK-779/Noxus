@@ -3,29 +3,31 @@
 import { RAWGResponse } from "@/utils/interfaceTypes";
 import { cacheLife } from "next/cache";
 
-export interface GenreResults {
+interface PlatformsType {
   id: number;
   name: string;
+  slug: string;
   games_count: number;
   image_background: string;
+  image: string | null;
 }
 
-export async function getGenres(): Promise<RAWGResponse<GenreResults>> {
+export async function getPlatforms(): Promise<RAWGResponse<PlatformsType>> {
   "use cache";
   cacheLife("days");
 
   const res = await fetch(
-    `https://api.rawg.io/api/genres?page_size=18&key=${process.env.RAWG_API_KEY}`,
+    `https://api.rawg.io/api/platforms?key=${process.env.RAWG_API_KEY}`,
     {
       next: {
-        tags: ["genres"],
+        tags: ["platforms"],
       },
     }
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch genres");
+    throw new Error("Failed to fetch Platforms");
   }
 
-  return res.json() as Promise<RAWGResponse<GenreResults>>;
+  return res.json();
 }

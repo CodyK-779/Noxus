@@ -1,10 +1,9 @@
 "use client";
 
 import { GamesType } from "@/actions/games-action";
-import { RAWGResponse } from "@/actions/genres-action";
 import { Swiper, SwiperSlide } from "swiper/react";
 import MBNewGameCard from "./MBNewGameCard";
-import { WishlistItemType } from "@/utils/interfaceTypes";
+import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
 
 interface Props {
   newGames: RAWGResponse<GamesType>;

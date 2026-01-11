@@ -3,10 +3,9 @@
 import { useEffect, useState } from "react";
 import SectionHeader from "./SectionHeader";
 import UpcomingGames from "./UpcomingGames";
-import { RAWGResponse } from "@/actions/genres-action";
 import { GamesType } from "@/actions/games-action";
 import MBUpcomingGamesSwiper from "./MBUpcomingGamesSwiper";
-import { WishlistItemType } from "@/utils/interfaceTypes";
+import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
 
 interface Props {
   games: RAWGResponse<GamesType>;

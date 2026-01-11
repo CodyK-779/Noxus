@@ -1,9 +1,10 @@
 "use client";
 
-import { GenreResults, RAWGResponse } from "@/actions/genres-action";
+import { GenreResults } from "@/actions/genres-action";
 import { Swiper, SwiperSlide } from "swiper/react";
 import MBGenreList from "./MBGenreList";
 import { Pagination } from "swiper/modules";
+import { RAWGResponse } from "@/utils/interfaceTypes";
 
 interface Props {
   genres: RAWGResponse<GenreResults>;

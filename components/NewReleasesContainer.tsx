@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from "react";
 import NewGames from "./NewGames";
-import { RAWGResponse } from "@/actions/genres-action";
 import { GamesType } from "@/actions/games-action";
 import MBNewGamesSwiper from "./MBNewGamesSwiper";
 import SectionHeader from "./SectionHeader";
-import { WishlistItemType } from "@/utils/interfaceTypes";
+import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
 
 interface Props {
   newGames: RAWGResponse<GamesType>;
