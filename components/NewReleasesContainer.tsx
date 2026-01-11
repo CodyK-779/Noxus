@@ -7,7 +7,6 @@ import { GamesType } from "@/actions/games-action";
 import MBNewGamesSwiper from "./MBNewGamesSwiper";
 import SectionHeader from "./SectionHeader";
 import { WishlistItemType } from "@/utils/interfaceTypes";
-import MBGameSectionSkeletons from "./skeletons/MBGameSectionSkeletons";
 
 interface Props {
   newGames: RAWGResponse<GamesType>;

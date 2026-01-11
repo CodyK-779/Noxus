@@ -3,8 +3,6 @@ import { RAWGResponse } from "@/actions/genres-action";
 import { PaginateType } from "@/utils/paginationInterface";
 import Image from "next/image";
 import Link from "next/link";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { Bookmark } from "lucide-react";
 import {
   platformIcons,
   platformIconByKey,

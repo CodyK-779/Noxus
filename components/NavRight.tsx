@@ -1,6 +1,6 @@
 "use client";
 
-import { signOut, useSession } from "@/app/lib/auth-client";
+import { useSession } from "@/app/lib/auth-client";
 import Link from "next/link";
 import ProfileDropdown from "./ProfileDropdown";
 import NavSearch from "./NavSearch";
@@ -12,11 +12,6 @@ import { useMenu } from "./MenuProvider";
 const NavRight = () => {
   const { data: session } = useSession();
   const { setOpenMenu } = useMenu();
-
-  const handleSignOut = async () => {
-    await signOut();
-    window.location.href = "/signIn";
-  };
 
   return (
     <div className="flex items-center min-[350px]:gap-4 gap-3.5">

@@ -1,5 +1,6 @@
 import { getGameDetails, getHighRatedGames } from "@/actions/games-action";
 import GameGenresContainer from "@/components/GameGenresContainer";
+import GamePlatformsContainer from "@/components/GamePlatformsContainer";
 import HeroAndNewReleases from "@/components/HeroAndNewReleases";
 import GameSkeletonContainer from "@/components/skeletons/GameSkeletonContainer";
 import HeroAndNewSkeleton from "@/components/skeletons/HeroAndNewSkeleton";
@@ -23,6 +24,8 @@ export default async function Home() {
       >
         <UpcomingGameWrapper />
       </Suspense>
+
+      <GamePlatformsContainer />
 
       {/* <ul className="flex flex-col gap-4">
         {games.results.map((game) => (
