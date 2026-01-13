@@ -3,7 +3,7 @@
 import { RAWGResponse } from "@/utils/interfaceTypes";
 import { cacheLife } from "next/cache";
 
-interface PlatformsType {
+export interface PlatformsType {
   id: number;
   name: string;
   slug: string;
