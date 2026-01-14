@@ -104,7 +104,7 @@ export async function getNewGames(): Promise<RAWGResponse<GamesType>> {
 
 export async function getUpcomingGames(): Promise<RAWGResponse<GamesType>> {
   "use cache";
-  cacheLife("hours");
+  cacheLife("days");
 
   const today = new Date();
   const nextMonth = new Date(today);
@@ -144,6 +144,28 @@ export async function getHighRatedGames(): Promise<RAWGResponse<GamesType>> {
 
   if (!res.ok) {
     throw new Error("Failed to get High rated games");
+  }
+
+  return res.json();
+}
+
+export async function getPlatformGames(
+  id: number
+): Promise<RAWGResponse<GamesType>> {
+  "use cache";
+  cacheLife("hours");
+
+  const res = await fetch(
+    `https://api.rawg.io/api/games?platforms=${id}&key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["platform", "games"],
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to get Platform Games");
   }
 
   return res.json();

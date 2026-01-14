@@ -12,6 +12,13 @@ export interface PlatformsType {
   image: string | null;
 }
 
+export interface PlatformDetails {
+  id: number;
+  name: string;
+  games_count: number;
+  description: string;
+}
+
 export async function getPlatforms(): Promise<RAWGResponse<PlatformsType>> {
   "use cache";
   cacheLife("days");
@@ -27,6 +34,23 @@ export async function getPlatforms(): Promise<RAWGResponse<PlatformsType>> {
 
   if (!res.ok) {
     throw new Error("Failed to fetch Platforms");
+  }
+
+  return res.json();
+}
+
+export async function getPlatformDetails(id: number): Promise<PlatformDetails> {
+  "use cache";
+  cacheLife("hours");
+
+  const res = await fetch(`https://api.rawg.io/api/platforms/${id}`, {
+    next: {
+      tags: ["platform", "details"],
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch platform details");
   }
 
   return res.json();
