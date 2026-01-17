@@ -17,6 +17,7 @@ const PlatformGrid = ({ platforms }: Props) => {
               src={platform.image_background}
               alt={platform.name}
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
             />
             <div className="absolute inset-0 bg-black/50" />

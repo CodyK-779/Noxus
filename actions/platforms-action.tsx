@@ -43,11 +43,14 @@ export async function getPlatformDetails(id: number): Promise<PlatformDetails> {
   "use cache";
   cacheLife("hours");
 
-  const res = await fetch(`https://api.rawg.io/api/platforms/${id}`, {
-    next: {
-      tags: ["platform", "details"],
-    },
-  });
+  const res = await fetch(
+    `https://api.rawg.io/api/platforms/${id}?key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["platform", "details"],
+      },
+    }
+  );
 
   if (!res.ok) {
     throw new Error("Failed to fetch platform details");
