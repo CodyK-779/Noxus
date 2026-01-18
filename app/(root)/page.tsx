@@ -1,4 +1,9 @@
-import { getGameDetails, getHighRatedGames } from "@/actions/games-action";
+import {
+  getGameDate,
+  getGameDetails,
+  getHighRatedGames,
+} from "@/actions/games-action";
+import { getParentPlatforms } from "@/actions/platforms-action";
 import GameGenresContainer from "@/components/GameGenresContainer";
 import GamePlatformsContainer from "@/components/GamePlatformsContainer";
 import HeroAndNewReleases from "@/components/HeroAndNewReleases";
@@ -10,6 +15,9 @@ import { Suspense } from "react";
 
 export default async function Home() {
   // const game = await getGameDetails();
+  const games = await getGameDate();
+
+  // console.log(games);
 
   return (
     <>
@@ -36,6 +44,7 @@ export default async function Home() {
                   src={game.background_image}
                   alt={game.name}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
                 />
               ) : (

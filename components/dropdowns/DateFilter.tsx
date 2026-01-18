@@ -1,0 +1,149 @@
+"use client";
+
+import { Dispatch, SetStateAction } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { Check, ChevronDown } from "lucide-react";
+import { Button } from "../ui/button";
+import { dates } from "@/data/date-data";
+
+export interface DateValues {
+  year: string;
+  value: string;
+}
+
+interface Props {
+  date: DateValues;
+  handleSearch: (date: string, value: string) => void;
+}
+
+const DateFilter = ({ date, handleSearch }: Props) => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="outline"
+          className={`flex items-center gap-2 ${date.year === "" ? "text-muted-foreground" : ""} `}
+        >
+          <p>{date.year !== "" ? date.year : "Release Dates"}</p>
+          <ChevronDown className="size-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-52">
+        <DropdownMenuLabel>Dates</DropdownMenuLabel>
+        <DropdownMenuGroup>
+          {/* 1st Date Range */}
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>2020-2026</DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent>
+                {dates["2020-2026"].map((d) => (
+                  <DropdownMenuItem
+                    key={d.date}
+                    className="flex items-center justify-between gap-2"
+                    onClick={() => handleSearch(d.date, d.range)}
+                  >
+                    {d.date}
+                    {date.value === d.range && <Check className="size-4" />}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+          {/* 2nd Date Range */}
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>2010-2019</DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent>
+                {dates["2010-2019"].map((d) => (
+                  <DropdownMenuItem
+                    key={d.date}
+                    onClick={() => handleSearch(d.date, d.range)}
+                  >
+                    {d.date}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+          {/* 3rd Date Range */}
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>2000-2009</DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent>
+                {dates["2000-2009"].map((d) => (
+                  <DropdownMenuItem
+                    key={d.date}
+                    onClick={() => handleSearch(d.date, d.range)}
+                  >
+                    {d.date}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+          {/* 4th Date Range */}
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>1990-1999</DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent>
+                {dates["1990-1999"].map((d) => (
+                  <DropdownMenuItem
+                    key={d.date}
+                    onClick={() => handleSearch(d.date, d.range)}
+                  >
+                    {d.date}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+          {/* 5th Date Range */}
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>1980-1989</DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent>
+                {dates["1980-1989"].map((d) => (
+                  <DropdownMenuItem
+                    key={d.date}
+                    onClick={() => handleSearch(d.date, d.range)}
+                  >
+                    {d.date}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+          {/* 6th Date Range */}
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>1970-1979</DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent>
+                {dates["1970-1979"].map((d) => (
+                  <DropdownMenuItem
+                    key={d.date}
+                    onClick={() => handleSearch(d.date, d.range)}
+                  >
+                    {d.date}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+export default DateFilter;

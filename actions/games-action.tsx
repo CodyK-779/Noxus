@@ -39,12 +39,12 @@ export async function getGames(): Promise<RAWGResponse<GamesType>> {
   cacheLife("hours");
 
   const res = await fetch(
-    `https://api.rawg.io/api/games?&page_size=50&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?&page_size=50&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["games"],
       },
-    }
+    },
   );
 
   if (!res.ok) {
@@ -59,12 +59,12 @@ export async function getGameDetails(): Promise<GameDetails> {
   cacheLife("hours");
 
   const res = await fetch(
-    `https://api.rawg.io/api/games/hollow-knight-silksong?key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games/hollow-knight-silksong?key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["games", "details"],
       },
-    }
+    },
   );
 
   if (!res.ok) {
@@ -87,12 +87,12 @@ export async function getNewGames(): Promise<RAWGResponse<GamesType>> {
   const dates = `${formatDate(thirtyDaysAgo)},${formatDate(today)}`;
 
   const res = await fetch(
-    `https://api.rawg.io/api/games?&page_size=40&dates=${dates}&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?&page_size=40&dates=${dates}&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["new", "games"],
       },
-    }
+    },
   );
 
   if (!res.ok) {
@@ -114,12 +114,12 @@ export async function getUpcomingGames(): Promise<RAWGResponse<GamesType>> {
   const dates = `${formatDate(today)},${formatDate(nextMonth)}`;
 
   const res = await fetch(
-    `https://api.rawg.io/api/games?page=1&page_size=50&dates=${dates}&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?page=1&page_size=50&dates=${dates}&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["upcoming", "games"],
       },
-    }
+    },
   );
 
   if (!res.ok) {
@@ -134,12 +134,12 @@ export async function getHighRatedGames(): Promise<RAWGResponse<GamesType>> {
   cacheLife("hours");
 
   const res = await fetch(
-    `https://api.rawg.io/api/games?metacritic=80,100&page_size=50&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?metacritic=80,100&page_size=50&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["top", "games"],
       },
-    }
+    },
   );
 
   if (!res.ok) {
@@ -150,18 +150,41 @@ export async function getHighRatedGames(): Promise<RAWGResponse<GamesType>> {
 }
 
 export async function getPlatformGames(
-  id: number
+  platformId: number,
+  dates?: string,
+  genreId?: number,
+  score?: string,
 ): Promise<RAWGResponse<GamesType>> {
   "use cache";
   cacheLife("hours");
 
   const res = await fetch(
-    `https://api.rawg.io/api/games?platforms=${id}&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?platforms=${platformId}&dates=${dates}&genre=${genreId}&metacritic=${score}&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["platform", "games"],
       },
-    }
+    },
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to get Platform Games");
+  }
+
+  return res.json();
+}
+
+export async function getGameDate(): Promise<RAWGResponse<GamesType>> {
+  "use cache";
+  cacheLife("hours");
+
+  const res = await fetch(
+    `${process.env.RAWG_URL}/games?dates=2019-01-01,2019-12-31&key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["games"],
+      },
+    },
   );
 
   if (!res.ok) {

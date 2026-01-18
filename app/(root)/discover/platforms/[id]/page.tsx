@@ -3,12 +3,14 @@ import { Suspense } from "react";
 
 export default async function PlatformDetailsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: number }>;
+  searchParams: Promise<{ date: string }>;
 }) {
   return (
     <Suspense>
-      <PlatformDetailsContainer params={params} />
+      <PlatformDetailsContainer params={params} searchParams={searchParams} />
     </Suspense>
   );
 }
