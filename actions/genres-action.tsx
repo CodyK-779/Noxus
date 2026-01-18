@@ -20,7 +20,7 @@ export async function getGenres(): Promise<RAWGResponse<GenreResults>> {
       next: {
         tags: ["genres"],
       },
-    }
+    },
   );
 
   if (!res.ok) {

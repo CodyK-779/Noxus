@@ -152,14 +152,14 @@ export async function getHighRatedGames(): Promise<RAWGResponse<GamesType>> {
 export async function getPlatformGames(
   platformId: number,
   dates?: string,
-  genreId?: number,
+  genreId?: string,
   score?: string,
 ): Promise<RAWGResponse<GamesType>> {
   "use cache";
   cacheLife("hours");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games?platforms=${platformId}&dates=${dates}&genre=${genreId}&metacritic=${score}&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?platforms=${platformId}&dates=${dates}${genreId && `&genres=${genreId}`}&metacritic=${score}&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["platform", "games"],

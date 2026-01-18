@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,26 +16,39 @@ import {
 import { Check, ChevronDown } from "lucide-react";
 import { Button } from "../ui/button";
 import { dates } from "@/data/date-data";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export interface DateValues {
-  year: string;
-  value: string;
-}
+const DateFilter = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-interface Props {
-  date: DateValues;
-  handleSearch: (date: string, value: string) => void;
-}
+  const [releaseDate, setReleaseDate] = useState({
+    year: "",
+    value: "",
+  });
 
-const DateFilter = ({ date, handleSearch }: Props) => {
+  const handleSearch = (date: string, value: string) => {
+    const dateParams = new URLSearchParams(searchParams.toString());
+
+    if (value !== releaseDate.value) {
+      dateParams.set("date", value);
+      setReleaseDate({ year: date, value: value });
+    } else {
+      dateParams.delete("date");
+      setReleaseDate({ year: "", value: "" });
+    }
+
+    router.push(`?${dateParams.toString()}`, { scroll: false });
+  };
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild className="min-w-36">
         <Button
           variant="outline"
-          className={`flex items-center gap-2 ${date.year === "" ? "text-muted-foreground" : ""} `}
+          className={`flex items-center justify-between gap-2 ${releaseDate.year === "" ? "text-muted-foreground" : ""} `}
         >
-          <p>{date.year !== "" ? date.year : "Release Dates"}</p>
+          <p>{releaseDate.year !== "" ? releaseDate.year : "Release Dates"}</p>
           <ChevronDown className="size-4" />
         </Button>
       </DropdownMenuTrigger>
@@ -54,7 +67,9 @@ const DateFilter = ({ date, handleSearch }: Props) => {
                     onClick={() => handleSearch(d.date, d.range)}
                   >
                     {d.date}
-                    {date.value === d.range && <Check className="size-4" />}
+                    {releaseDate.value === d.range && (
+                      <Check className="size-4" />
+                    )}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuSubContent>
@@ -68,9 +83,13 @@ const DateFilter = ({ date, handleSearch }: Props) => {
                 {dates["2010-2019"].map((d) => (
                   <DropdownMenuItem
                     key={d.date}
+                    className="flex items-center justify-between gap-2"
                     onClick={() => handleSearch(d.date, d.range)}
                   >
                     {d.date}
+                    {releaseDate.value === d.range && (
+                      <Check className="size-4" />
+                    )}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuSubContent>
@@ -84,9 +103,13 @@ const DateFilter = ({ date, handleSearch }: Props) => {
                 {dates["2000-2009"].map((d) => (
                   <DropdownMenuItem
                     key={d.date}
+                    className="flex items-center justify-between gap-2"
                     onClick={() => handleSearch(d.date, d.range)}
                   >
                     {d.date}
+                    {releaseDate.value === d.range && (
+                      <Check className="size-4" />
+                    )}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuSubContent>
@@ -100,9 +123,13 @@ const DateFilter = ({ date, handleSearch }: Props) => {
                 {dates["1990-1999"].map((d) => (
                   <DropdownMenuItem
                     key={d.date}
+                    className="flex items-center justify-between gap-2"
                     onClick={() => handleSearch(d.date, d.range)}
                   >
                     {d.date}
+                    {releaseDate.value === d.range && (
+                      <Check className="size-4" />
+                    )}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuSubContent>
@@ -116,9 +143,13 @@ const DateFilter = ({ date, handleSearch }: Props) => {
                 {dates["1980-1989"].map((d) => (
                   <DropdownMenuItem
                     key={d.date}
+                    className="flex items-center justify-between gap-2"
                     onClick={() => handleSearch(d.date, d.range)}
                   >
                     {d.date}
+                    {releaseDate.value === d.range && (
+                      <Check className="size-4" />
+                    )}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuSubContent>
@@ -132,9 +163,13 @@ const DateFilter = ({ date, handleSearch }: Props) => {
                 {dates["1970-1979"].map((d) => (
                   <DropdownMenuItem
                     key={d.date}
+                    className="flex items-center justify-between gap-2"
                     onClick={() => handleSearch(d.date, d.range)}
                   >
                     {d.date}
+                    {releaseDate.value === d.range && (
+                      <Check className="size-4" />
+                    )}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuSubContent>

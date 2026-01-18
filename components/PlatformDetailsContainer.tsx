@@ -6,15 +6,16 @@ import Image from "next/image";
 
 interface Props {
   params: Promise<{ id: number }>;
-  searchParams: Promise<{ date: string }>;
+  searchParams: Promise<{ date: string; genre: string }>;
 }
 
 const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
   const platformId = (await params).id;
   const dates = (await searchParams).date || "";
+  const genreId = (await searchParams).genre || "";
   const [platform, games] = await Promise.all([
     getPlatformDetails(platformId),
-    getPlatformGames(platformId, dates),
+    getPlatformGames(platformId, dates, genreId),
   ]);
 
   return (
@@ -24,6 +25,7 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
         <TextExtender description={platform.description} />
       )}
       <PlatformFilters />
+      Results: {games.count}
       <ul className="flex flex-col gap-4">
         {games.results.map((game) => (
           <li key={game.id} className="flex flex-col gap-1">
