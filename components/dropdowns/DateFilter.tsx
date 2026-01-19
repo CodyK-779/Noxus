@@ -46,7 +46,7 @@ const DateFilter = () => {
       <DropdownMenuTrigger asChild className="min-w-36">
         <Button
           variant="outline"
-          className={`flex items-center justify-between gap-2 ${releaseDate.year === "" ? "text-muted-foreground" : ""} `}
+          className={`flex items-center justify-between gap-4 ${releaseDate.year === "" ? "text-muted-foreground" : ""} `}
         >
           <p>{releaseDate.year !== "" ? releaseDate.year : "Release Dates"}</p>
           <ChevronDown className="size-4" />

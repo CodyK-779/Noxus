@@ -1,7 +1,7 @@
 "use client";
 
-import { Check, ChevronDown } from "lucide-react";
-import { Button } from "../ui/button";
+import { tagData } from "@/data/tag-data";
+import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,15 +10,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { genreData } from "@/data/genre-data";
-import { useState } from "react";
+import { Button } from "../ui/button";
+import { ChevronDown, Check } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const GenreFilter = () => {
+const TagFilter = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const [genre, setGenre] = useState({
+  const [tag, setTag] = useState({
     name: "",
     value: "",
   });
@@ -26,12 +26,12 @@ const GenreFilter = () => {
   const handleSearch = (name: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
 
-    if (genre.value !== value) {
-      params.set("genre", value);
-      setGenre({ name, value });
+    if (tag.value !== value) {
+      params.set("tag", value);
+      setTag({ name, value });
     } else {
-      params.delete("genre");
-      setGenre({ name: "", value: "" });
+      params.delete("tag");
+      setTag({ name: "", value: "" });
     }
 
     router.push(`?${params.toString()}`, { scroll: false });
@@ -42,23 +42,23 @@ const GenreFilter = () => {
       <DropdownMenuTrigger asChild className="min-w-36">
         <Button
           variant="outline"
-          className={`flex items-center justify-between gap-4 ${genre.name === "" ? "text-muted-foreground" : ""} `}
+          className={`flex items-center justify-between gap-4 ${tag.name === "" ? "text-muted-foreground" : ""} `}
         >
-          <p>{genre.name !== "" ? genre.name : "Filter Genre"}</p>
+          <p>{tag.name !== "" ? tag.name : "Filter Tags"}</p>
           <ChevronDown className="size-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-52">
-        <DropdownMenuLabel>Genres</DropdownMenuLabel>
+        <DropdownMenuLabel>Game Tags</DropdownMenuLabel>
         <DropdownMenuGroup>
-          {genreData.map((g) => (
+          {tagData.map((t) => (
             <DropdownMenuItem
-              key={g.id}
+              key={t.id}
               className="flex items-center justify-between gap-2"
-              onClick={() => handleSearch(g.name, g.id)}
+              onClick={() => handleSearch(t.name, t.id)}
             >
-              {g.name}
-              {genre.value === g.id && <Check className="size-4" />}
+              {t.name}
+              {tag.value === t.id && <Check className="size-4" />}
             </DropdownMenuItem>
           ))}
         </DropdownMenuGroup>
@@ -67,4 +67,4 @@ const GenreFilter = () => {
   );
 };
 
-export default GenreFilter;
+export default TagFilter;

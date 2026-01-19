@@ -6,7 +6,12 @@ export default async function PlatformDetailsPage({
   searchParams,
 }: {
   params: Promise<{ id: number }>;
-  searchParams: Promise<{ date: string; genre: string }>;
+  searchParams: Promise<{
+    date: string;
+    genre: string;
+    tag: string;
+    metascore: string;
+  }>;
 }) {
   return (
     <Suspense>
