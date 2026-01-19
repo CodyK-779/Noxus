@@ -3,6 +3,8 @@ import { getPlatformDetails } from "@/actions/platforms-action";
 import TextExtender from "@/utils/TextExtender";
 import PlatformFilters from "./PlatformFilters";
 import Image from "next/image";
+import PlatformDetailGames from "./PlatformDetailGames";
+import { getUser } from "@/actions/user-action";
 
 interface Props {
   params: Promise<{ id: number }>;
@@ -20,10 +22,13 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
   const genreId = (await searchParams).genre || "";
   const tagId = (await searchParams).tag || "";
   const score = (await searchParams).metascore || "";
-  const [platform, games] = await Promise.all([
+  const [platform, games, user] = await Promise.all([
     getPlatformDetails(platformId),
     getPlatformGames(platformId, dates, genreId, tagId, score),
+    getUser(),
   ]);
+
+  const wishlistItems = user?.wishlist?.items;
 
   return (
     <div className="max-container mt-24">
@@ -32,34 +37,11 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
         <TextExtender description={platform.description} />
       )}
       <PlatformFilters />
-      Results: {games.count}
-      <ul className="flex flex-col gap-4">
-        {games.results.map((game) => (
-          <li key={game.id} className="flex flex-col gap-1">
-            <div className="relative aspect-video size-40 rounded-md overflow-hidden">
-              {game.background_image ? (
-                <Image
-                  src={game.background_image}
-                  alt={game.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              ) : (
-                <Image
-                  src="/image-placeholder.webp"
-                  alt="Image placeholder"
-                  fill
-                  sizes="(max-width: 768px) 80vw"
-                  className="object-cover"
-                />
-              )}
-            </div>
-            <p className="font-medium">{game.name}</p>
-            <p className="font-medium">{game.metacritic}</p>
-          </li>
-        ))}
-      </ul>
+      <PlatformDetailGames
+        platformId={platformId}
+        games={games}
+        wishlistItems={wishlistItems}
+      />
     </div>
   );
 };

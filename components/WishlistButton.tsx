@@ -19,6 +19,9 @@ interface Props {
   rating: number;
   platforms: string[];
   wishlistItems: WishlistItemType[] | undefined;
+  hidden?: string;
+  hero?: boolean;
+  path: string;
 }
 
 const WishlistButton = ({
@@ -32,12 +35,15 @@ const WishlistButton = ({
   rating,
   platforms,
   wishlistItems,
+  hidden,
+  hero,
+  path,
 }: Props) => {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [wishlisted, setWishlisted] = useState(
-    wishlistItems?.some((item) => item.gameId === gameId) || false
+    wishlistItems?.some((item) => item.gameId === gameId) || false,
   );
 
   const handleWishlist = async () => {
@@ -56,7 +62,7 @@ const WishlistButton = ({
         createdAt,
         rating,
         platforms,
-        "/"
+        path,
       );
 
       if (results.success) {
@@ -67,7 +73,7 @@ const WishlistButton = ({
     } catch (error) {
       console.error("Error updating wishlist:", error);
       setWishlisted(
-        wishlistItems?.some((item) => item.gameId === gameId) || false
+        wishlistItems?.some((item) => item.gameId === gameId) || false,
       );
     } finally {
       setLoading(false);
@@ -78,7 +84,7 @@ const WishlistButton = ({
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
         <button
-          className={`absolute ${position} items-center justify-center bg-black border border-white p-1 rounded-full cursor-pointer z-10`}
+          className={`absolute ${position} ${!hero && !loading && `${hidden}`} items-center justify-center bg-black border border-white p-1 rounded-full cursor-pointer z-10`}
           onClick={handleWishlist}
           disabled={loading}
         >

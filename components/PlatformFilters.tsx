@@ -15,7 +15,7 @@ const PlatformFilters = () => {
       <p className="text-xs font-medium text-neutral-400 mb-6">
         Note: Select the same filter value to cancel
       </p>
-      <hr className="h-0.5 bg-neutral-800 mb-10" />
+      <hr className="h-0.5 bg-neutral-800" />
     </>
   );
 };

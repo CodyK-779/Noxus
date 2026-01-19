@@ -28,17 +28,17 @@ const DateFilter = () => {
   });
 
   const handleSearch = (date: string, value: string) => {
-    const dateParams = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams.toString());
 
     if (value !== releaseDate.value) {
-      dateParams.set("date", value);
+      params.set("date", value);
       setReleaseDate({ year: date, value: value });
     } else {
-      dateParams.delete("date");
+      params.delete("date");
       setReleaseDate({ year: "", value: "" });
     }
 
-    router.push(`?${dateParams.toString()}`, { scroll: false });
+    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   return (

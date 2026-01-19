@@ -79,6 +79,8 @@ const HeroGameCard = ({ data, wishlistItems }: Props) => {
         platforms={data.platforms}
         createdAt={data.date}
         wishlistItems={wishlistItems}
+        path="/"
+        hero
       />
     </div>
   );

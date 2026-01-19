@@ -1,16 +1,20 @@
 import { GamesType } from "@/actions/games-action";
 import Image from "next/image";
 import Link from "next/link";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { platformIcons, platformIconByKey } from "@/utils/utils";
-import { Bookmark } from "lucide-react";
-import { RAWGResponse } from "@/utils/interfaceTypes";
+import {
+  platformIcons,
+  platformIconByKey,
+  convertPlatformArray,
+} from "@/utils/utils";
+import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
+import WishlistButton from "./WishlistButton";
 
 interface Props {
   games: RAWGResponse<GamesType>;
+  wishlistItems: WishlistItemType[] | undefined;
 }
 
-const UpcomingGamesGrid = ({ games }: Props) => {
+const UpcomingGamesGrid = ({ games, wishlistItems }: Props) => {
   return (
     <section className="grid lg:grid-cols-5 md:grid-cols-4 sm:gap-5 min-[400px]:gap-4 gap-3 sm:grid-cols-3 grid-cols-2 min-[400px]:pt-16 pt-14">
       {games.results.map((game) => (
@@ -37,16 +41,20 @@ const UpcomingGamesGrid = ({ games }: Props) => {
             </div>
           </Link>
 
-          <Tooltip delayDuration={0}>
-            <TooltipTrigger asChild>
-              <div className="absolute top-2.5 right-2.5 hidden group-hover:flex items-center justify-center bg-black border border-white p-1 rounded-full cursor-pointer">
-                <Bookmark className="size-4" />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="font-semibold">Add to Wishlist</p>
-            </TooltipContent>
-          </Tooltip>
+          <WishlistButton
+            position="top-2.5 right-2.5 group-hover:flex"
+            size="size-4"
+            wishlistItems={wishlistItems}
+            gameId={game.id}
+            name={game.name}
+            slug={game.slug}
+            image={game.background_image}
+            rating={game.rating}
+            platforms={convertPlatformArray(game.platforms)}
+            createdAt={String(game.released)}
+            path="/discover/upcoming_games"
+            hidden="hidden"
+          />
 
           <p className="mt-2 mb-0.5 font-medium sm:text-sm min-[400px]:text-xs min-[350px]:text-[11px] text-[10px] text-neutral-400">
             Available in{" "}

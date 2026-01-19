@@ -51,7 +51,7 @@ const NewGames = ({ newGames, paginate, wishlistItems }: Props) => {
           </Link>
 
           <WishlistButton
-            position="top-2.5 right-2.5 hidden group-hover:flex"
+            position="top-2.5 right-2.5 group-hover:flex"
             size="size-4"
             gameId={game.id}
             name={game.name}
@@ -61,6 +61,8 @@ const NewGames = ({ newGames, paginate, wishlistItems }: Props) => {
             createdAt={game.released.toString()}
             platforms={convertPlatformArray(game.platforms)}
             wishlistItems={wishlistItems}
+            hidden="hidden"
+            path="/"
           />
 
           <p className="mt-2 mb-0.5 font-medium lg:text-sm text-xs text-neutral-400">
@@ -81,7 +83,7 @@ const NewGames = ({ newGames, paginate, wishlistItems }: Props) => {
             )}
             <div
               className={`px-1.5 py-0.5 rounded ${ratingBadge(
-                game.rating
+                game.rating,
               )} text-white font-semibold text-xs`}
             >
               {gameRating(game.rating)}

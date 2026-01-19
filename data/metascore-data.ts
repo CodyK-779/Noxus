@@ -1,7 +1,7 @@
 export const metacriticData = [
   {
-    score: "0-20",
-    value: "0,20",
+    score: "01-20",
+    value: "01,20",
   },
   {
     score: "20-40",

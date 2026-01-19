@@ -1,27 +1,27 @@
 import { GamesType } from "@/actions/games-action";
-import Image from "next/image";
+import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
 import {
   convertPlatformArray,
-  gameRating,
   platformIconByKey,
   platformIcons,
 } from "@/utils/utils";
+import Image from "next/image";
 import Link from "next/link";
-import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
 import WishlistButton from "./WishlistButton";
 
 interface Props {
+  platformId: number;
   games: RAWGResponse<GamesType>;
   wishlistItems: WishlistItemType[] | undefined;
 }
 
-const ratingBadge = (rating: number) => {
-  if (rating < 3) return "bg-red-500";
-  if (rating < 4) return "bg-orange-500";
-  return "bg-green-500";
+const scoreColors = (score: number) => {
+  if (score < 49) return "text-red-500";
+  if (score < 74) return "text-yellow-500";
+  return "text-green-500";
 };
 
-const NewGamesGrid = ({ games, wishlistItems }: Props) => {
+const PlatformDetailGames = ({ platformId, games, wishlistItems }: Props) => {
   return (
     <section className="grid lg:grid-cols-5 md:grid-cols-4 sm:gap-5 min-[400px]:gap-4 gap-3 sm:grid-cols-3 grid-cols-2 min-[400px]:pt-16 pt-14">
       {games.results.map((game) => (
@@ -60,7 +60,7 @@ const NewGamesGrid = ({ games, wishlistItems }: Props) => {
             platforms={convertPlatformArray(game.platforms)}
             createdAt={String(game.released)}
             hidden="sm:hidden"
-            path="/discover/new-releases"
+            path={`/discover/platforms/${platformId}`}
           />
 
           <p className="mt-2 mb-0.5 font-medium lg:text-sm text-xs text-neutral-400">
@@ -70,23 +70,27 @@ const NewGamesGrid = ({ games, wishlistItems }: Props) => {
             })}
           </p>
 
-          <p className="lg:text-base text-sm font-bold">{game.name}</p>
+          <p className="lg:text-base min-[350px]:text-sm text-xs font-bold">
+            {game.name}
+          </p>
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between max-[350px]:mt-0.5">
             {game.platforms && (
               <div className="flex items-center gap-1">
                 {platformIcons(game.platforms).map((p) => (
-                  <p key={p}>{platformIconByKey(p)}</p>
+                  <p key={p} className="max-[350px]:text-sm">
+                    {platformIconByKey(p)}
+                  </p>
                 ))}
               </div>
             )}
-            <div
-              className={`min-[400px]:px-1.5 px-1 min-[400px]:py-0.5 py:[1.5px] rounded ${ratingBadge(
-                game.rating,
-              )} text-white font-semibold min-[400px]:text-xs text-[10px]`}
-            >
-              {gameRating(game.rating)}
-            </div>
+            {game.metacritic && (
+              <p
+                className={`${scoreColors(game.metacritic)} min-[400px]:text-sm text-[13px] font-semibold`}
+              >
+                {game.metacritic}
+              </p>
+            )}
           </div>
         </div>
       ))}
@@ -94,4 +98,4 @@ const NewGamesGrid = ({ games, wishlistItems }: Props) => {
   );
 };
 
-export default NewGamesGrid;
+export default PlatformDetailGames;

@@ -61,6 +61,7 @@ const MBNewGameCard = ({ data, wishlistItems }: Props) => {
         platforms={convertPlatformArray(data.platforms)}
         createdAt={data.released.toString()}
         wishlistItems={wishlistItems}
+        path="/"
       />
 
       <p className="mt-2 mb-0.5 font-medium sm:text-sm text-xs text-neutral-400">
@@ -84,7 +85,7 @@ const MBNewGameCard = ({ data, wishlistItems }: Props) => {
         )}
         <div
           className={`px-1.5 py-0.5 rounded ${ratingBadge(
-            data.rating
+            data.rating,
           )} text-white font-semibold sm:text-sm min-[375px]:text-xs text-[11px]`}
         >
           {gameRating(data.rating)}
