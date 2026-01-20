@@ -47,10 +47,10 @@ const TagFilter = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="min-w-36">
+      <DropdownMenuTrigger asChild className="sm:min-w-36 max-[639px]:w-full">
         <Button
           variant="outline"
-          className={`flex items-center justify-between gap-4 ${tag.name === "" ? "text-muted-foreground" : ""} `}
+          className={`flex items-center justify-between gap-4 min-[350px]:text-sm text-xs ${tag.name === "" ? "text-muted-foreground" : ""} `}
         >
           <p>{tag.name !== "" ? tag.name : "Filter Tags"}</p>
           <ChevronDown className="size-4" />

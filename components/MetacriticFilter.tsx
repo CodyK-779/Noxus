@@ -47,16 +47,16 @@ const MetacriticFilter = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="min-w-36">
+      <DropdownMenuTrigger asChild className="sm:min-w-36 max-[639px]:w-full">
         <Button
           variant="outline"
-          className={`flex items-center justify-between gap-4 ${metaScore.score === "" ? "text-muted-foreground" : ""} `}
+          className={`flex items-center justify-between gap-4 min-[350px]:text-sm text-xs ${metaScore.score === "" ? "text-muted-foreground" : ""} `}
         >
           <p>{metaScore.score !== "" ? metaScore.score : "Filter Scores"}</p>
           <ChevronDown className="size-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-52">
+      <DropdownMenuContent className="w-36">
         <DropdownMenuLabel>Scores</DropdownMenuLabel>
         <DropdownMenuGroup>
           {metacriticData.map((m) => (

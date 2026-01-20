@@ -56,16 +56,16 @@ const DateFilter = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="min-w-36">
+      <DropdownMenuTrigger asChild className="sm:min-w-36 max-[639px]:w-full">
         <Button
           variant="outline"
-          className={`flex items-center justify-between gap-4 ${releaseDate.year === "" ? "text-muted-foreground" : ""} `}
+          className={`flex items-center justify-between gap-4 min-[350px]:text-sm text-xs ${releaseDate.year === "" ? "text-muted-foreground" : ""} `}
         >
           <p>{releaseDate.year !== "" ? releaseDate.year : "Release Dates"}</p>
           <ChevronDown className="size-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-52">
+      <DropdownMenuContent className="w-44">
         <DropdownMenuLabel>Dates</DropdownMenuLabel>
         <DropdownMenuGroup>
           {/* 1st Date Range */}

@@ -1,9 +1,9 @@
 import { getPlatformGames } from "@/actions/games-action";
 import { getPlatformDetails } from "@/actions/platforms-action";
-import TextExtender from "@/utils/TextExtender";
 import PlatformFilters from "./PlatformFilters";
 import PlatformDetailGames from "./PlatformDetailGames";
 import { getUser } from "@/actions/user-action";
+import BackButton from "./BackButton";
 
 interface Props {
   params: Promise<{ id: number }>;
@@ -31,10 +31,10 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
 
   return (
     <div className="max-container mt-24">
-      <h1 className="text-5xl font-bold mb-4">Games for {platform.name}</h1>
-      {platform.description && (
-        <TextExtender description={platform.description} />
-      )}
+      <BackButton path="/discover/platforms" />
+      <h1 className="md:text-5xl sm:text-4xl min-[400px]:text-3xl text-2xl font-bold mb-4 mt-6 text-[#e91e3f]">
+        Games for {platform.name}
+      </h1>
       <PlatformFilters />
       <PlatformDetailGames
         platformId={platformId}

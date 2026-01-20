@@ -1,7 +1,7 @@
 "use client";
 
+import SafeHTMLRenderer from "@/utils/SafeHTMLRenderer";
 import { useEffect, useState } from "react";
-import SafeHTMLRenderer from "./SafeHTMLRenderer";
 
 interface Props {
   description: string;
@@ -27,7 +27,7 @@ const TextExtender = ({ description }: Props) => {
       {truncate && (
         <button
           onClick={() => setExpanded(!expanded)}
-          className="text-sm whitespace-nowrap h-fit font-semibold bg-[#e91e3f] rounded px-1 hover:underline"
+          className="text-xs whitespace-nowrap h-fit font-semibold bg-[#e91e3f] rounded px-1 py-0.5 hover:underline"
         >
           {expanded ? "Show less" : "Show more"}
         </button>
