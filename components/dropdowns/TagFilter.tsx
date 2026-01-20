@@ -14,13 +14,21 @@ import { Button } from "../ui/button";
 import { ChevronDown, Check } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 
+const getTagLabel = (value: string) => {
+  if (!value) return "";
+
+  return tagData.find((t) => t.id === value)?.name || "";
+};
+
 const TagFilter = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  const selectedTag = searchParams.get("tag") || "";
+
   const [tag, setTag] = useState({
-    name: "",
-    value: "",
+    name: getTagLabel(selectedTag),
+    value: selectedTag,
   });
 
   const handleSearch = (name: string, value: string) => {

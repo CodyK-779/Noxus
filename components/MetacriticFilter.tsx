@@ -14,13 +14,21 @@ import { ChevronDown, Check } from "lucide-react";
 import { Button } from "./ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 
+const getScoreLabel = (value: string) => {
+  if (!value) return "";
+
+  return metacriticData.find((m) => m.value === value)?.score || "";
+};
+
 const MetacriticFilter = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  const selectedScore = searchParams.get("metascore") || "";
+
   const [metaScore, setMetaScore] = useState({
-    score: "",
-    value: "",
+    score: getScoreLabel(selectedScore),
+    value: selectedScore,
   });
 
   const handleSearch = (score: string, value: string) => {

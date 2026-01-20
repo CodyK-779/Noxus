@@ -2,7 +2,6 @@ import { getPlatformGames } from "@/actions/games-action";
 import { getPlatformDetails } from "@/actions/platforms-action";
 import TextExtender from "@/utils/TextExtender";
 import PlatformFilters from "./PlatformFilters";
-import Image from "next/image";
 import PlatformDetailGames from "./PlatformDetailGames";
 import { getUser } from "@/actions/user-action";
 

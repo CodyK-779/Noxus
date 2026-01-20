@@ -14,13 +14,21 @@ import { genreData } from "@/data/genre-data";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
+const getGenreLabel = (value: string) => {
+  if (!value) return "";
+
+  return genreData.find((g) => g.id === value)?.name || "";
+};
+
 const GenreFilter = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  const selectedGenre = searchParams.get("genre") || "";
+
   const [genre, setGenre] = useState({
-    name: "",
-    value: "",
+    name: getGenreLabel(selectedGenre),
+    value: selectedGenre,
   });
 
   const handleSearch = (name: string, value: string) => {

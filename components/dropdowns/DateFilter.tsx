@@ -18,13 +18,26 @@ import { Button } from "../ui/button";
 import { dates } from "@/data/date-data";
 import { useRouter, useSearchParams } from "next/navigation";
 
+const getYearFromRange = (value: string) => {
+  if (!value) return "";
+
+  for (const group of Object.values(dates)) {
+    const match = group.find((d) => d.range === value);
+    if (match) return match.date;
+  }
+
+  return "";
+};
+
 const DateFilter = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  const selectedDate = searchParams.get("date") || "";
+
   const [releaseDate, setReleaseDate] = useState({
-    year: "",
-    value: "",
+    year: getYearFromRange(selectedDate) || "",
+    value: selectedDate,
   });
 
   const handleSearch = (date: string, value: string) => {

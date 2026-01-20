@@ -63,27 +63,13 @@ const PlatformDetailGames = ({ platformId, games, wishlistItems }: Props) => {
             path={`/discover/platforms/${platformId}`}
           />
 
-          <p className="mt-2 mb-0.5 font-medium lg:text-sm text-xs text-neutral-400">
-            {new Date(game.released).toLocaleDateString("en-US", {
-              month: "short",
-              year: "numeric",
-            })}
-          </p>
-
-          <p className="lg:text-base min-[350px]:text-sm text-xs font-bold">
-            {game.name}
-          </p>
-
-          <div className="flex items-center justify-between max-[350px]:mt-0.5">
-            {game.platforms && (
-              <div className="flex items-center gap-1">
-                {platformIcons(game.platforms).map((p) => (
-                  <p key={p} className="max-[350px]:text-sm">
-                    {platformIconByKey(p)}
-                  </p>
-                ))}
-              </div>
-            )}
+          <div className="flex items-center justify-between mt-2 mb-0.5">
+            <p className="font-medium lg:text-sm text-xs text-neutral-400">
+              {new Date(game.released).toLocaleDateString("en-US", {
+                month: "short",
+                year: "numeric",
+              })}
+            </p>
             {game.metacritic && (
               <p
                 className={`${scoreColors(game.metacritic)} min-[400px]:text-sm text-[13px] font-semibold`}
@@ -92,6 +78,20 @@ const PlatformDetailGames = ({ platformId, games, wishlistItems }: Props) => {
               </p>
             )}
           </div>
+
+          <p className="lg:text-base min-[350px]:text-sm text-xs font-bold">
+            {game.name}
+          </p>
+
+          {game.platforms && (
+            <div className="flex items-center gap-1 max-[350px]:mt-0.5">
+              {platformIcons(game.platforms).map((p) => (
+                <p key={p} className="max-[350px]:text-sm">
+                  {platformIconByKey(p)}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </section>
