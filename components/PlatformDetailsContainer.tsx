@@ -30,7 +30,7 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
   const wishlistItems = user?.wishlist?.items;
 
   return (
-    <div className="max-container mt-24">
+    <section className="max-container mt-24">
       <BackButton path="/discover/platforms" />
       <h1 className="md:text-5xl sm:text-4xl min-[400px]:text-3xl text-2xl font-bold mb-4 mt-6 text-[#e91e3f]">
         Games for {platform.name}
@@ -41,7 +41,7 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
         games={games}
         wishlistItems={wishlistItems}
       />
-    </div>
+    </section>
   );
 };
 

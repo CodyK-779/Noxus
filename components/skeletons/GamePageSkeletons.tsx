@@ -19,10 +19,7 @@ const GamePageSkeletons = ({ header, desc }: Props) => {
             <Skeleton className="mt-3 mb-0.5 w-full min-[400px]:h-3.5 h-3" />
             <Skeleton className="min-[400px]:mt-3 mt-2.5 w-full min-[400px]:h-4 h-3" />
 
-            <div className="flex items-center justify-between min-[400px]:mt-2.5 mt-2">
-              <Skeleton className="min-[400px]:w-20 w-14 min-[400px]:h-3 h-2.5" />
-              <Skeleton className="min-[400px]:w-20 w-14 min-[400px]:h-3 h-2.5" />
-            </div>
+            <Skeleton className="min-[400px]:w-20 w-14 min-[400px]:h-3 h-2.5 min-[400px]:mt-2.5 mt-2" />
           </div>
         ))}
       </section>

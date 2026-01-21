@@ -15,10 +15,10 @@ interface Props {
   wishlistItems: WishlistItemType[] | undefined;
 }
 
-const ratingBadge = (rating: number) => {
-  if (rating < 3) return "bg-red-500";
-  if (rating < 4) return "bg-orange-500";
-  return "bg-green-500";
+const scoreColors = (score: number) => {
+  if (score < 3) return "text-red-500";
+  if (score < 4) return "text-yellow-500";
+  return "text-green-500";
 };
 
 const NewGamesGrid = ({ games, wishlistItems }: Props) => {
@@ -63,31 +63,33 @@ const NewGamesGrid = ({ games, wishlistItems }: Props) => {
             path="/discover/new-releases"
           />
 
-          <p className="mt-2 mb-0.5 font-medium lg:text-sm text-xs text-neutral-400">
-            {new Date(game.released).toLocaleDateString("en-US", {
-              month: "short",
-              year: "numeric",
-            })}
-          </p>
-
-          <p className="lg:text-base text-sm font-bold">{game.name}</p>
-
-          <div className="flex items-center justify-between">
-            {game.platforms && (
-              <div className="flex items-center gap-1">
-                {platformIcons(game.platforms).map((p) => (
-                  <p key={p}>{platformIconByKey(p)}</p>
-                ))}
-              </div>
-            )}
-            <div
-              className={`min-[400px]:px-1.5 px-1 min-[400px]:py-0.5 py:[1.5px] rounded ${ratingBadge(
-                game.rating,
-              )} text-white font-semibold min-[400px]:text-xs text-[10px]`}
+          <div className="flex items-center justify-between mt-2 mb-0.5">
+            <p className="font-medium lg:text-sm text-xs text-neutral-400">
+              {new Date(game.released).toLocaleDateString("en-US", {
+                month: "short",
+                year: "numeric",
+              })}
+            </p>
+            <p
+              className={`${scoreColors(game.rating)} min-[400px]:text-sm text-[13px] font-bold`}
             >
               {gameRating(game.rating)}
-            </div>
+            </p>
           </div>
+
+          <p className="lg:text-base min-[350px]:text-sm text-xs font-bold">
+            {game.name}
+          </p>
+
+          {game.platforms && (
+            <div className="flex items-center gap-1 max-[350px]:mt-0.5">
+              {platformIcons(game.platforms).map((p) => (
+                <p key={p} className="max-[350px]:text-sm">
+                  {platformIconByKey(p)}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </section>

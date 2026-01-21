@@ -1,4 +1,5 @@
 import PlatformDetailsContainer from "@/components/PlatformDetailsContainer";
+import PDContainerSkeleton from "@/components/skeletons/PDContainerSkeleton";
 import { Suspense } from "react";
 
 export default async function PlatformDetailsPage({
@@ -14,7 +15,7 @@ export default async function PlatformDetailsPage({
   }>;
 }) {
   return (
-    <Suspense>
+    <Suspense fallback={<PDContainerSkeleton />}>
       <PlatformDetailsContainer params={params} searchParams={searchParams} />
     </Suspense>
   );

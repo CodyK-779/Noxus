@@ -65,13 +65,15 @@ const UpcomingGamesGrid = ({ games, wishlistItems }: Props) => {
             })}
           </p>
 
-          <p className="lg:text-base min-[350px]:text-sm text-[13px] font-bold">
+          <p className="lg:text-base min-[350px]:text-sm text-xs font-bold">
             {game.name}
           </p>
           {game.platforms && (
-            <div className="flex items-center gap-1 mt-1">
+            <div className="flex items-center gap-1 max-[350px]:mt-0.5">
               {platformIcons(game.platforms).map((p) => (
-                <div key={p}>{platformIconByKey(p)}</div>
+                <p key={p} className="max-[350px]:text-sm">
+                  {platformIconByKey(p)}
+                </p>
               ))}
             </div>
           )}
