@@ -33,10 +33,7 @@ const GameSectionSkeletons = () => {
           <Skeleton className="mt-3 mb-0.5 w-full h-3.5" />
           <Skeleton className="mt-3 w-full h-4" />
 
-          <div className="flex items-center justify-between mt-2.5">
-            <Skeleton className="w-20 h-3" />
-            <Skeleton className="w-20 h-3" />
-          </div>
+          <Skeleton className="w-20 h-3 mt-2.5" />
         </div>
       ))}
     </div>

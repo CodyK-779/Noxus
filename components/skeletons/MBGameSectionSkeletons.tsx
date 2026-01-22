@@ -15,10 +15,7 @@ const MBGameSectionSkeletons = () => {
               <Skeleton className="mt-3 mb-0.5 w-full min-[400px]:h-3.5 h-3" />
               <Skeleton className="mt-3 w-full min-[400px]:h-4 h-3" />
 
-              <div className="flex items-center justify-between mt-2.5">
-                <Skeleton className="w-20 min-[400px]:h-3 h-2.5" />
-                <Skeleton className="w-20 min-[400px]:h-3 h-2.5" />
-              </div>
+              <Skeleton className="w-20 min-[400px]:h-3 h-2.5 mt-2.5" />
             </div>
           </SwiperSlide>
         ))}

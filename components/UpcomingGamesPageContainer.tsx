@@ -9,7 +9,7 @@ const UpcomingGamesPageContainer = async () => {
   const wishlistItems = user?.wishlist?.items;
 
   return (
-    <main className="max-container min-[400px]:mt-32 mt-24">
+    <main className="max-container min-[400px]:mt-28 mt-24">
       <PageHeaders
         header="Discover Upcoming Games"
         desc="Check out upcoming games that will be released in the next 6 months."

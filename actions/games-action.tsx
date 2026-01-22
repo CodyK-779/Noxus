@@ -134,7 +134,7 @@ export async function getHighRatedGames(): Promise<RAWGResponse<GamesType>> {
   cacheLife("hours");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games?metacritic=80,100&page_size=50&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?metacritic=80,100&page_size=40&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["top", "games"],
@@ -164,26 +164,6 @@ export async function getPlatformGames(
     {
       next: {
         tags: ["platform", "games"],
-      },
-    },
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to get Platform Games");
-  }
-
-  return res.json();
-}
-
-export async function getGameDate(): Promise<RAWGResponse<GamesType>> {
-  "use cache";
-  cacheLife("hours");
-
-  const res = await fetch(
-    `${process.env.RAWG_URL}/games?dates=2019-01-01,2019-12-31&key=${process.env.RAWG_API_KEY}`,
-    {
-      next: {
-        tags: ["games"],
       },
     },
   );

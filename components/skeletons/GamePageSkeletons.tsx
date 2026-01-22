@@ -8,7 +8,7 @@ interface Props {
 
 const GamePageSkeletons = ({ header, desc }: Props) => {
   return (
-    <main className="max-container min-[400px]:mt-32 mt-24">
+    <main className="max-container min-[400px]:mt-28 mt-24">
       <PageHeaders header={header} desc={desc} />
 
       <section className="grid lg:grid-cols-5 md:grid-cols-4 sm:gap-5 min-[400px]:gap-4 gap-3 sm:grid-cols-3 grid-cols-2 min-[400px]:pt-16 pt-14">

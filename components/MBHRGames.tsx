@@ -1,39 +1,39 @@
 import { GamesType } from "@/actions/games-action";
+import { WishlistItemType } from "@/utils/interfaceTypes";
 import Image from "next/image";
 import Link from "next/link";
+import WishlistButton from "./WishlistButton";
+import { useSwiperSlide } from "swiper/react";
 import {
   convertPlatformArray,
   gameRating,
   platformIconByKey,
   platformIcons,
 } from "@/utils/utils";
-import { useSwiperSlide } from "swiper/react";
-import WishlistButton from "./WishlistButton";
-import { WishlistItemType } from "@/utils/interfaceTypes";
 
 interface Props {
-  data: GamesType;
+  game: GamesType;
   wishlistItems: WishlistItemType[] | undefined;
 }
 
 const scoreColors = (score: number) => {
-  if (score < 3) return "text-red-500";
-  if (score < 4) return "text-yellow-500";
+  if (score < 49) return "text-red-500";
+  if (score < 74) return "text-yellow-500";
   return "text-green-500";
 };
 
-const MBNewGameCard = ({ data, wishlistItems }: Props) => {
+const MBHRGames = ({ game, wishlistItems }: Props) => {
   const swiper = useSwiperSlide();
   const isActive = swiper.isActive;
 
   return (
     <div className="relative group">
-      <Link href={`/browse/${data.slug}`}>
+      <Link href={`/browse/${game.slug}`}>
         <div className="relative aspect-[3/4] rounded-md overflow-hidden">
-          {data.background_image ? (
+          {game.background_image ? (
             <Image
-              src={data.background_image}
-              alt={data.name}
+              src={game.background_image}
+              alt={game.name}
               fill
               sizes="(max-width: 768px) 80vw"
               className="object-cover"
@@ -53,38 +53,40 @@ const MBNewGameCard = ({ data, wishlistItems }: Props) => {
       <WishlistButton
         position={`top-2.5 right-2.5 ${isActive ? "flex" : "hidden"}`}
         size="sm:size-4 size-3.5"
-        gameId={data.id}
-        name={data.name}
-        image={data.background_image}
-        slug={data.slug}
-        rating={data.rating}
-        platforms={convertPlatformArray(data.platforms)}
-        createdAt={data.released.toString()}
+        gameId={game.id}
+        name={game.name}
+        image={game.background_image}
+        slug={game.slug}
+        rating={game.rating}
+        platforms={convertPlatformArray(game.platforms)}
+        createdAt={game.released.toString()}
         wishlistItems={wishlistItems}
         path="/"
       />
 
       <div className="flex items-center justify-between mt-2 mb-0.5">
         <p className="font-medium lg:text-sm text-xs text-neutral-400">
-          {new Date(data.released).toLocaleDateString("en-US", {
+          {new Date(game.released).toLocaleDateString("en-US", {
             month: "short",
             year: "numeric",
           })}
         </p>
-        <p
-          className={`${scoreColors(data.rating)} min-[400px]:text-sm text-[13px] font-bold`}
-        >
-          {gameRating(data.rating)}
-        </p>
+        {game.metacritic && (
+          <p
+            className={`${scoreColors(game.metacritic)} min-[400px]:text-sm text-[13px] font-semibold`}
+          >
+            {game.metacritic}
+          </p>
+        )}
       </div>
 
       <p className="sm:text-lg min-[400px]:text-[15px] min-[350px]:text-sm text-[13px] font-bold">
-        {data.name}
+        {game.name}
       </p>
 
-      {data.platforms && (
+      {game.platforms && (
         <div className="flex items-center gap-1 mt-1">
-          {platformIcons(data.platforms).map((p) => (
+          {platformIcons(game.platforms).map((p) => (
             <div key={p}>{platformIconByKey(p)}</div>
           ))}
         </div>
@@ -93,4 +95,4 @@ const MBNewGameCard = ({ data, wishlistItems }: Props) => {
   );
 };
 
-export default MBNewGameCard;
+export default MBHRGames;

@@ -1,12 +1,8 @@
-import {
-  getGameDate,
-  getGameDetails,
-  getHighRatedGames,
-} from "@/actions/games-action";
-import { getParentPlatforms } from "@/actions/platforms-action";
+import { getGameDetails } from "@/actions/games-action";
 import GameGenresContainer from "@/components/GameGenresContainer";
 import GamePlatformsContainer from "@/components/GamePlatformsContainer";
 import HeroAndNewReleases from "@/components/HeroAndNewReleases";
+import HighRatedGamesWrapper from "@/components/HighRatedGamesWrapper";
 import GameSkeletonContainer from "@/components/skeletons/GameSkeletonContainer";
 import HeroAndNewSkeleton from "@/components/skeletons/HeroAndNewSkeleton";
 import UpcomingGameWrapper from "@/components/UpcomingGameWrapper";
@@ -15,9 +11,6 @@ import { Suspense } from "react";
 
 export default async function Home() {
   // const game = await getGameDetails();
-  const games = await getGameDate();
-
-  // console.log(games);
 
   return (
     <>
@@ -34,6 +27,14 @@ export default async function Home() {
       </Suspense>
 
       <GamePlatformsContainer />
+
+      <Suspense
+        fallback={
+          <GameSkeletonContainer header="Discover Highly Rated Games" />
+        }
+      >
+        <HighRatedGamesWrapper />
+      </Suspense>
 
       {/* <ul className="flex flex-col gap-4">
         {games.results.map((game) => (

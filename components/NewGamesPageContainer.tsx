@@ -9,7 +9,7 @@ const NewGamesPageContainer = async () => {
   const wishlistItems = user?.wishlist?.items;
 
   return (
-    <main className="max-container min-[400px]:mt-32 mt-24">
+    <main className="max-container min-[400px]:mt-28 mt-24">
       <PageHeaders
         header="Discover New Releases"
         desc="Check out newly released games in the last 30 days."
