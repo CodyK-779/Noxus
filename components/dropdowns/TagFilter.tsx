@@ -57,8 +57,8 @@ const TagFilter = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-52">
-        <DropdownMenuLabel>Game Tags</DropdownMenuLabel>
         <DropdownMenuGroup>
+          <DropdownMenuLabel>Game Tags</DropdownMenuLabel>
           {tagData.map((t) => (
             <DropdownMenuItem
               key={t.id}

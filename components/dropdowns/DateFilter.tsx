@@ -66,8 +66,8 @@ const DateFilter = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-44">
-        <DropdownMenuLabel>Dates</DropdownMenuLabel>
         <DropdownMenuGroup>
+          <DropdownMenuLabel>Dates</DropdownMenuLabel>
           {/* 1st Date Range */}
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>2020-2026</DropdownMenuSubTrigger>

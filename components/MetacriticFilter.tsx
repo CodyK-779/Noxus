@@ -57,8 +57,8 @@ const MetacriticFilter = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-36">
-        <DropdownMenuLabel>Scores</DropdownMenuLabel>
         <DropdownMenuGroup>
+          <DropdownMenuLabel>Scores</DropdownMenuLabel>
           {metacriticData.map((m) => (
             <DropdownMenuItem
               key={m.score}

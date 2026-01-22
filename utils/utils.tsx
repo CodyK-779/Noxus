@@ -5,9 +5,20 @@ const getPlatformKey = (name: string) => {
   if (name.includes("PlayStation") || name.includes("PS")) return "playstation";
   if (name.includes("Nintendo")) return "nintendo";
   if (name.includes("Xbox")) return "xbox";
-  if (name.includes("macOs") || name.includes("iOs")) return "ios";
+  if (
+    name.includes("macOS") ||
+    name.includes("iOS") ||
+    name.includes("Classic Macintosh") ||
+    name.includes("Apple II")
+  )
+    return "ios";
   if (name.includes("Android")) return "android";
-  if (name.includes("Game Boy")) return "gameboy";
+  if (
+    name.includes("Game Boy") ||
+    name.includes("GameCube") ||
+    name.includes("Wii")
+  )
+    return "gameboy";
   return null;
 };
 
@@ -35,8 +46,8 @@ export const platformIconByKey = (key: string | null) => {
 export const platformIcons = (platform: GamePlatforms[]) => {
   const uniquePlatforms = Array.from(
     new Set(
-      platform.map((p) => getPlatformKey(p.platform.name)).filter(Boolean)
-    )
+      platform.map((p) => getPlatformKey(p.platform.name)).filter(Boolean),
+    ),
   );
 
   return uniquePlatforms;

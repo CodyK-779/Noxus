@@ -57,8 +57,8 @@ const GenreFilter = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-52">
-        <DropdownMenuLabel>Genres</DropdownMenuLabel>
         <DropdownMenuGroup>
+          <DropdownMenuLabel>Genres</DropdownMenuLabel>
           {genreData.map((g) => (
             <DropdownMenuItem
               key={g.id}

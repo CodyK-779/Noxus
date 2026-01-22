@@ -129,12 +129,14 @@ export async function getUpcomingGames(): Promise<RAWGResponse<GamesType>> {
   return res.json();
 }
 
-export async function getHighRatedGames(): Promise<RAWGResponse<GamesType>> {
+export async function getHighRatedGames(
+  platformId?: string,
+): Promise<RAWGResponse<GamesType>> {
   "use cache";
   cacheLife("hours");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games?metacritic=80,100&page_size=40&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?metacritic=80,100&${platformId && `platforms=${platformId}`}&page_size=40&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["top", "games"],
