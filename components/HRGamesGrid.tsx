@@ -22,7 +22,7 @@ const scoreColors = (score: number) => {
 
 export const HRGamesGrid = ({ games, wishlistItems }: Props) => {
   return (
-    <section className="grid lg:grid-cols-5 md:grid-cols-4 sm:gap-5 min-[400px]:gap-4 gap-3 sm:grid-cols-3 grid-cols-2 min-[400px]:pt-16 pt-14">
+    <section className="grid lg:grid-cols-5 md:grid-cols-4 sm:gap-5 min-[400px]:gap-4 gap-3 sm:grid-cols-3 grid-cols-2 min-[400px]:pt-14 pt-14">
       {games.results.map((game) => (
         <div key={game.id} className="relative group min-[400px]:mb-10 mb-4">
           <Link href={`/browse/${game.slug}`}>
@@ -66,6 +66,7 @@ export const HRGamesGrid = ({ games, wishlistItems }: Props) => {
             <p className="font-medium lg:text-sm text-xs text-neutral-400">
               {new Date(game.released).toLocaleDateString("en-US", {
                 month: "short",
+                day: "numeric",
                 year: "numeric",
               })}
             </p>

@@ -23,6 +23,8 @@ interface Props {
   platforms: RAWGResponse<ParentPlatforms>;
 }
 
+const count = 40;
+
 const PlatformFilter = ({ platforms }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -53,9 +55,11 @@ const PlatformFilter = ({ platforms }: Props) => {
     const params = new URLSearchParams(searchParams.toString());
 
     if (platformValue.value !== value) {
+      params.set("page", "1");
       params.set("platform", value);
       setPlatformValue({ label, value });
     } else {
+      params.set("page", "1");
       params.delete("platform");
       setPlatformValue({ label: "", value: "" });
     }

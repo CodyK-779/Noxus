@@ -12,6 +12,7 @@ export default async function PlatformDetailsPage({
     genre: string;
     tag: string;
     metascore: string;
+    page: string;
   }>;
 }) {
   return (

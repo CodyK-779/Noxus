@@ -35,9 +35,11 @@ const MetacriticFilter = () => {
     const params = new URLSearchParams(searchParams.toString());
 
     if (metaScore.value !== value) {
+      params.set("page", "1");
       params.set("metascore", value);
       setMetaScore({ score, value });
     } else {
+      params.set("page", "1");
       params.delete("metascore");
       setMetaScore({ score: "", value: "" });
     }

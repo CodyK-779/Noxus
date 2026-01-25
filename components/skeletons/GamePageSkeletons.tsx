@@ -1,15 +1,61 @@
+import { Gamepad2 } from "lucide-react";
 import PageHeaders from "../PageHeaders";
 import { Skeleton } from "../ui/skeleton";
+import DropdownSkeleton from "./DropdownSkeleton";
 
 interface Props {
   header: string;
   desc: string;
+  filterFor: "new" | "upcoming" | "high";
 }
 
-const GamePageSkeletons = ({ header, desc }: Props) => {
+const GamePageSkeletons = ({ header, desc, filterFor }: Props) => {
+  const upcomingLabels = ["Filter Platform", "Filter Genre", "Filter Tags"];
+  const newGamesLabels = [
+    "Filter Platform",
+    "Filter Genre",
+    "Filter Tags",
+    "Filter Scores",
+  ];
+  const hrLabels = [
+    "Release Dates",
+    "Filter Platform",
+    "Filter Genre",
+    "Filter Tags",
+  ];
+
+  const dropdown = (filterFor: "new" | "upcoming" | "high") => {
+    if (filterFor === "new") return newGamesLabels;
+    if (filterFor === "high") return hrLabels;
+    return upcomingLabels;
+  };
+
   return (
     <main className="max-container min-[400px]:mt-28 mt-24">
       <PageHeaders header={header} desc={desc} />
+      <div className="md:flex items-center grid md:grid-cols-4 grid-cols-2 sm:gap-3 gap-2.5 mt-6 mb-8">
+        {dropdown(filterFor).map((d) => (
+          <DropdownSkeleton
+            key={d}
+            label={d}
+            size="sm:min-w-36 max-[639px]:w-full"
+          />
+        ))}
+      </div>
+
+      <hr />
+
+      <div className="flex items-center gap-3 mt-6">
+        <div className="min-[400px]:p-2.5 p-2 rounded-lg bg-[#e91e3f]">
+          <Gamepad2 className="size-5" />
+        </div>
+        <div>
+          <Skeleton className="w-32 sm:h-[18px] min-[400px]:h-4 h-3.5 mb-2" />
+          <p className="min-[400px]:text-sm text-xs text-gray-400">
+            Browse through our collection
+          </p>
+        </div>
+      </div>
 
       <section className="grid lg:grid-cols-5 md:grid-cols-4 sm:gap-5 min-[400px]:gap-4 gap-3 sm:grid-cols-3 grid-cols-2 min-[400px]:pt-16 pt-14">
         {Array.from({ length: 20 }).map((_, index) => (

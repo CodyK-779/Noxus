@@ -44,9 +44,11 @@ const DateFilter = () => {
     const params = new URLSearchParams(searchParams.toString());
 
     if (value !== releaseDate.value) {
+      params.set("page", "1");
       params.set("date", value);
       setReleaseDate({ year: date, value: value });
     } else {
+      params.set("page", "1");
       params.delete("date");
       setReleaseDate({ year: "", value: "" });
     }

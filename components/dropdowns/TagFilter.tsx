@@ -35,9 +35,11 @@ const TagFilter = () => {
     const params = new URLSearchParams(searchParams.toString());
 
     if (tag.value !== value) {
+      params.set("page", "1");
       params.set("tag", value);
       setTag({ name, value });
     } else {
+      params.set("page", "1");
       params.delete("tag");
       setTag({ name: "", value: "" });
     }

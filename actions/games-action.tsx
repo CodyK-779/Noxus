@@ -74,7 +74,13 @@ export async function getGameDetails(): Promise<GameDetails> {
   return res.json();
 }
 
-export async function getNewGames(): Promise<RAWGResponse<GamesType>> {
+export async function getNewGames(
+  page?: string,
+  platformId?: string,
+  genreId?: string,
+  tagId?: string,
+  score?: string,
+): Promise<RAWGResponse<GamesType>> {
   "use cache";
   cacheLife("hours");
 
@@ -87,7 +93,7 @@ export async function getNewGames(): Promise<RAWGResponse<GamesType>> {
   const dates = `${formatDate(thirtyDaysAgo)},${formatDate(today)}`;
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games?&page_size=40&dates=${dates}&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?${platformId && `&platforms=${platformId}`}${genreId && `&genres=${genreId}`}${tagId && `&tags=${tagId}`}${score && `&metacritic=${score}`}&page=${page ? page : "1"}&page_size=40&dates=${dates}&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["new", "games"],
@@ -102,7 +108,12 @@ export async function getNewGames(): Promise<RAWGResponse<GamesType>> {
   return res.json();
 }
 
-export async function getUpcomingGames(): Promise<RAWGResponse<GamesType>> {
+export async function getUpcomingGames(
+  page?: string,
+  platformId?: string,
+  genreId?: string,
+  tagId?: string,
+): Promise<RAWGResponse<GamesType>> {
   "use cache";
   cacheLife("days");
 
@@ -114,7 +125,7 @@ export async function getUpcomingGames(): Promise<RAWGResponse<GamesType>> {
   const dates = `${formatDate(today)},${formatDate(nextMonth)}`;
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games?page=1&page_size=50&dates=${dates}&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?${platformId && `&platforms=${platformId}`}${genreId && `&genres=${genreId}`}${tagId && `&tags=${tagId}`}&dates=${dates}&page=${page ? page : "1"}&page_size=40&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["upcoming", "games"],
@@ -130,13 +141,17 @@ export async function getUpcomingGames(): Promise<RAWGResponse<GamesType>> {
 }
 
 export async function getHighRatedGames(
+  dates?: string,
   platformId?: string,
+  genreId?: string,
+  tagId?: string,
+  page?: string,
 ): Promise<RAWGResponse<GamesType>> {
   "use cache";
   cacheLife("hours");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games?metacritic=80,100&${platformId && `platforms=${platformId}`}&page_size=40&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?metacritic=80,100${dates && `&dates=${dates}`}${platformId && `&platforms=${platformId}`}${genreId && `&genres=${genreId}`}${tagId && `&tags=${tagId}`}&page=${page ? page : "1"}&page_size=40&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["top", "games"],
@@ -157,12 +172,13 @@ export async function getPlatformGames(
   genreId?: string,
   tagId?: string,
   score?: string,
+  page?: string,
 ): Promise<RAWGResponse<GamesType>> {
   "use cache";
   cacheLife("hours");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games?platforms=${platformId}&dates=${dates}${genreId && `&genres=${genreId}`}${tagId && `&tags=${tagId}`}&metacritic=${score}&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?platforms=${platformId}&dates=${dates}${genreId && `&genres=${genreId}`}${tagId && `&tags=${tagId}`}&metacritic=${score}&page=${page ? page : "1"}&page_size=40&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["platform", "games"],

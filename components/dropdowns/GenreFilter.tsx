@@ -35,9 +35,11 @@ const GenreFilter = () => {
     const params = new URLSearchParams(searchParams.toString());
 
     if (genre.value !== value) {
+      params.set("page", "1");
       params.set("genre", value);
       setGenre({ name, value });
     } else {
+      params.set("page", "1");
       params.delete("genre");
       setGenre({ name: "", value: "" });
     }

@@ -68,6 +68,7 @@ const MBHRGames = ({ game, wishlistItems }: Props) => {
         <p className="font-medium lg:text-sm text-xs text-neutral-400">
           {new Date(game.released).toLocaleDateString("en-US", {
             month: "short",
+            day: "numeric",
             year: "numeric",
           })}
         </p>

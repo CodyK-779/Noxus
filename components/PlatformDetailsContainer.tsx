@@ -1,9 +1,10 @@
 import { getPlatformGames } from "@/actions/games-action";
 import { getPlatformDetails } from "@/actions/platforms-action";
-import PlatformFilters from "./PlatformFilters";
+import PlatformPageFilters from "./PlatformPageFilters";
 import PlatformDetailGames from "./PlatformDetailGames";
 import { getUser } from "@/actions/user-action";
 import BackButton from "./BackButton";
+import { PaginationCtrl } from "./PaginationCtrl";
 
 interface Props {
   params: Promise<{ id: number }>;
@@ -12,6 +13,7 @@ interface Props {
     genre: string;
     tag: string;
     metascore: string;
+    page: string;
   }>;
 }
 
@@ -21,9 +23,10 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
   const genreId = (await searchParams).genre || "";
   const tagId = (await searchParams).tag || "";
   const score = (await searchParams).metascore || "";
+  const currentPage = (await searchParams).page || "1";
   const [platform, games, user] = await Promise.all([
     getPlatformDetails(platformId),
-    getPlatformGames(platformId, dates, genreId, tagId, score),
+    getPlatformGames(platformId, dates, genreId, tagId, score, currentPage),
     getUser(),
   ]);
 
@@ -35,12 +38,19 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
       <h1 className="md:text-5xl sm:text-4xl min-[400px]:text-3xl text-2xl font-bold mb-4 mt-6 text-[#e91e3f]">
         Games for {platform.name}
       </h1>
-      <PlatformFilters />
+      <PlatformPageFilters />
       <PlatformDetailGames
         platformId={platformId}
         games={games}
         wishlistItems={wishlistItems}
       />
+      {games.count > 40 && (
+        <PaginationCtrl
+          page={Number(currentPage)}
+          pageSize={40}
+          totalCount={games.count}
+        />
+      )}
     </section>
   );
 };
