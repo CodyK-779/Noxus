@@ -7,9 +7,9 @@ import PlatformFilter from "./dropdowns/PlatformFilter";
 import GenreFilter from "./dropdowns/GenreFilter";
 import TagFilter from "./dropdowns/TagFilter";
 import MetacriticFilter from "./MetacriticFilter";
-import { Gamepad2 } from "lucide-react";
 import { PaginationCtrl } from "./PaginationCtrl";
 import { NewGamesSearches } from "@/app/(root)/discover/new-releases/page";
+import GamesCount from "./GamesCount";
 
 interface Props {
   header: string;
@@ -43,20 +43,7 @@ const NewGamesPageContainer = async ({ header, desc, searchParams }: Props) => {
 
       <hr />
 
-      <div className="flex items-center gap-3 mt-6">
-        <div className="min-[400px]:p-2.5 p-2 rounded-lg bg-[#e91e3f]">
-          <Gamepad2 className="size-5" />
-        </div>
-        <div>
-          <h3 className="sm:text-lg min-[400px]:text-base text-sm font-bold text-white sm:-mb-0.5">
-            {newGames.count.toLocaleString()} Games Found
-          </h3>
-
-          <p className="min-[400px]:text-sm text-xs text-gray-400">
-            Browse through our collection
-          </p>
-        </div>
-      </div>
+      <GamesCount count={newGames.count} />
 
       <NewGamesGrid games={newGames} wishlistItems={wishlistItems} />
 

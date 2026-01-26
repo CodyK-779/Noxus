@@ -16,10 +16,10 @@ const SectionHeaderShell = ({ header }: Props) => {
       </div>
 
       <div className="hidden min-[768px]:flex items-center gap-3.5">
-        <button className="flex items-center justify-center p-2 bg-neutral-700 disabled:opacity-50 rounded-full">
+        <button className="flex items-center justify-center p-2 bg-neutral-700 opacity-50 rounded-full">
           <ChevronLeft className="size-4" />
         </button>
-        <button className="flex items-center justify-center p-2 bg-neutral-700 disabled:opacity-50 rounded-full">
+        <button className="flex items-center justify-center p-2 bg-neutral-700 rounded-full">
           <ChevronRight className="size-4" />
         </button>
       </div>

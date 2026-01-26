@@ -5,6 +5,7 @@ import PlatformDetailGames from "./PlatformDetailGames";
 import { getUser } from "@/actions/user-action";
 import BackButton from "./BackButton";
 import { PaginationCtrl } from "./PaginationCtrl";
+import GamesCount from "./GamesCount";
 
 interface Props {
   params: Promise<{ id: number }>;
@@ -35,10 +36,15 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
   return (
     <section className="max-container mt-24">
       <BackButton path="/discover/platforms" />
-      <h1 className="md:text-5xl sm:text-4xl min-[400px]:text-3xl text-2xl font-bold mb-4 mt-6 text-[#e91e3f]">
+      <h1 className="md:text-5xl sm:text-4xl min-[400px]:text-3xl text-2xl font-bold my-6 text-[#e91e3f]">
         Games for {platform.name}
       </h1>
       <PlatformPageFilters />
+
+      <hr className="mt-8" />
+
+      <GamesCount count={games.count} />
+
       <PlatformDetailGames
         platformId={platformId}
         games={games}
