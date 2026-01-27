@@ -21,7 +21,12 @@ export default function NewGamesPage({
   return (
     <Suspense
       fallback={
-        <GamePageSkeletons header={header} desc={desc} filterFor="new" />
+        <GamePageSkeletons
+          header={header}
+          desc={desc}
+          filterFor="new"
+          path="New-releases"
+        />
       }
     >
       <NewGamesPageContainer

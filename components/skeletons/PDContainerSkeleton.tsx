@@ -1,11 +1,11 @@
-import BackButton from "../BackButton";
+import PlatformDetailsNavigation from "../PlatformDetailsNavigation";
 import { Skeleton } from "../ui/skeleton";
 import DropdownSkeleton from "./DropdownSkeleton";
 
 const PDContainerSkeleton = () => {
   return (
     <section className="max-container mt-24">
-      <BackButton path="/discover/platforms" />
+      <PlatformDetailsNavigation skeleton />
       <Skeleton className="md:w-80 sm:w-72 w-full md:h-10 sm:h-8 min-[400px]:h-7 h-6 mt-8" />
 
       <div className="md:flex items-center grid md:grid-cols-4 grid-cols-2 sm:gap-3 gap-2.5 mt-5 mb-4">

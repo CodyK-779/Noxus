@@ -21,7 +21,12 @@ export default async function UpcomingGamesPage({
   return (
     <Suspense
       fallback={
-        <GamePageSkeletons header={header} desc={desc} filterFor="upcoming" />
+        <GamePageSkeletons
+          header={header}
+          desc={desc}
+          filterFor="upcoming"
+          path="Upcoming-games"
+        />
       }
     >
       <UpcomingGamesPageContainer

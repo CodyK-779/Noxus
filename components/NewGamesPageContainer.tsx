@@ -10,6 +10,7 @@ import MetacriticFilter from "./MetacriticFilter";
 import { PaginationCtrl } from "./PaginationCtrl";
 import { NewGamesSearches } from "@/app/(root)/discover/new-releases/page";
 import GamesCount from "./GamesCount";
+import PageNavigation from "./PageNavigation";
 
 interface Props {
   header: string;
@@ -33,6 +34,7 @@ const NewGamesPageContainer = async ({ header, desc, searchParams }: Props) => {
 
   return (
     <main className="max-container min-[400px]:mt-28 mt-24">
+      <PageNavigation path="New-releases" />
       <PageHeaders header={header} desc={desc} />
       <div className="md:flex items-center grid md:grid-cols-4 grid-cols-2 sm:gap-3 gap-2.5 mt-6 mb-8">
         <PlatformFilter platforms={platforms} />

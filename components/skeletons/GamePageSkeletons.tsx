@@ -2,14 +2,16 @@ import { Gamepad2 } from "lucide-react";
 import PageHeaders from "../PageHeaders";
 import { Skeleton } from "../ui/skeleton";
 import DropdownSkeleton from "./DropdownSkeleton";
+import PageNavigation from "../PageNavigation";
 
 interface Props {
   header: string;
   desc: string;
   filterFor: "new" | "upcoming" | "high";
+  path: string;
 }
 
-const GamePageSkeletons = ({ header, desc, filterFor }: Props) => {
+const GamePageSkeletons = ({ header, desc, filterFor, path }: Props) => {
   const upcomingLabels = ["Filter Platform", "Filter Genre", "Filter Tags"];
   const newGamesLabels = [
     "Filter Platform",
@@ -32,6 +34,7 @@ const GamePageSkeletons = ({ header, desc, filterFor }: Props) => {
 
   return (
     <main className="max-container min-[400px]:mt-28 mt-24">
+      <PageNavigation path={path} />
       <PageHeaders header={header} desc={desc} />
       <div className="md:flex items-center grid md:grid-cols-4 grid-cols-2 sm:gap-3 gap-2.5 mt-6 mb-8">
         {dropdown(filterFor).map((d) => (

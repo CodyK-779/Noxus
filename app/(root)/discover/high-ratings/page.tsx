@@ -22,7 +22,12 @@ export default function HRGamesPage({
   return (
     <Suspense
       fallback={
-        <GamePageSkeletons header={header} desc={desc} filterFor="high" />
+        <GamePageSkeletons
+          header={header}
+          desc={desc}
+          filterFor="high"
+          path="High-ratings"
+        />
       }
     >
       <HRPageContainer

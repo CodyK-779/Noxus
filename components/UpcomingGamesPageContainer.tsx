@@ -9,6 +9,7 @@ import PlatformFilter from "./dropdowns/PlatformFilter";
 import TagFilter from "./dropdowns/TagFilter";
 import { PaginationCtrl } from "./PaginationCtrl";
 import GamesCount from "./GamesCount";
+import PageNavigation from "./PageNavigation";
 
 interface Props {
   header: string;
@@ -35,6 +36,7 @@ const UpcomingGamesPageContainer = async ({
 
   return (
     <main className="max-container min-[400px]:mt-28 mt-24">
+      <PageNavigation path="Upcoming-games" />
       <PageHeaders header={header} desc={desc} />
       <div className="md:flex items-center grid md:grid-cols-4 grid-cols-2 sm:gap-3 gap-2.5 mt-6 mb-8">
         <PlatformFilter platforms={platforms} />
