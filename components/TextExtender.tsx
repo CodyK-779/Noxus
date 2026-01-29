@@ -1,7 +1,7 @@
 "use client";
 
-import SafeHTMLRenderer from "@/utils/SafeHTMLRenderer";
-import { useEffect, useState } from "react";
+import SafeHTMLRenderer from "@/components/SafeHTMLRenderer";
+import { useState, useMemo } from "react";
 
 interface Props {
   description: string;
@@ -9,25 +9,25 @@ interface Props {
 
 const TextExtender = ({ description }: Props) => {
   const [expanded, setExpanded] = useState(false);
-  const [truncate, setTruncate] = useState(false);
 
-  useEffect(() => {
-    setTruncate(description.length > 300);
-  }, [description]);
+  const isTruncatable = useMemo(
+    () => description.replace(/<[^>]*>/g, "").length > 300,
+    [description],
+  );
 
   return (
-    <div className="">
+    <div className="space-y-2">
       <SafeHTMLRenderer
         html={description}
-        className={`sm:text-base text-sm font-medium ${
-          truncate && !expanded ? "line-clamp-4" : ""
+        className={`sm:text-base min-[400px]:text-sm text-[13px] font-medium transition-all ${
+          !expanded && isTruncatable ? `line-clamp-4` : ""
         }`}
       />
 
-      {truncate && (
+      {isTruncatable && (
         <button
-          onClick={() => setExpanded(!expanded)}
-          className="text-xs whitespace-nowrap h-fit font-semibold bg-[#e91e3f] rounded px-1 py-0.5 hover:underline"
+          onClick={() => setExpanded((prev) => !prev)}
+          className="text-xs font-semibold text-rose-500 hover:text-rose-600 transition underline-offset-4 hover:underline"
         >
           {expanded ? "Show less" : "Show more"}
         </button>

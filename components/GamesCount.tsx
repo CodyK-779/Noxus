@@ -12,7 +12,7 @@ const GamesCount = ({ count }: Props) => {
       </div>
       <div>
         <h3 className="sm:text-lg min-[400px]:text-base text-sm font-bold text-white sm:-mb-0.5">
-          {count} Games Found
+          {count.toLocaleString()} Games Found
         </h3>
 
         <p className="min-[400px]:text-sm text-xs text-gray-400">

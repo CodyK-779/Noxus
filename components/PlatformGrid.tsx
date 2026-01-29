@@ -26,7 +26,7 @@ const PlatformGrid = ({ platforms }: Props) => {
                 {platform.name}
               </p>
               <p className="font-bold md:text-base sm:text-sm text-[13px]">
-                Games: {platform.games_count}
+                Games: {platform.games_count.toLocaleString()}
               </p>
             </div>
           </div>

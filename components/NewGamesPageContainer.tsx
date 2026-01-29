@@ -36,7 +36,7 @@ const NewGamesPageContainer = async ({ header, desc, searchParams }: Props) => {
     <main className="max-container min-[400px]:mt-28 mt-24">
       <PageNavigation path="New-releases" />
       <PageHeaders header={header} desc={desc} />
-      <div className="md:flex items-center grid md:grid-cols-4 grid-cols-2 sm:gap-3 gap-2.5 mt-6 mb-8">
+      <div className="md:flex items-center grid md:grid-cols-4 grid-cols-2 sm:gap-3 gap-2.5 mt-6 min-[375px]:mb-8 mb-6">
         <PlatformFilter platforms={platforms} />
         <GenreFilter />
         <TagFilter />

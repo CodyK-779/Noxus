@@ -1,11 +1,11 @@
 import { getPlatformGames } from "@/actions/games-action";
 import { getPlatformDetails } from "@/actions/platforms-action";
 import PlatformPageFilters from "./PlatformPageFilters";
-import PlatformDetailGames from "./PlatformDetailGames";
 import { getUser } from "@/actions/user-action";
 import { PaginationCtrl } from "./PaginationCtrl";
 import GamesCount from "./GamesCount";
 import PlatformDetailsNavigation from "./PlatformDetailsNavigation";
+import GamesGrid from "./GamesGrid";
 
 interface Props {
   params: Promise<{ id: number }>;
@@ -35,7 +35,6 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
 
   return (
     <section className="max-container mt-24">
-      {/* <BackButton path="/discover/platforms" /> */}
       <PlatformDetailsNavigation path={platform.name} />
       <h1 className="md:text-5xl sm:text-4xl min-[400px]:text-3xl text-2xl font-bold my-6 text-[#e91e3f]">
         Games for {platform.name}
@@ -46,11 +45,12 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
 
       <GamesCount count={games.count} />
 
-      <PlatformDetailGames
-        platformId={platformId}
+      <GamesGrid
         games={games}
         wishlistItems={wishlistItems}
+        path={`/discover/platforms/${platformId}`}
       />
+
       {games.count > 40 && (
         <PaginationCtrl
           page={Number(currentPage)}

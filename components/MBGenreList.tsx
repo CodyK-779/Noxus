@@ -32,7 +32,7 @@ const MBGenreList = ({ border, padding, genres }: Props) => {
                 {genre.name}
               </p>
               <p className="font-medium min-[400px]:text-sm text-[13px]">
-                Game Count: {genre.games_count}
+                Game Count: {genre.games_count.toLocaleString()}
               </p>
             </div>
           </div>

@@ -192,3 +192,28 @@ export async function getPlatformGames(
 
   return res.json();
 }
+
+export async function getGenreGames(
+  genreId: number,
+  platformId?: string,
+  dates?: string,
+  tagId?: string,
+  score?: string,
+  page?: string,
+): Promise<RAWGResponse<GamesType>> {
+  "use cache";
+  cacheLife("hours");
+
+  const res = await fetch(
+    `${process.env.RAWG_URL}/games?${platformId && `&platforms=${platformId}`}${dates && `&dates=${dates}`}${tagId && `&tags=${tagId}`}${score && `&metacritic=${score}`}&genres=${genreId}&page=${page ? page : "1"}&page_size=40&key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["genre", "games"],
+      },
+    },
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch Genre Games");
+
+  return res.json();
+}

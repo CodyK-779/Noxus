@@ -38,27 +38,6 @@ export interface PaginationWithLinksProps {
   navigationMode?: "link" | "router";
 }
 
-/**
- * Navigate with Nextjs links or router.push with loading states
- * 
- * @example
- * ```
- * // Using Link navigation (default)
- * <PaginationWithLinks
-    page={1}
-    pageSize={20}
-    totalCount={500}
-  />
- * 
- * // Using router.push with loading states
- * <PaginationWithLinks
-    page={1}
-    pageSize={20}
-    totalCount={500}
-    navigationMode="router"
-  />
- * ```
- */
 export function PaginationCtrl({
   pageSizeSelectOptions,
   pageSize,
@@ -102,7 +81,7 @@ export function PaginationCtrl({
       const key = pageSizeSelectOptions?.pageSizeSearchParam || "pageSize";
       const newSearchParams = new URLSearchParams(searchParams || undefined);
       newSearchParams.set(key, String(newPageSize));
-      newSearchParams.delete(pageSearchParam || "page"); // Clear the page number when changing page size
+      newSearchParams.delete(pageSearchParam || "page");
       const url = `${pathname}?${newSearchParams.toString()}`;
 
       if (navigationMode === "router") {
@@ -181,7 +160,9 @@ export function PaginationCtrl({
         );
       }
 
-      items.push(createPageItem(totalPageCount));
+      if (totalPageCount > 500) {
+        items.push(totalPageCount);
+      } else items.push(createPageItem(totalPageCount));
     }
 
     return items;

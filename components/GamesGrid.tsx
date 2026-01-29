@@ -1,19 +1,19 @@
 import { GamesType } from "@/actions/games-action";
 import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
+import Image from "next/image";
+import Link from "next/link";
+import WishlistButton from "./WishlistButton";
 import {
   convertPlatformArray,
   platformIconByKey,
   platformIcons,
 } from "@/utils/utils";
-import Image from "next/image";
-import Link from "next/link";
-import WishlistButton from "./WishlistButton";
 import EmptyResults from "./EmptyResults";
 
 interface Props {
-  platformId: number;
   games: RAWGResponse<GamesType>;
   wishlistItems: WishlistItemType[] | undefined;
+  path: string;
 }
 
 const scoreColors = (score: number) => {
@@ -22,11 +22,11 @@ const scoreColors = (score: number) => {
   return "text-green-500";
 };
 
-const PlatformDetailGames = ({ platformId, games, wishlistItems }: Props) => {
+const GamesGrid = ({ games, wishlistItems, path }: Props) => {
   return (
     <>
       {games.count > 0 ? (
-        <section className="grid lg:grid-cols-5 md:grid-cols-4 sm:gap-5 min-[400px]:gap-4 gap-3 sm:grid-cols-3 grid-cols-2 min-[400px]:pt-16 pt-14">
+        <section className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-5 min-[400px]:gap-4 gap-3 pt-14">
           {games.results.map((game) => (
             <div
               key={game.id}
@@ -66,7 +66,7 @@ const PlatformDetailGames = ({ platformId, games, wishlistItems }: Props) => {
                 platforms={convertPlatformArray(game.platforms)}
                 createdAt={String(game.released)}
                 hidden="sm:hidden"
-                path={`/discover/platforms/${platformId}`}
+                path={path}
               />
 
               <div className="flex items-center justify-between mt-2 mb-0.5">
@@ -109,4 +109,4 @@ const PlatformDetailGames = ({ platformId, games, wishlistItems }: Props) => {
   );
 };
 
-export default PlatformDetailGames;
+export default GamesGrid;

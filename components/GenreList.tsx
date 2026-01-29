@@ -30,7 +30,7 @@ const GenreList = ({ border, padding, genres }: Props) => {
             <div className="flex flex-col">
               <p className="lg:text-base text-sm font-semibold">{genre.name}</p>
               <p className="font-medium lg:text-sm text-[13px]">
-                Game Count: {genre.games_count}
+                Game Count: {genre.games_count.toLocaleString()}
               </p>
             </div>
           </div>
