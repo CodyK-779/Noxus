@@ -5,8 +5,11 @@ import {
   platformIcons,
   platformIconByKey,
   convertPlatformArray,
-} from "@/utils/utils";
-import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
+} from "@/components/utils/utils";
+import {
+  RAWGResponse,
+  WishlistItemType,
+} from "@/components/utils/interfaceTypes";
 import WishlistButton from "./WishlistButton";
 import EmptyResults from "./EmptyResults";
 

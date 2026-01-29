@@ -1,5 +1,8 @@
 import { GamesType } from "@/actions/games-action";
-import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
+import {
+  RAWGResponse,
+  WishlistItemType,
+} from "@/components/utils/interfaceTypes";
 import Image from "next/image";
 import Link from "next/link";
 import WishlistButton from "./WishlistButton";
@@ -7,7 +10,7 @@ import {
   convertPlatformArray,
   platformIconByKey,
   platformIcons,
-} from "@/utils/utils";
+} from "@/components/utils/utils";
 
 interface Props {
   games: RAWGResponse<GamesType>;

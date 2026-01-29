@@ -3,7 +3,10 @@
 import { GamesType } from "@/actions/games-action";
 import { Swiper, SwiperSlide } from "swiper/react";
 import MBNewGameCard from "./MBNewGameCard";
-import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
+import {
+  RAWGResponse,
+  WishlistItemType,
+} from "@/components/utils/interfaceTypes";
 
 interface Props {
   newGames: RAWGResponse<GamesType>;

@@ -1,7 +1,10 @@
 "use client";
 
 import { GamesType } from "@/actions/games-action";
-import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
+import {
+  RAWGResponse,
+  WishlistItemType,
+} from "@/components/utils/interfaceTypes";
 import { Swiper, SwiperSlide } from "swiper/react";
 import MBHRGames from "./MBHRGames";
 

@@ -1,7 +1,10 @@
 "use client";
 
 import { GamesType } from "@/actions/games-action";
-import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
+import {
+  RAWGResponse,
+  WishlistItemType,
+} from "@/components/utils/interfaceTypes";
 import SectionHeader from "./SectionHeader";
 import { useEffect, useState } from "react";
 import HighRatedGames from "./HighRatedGames";

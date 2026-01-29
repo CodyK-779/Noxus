@@ -6,10 +6,13 @@ import {
   gameRating,
   platformIconByKey,
   platformIcons,
-} from "@/utils/utils";
-import { PaginateType } from "@/utils/paginationInterface";
+} from "@/components/utils/utils";
+import { PaginateType } from "@/components/utils/paginationInterface";
 import WishlistButton from "./WishlistButton";
-import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
+import {
+  RAWGResponse,
+  WishlistItemType,
+} from "@/components/utils/interfaceTypes";
 
 interface Props {
   paginate: PaginateType;

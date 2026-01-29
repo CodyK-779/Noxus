@@ -5,7 +5,10 @@ import SectionHeader from "./SectionHeader";
 import UpcomingGames from "./UpcomingGames";
 import { GamesType } from "@/actions/games-action";
 import MBUpcomingGamesSwiper from "./MBUpcomingGamesSwiper";
-import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
+import {
+  RAWGResponse,
+  WishlistItemType,
+} from "@/components/utils/interfaceTypes";
 
 interface Props {
   games: RAWGResponse<GamesType>;

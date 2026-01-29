@@ -2,7 +2,7 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import PaginateControls from "./PaginateControls";
-import { PaginateType } from "@/utils/paginationInterface";
+import { PaginateType } from "@/components/utils/paginationInterface";
 
 export interface Props {
   header: string;

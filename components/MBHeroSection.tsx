@@ -10,7 +10,7 @@ import HeroGameCard from "./HeroGameCard";
 import { heroMobile } from "@/data/hero-data";
 import { Suspense } from "react";
 import { Skeleton } from "./ui/skeleton";
-import { WishlistItemType } from "@/utils/interfaceTypes";
+import { WishlistItemType } from "@/components/utils/interfaceTypes";
 
 interface Props {
   wishlistItems: WishlistItemType[] | undefined;

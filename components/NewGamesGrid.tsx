@@ -5,9 +5,12 @@ import {
   gameRating,
   platformIconByKey,
   platformIcons,
-} from "@/utils/utils";
+} from "@/components/utils/utils";
 import Link from "next/link";
-import { RAWGResponse, WishlistItemType } from "@/utils/interfaceTypes";
+import {
+  RAWGResponse,
+  WishlistItemType,
+} from "@/components/utils/interfaceTypes";
 import WishlistButton from "./WishlistButton";
 import EmptyResults from "./EmptyResults";
 

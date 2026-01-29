@@ -2,7 +2,7 @@ import { GamesType } from "@/actions/games-action";
 import Image from "next/image";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { platformIcons, platformIconByKey } from "@/utils/utils";
+import { platformIcons, platformIconByKey } from "@/components/utils/utils";
 import { Bookmark } from "lucide-react";
 import { useSwiperSlide } from "swiper/react";
 

@@ -12,6 +12,8 @@ import { Suspense } from "react";
 export default async function Home() {
   // const game = await getGameDetails();
 
+  // console.log(game.tags);
+
   return (
     <>
       <Suspense fallback={<HeroAndNewSkeleton />}>

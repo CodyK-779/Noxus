@@ -2,7 +2,7 @@ import { heroData } from "@/data/hero-data";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { WishlistItemType } from "@/utils/interfaceTypes";
+import { WishlistItemType } from "@/components/utils/interfaceTypes";
 import HeroWishlist from "./HeroWishlist";
 import { Dispatch, SetStateAction } from "react";
 

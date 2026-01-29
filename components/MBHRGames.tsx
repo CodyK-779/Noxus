@@ -1,5 +1,5 @@
 import { GamesType } from "@/actions/games-action";
-import { WishlistItemType } from "@/utils/interfaceTypes";
+import { WishlistItemType } from "@/components/utils/interfaceTypes";
 import Image from "next/image";
 import Link from "next/link";
 import WishlistButton from "./WishlistButton";
@@ -9,7 +9,7 @@ import {
   gameRating,
   platformIconByKey,
   platformIcons,
-} from "@/utils/utils";
+} from "@/components/utils/utils";
 
 interface Props {
   game: GamesType;

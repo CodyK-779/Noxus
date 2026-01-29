@@ -6,10 +6,10 @@ import {
   gameRating,
   platformIconByKey,
   platformIcons,
-} from "@/utils/utils";
+} from "@/components/utils/utils";
 import { useSwiperSlide } from "swiper/react";
 import WishlistButton from "./WishlistButton";
-import { WishlistItemType } from "@/utils/interfaceTypes";
+import { WishlistItemType } from "@/components/utils/interfaceTypes";
 
 interface Props {
   data: GamesType;

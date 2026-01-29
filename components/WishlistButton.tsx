@@ -2,7 +2,7 @@
 
 import { Bookmark, Loader2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { WishlistItemType } from "@/utils/interfaceTypes";
+import { WishlistItemType } from "@/components/utils/interfaceTypes";
 import { useSession } from "@/app/lib/auth-client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";

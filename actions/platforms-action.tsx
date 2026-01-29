@@ -1,6 +1,6 @@
 "use server";
 
-import { RAWGResponse } from "@/utils/interfaceTypes";
+import { RAWGResponse } from "@/components/utils/interfaceTypes";
 import { cacheLife } from "next/cache";
 
 export interface PlatformsType {
@@ -44,7 +44,7 @@ export async function getPlatforms(): Promise<RAWGResponse<PlatformsType>> {
       next: {
         tags: ["platforms"],
       },
-    }
+    },
   );
 
   if (!res.ok) {
@@ -66,7 +66,7 @@ export async function getParentPlatforms(): Promise<
       next: {
         tags: ["parent", "platforms"],
       },
-    }
+    },
   );
 
   if (!res.ok) {
@@ -86,7 +86,7 @@ export async function getPlatformDetails(id: number): Promise<PlatformDetails> {
       next: {
         tags: ["platform", "details"],
       },
-    }
+    },
   );
 
   if (!res.ok) {

@@ -1,5 +1,5 @@
 import { PlatformsType } from "@/actions/platforms-action";
-import { RAWGResponse } from "@/utils/interfaceTypes";
+import { RAWGResponse } from "@/components/utils/interfaceTypes";
 import Image from "next/image";
 import Link from "next/link";
 

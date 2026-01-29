@@ -1,6 +1,6 @@
 "use client";
 
-import { PaginateType } from "@/utils/paginationInterface";
+import { PaginateType } from "@/components/utils/paginationInterface";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 

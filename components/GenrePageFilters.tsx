@@ -1,6 +1,6 @@
 import { ParentPlatforms } from "@/actions/platforms-action";
 import PlatformFilter from "./dropdowns/PlatformFilter";
-import { RAWGResponse } from "@/utils/interfaceTypes";
+import { RAWGResponse } from "@/components/utils/interfaceTypes";
 import DateFilter from "./dropdowns/DateFilter";
 import TagFilter from "./dropdowns/TagFilter";
 import MetacriticFilter from "./MetacriticFilter";

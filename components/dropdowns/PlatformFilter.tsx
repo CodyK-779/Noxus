@@ -1,7 +1,7 @@
 "use client";
 
 import { ParentPlatforms } from "@/actions/platforms-action";
-import { RAWGResponse } from "@/utils/interfaceTypes";
+import { RAWGResponse } from "@/components/utils/interfaceTypes";
 import { useState } from "react";
 import {
   DropdownMenu,

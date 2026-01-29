@@ -4,7 +4,7 @@ import { GenreResults } from "@/actions/genres-action";
 import { Swiper, SwiperSlide } from "swiper/react";
 import MBGenreList from "./MBGenreList";
 import { Pagination } from "swiper/modules";
-import { RAWGResponse } from "@/utils/interfaceTypes";
+import { RAWGResponse } from "@/components/utils/interfaceTypes";
 
 interface Props {
   genres: RAWGResponse<GenreResults>;

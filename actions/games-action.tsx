@@ -1,6 +1,6 @@
 "use server";
 
-import { RAWGResponse } from "@/utils/interfaceTypes";
+import { RAWGResponse } from "@/components/utils/interfaceTypes";
 import { cacheLife } from "next/cache";
 
 export interface GamePlatforms {
@@ -32,6 +32,8 @@ export interface GameDetails {
   metacritic: number;
   released: Date;
   platforms: GamePlatforms[];
+  genres: { name: string }[];
+  tags: { name: string }[];
 }
 
 export async function getGames(): Promise<RAWGResponse<GamesType>> {
@@ -214,6 +216,26 @@ export async function getGenreGames(
   );
 
   if (!res.ok) throw new Error("Failed to fetch Genre Games");
+
+  return res.json();
+}
+
+export async function searchSuggestions(
+  search: string,
+): Promise<RAWGResponse<GamesType>> {
+  "use cache";
+  cacheLife("days");
+
+  const res = await fetch(
+    `${process.env.RAWG_URL}/games?search=${search}&key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["game", "suggestions"],
+      },
+    },
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch search suggestions");
 
   return res.json();
 }

@@ -1,6 +1,6 @@
 "use server";
 
-import { RAWGResponse } from "@/utils/interfaceTypes";
+import { RAWGResponse } from "@/components/utils/interfaceTypes";
 import { cacheLife } from "next/cache";
 
 export interface TagType {
@@ -18,7 +18,7 @@ export async function getTags(): Promise<RAWGResponse<TagType>> {
       next: {
         tags: ["tags"],
       },
-    }
+    },
   );
 
   if (!res.ok) throw new Error("Failed to fetch tags");

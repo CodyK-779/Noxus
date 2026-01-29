@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSwiperSlide } from "swiper/react";
 import WishlistButton from "./WishlistButton";
-import { WishlistItemType } from "@/utils/interfaceTypes";
+import { WishlistItemType } from "@/components/utils/interfaceTypes";
 
 interface Props {
   data: HeroMobile;

@@ -1,6 +1,6 @@
 "use client";
 
-import { WishlistItemType } from "@/utils/interfaceTypes";
+import { WishlistItemType } from "@/components/utils/interfaceTypes";
 import { Bookmark, Loader2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { useState } from "react";
@@ -34,7 +34,7 @@ const HeroWishlist = ({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [wishlisted, setWishlisted] = useState(
-    wishlistItems?.some((item) => item.gameId === gameId) || false
+    wishlistItems?.some((item) => item.gameId === gameId) || false,
   );
 
   const handleWishlist = async () => {
@@ -54,7 +54,7 @@ const HeroWishlist = ({
         createdAt,
         rating,
         platforms,
-        "/"
+        "/",
       );
 
       if (results.success) {
@@ -65,7 +65,7 @@ const HeroWishlist = ({
     } catch (error) {
       console.error("Error updating wishlist:", error);
       setWishlisted(
-        wishlistItems?.some((item) => item.gameId === gameId) || false
+        wishlistItems?.some((item) => item.gameId === gameId) || false,
       );
     } finally {
       setLoading(false);

@@ -4,7 +4,7 @@ import { useState } from "react";
 import HeroLeft from "./HeroLeft";
 import HeroRight from "./HeroRight";
 import MBHeroSection from "./MBHeroSection";
-import { WishlistItemType } from "@/utils/interfaceTypes";
+import { WishlistItemType } from "@/components/utils/interfaceTypes";
 
 interface Props {
   wishlistItems: WishlistItemType[] | undefined;

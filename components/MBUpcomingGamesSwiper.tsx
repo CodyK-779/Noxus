@@ -3,7 +3,7 @@
 import { GamesType } from "@/actions/games-action";
 import { Swiper, SwiperSlide } from "swiper/react";
 import MBUpcomingGames from "./MBUpcomingGames";
-import { RAWGResponse } from "@/utils/interfaceTypes";
+import { RAWGResponse } from "@/components/utils/interfaceTypes";
 
 interface Props {
   games: RAWGResponse<GamesType>;

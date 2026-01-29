@@ -1,6 +1,6 @@
 "use server";
 
-import { RAWGResponse } from "@/utils/interfaceTypes";
+import { RAWGResponse } from "@/components/utils/interfaceTypes";
 import { cacheLife } from "next/cache";
 
 export interface GenreResults {
