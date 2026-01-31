@@ -12,6 +12,8 @@ const NavSearch = () => {
   const [search, setSearch] = useState("");
   const [result, setResult] = useState<GamesType[]>([]);
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -37,6 +39,20 @@ const NavSearch = () => {
 
     fetchResults();
   }, [debouncedValue]);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(e.target as Node)
+      ) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -68,13 +84,14 @@ const NavSearch = () => {
   const selectedSearch = searchParams.get("search") || "";
 
   return (
-    <div className="relative flex items-center">
+    <div ref={wrapperRef} className="relative flex items-center">
       <div className="hidden min-[580px]:block cm:w-50 lg:w-72">
         <form className="relative" onSubmit={handleSubmit}>
           <input
             type="text"
             ref={inputRef}
             onChange={(e) => setSearch(e.target.value)}
+            onFocus={() => setOpen(true)}
             defaultValue={selectedSearch}
             placeholder="Search Games"
             enterKeyHint="search"
@@ -93,7 +110,7 @@ const NavSearch = () => {
             <Search className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-neutral-200 cursor-pointer" />
           )}
         </form>
-        {search && result && (
+        {open && search && result && (
           <SearchResults
             games={result}
             loading={loading}
