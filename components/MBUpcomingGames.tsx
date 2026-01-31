@@ -16,7 +16,7 @@ const MBUpcomingGames = ({ data }: Props) => {
 
   return (
     <div key={data.id} className="relative group">
-      <Link href={`/browse/${data.slug}`}>
+      <Link href={`/browse/games/${data.slug}`}>
         <div className="relative aspect-[3/4] rounded-md overflow-hidden ">
           {data.background_image ? (
             <Image

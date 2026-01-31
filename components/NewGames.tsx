@@ -31,7 +31,7 @@ const NewGames = ({ newGames, paginate, wishlistItems }: Props) => {
     <div className="hidden max-container min-[768px]:grid lg:grid-cols-5 grid-cols-4 gap-4">
       {newGames.results.slice(paginate.start, paginate.end).map((game) => (
         <div key={game.id} className="relative group">
-          <Link href={`/browse/${game.slug}`}>
+          <Link href={`/browse/games/${game.slug}`}>
             <div className="relative aspect-[3/4] rounded-md overflow-hidden ">
               {game.background_image ? (
                 <Image

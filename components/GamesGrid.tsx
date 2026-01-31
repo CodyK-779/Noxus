@@ -35,7 +35,7 @@ const GamesGrid = ({ games, wishlistItems, path }: Props) => {
               key={game.id}
               className="relative group min-[400px]:mb-10 mb-4"
             >
-              <Link href={`/browse/${game.slug}`}>
+              <Link href={`/browse/games/${game.slug}`}>
                 <div className="relative aspect-[3/4] rounded-md overflow-hidden">
                   {game.background_image ? (
                     <Image

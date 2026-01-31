@@ -227,7 +227,7 @@ export async function searchSuggestions(
   cacheLife("days");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games?search=${search}&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?search=${encodeURIComponent(search)}&page_size=5&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["game", "suggestions"],

@@ -2,16 +2,41 @@
 
 import { Search, XIcon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useMenu } from "./MenuProvider";
+import useDebounce from "./utils/useDebounce";
+import { GamesType, searchSuggestions } from "@/actions/games-action";
+import SearchResults from "./SearchResults";
 
 const NavSearch = () => {
   const [search, setSearch] = useState("");
+  const [result, setResult] = useState<GamesType[]>([]);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const inputRef = useRef<HTMLInputElement>(null);
   const { openSearch, setOpenSearch } = useMenu();
+  const debouncedValue = useDebounce(search, 500);
+
+  useEffect(() => {
+    if (!debouncedValue) {
+      setResult([]);
+      return;
+    }
+
+    const fetchResults = async () => {
+      setLoading(true);
+      try {
+        const data = await searchSuggestions(debouncedValue);
+        setResult(data.results);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchResults();
+  }, [debouncedValue]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -21,7 +46,7 @@ const NavSearch = () => {
 
     if (query) {
       params.set("search", query);
-      router.push(`/browse?${params.toString()}`);
+      router.push(`/browse/games?${params.toString()}`);
     } else {
       params.delete("search");
       setSearch("");
@@ -43,7 +68,7 @@ const NavSearch = () => {
   const selectedSearch = searchParams.get("search") || "";
 
   return (
-    <div className="flex items-center">
+    <div className="relative flex items-center">
       <div className="hidden min-[580px]:block cm:w-50 lg:w-72">
         <form className="relative" onSubmit={handleSubmit}>
           <input
@@ -68,6 +93,13 @@ const NavSearch = () => {
             <Search className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-neutral-200 cursor-pointer" />
           )}
         </form>
+        {search && result && (
+          <SearchResults
+            games={result}
+            loading={loading}
+            handleSubmit={handleSubmit}
+          />
+        )}
       </div>
       <div
         className="min-[580px]:hidden cursor-pointer"
