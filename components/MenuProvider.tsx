@@ -4,8 +4,10 @@ import {
   createContext,
   Dispatch,
   ReactNode,
+  RefObject,
   SetStateAction,
   useContext,
+  useRef,
   useState,
 } from "react";
 
@@ -14,10 +16,15 @@ interface Props {
 }
 
 interface MenuContextType {
+  search: string;
   openMenu: boolean;
   openSearch: boolean;
+  recents: string[] | [];
+  setSearch: Dispatch<SetStateAction<string>>;
   setOpenMenu: Dispatch<SetStateAction<boolean>>;
   setOpenSearch: Dispatch<SetStateAction<boolean>>;
+  setRecents: Dispatch<SetStateAction<string[] | []>>;
+  mbInputRef: RefObject<HTMLInputElement | null>;
 }
 
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
@@ -33,16 +40,24 @@ export const useMenu = () => {
 };
 
 const MenuProvider = ({ children }: Props) => {
+  const [search, setSearch] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
+  const [recents, setRecents] = useState<string[] | []>([]);
+  const mbInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <MenuContext.Provider
       value={{
+        search,
         openMenu,
         openSearch,
+        recents,
+        setSearch,
         setOpenMenu,
         setOpenSearch,
+        setRecents,
+        mbInputRef,
       }}
     >
       {children}

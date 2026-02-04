@@ -11,7 +11,9 @@ const NavContent = () => {
   const { openSearch } = useMenu();
 
   return (
-    <>
+    <nav
+      className={`fixed w-full top-0 border-b border-[#e91e3f] py-4 ${openSearch ? "bg-neutral-950" : "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"} z-20`}
+    >
       <div
         className={`max-container ${
           openSearch ? "hidden min-[580px]:flex" : "flex"
@@ -25,7 +27,7 @@ const NavContent = () => {
                 src="/logo-red.png"
                 alt="Logo"
                 fill
-                sizes="(min-width: 400px) 36px, 32px"
+                sizes="(min-width: 400px) 72px, 64px"
                 className="object-cover"
               />
             </div>
@@ -41,7 +43,7 @@ const NavContent = () => {
         <NavRight />
       </div>
       {openSearch && <MobileNavSearch />}
-    </>
+    </nav>
   );
 };
 

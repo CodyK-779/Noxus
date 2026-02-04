@@ -2,20 +2,29 @@
 
 import { ArrowLeftIcon, Search } from "lucide-react";
 import { useMenu } from "./MenuProvider";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import useDebounce from "./utils/useDebounce";
+import { addRecentSearch, getRecentSearches } from "./utils/resendSearches";
 
 const MobileNavSearch = () => {
-  const { openSearch, setOpenSearch } = useMenu();
-  const [search, setSearch] = useState("");
+  const {
+    openSearch,
+    search,
+    setOpenSearch,
+    setSearch,
+    setRecents,
+    mbInputRef,
+  } = useMenu();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const debouncedValue = useDebounce(search, 500);
 
   useEffect(() => {
     if (openSearch) {
-      inputRef.current?.focus();
+      if (mbInputRef.current) mbInputRef.current.value = "";
+      mbInputRef.current?.focus();
     }
   }, [openSearch]);
 
@@ -23,11 +32,15 @@ const MobileNavSearch = () => {
     e.preventDefault();
 
     const params = new URLSearchParams(searchParams.toString());
-    const query = inputRef.current?.value || "";
+    const query = mbInputRef.current?.value || "";
 
     if (query) {
       params.set("search", query);
       router.push(`/browse?${params.toString()}`, { scroll: false });
+      addRecentSearch(query);
+      setRecents(getRecentSearches());
+      setSearch("");
+      setOpenSearch(false);
     } else {
       params.delete("search");
       setSearch("");
@@ -40,9 +53,9 @@ const MobileNavSearch = () => {
     params.delete("search");
     setSearch("");
 
-    if (inputRef.current) {
-      inputRef.current.value = "";
-      inputRef.current.focus();
+    if (mbInputRef.current) {
+      mbInputRef.current.value = "";
+      mbInputRef.current.focus();
     }
     router.push(pathname, { scroll: false });
   };
@@ -56,7 +69,7 @@ const MobileNavSearch = () => {
       </div>
       <form onSubmit={handleSubmit} className="relative w-full">
         <input
-          ref={inputRef}
+          ref={mbInputRef}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search Games"
           defaultValue={selectedSearch}

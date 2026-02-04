@@ -23,7 +23,7 @@ const MBGenreList = ({ border, padding, genres }: Props) => {
                 src={genre.image_background}
                 alt={genre.name}
                 fill
-                sizes="(min-width: 1024px) 56px, 48px"
+                sizes="(min-width: 1024px) 112px, 96px"
                 className="object-cover"
               />
             </div>

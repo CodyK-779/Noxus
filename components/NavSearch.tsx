@@ -18,7 +18,7 @@ const NavSearch = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { openSearch, setOpenSearch } = useMenu();
+  const { setOpenSearch } = useMenu();
   const debouncedValue = useDebounce(search, 500);
 
   useEffect(() => {

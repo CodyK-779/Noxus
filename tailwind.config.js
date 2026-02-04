@@ -16,12 +16,14 @@ module.exports = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-			fontFamily: {
-				orbitron: ['var(--font-orbitron)'],
-			},
-			transitionTimingFunction: {
-				"custom-ease": 'cubic-bezier(0.25, 0.8, 0.25, 1)',
-			},
+  		fontFamily: {
+  			orbitron: [
+  				'var(--font-orbitron)'
+  			]
+  		},
+  		transitionTimingFunction: {
+  			'custom-ease': 'cubic-bezier(0.25, 0.8, 0.25, 1)'
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
