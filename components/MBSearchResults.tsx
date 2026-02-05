@@ -1,7 +1,7 @@
 "use client";
 
 import { useMenu } from "./MenuProvider";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import RecentSearches from "./RecentSearches";
 
 const MBSearchResults = () => {
@@ -23,7 +23,13 @@ const MBSearchResults = () => {
     <div
       className={`fixed inset-0 top-[70px] bg-neutral-950 z-20 min-[580px]:hidden ${!openSearch && "hidden"}`}
     >
-      <RecentSearches />
+      <Suspense
+        fallback={
+          <p className="max-container font-medium">No Recent Searches</p>
+        }
+      >
+        {!search && <RecentSearches />}
+      </Suspense>
     </div>
   );
 };

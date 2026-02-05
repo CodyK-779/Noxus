@@ -1,6 +1,4 @@
-"use client";
-
-import { X } from "lucide-react";
+import { Dispatch, SetStateAction } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,37 +8,41 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { Dispatch, SetStateAction } from "react";
-import {
-  clearAllRecentSearches,
-  getRecentSearches,
-} from "../utils/resendSearches";
+import { getRecentSearches, removeRecentSearch } from "../utils/resendSearches";
+import { useMenu } from "../MenuProvider";
 
 interface Props {
-  setRecents: Dispatch<SetStateAction<[] | string[]>>;
+  openDialog: boolean;
+  setOpenDialog: Dispatch<SetStateAction<boolean>>;
+  selectedSearch: string | null;
+  setSelectedSearch: Dispatch<SetStateAction<string | null>>;
 }
 
-const ClearAllRecents = ({ setRecents }: Props) => {
-  const clearAllRecents = () => {
-    clearAllRecentSearches();
+const DeleteRecent = ({
+  openDialog,
+  setOpenDialog,
+  selectedSearch,
+  setSelectedSearch,
+}: Props) => {
+  const { setRecents } = useMenu();
+
+  const handleDelete = (recent: string | null) => {
+    if (!selectedSearch) return;
+
+    removeRecentSearch(selectedSearch);
     setRecents(getRecentSearches());
+    setSelectedSearch(null);
   };
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <button>
-          <X className="min-[375px]:size-6 size-5" />
-        </button>
-      </AlertDialogTrigger>
+    <AlertDialog open={openDialog} onOpenChange={setOpenDialog}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Delete Confirmation</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete all your
-            search histories.
+            This action cannot be undone. This will permanently delete this
+            search history.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -48,7 +50,7 @@ const ClearAllRecents = ({ setRecents }: Props) => {
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            onClick={clearAllRecents}
+            onClick={() => handleDelete(selectedSearch)}
             className="bg-red-600 text-white hover:bg-red-700 transition-colors font-medium"
           >
             Continue
@@ -59,4 +61,4 @@ const ClearAllRecents = ({ setRecents }: Props) => {
   );
 };
 
-export default ClearAllRecents;
+export default DeleteRecent;

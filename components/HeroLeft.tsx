@@ -49,7 +49,8 @@ const HeroLeft = ({ showGame, wishlistItems, setIsPaused }: Props) => {
             src={heroData[showGame].img}
             alt="Game_Background"
             fill
-            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 768px"
+            className="object-cover max-[768px]:hidden"
             priority
           />
 

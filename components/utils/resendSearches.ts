@@ -19,3 +19,10 @@ export function clearAllRecentSearches() {
   if (typeof window === "undefined") return;
   localStorage.removeItem(RECENT_KEY)
 }
+
+export function removeRecentSearch(query: string) {
+  if (typeof window === "undefined") return;
+
+  const updated = getRecentSearches().filter(q => q.toLowerCase() !== query.toLowerCase());
+  localStorage.setItem(RECENT_KEY, JSON.stringify(updated))
+}

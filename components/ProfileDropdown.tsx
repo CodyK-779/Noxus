@@ -26,6 +26,7 @@ const ProfileDropdown = () => {
               src={session.user.image}
               alt={session.user.name}
               fill
+              sizes="(min-width: 400px) 38px, 35px"
               className="object-cover"
             />
           ) : (
