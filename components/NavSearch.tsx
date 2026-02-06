@@ -30,7 +30,7 @@ const NavSearch = () => {
     const fetchResults = async () => {
       setLoading(true);
       try {
-        const data = await searchSuggestions(debouncedValue);
+        const data = await searchSuggestions(debouncedValue, 5);
         setResult(data.results);
       } finally {
         setLoading(false);

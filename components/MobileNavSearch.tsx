@@ -4,7 +4,6 @@ import { ArrowLeftIcon, Search } from "lucide-react";
 import { useMenu } from "./MenuProvider";
 import { FormEvent, useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import useDebounce from "./utils/useDebounce";
 import { addRecentSearch, getRecentSearches } from "./utils/resendSearches";
 
 const MobileNavSearch = () => {
@@ -19,7 +18,6 @@ const MobileNavSearch = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const debouncedValue = useDebounce(search, 500);
 
   useEffect(() => {
     if (openSearch) {
@@ -60,11 +58,17 @@ const MobileNavSearch = () => {
     router.push(pathname, { scroll: false });
   };
 
+  const handleCloseSearch = () => {
+    setOpenSearch(false);
+    setSearch("");
+    if (mbInputRef.current) mbInputRef.current.value = "";
+  };
+
   const selectedSearch = searchParams.get("search") || "";
 
   return (
     <div className="min-[580px]:hidden max-container flex items-center gap-2">
-      <div className="cursor-pointer" onClick={() => setOpenSearch(false)}>
+      <div className="cursor-pointer" onClick={handleCloseSearch}>
         <ArrowLeftIcon className="min-[350px]:size-6 size-5" />
       </div>
       <form onSubmit={handleSubmit} className="relative w-full">

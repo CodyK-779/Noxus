@@ -222,12 +222,13 @@ export async function getGenreGames(
 
 export async function searchSuggestions(
   search: string,
+  size: number,
 ): Promise<RAWGResponse<GamesType>> {
   "use cache";
   cacheLife("days");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games?search=${encodeURIComponent(search)}&page_size=5&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?search=${encodeURIComponent(search)}&page_size=${size}&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["game", "suggestions"],

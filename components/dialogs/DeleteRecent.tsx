@@ -27,7 +27,7 @@ const DeleteRecent = ({
 }: Props) => {
   const { setRecents } = useMenu();
 
-  const handleDelete = (recent: string | null) => {
+  const handleDelete = () => {
     if (!selectedSearch) return;
 
     removeRecentSearch(selectedSearch);
@@ -50,7 +50,7 @@ const DeleteRecent = ({
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            onClick={() => handleDelete(selectedSearch)}
+            onClick={handleDelete}
             className="bg-red-600 text-white hover:bg-red-700 transition-colors font-medium"
           >
             Continue

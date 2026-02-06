@@ -60,7 +60,7 @@ const RecentSearches = () => {
         {recents.length > 0 ? (
           <>
             <div className="max-container flex items-center justify-between gap-2">
-              <p className="min-[375px]:text-base text-sm font-medium">
+              <p className="min-[375px]:text-base text-sm font-bold">
                 Recent Searches
               </p>
               <ClearAllRecents setRecents={setRecents} />
@@ -99,7 +99,7 @@ const RecentSearches = () => {
             </div>
           </>
         ) : (
-          <p className="max-container font-medium">No Recent Searches</p>
+          <p className="max-container font-bold">No Recent Searches</p>
         )}
       </div>
       <DeleteRecent
