@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 import { Pagination, Autoplay, A11y } from "swiper/modules";
 import HeroGameCard from "./HeroGameCard";
 import { heroMobile } from "@/data/hero-data";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
 import { WishlistItemType } from "@/components/utils/interfaceTypes";
 
@@ -17,12 +17,16 @@ interface Props {
 }
 
 const MBHeroSection = ({ wishlistItems }: Props) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <section className="min-[768px]:hidden pt-[90px]">
       <Suspense
         fallback={<Skeleton className="aspect-[3/4] rounded-xl mx-12" />}
       >
         <Swiper
+          onSwiper={(swiper) => setActiveIndex(swiper.realIndex)}
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           modules={[Pagination, Autoplay, A11y]}
           spaceBetween={15}
           slidesPerView={1.25}
@@ -39,9 +43,13 @@ const MBHeroSection = ({ wishlistItems }: Props) => {
           }}
           className="mb-2"
         >
-          {heroMobile.map((data) => (
+          {heroMobile.map((data, index) => (
             <SwiperSlide key={data.link}>
-              <HeroGameCard data={data} wishlistItems={wishlistItems} />
+              <HeroGameCard
+                data={data}
+                isActive={activeIndex === index}
+                wishlistItems={wishlistItems}
+              />
             </SwiperSlide>
           ))}
 

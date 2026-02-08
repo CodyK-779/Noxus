@@ -7,6 +7,7 @@ import { WishlistItemType } from "@/components/utils/interfaceTypes";
 
 interface Props {
   data: HeroMobile;
+  isActive: boolean;
   wishlistItems: WishlistItemType[] | undefined;
 }
 
@@ -27,10 +28,7 @@ const logoStyles = (logo: string) => {
   }
 };
 
-const HeroGameCard = ({ data, wishlistItems }: Props) => {
-  const slide = useSwiperSlide();
-  const isActive = slide.isActive;
-
+const HeroGameCard = ({ data, isActive, wishlistItems }: Props) => {
   return (
     <div className="min-[768px]:hidden">
       <Link href={`/browse/${data.link}`}>

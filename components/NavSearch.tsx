@@ -115,6 +115,8 @@ const NavSearch = () => {
             games={result}
             loading={loading}
             handleSubmit={handleSubmit}
+            inputRef={inputRef}
+            setSearch={setSearch}
           />
         )}
       </div>

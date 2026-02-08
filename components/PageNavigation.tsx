@@ -1,6 +1,8 @@
+"use client";
+
 import { ChevronRight } from "lucide-react";
-import Link from "next/link";
 import { Skeleton } from "./ui/skeleton";
+import { useRouter } from "next/navigation";
 
 interface Props {
   path?: string;
@@ -8,14 +10,16 @@ interface Props {
 }
 
 const PageNavigation = ({ path, skeleton }: Props) => {
+  const router = useRouter();
+
   return (
     <div className="flex items-center gap-2 min-[400px]:text-sm text-xs mb-6 font-medium">
-      <Link
-        href="/"
-        className="text-neutral-400 hover:text-white transition-colors"
+      <div
+        onClick={() => router.back()}
+        className="text-neutral-400 hover:text-white transition-colors cursor-pointer"
       >
         Discover
-      </Link>
+      </div>
       <ChevronRight className="size-4 text-gray-400" />
       {!skeleton ? (
         <p className="text-white cursor-pointer">{path}</p>

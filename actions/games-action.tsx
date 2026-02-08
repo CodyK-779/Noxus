@@ -9,6 +9,10 @@ export interface GamePlatforms {
     slug: string;
     name: string;
   };
+  requirements: {
+    minimum: string;
+    recommended: string;
+  };
 }
 
 export interface GamesType {
@@ -34,6 +38,22 @@ export interface GameDetails {
   platforms: GamePlatforms[];
   genres: { name: string }[];
   tags: { name: string }[];
+  developers: { name: string }[];
+}
+
+export interface GameScreenShots {
+  id: number;
+  image: string;
+}
+
+export interface GameTrailers {
+  id: number;
+  name: string;
+  preview: string;
+  data: {
+    480: string;
+    max: string;
+  };
 }
 
 export async function getGames(): Promise<RAWGResponse<GamesType>> {
@@ -61,7 +81,7 @@ export async function getGameDetails(): Promise<GameDetails> {
   cacheLife("hours");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games/hollow-knight-silksong?key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games/grand-theft-auto-v?key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["games", "details"],
@@ -237,6 +257,46 @@ export async function searchSuggestions(
   );
 
   if (!res.ok) throw new Error("Failed to fetch search suggestions");
+
+  return res.json();
+}
+
+export async function getGameScreenShots(
+  id: number,
+): Promise<RAWGResponse<GameScreenShots>> {
+  "use cache";
+  cacheLife("days");
+
+  const res = await fetch(
+    `${process.env.RAWG_URL}/games/${id}/screenshots?key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["game", "screenshots"],
+      },
+    },
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch game screenshots");
+
+  return res.json();
+}
+
+export async function getGameTrailers(
+  id: number,
+): Promise<RAWGResponse<GameTrailers>> {
+  "use cache";
+  cacheLife("days");
+
+  const res = await fetch(
+    `${process.env.RAWG_URL}/games/${id}/movies?key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["game", "trailers"],
+      },
+    },
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch game trailers");
 
   return res.json();
 }

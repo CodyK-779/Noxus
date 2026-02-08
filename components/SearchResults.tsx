@@ -3,16 +3,29 @@ import { ArrowRight, Gamepad2, SearchX } from "lucide-react";
 import Image from "next/image";
 import { platformIcons, platformIconByKey } from "./utils/utils";
 import Link from "next/link";
-import { FormEvent } from "react";
+import { Dispatch, FormEvent, RefObject, SetStateAction } from "react";
 import { Skeleton } from "./ui/skeleton";
 
 interface Props {
   games: GamesType[];
   loading: boolean;
   handleSubmit: (e: FormEvent<Element>) => void;
+  inputRef: RefObject<HTMLInputElement | null>;
+  setSearch: Dispatch<SetStateAction<string>>;
 }
 
-const SearchResults = ({ games, loading, handleSubmit }: Props) => {
+const SearchResults = ({
+  games,
+  loading,
+  handleSubmit,
+  inputRef,
+  setSearch,
+}: Props) => {
+  const handleSearch = () => {
+    if (inputRef.current) inputRef.current.value = "";
+    setSearch("");
+  };
+
   return (
     <div className="absolute right-0 top-full mt-2 w-[445px] z-20">
       <div className="max-h-[70vh] overflow-y-auto rounded-2xl bg-neutral-900 border border-neutral-700 shadow-2xl px-2 pt-4 pb-2">
@@ -26,6 +39,7 @@ const SearchResults = ({ games, loading, handleSubmit }: Props) => {
                 {games.map((game) => (
                   <Link
                     href={`/browse/games/${game.slug}`}
+                    onClick={handleSearch}
                     key={game.id}
                     className="flex items-center gap-3 mb p-2.5 rounded hover:bg-neutral-800 cursor-pointer transition"
                   >

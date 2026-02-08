@@ -1,4 +1,4 @@
-import { getGameDetails } from "@/actions/games-action";
+import { getGameDetails, getGames } from "@/actions/games-action";
 import GameGenresContainer from "@/components/GameGenresContainer";
 import GamePlatformsContainer from "@/components/GamePlatformsContainer";
 import HeroAndNewReleases from "@/components/HeroAndNewReleases";
@@ -11,8 +11,9 @@ import { Suspense } from "react";
 
 export default async function Home() {
   // const game = await getGameDetails();
+  // const games = await getGames();
 
-  // console.log(game.tags);
+  // console.log(game.id);
 
   return (
     <>
@@ -41,7 +42,7 @@ export default async function Home() {
       {/* <ul className="flex flex-col gap-4">
         {games.results.map((game) => (
           <li key={game.id} className="flex flex-col gap-1">
-            <div className="relative aspect-video size-40 rounded-md overflow-hidden">
+            <div className="relative aspect-[12.6/7] rounded-md overflow-hidden">
               {game.background_image ? (
                 <Image
                   src={game.background_image}
