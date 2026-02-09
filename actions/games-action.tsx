@@ -76,12 +76,12 @@ export async function getGames(): Promise<RAWGResponse<GamesType>> {
   return res.json();
 }
 
-export async function getGameDetails(): Promise<GameDetails> {
+export async function getGameDetails(slug: string): Promise<GameDetails> {
   "use cache";
   cacheLife("hours");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games/grand-theft-auto-v?key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games/${slug}?key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["games", "details"],
@@ -262,13 +262,13 @@ export async function searchSuggestions(
 }
 
 export async function getGameScreenShots(
-  id: number,
+  slug: string,
 ): Promise<RAWGResponse<GameScreenShots>> {
   "use cache";
   cacheLife("days");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games/${id}/screenshots?key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games/${slug}/screenshots?key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["game", "screenshots"],
@@ -282,13 +282,13 @@ export async function getGameScreenShots(
 }
 
 export async function getGameTrailers(
-  id: number,
+  slug: string,
 ): Promise<RAWGResponse<GameTrailers>> {
   "use cache";
   cacheLife("days");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games/${id}/movies?key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games/${slug}/movies?key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["game", "trailers"],

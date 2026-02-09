@@ -49,6 +49,7 @@ const HeroLeft = ({ showGame, wishlistItems, setIsPaused }: Props) => {
             src={heroData[showGame].img}
             alt="Game_Background"
             fill
+            loading="eager"
             sizes="(max-width: 768px) 100vw, 768px"
             className="object-cover max-[768px]:hidden"
             priority
@@ -99,7 +100,7 @@ const HeroLeft = ({ showGame, wishlistItems, setIsPaused }: Props) => {
               </p>
 
               <div className="flex items-center gap-4">
-                <Link href={`/browse/${heroData[showGame].link}`}>
+                <Link href={`/browse/games/${heroData[showGame].link}`}>
                   <button className="nox-btn font-medium px-6 py-2">
                     Learn More
                   </button>

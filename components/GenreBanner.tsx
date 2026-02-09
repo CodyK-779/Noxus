@@ -19,7 +19,13 @@ const gameCount = (count: number) => {
 const GenreBanner = ({ name, image, count }: Props) => {
   return (
     <div className="relative sm:h-[300px] min-[425px]:h-[250px] min-[375px]:h-[225px] h-[200px] overflow-hidden min-[400px]:mt-[69.5px] mt-[65.5px]">
-      <Image src={image} alt={name} fill className="inset-0 object-cover " />
+      <Image
+        src={image}
+        alt={name}
+        fill
+        loading="eager"
+        className="inset-0 object-cover "
+      />
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
       <div className="relative max-container z-10 h-full flex flex-col justify-end md:pb-10 min-[425px]:pb-8 pb-6">

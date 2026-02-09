@@ -1,7 +1,6 @@
 import { HeroMobile } from "@/data/hero-data";
 import Image from "next/image";
 import Link from "next/link";
-import { useSwiperSlide } from "swiper/react";
 import WishlistButton from "./WishlistButton";
 import { WishlistItemType } from "@/components/utils/interfaceTypes";
 
@@ -31,7 +30,7 @@ const logoStyles = (logo: string) => {
 const HeroGameCard = ({ data, isActive, wishlistItems }: Props) => {
   return (
     <div className="min-[768px]:hidden">
-      <Link href={`/browse/${data.link}`}>
+      <Link href={`/browse/games/${data.link}`}>
         <div className="relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer group">
           <Image
             src={data.img}

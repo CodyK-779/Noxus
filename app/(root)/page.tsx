@@ -42,7 +42,7 @@ export default async function Home() {
       {/* <ul className="flex flex-col gap-4">
         {games.results.map((game) => (
           <li key={game.id} className="flex flex-col gap-1">
-            <div className="relative aspect-[12.6/7] rounded-md overflow-hidden">
+            <div className="relative w-full h-[725px] rounded-md overflow-hidden">
               {game.background_image ? (
                 <Image
                   src={game.background_image}
