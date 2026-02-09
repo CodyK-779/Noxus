@@ -1,13 +1,13 @@
 import HeroSectionSkeleton from "./HeroSectionSkeleton";
 import GameSkeletonContainer from "./GameSkeletonContainer";
 
-const HeroAndNewSkeleton = () => {
+const HeroAndHRSkeleton = () => {
   return (
     <>
       <HeroSectionSkeleton />
-      <GameSkeletonContainer header="Discover New Releases" />
+      <GameSkeletonContainer header="Discover Highly Rated Games" />
     </>
   );
 };
 
-export default HeroAndNewSkeleton;
+export default HeroAndHRSkeleton;

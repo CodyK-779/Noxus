@@ -1,10 +1,10 @@
 import { getGameDetails, getGames } from "@/actions/games-action";
 import GameGenresContainer from "@/components/GameGenresContainer";
 import GamePlatformsContainer from "@/components/GamePlatformsContainer";
-import HeroAndNewReleases from "@/components/HeroAndNewReleases";
-import HighRatedGamesWrapper from "@/components/HighRatedGamesWrapper";
+import HeroAndHRGames from "@/components/HeroAndHRGames";
+import NewGamesWrapper from "@/components/NewGamesWrapper";
 import GameSkeletonContainer from "@/components/skeletons/GameSkeletonContainer";
-import HeroAndNewSkeleton from "@/components/skeletons/HeroAndNewSkeleton";
+import HeroAndHRSkeleton from "@/components/skeletons/HeroAndHRSkeleton";
 import UpcomingGameWrapper from "@/components/UpcomingGameWrapper";
 import Image from "next/image";
 import { Suspense } from "react";
@@ -17,26 +17,24 @@ export default async function Home() {
 
   return (
     <>
-      <Suspense fallback={<HeroAndNewSkeleton />}>
-        <HeroAndNewReleases />
+      <Suspense fallback={<HeroAndHRSkeleton />}>
+        <HeroAndHRGames />
       </Suspense>
 
       <GameGenresContainer />
 
       <Suspense
-        fallback={<GameSkeletonContainer header="Discover Upcoming Games" />}
+        fallback={<GameSkeletonContainer header="Discover New Releases" />}
       >
-        <UpcomingGameWrapper />
+        <NewGamesWrapper />
       </Suspense>
 
       <GamePlatformsContainer />
 
       <Suspense
-        fallback={
-          <GameSkeletonContainer header="Discover Highly Rated Games" />
-        }
+        fallback={<GameSkeletonContainer header="Discover Upcoming Games" />}
       >
-        <HighRatedGamesWrapper />
+        <UpcomingGameWrapper />
       </Suspense>
 
       {/* <ul className="flex flex-col gap-4">
