@@ -22,7 +22,7 @@ const MBSearchResults = () => {
 
   return (
     <div
-      className={`fixed inset-0 top-[70px] bg-neutral-950 z-20 min-[580px]:hidden ${!openSearch && "hidden"}`}
+      className={`fixed inset-0 min-[350px]:top-[70px] top-[65px] bg-neutral-950 z-20 min-[580px]:hidden ${!openSearch && "hidden"}`}
     >
       <div className="h-full overflow-auto pb-10">
         <Suspense

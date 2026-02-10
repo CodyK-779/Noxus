@@ -10,10 +10,10 @@ import Image from "next/image";
 import { Suspense } from "react";
 
 export default async function Home() {
-  // const game = await getGameDetails();
+  // const game = await getGameDetails("grand-theft-auto-v");
   // const games = await getGames();
 
-  // console.log(game.id);
+  // console.log(game.developers);
 
   return (
     <>
