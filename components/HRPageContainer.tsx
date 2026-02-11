@@ -51,6 +51,7 @@ const HRPageContainer = async ({ header, desc, searchParams }: Props) => {
         games={games}
         wishlistItems={wishlistItems}
         path="/discover/high-ratings"
+        from="high-ratings"
       />
 
       {games.count > 40 && (

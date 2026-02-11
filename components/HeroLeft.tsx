@@ -100,7 +100,9 @@ const HeroLeft = ({ showGame, wishlistItems, setIsPaused }: Props) => {
               </p>
 
               <div className="flex items-center gap-4">
-                <Link href={`/browse/games/${heroData[showGame].link}`}>
+                <Link
+                  href={`/browse/games/${heroData[showGame].link}?from=Discover`}
+                >
                   <button className="nox-btn font-medium px-6 py-2">
                     Learn More
                   </button>

@@ -47,6 +47,7 @@ const GenreDetailsContainer = async ({ params, searchParams }: Props) => {
           games={games}
           wishlistItems={wishlistItems}
           path={`/discover/genre/${genreId}`}
+          from={genre.name}
         />
       </div>
 

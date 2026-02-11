@@ -28,7 +28,7 @@ const MBNewGameCard = ({ data, wishlistItems }: Props) => {
 
   return (
     <div className="relative group">
-      <Link href={`/browse/games/${data.slug}`}>
+      <Link href={`/browse/games/${data.slug}?from=Discover`}>
         <div className="relative aspect-[3/4] rounded-md overflow-hidden">
           {data.background_image ? (
             <Image

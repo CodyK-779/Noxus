@@ -28,7 +28,7 @@ const MBHRGames = ({ game, wishlistItems }: Props) => {
 
   return (
     <div className="relative group">
-      <Link href={`/browse/games/${game.slug}`}>
+      <Link href={`/browse/games/${game.slug}?from=Discover`}>
         <div className="relative aspect-[3/4] rounded-md overflow-hidden">
           {game.background_image ? (
             <Image

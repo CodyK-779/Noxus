@@ -72,3 +72,5 @@ export const genreData = [
     name: "Educational"
   }
 ]
+
+export const genresArray = ["Action", "Indie", "Adventure", "RPG", "Strategy", "Shooter", "Casual", "Simulation", "Puzzle", "Arcade", "Platformer", "Massively Multiplayer", "Racing", "Sports", "Family", "Board Games", "Card", "Educational"]

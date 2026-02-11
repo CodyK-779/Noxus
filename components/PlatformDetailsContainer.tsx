@@ -49,6 +49,7 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
         games={games}
         wishlistItems={wishlistItems}
         path={`/discover/platforms/${platformId}`}
+        from={platform.name}
       />
 
       {games.count > 40 && (

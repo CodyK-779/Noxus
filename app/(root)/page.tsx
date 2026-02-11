@@ -13,8 +13,6 @@ export default async function Home() {
   // const game = await getGameDetails("grand-theft-auto-v");
   // const games = await getGames();
 
-  // console.log(game.developers);
-
   return (
     <>
       <Suspense fallback={<HeroAndHRSkeleton />}>

@@ -30,7 +30,7 @@ const logoStyles = (logo: string) => {
 const HeroGameCard = ({ data, isActive, wishlistItems }: Props) => {
   return (
     <div className="min-[768px]:hidden">
-      <Link href={`/browse/games/${data.link}`}>
+      <Link href={`/browse/games/${data.link}?from=Discover`}>
         <div className="relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer group">
           <Image
             src={data.img}

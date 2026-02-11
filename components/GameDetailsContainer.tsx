@@ -7,7 +7,6 @@ import GameBanner from "./GameBanner";
 import { Deepseek } from "./Deepseek";
 import Gemini from "./Gemini";
 import GPT from "./GPT";
-import Image from "next/image";
 import GameNavigation from "./GameNavigation";
 
 interface Props {
@@ -22,12 +21,10 @@ const GameDetailsContainer = async ({ params }: Props) => {
     getGameTrailers(gameSlug),
   ]);
 
-  // console.log(game.rating);
-
   return (
     <>
       <GameBanner game={game} />
-      <GameNavigation />
+      <GameNavigation name={game.name} />
       {/* <Gemini game={game} screenshots={screenshots} trailers={trailers} /> */}
       {/* <Deepseek game={game} screenshots={screenshots} trailers={trailers} /> */}
       {/* <GPT game={game} screenshots={screenshots} trailers={trailers} /> */}
