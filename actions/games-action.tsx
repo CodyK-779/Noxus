@@ -56,6 +56,14 @@ export interface GameTrailers {
   };
 }
 
+export interface GameAchievements {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  percent: string;
+}
+
 export async function getGames(): Promise<RAWGResponse<GamesType>> {
   "use cache";
   cacheLife("hours");
@@ -297,6 +305,44 @@ export async function getGameTrailers(
   );
 
   if (!res.ok) throw new Error("Failed to fetch game trailers");
+
+  return res.json();
+}
+
+export async function getGameAchievements(
+  slug: string,
+): Promise<RAWGResponse<GameAchievements>> {
+  "use cache";
+  cacheLife("days");
+
+  const res = await fetch(
+    `${process.env.RAWG_URL}/games/${slug}/achievements?key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["game", "achievements"],
+      },
+    },
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch game achievements");
+
+  return res.json();
+}
+
+export async function getGameAddons(slug: string) {
+  "use cache";
+  cacheLife("days");
+
+  const res = await fetch(
+    `${process.env.RAWG_URL}/games/${slug}/additions?key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["game", "additions"],
+      },
+    },
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch game additions");
 
   return res.json();
 }

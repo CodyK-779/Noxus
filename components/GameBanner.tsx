@@ -10,7 +10,7 @@ const GameBanner = ({ game }: Props) => {
   const rating = game.rating ?? 0;
 
   return (
-    <section className="relative w-full xl:h-[660px] aspect-video overflow-hidden min-[400px]:mt-[69.5px] mt-[65.5px]">
+    <section className="relative w-full xl:h-[660px] aspect-video overflow-hidden min-[400px]:mt-[69.5px] mt-[65.5px] sm:mb-0 mb-4">
       <Image
         src={game.background_image}
         alt={game.name}
@@ -19,8 +19,9 @@ const GameBanner = ({ game }: Props) => {
         sizes="100vw"
         className="inset-0 object-cover xl:object-top"
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-neutral-950/40 to-neutral-950 z-0" />
-      <div className="relative max-container h-full flex flex-col justify-end md:pb-14 min-[425px]:pb-6 pb-4">
+      <div className="pointer-events-none hidden sm:block absolute inset-0 bg-gradient-to-b from-transparent via-neutral-950/40 to-neutral-950 z-0" />
+
+      <div className="relative max-container h-full hidden sm:flex flex-col justify-end xl:pb-12 md:pb-10 min-[425px]:pb-6 pb-4">
         {/* Name */}
         <h1 className="xl:text-6xl md:text-5xl sm:text-4xl min-[500px]:text-3xl min-[400px]:text-[26px] min-[350px]:text-2xl text-[22px] font-bold md:mb-5 min-[500px]:mb-2.5 min-[375px]:mb-1.5 mb-1">
           {game.name}

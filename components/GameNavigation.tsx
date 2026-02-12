@@ -18,7 +18,7 @@ const GameNavigation = ({ name, skeleton }: Props) => {
   const router = useRouter();
 
   return (
-    <div className="max-container flex items-center gap-2 min-[400px]:text-sm text-xs mb-6 font-medium text-gray-400">
+    <div className="max-container flex items-center min-[375px]:gap-2 gap-1.5 min-[400px]:text-sm text-xs font-medium text-gray-400">
       {/* Home Route */}
       {from === "Discover" && (
         <>
@@ -28,9 +28,9 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           >
             {from}
           </div>
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           {!skeleton ? (
-            <p className="text-white cursor-pointer">{name}</p>
+            <p className="text-white cursor-pointer truncate">{name}</p>
           ) : (
             <Skeleton className="w-20 h-3" />
           )}
@@ -43,16 +43,16 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           <Link href="/" className="hover:text-white transition-colors">
             Discover
           </Link>
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           <div
             onClick={() => router.back()}
             className="hover:text-white transition-colors cursor-pointer"
           >
             High-ratings
           </div>
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           {!skeleton ? (
-            <p className="text-white cursor-pointer">{name}</p>
+            <p className="text-white cursor-pointer truncate">{name}</p>
           ) : (
             <Skeleton className="w-20 h-3" />
           )}
@@ -65,16 +65,16 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           <Link href="/" className="hover:text-white transition-colors">
             Discover
           </Link>
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           <div
             onClick={() => router.back()}
             className="hover:text-white transition-colors cursor-pointer"
           >
             New-releases
           </div>
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           {!skeleton ? (
-            <p className="text-white cursor-pointer">{name}</p>
+            <p className="text-white cursor-pointer truncate">{name}</p>
           ) : (
             <Skeleton className="w-20 h-3" />
           )}
@@ -87,16 +87,16 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           <Link href="/" className="hover:text-white transition-colors">
             Discover
           </Link>
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           <div
             onClick={() => router.back()}
             className="hover:text-white transition-colors cursor-pointer"
           >
             Upcoming-games
           </div>
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           {!skeleton ? (
-            <p className="text-white cursor-pointer">{name}</p>
+            <p className="text-white cursor-pointer truncate">{name}</p>
           ) : (
             <Skeleton className="w-20 h-3" />
           )}
@@ -109,23 +109,23 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           <Link href="/" className="hover:text-white transition-colors">
             Discover
           </Link>
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           <Link
             href="/discover/platforms"
             className="hover:text-white transition-colors"
           >
             Platforms
           </Link>
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           <div
             onClick={() => router.back()}
             className="hover:text-white transition-colors cursor-pointer"
           >
             {from}
           </div>
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           {!skeleton ? (
-            <p className="text-white cursor-pointer">{name}</p>
+            <p className="text-white cursor-pointer truncate">{name}</p>
           ) : (
             <Skeleton className="w-20 h-3" />
           )}
@@ -138,16 +138,16 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           <Link href="/" className="hover:text-white transition-colors">
             Discover
           </Link>
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           <div
             onClick={() => router.back()}
             className="hover:text-white transition-colors cursor-pointer"
           >
             {from}
           </div>
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           {!skeleton ? (
-            <p className="text-white cursor-pointer">{name}</p>
+            <p className="text-white cursor-pointer truncate">{name}</p>
           ) : (
             <Skeleton className="w-20 h-3" />
           )}
