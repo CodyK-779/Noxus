@@ -22,8 +22,9 @@ const GamePaginateCtrls = ({ paginate, setPaginate, count }: Props) => {
     if (screenWidth >= 1024) return 5;
     if (screenWidth >= 768) return 4;
     if (screenWidth >= 640) return 3;
+    if (screenWidth >= 425) return 4;
 
-    return 4;
+    return 3;
   };
 
   const handlePrevious = () => {
@@ -58,7 +59,7 @@ const GamePaginateCtrls = ({ paginate, setPaginate, count }: Props) => {
           disabled={paginate.start <= 0}
           className="flex items-center justify-center p-2 bg-neutral-700 disabled:opacity-50 rounded-full"
         >
-          <ChevronLeft className="size-4" />
+          <ChevronLeft className="min-[375px]:size-4 size-3.5" />
         </button>
       </div>
 
@@ -68,7 +69,7 @@ const GamePaginateCtrls = ({ paginate, setPaginate, count }: Props) => {
           disabled={paginate.end >= count}
           className="flex items-center justify-center p-2 bg-neutral-700 disabled:opacity-50 rounded-full"
         >
-          <ChevronRight className="size-4" />
+          <ChevronRight className="min-[375px]:size-4 size-3.5" />
         </button>
       </div>
     </>

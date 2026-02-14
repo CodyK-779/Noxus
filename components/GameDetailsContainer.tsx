@@ -6,9 +6,6 @@ import {
   getGameTrailers,
 } from "@/actions/games-action";
 import GameBanner from "./GameBanner";
-import { Deepseek } from "./Deepseek";
-import Gemini from "./Gemini";
-import GPT from "./GPT";
 import GameNavigation from "./GameNavigation";
 import MBGameTitle from "./MBGameTitle";
 import GameTabs from "./GameTabs";
@@ -27,8 +24,6 @@ const GameDetailsContainer = async ({ params }: Props) => {
     getGameAddons(gameSlug),
   ]);
 
-  // console.log(trailers.results);
-
   return (
     <>
       <GameBanner game={game} />
@@ -40,13 +35,3 @@ const GameDetailsContainer = async ({ params }: Props) => {
 };
 
 export default GameDetailsContainer;
-
-{
-  /* <Gemini game={game} screenshots={screenshots} trailers={trailers} /> */
-}
-{
-  /* <Deepseek game={game} screenshots={screenshots} trailers={trailers} /> */
-}
-{
-  /* <GPT game={game} screenshots={screenshots} trailers={trailers} /> */
-}
