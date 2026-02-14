@@ -1,16 +1,17 @@
-"use client";
-
-import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import GameOverview from "./GameOverview";
+import { RAWGResponse } from "./utils/interfaceTypes";
+import { GameScreenShots, GameTrailers } from "@/actions/games-action";
 
-const GameTabs = () => {
-  const [value, setValue] = useState("achievements");
+interface Props {
+  screenshots: RAWGResponse<GameScreenShots>;
+  trailers: RAWGResponse<GameTrailers>;
+}
 
-  console.log(value);
-
+const GameTabs = ({ screenshots, trailers }: Props) => {
   return (
     <Tabs defaultValue="overview" className="max-container mt-6">
-      <TabsList className="inline-flex h-9 items-center text-muted-foreground w-full justify-start rounded-none border-b bg-transparent p-0">
+      <TabsList className="inline-flex h-9 items-center text-muted-foreground w-full justify-start rounded-none border-b bg-transparent p-0 mb-4">
         <TabsTrigger
           className="tab-trigger min-[425px]:text-base text-sm"
           value="overview"
@@ -25,7 +26,7 @@ const GameTabs = () => {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="overview">
-        <p>hello world</p>
+        <GameOverview screenshots={screenshots} trailers={trailers} />
       </TabsContent>
       <TabsContent value="achievements">
         <p>Grammy</p>

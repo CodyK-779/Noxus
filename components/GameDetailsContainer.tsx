@@ -12,7 +12,6 @@ import GPT from "./GPT";
 import GameNavigation from "./GameNavigation";
 import MBGameTitle from "./MBGameTitle";
 import GameTabs from "./GameTabs";
-import TabsCustomUnderlineDemo from "./shadcn-studio/tabs/tabs-26";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -28,13 +27,14 @@ const GameDetailsContainer = async ({ params }: Props) => {
     getGameAddons(gameSlug),
   ]);
 
+  // console.log(trailers.results);
+
   return (
     <>
       <GameBanner game={game} />
       <GameNavigation name={game.name} />
       <MBGameTitle game={game} />
-      <GameTabs />
-      {/* <TabsCustomUnderlineDemo /> */}
+      <GameTabs screenshots={screenshots} trailers={trailers} />
     </>
   );
 };
