@@ -9,7 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "../ui/alert-dialog";
-import { getRecentSearches, removeRecentSearch } from "../utils/resendSearches";
+import { getRecentSearches, removeRecentSearch } from "../utils/recentSearches";
 import { useMenu } from "../MenuProvider";
 
 interface Props {

@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpLeft, History } from "lucide-react";
-import { getRecentSearches } from "./utils/resendSearches";
+import { getRecentSearches } from "./utils/recentSearches";
 import { useMenu } from "./MenuProvider";
 import { useEffect, useRef, useState } from "react";
 import ClearAllRecents from "./dialogs/ClearAllRecents";

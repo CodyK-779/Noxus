@@ -10,7 +10,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Skeleton } from "./ui/skeleton";
-import { addRecentSearch, getRecentSearches } from "./utils/resendSearches";
+import { addRecentSearch, getRecentSearches } from "./utils/recentSearches";
 import NoResults from "./NoResults";
 
 const MBSearchSuggestions = () => {

@@ -11,14 +11,26 @@ const GameBanner = ({ game }: Props) => {
 
   return (
     <section className="relative w-full xl:h-[660px] aspect-video overflow-hidden min-[400px]:mt-[69.5px] mt-[65.5px] sm:mb-0 mb-4">
-      <Image
-        src={game.background_image}
-        alt={game.name}
-        fill
-        loading="eager"
-        sizes="100vw"
-        className="inset-0 object-cover xl:object-top"
-      />
+      {game.background_image ? (
+        <Image
+          src={game.background_image}
+          alt={game.name}
+          fill
+          loading="eager"
+          sizes="100vw"
+          className="inset-0 object-cover xl:object-top"
+        />
+      ) : (
+        <Image
+          src="/no-image.jpg"
+          alt="Image Placeholder"
+          fill
+          loading="eager"
+          sizes="100vw"
+          className="inset-0 object-cover xl:object-top"
+        />
+      )}
+
       <div className="pointer-events-none hidden sm:block absolute inset-0 bg-gradient-to-b from-transparent via-neutral-950/40 to-neutral-950 z-0" />
 
       <div className="relative max-container h-full hidden sm:flex flex-col justify-end xl:pb-12 md:pb-10 min-[425px]:pb-6 pb-4">
@@ -40,7 +52,7 @@ const GameBanner = ({ game }: Props) => {
               })}
             </div>
             <p className="lg:text-lg sm:text-base min-[375px]:text-sm text-[13px] font-semibold">
-              {game.rating.toFixed(1)}
+              {game.rating.toFixed(game.rating > 0 ? 1 : 0)}
             </p>
           </div>
 

@@ -16,7 +16,7 @@ import { Dispatch, SetStateAction } from "react";
 import {
   clearAllRecentSearches,
   getRecentSearches,
-} from "../utils/resendSearches";
+} from "../utils/recentSearches";
 
 interface Props {
   setRecents: Dispatch<SetStateAction<[] | string[]>>;

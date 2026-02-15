@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useMemo, useState } from "react";
 import { RAWGResponse } from "./utils/interfaceTypes";
 import { GameScreenShots, GameTrailers } from "@/actions/games-action";
@@ -20,7 +22,7 @@ interface DataType {
 const GameCarousel = ({ screenshots, trailers }: Props) => {
   const [paginate, setPaginate] = useState({
     start: 0,
-    end: 4,
+    end: 3,
   });
 
   useEffect(() => {
@@ -107,11 +109,12 @@ const GameCarousel = ({ screenshots, trailers }: Props) => {
                 src={currentItem.url}
                 alt=""
                 fill
+                sizes="(max-width: 768px) 100vw, (min-width: 769px) 66vw"
                 className="object-cover"
               />
             )}
           </div>
-          <div className="relative grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 min-[425px]:grid-cols-4 grid-cols-3 lg:gap-4 min-[375px]:gap-3.5 min-[350px]:gap-3 gap-2.5 sm:px-12 px-10 mt-6">
+          <div className="relative grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 min-[425px]:grid-cols-4 grid-cols-3 lg:gap-4 min-[375px]:gap-3.5 min-[350px]:gap-3 gap-2.5 sm:px-12 px-10 mt-6 mb-10">
             {mergedData.length > 0 &&
               mergedData.slice(paginate.start, paginate.end).map((data) => (
                 <div
@@ -125,6 +128,7 @@ const GameCarousel = ({ screenshots, trailers }: Props) => {
                     src={data.img}
                     alt={data.id}
                     fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
                   />
                   {currentItem.url !== data.url && (

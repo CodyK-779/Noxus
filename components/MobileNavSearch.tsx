@@ -4,7 +4,7 @@ import { ArrowLeftIcon, Search } from "lucide-react";
 import { useMenu } from "./MenuProvider";
 import { FormEvent, useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { addRecentSearch, getRecentSearches } from "./utils/resendSearches";
+import { addRecentSearch, getRecentSearches } from "./utils/recentSearches";
 
 const MobileNavSearch = () => {
   const {

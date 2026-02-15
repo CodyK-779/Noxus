@@ -1,6 +1,5 @@
 import PageNavigation from "./PageNavigation";
 import TextExtender from "./TextExtender";
-import { Skeleton } from "./ui/skeleton";
 
 interface Props {
   name: string;

@@ -38,7 +38,8 @@ export interface GameDetails {
   platforms: GamePlatforms[];
   genres: { name: string }[];
   tags: { name: string }[];
-  developers: { name: string; image_background: string }[];
+  developers: { id: number; name: string; image_background: string }[];
+  publishers: { id: number; name: string; image_background: string }[];
 }
 
 export interface GameScreenShots {
