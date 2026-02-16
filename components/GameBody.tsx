@@ -1,12 +1,15 @@
 "use client";
 
-import { GameDetails } from "@/actions/games-action";
+import { GameAchievements, GameDetails } from "@/actions/games-action";
 import TextExtender from "./TextExtender";
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import { RAWGResponse } from "./utils/interfaceTypes";
+import GameAchievementSection from "./GameAchievement";
 
 interface Props {
   game: GameDetails;
+  achievements: RAWGResponse<GameAchievements>;
 }
 
 interface DeveloperData {
@@ -16,7 +19,7 @@ interface DeveloperData {
   role: string;
 }
 
-const GameBody = ({ game }: Props) => {
+const GameBody = ({ game, achievements }: Props) => {
   const [isMobile, setIsMobile] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
@@ -171,7 +174,7 @@ const GameBody = ({ game }: Props) => {
                 </p>
                 <div className="flex items-center gap-1.5">
                   <div className="lg:size-[5px] md:size-1 min-[375px]:size-[5px] size-1 rounded-full bg-[#e91e3f]" />
-                  <p className="lg:text-xs md:text-[11px] min-[375px]:text-xs text-[11px] font-medium text-neutral-400">
+                  <p className="lg:text-xs md:text-[11px] min-[375px]:text-xs text-[11px] font-medium text-neutral-300">
                     {data.role}
                   </p>
                 </div>
@@ -184,6 +187,15 @@ const GameBody = ({ game }: Props) => {
           No Developers & Publishers available yet.
         </p>
       )}
+
+      {achievements.results.length > 0 && (
+        <>
+          <hr className="mt-10 mb-6" />
+          <GameAchievementSection achievements={achievements} />
+        </>
+      )}
+
+      <hr className="my-6" />
     </>
   );
 };

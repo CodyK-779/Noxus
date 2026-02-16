@@ -29,7 +29,12 @@ const GameDetailsContainer = async ({ params }: Props) => {
       <GameBanner game={game} />
       <GameNavigation name={game.name} />
       <MBGameTitle game={game} />
-      <GameTabs game={game} screenshots={screenshots} trailers={trailers} />
+      <GameTabs
+        game={game}
+        screenshots={screenshots}
+        trailers={trailers}
+        achievements={achievements}
+      />
     </>
   );
 };

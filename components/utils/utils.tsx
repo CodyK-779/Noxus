@@ -1,4 +1,5 @@
 import { GamePlatforms } from "@/actions/games-action";
+import { Award, Sparkles, Star, Trophy } from "lucide-react";
 
 const getPlatformKey = (name: string) => {
   if (name.includes("PC")) return "pc";
@@ -63,4 +64,44 @@ export const gameRating = (rating: number) => {
 
 export const convertPlatformArray = (platforms: GamePlatforms[]) => {
   return platforms?.map((p) => p.platform.name);
+};
+
+export const getRarityDetails = (percent: number) => {
+  if (percent >= 40) {
+    return {
+      label: "Common",
+      color: "text-gray-400",
+      bgColor: "bg-gray-500/20",
+      borderColor: "border-gray-500/30",
+      icon: <Trophy className="size-3" />,
+      barColor: "bg-gray-500",
+    };
+  } else if (percent >= 20) {
+    return {
+      label: "Rare",
+      color: "text-blue-500",
+      bgColor: "bg-blue-500/20",
+      borderColor: "border-blue-500/30",
+      icon: <Star className="size-3" />,
+      barColor: "bg-blue-500",
+    };
+  } else if (percent >= 10) {
+    return {
+      label: "Epic",
+      color: "text-purple-400",
+      bgColor: "bg-purple-500/20",
+      borderColor: "border-purple-500/30",
+      icon: <Sparkles className="size-3" />,
+      barColor: "bg-purple-500",
+    };
+  } else {
+    return {
+      label: "Legendary",
+      color: "text-yellow-400",
+      bgColor: "bg-yellow-500/20",
+      borderColor: "border-yellow-500/30",
+      icon: <Award className="size-3" />,
+      barColor: "bg-yellow-500",
+    };
+  }
 };

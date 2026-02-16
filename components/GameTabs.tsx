@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import GameOverview from "./GameOverview";
 import { RAWGResponse } from "./utils/interfaceTypes";
 import {
+  GameAchievements,
   GameDetails,
   GameScreenShots,
   GameTrailers,
@@ -11,9 +12,10 @@ interface Props {
   game: GameDetails;
   screenshots: RAWGResponse<GameScreenShots>;
   trailers: RAWGResponse<GameTrailers>;
+  achievements: RAWGResponse<GameAchievements>;
 }
 
-const GameTabs = ({ game, screenshots, trailers }: Props) => {
+const GameTabs = ({ game, screenshots, trailers, achievements }: Props) => {
   return (
     <Tabs defaultValue="overview" className="max-container mt-6">
       <TabsList className="inline-flex h-9 items-center text-muted-foreground w-full justify-start rounded-none border-b bg-transparent p-0 mb-4">
@@ -35,6 +37,7 @@ const GameTabs = ({ game, screenshots, trailers }: Props) => {
           game={game}
           screenshots={screenshots}
           trailers={trailers}
+          achievements={achievements}
         />
       </TabsContent>
       <TabsContent value="achievements">
