@@ -170,11 +170,11 @@ export default function GameAchievementSection({ achievements }: Props) {
 
       <TabsList className="bg-transparent p-0 h-auto border-0 mt-10">
         <TabsTrigger value="achievements" className="p-0">
-          <div className="flex items-center gap-2 group hover:text-[#e91e3f] transition-colors">
-            <p className="text-base">
+          <div className="flex items-center min-[375px]:gap-2 gap-1.5 group hover:text-[#e91e3f] transition-colors">
+            <p className="min-[375px]:text-base text-sm">
               Show all {achievements.count} achievements
             </p>
-            <ArrowRight className="size-5 mt-[3px] group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="min-[375px]:size-5 size-4 mt-[3px] group-hover:translate-x-1 transition-transform" />
           </div>
         </TabsTrigger>
       </TabsList>
