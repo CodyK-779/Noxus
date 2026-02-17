@@ -105,3 +105,50 @@ export const getRarityDetails = (percent: number) => {
     };
   }
 };
+
+export const parseRequirements = (text?: string) => {
+  if (!text) return [];
+
+  // Remove Minimum/Recommended label
+  let cleaned = text.replace(/Minimum:|Recommended:/gi, "").trim();
+
+  // If there are no line breaks (GTA style), insert them before known labels
+  const labels = [
+    "OS:",
+    "Processor:",
+    "Memory:",
+    "Graphics:",
+    "Storage:",
+    "Sound Card:",
+    "DirectX:",
+    "Network:",
+    "VR Support:",
+    "Additional Notes:",
+  ];
+
+  labels.forEach((label) => {
+    cleaned = cleaned.replaceAll(label, `\n${label}`);
+  });
+
+  const lines = cleaned
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const result: { label: string; value: string }[] = [];
+
+  lines.forEach((line) => {
+    const separatorIndex = line.indexOf(":");
+
+    if (separatorIndex !== -1) {
+      const label = line.slice(0, separatorIndex).trim();
+      const value = line.slice(separatorIndex + 1).trim();
+
+      result.push({ label, value });
+    } else {
+      result.push({ label: "Note", value: line });
+    }
+  });
+
+  return result;
+};

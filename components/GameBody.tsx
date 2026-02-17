@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { RAWGResponse } from "./utils/interfaceTypes";
 import GameAchievementSection from "./GameAchievement";
+import SystemRequirements from "./SystemRequirements";
 
 interface Props {
   game: GameDetails;
@@ -196,6 +197,12 @@ const GameBody = ({ game, achievements }: Props) => {
       )}
 
       <hr className="my-6" />
+
+      <h1 className="md:text-3xl min-[400px]:text-2xl text-xl font-bold mb-6 underline underline-offset-8 decoration-[#e91e3f]">
+        System Requirements
+      </h1>
+
+      <SystemRequirements platforms={game.platforms} />
     </>
   );
 };

@@ -72,7 +72,7 @@ const MBSearchSuggestions = () => {
               <div className="flex flex-col min-[350px]:mt-4 mt-3">
                 {results.map((r) => (
                   <Link
-                    href={`/browse/games/${r.slug}`}
+                    href={`/browse/games/${r.slug}?from=browser`}
                     onClick={handleNavigate}
                     key={r.id}
                     className="hover:bg-neutral-900 transition-colors cursor-pointer py-2.5"
