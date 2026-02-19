@@ -1,6 +1,5 @@
 import {
   getGameAchievements,
-  getGameAddons,
   getGameDetails,
   getGameScreenShots,
   getGameTrailers,
@@ -16,12 +15,11 @@ interface Props {
 
 const GameDetailsContainer = async ({ params }: Props) => {
   const gameSlug = (await params).slug;
-  const [game, screenshots, trailers, achievements, adds] = await Promise.all([
+  const [game, screenshots, trailers, achievements] = await Promise.all([
     getGameDetails(gameSlug),
     getGameScreenShots(gameSlug),
     getGameTrailers(gameSlug),
     getGameAchievements(gameSlug),
-    getGameAddons(gameSlug),
   ]);
 
   return (

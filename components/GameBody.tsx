@@ -151,7 +151,7 @@ const GameBody = ({ game, achievements }: Props) => {
           {mergedData.map((data) => (
             <div
               key={data.id}
-              className="group flex items-center md:gap-2.5 gap-3 lg:p-3 md:px-3 md:py-2 p-3 rounded-lg bg-neutral-900/60 border border-neutral-800 backdrop-blur-sm transition-all duration-300 hover:bg-neutral-900 hover:border-neutral-700 hover:shadow-lg hover:shadow-black/30 hover:-translate-y-0.5"
+              className="group flex items-center md:gap-2.5 gap-3 lg:p-3 md:px-3 md:py-2 p-3 rounded-lg bg-neutral-900/60 border border-neutral-800 transition-all duration-300 hover:bg-neutral-900 hover:border-neutral-700 hover:shadow-lg hover:shadow-black/30 hover:-translate-y-0.5"
             >
               <div className="relative lg:size-11 md:size-10 min-[375px]:size-11 size-10 shrink-0 rounded-full overflow-hidden bg-gradient-to-br from-pink-500 to-rose-600 text-white font-semibold flex items-center justify-center">
                 {data.image ? (
@@ -185,7 +185,7 @@ const GameBody = ({ game, achievements }: Props) => {
         </div>
       ) : (
         <p className="text-sm text-neutral-400 italic">
-          No Developers & Publishers available yet.
+          Developers & Publishers aren't listed yet.
         </p>
       )}
 

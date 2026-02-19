@@ -26,6 +26,11 @@ export interface GamesType {
   platforms: GamePlatforms[];
 }
 
+export interface GameStore {
+  id: number;
+  store: { id: number; name: string; slug: string; domain: string };
+}
+
 export interface GameDetails {
   id: number;
   slug: string;
@@ -35,9 +40,12 @@ export interface GameDetails {
   rating: number;
   metacritic: number;
   released: Date;
+  website: string;
+  playtime: number;
   platforms: GamePlatforms[];
   genres: { name: string }[];
   tags: { name: string }[];
+  stores: GameStore[];
   developers: { id: number; name: string; image_background: string }[];
   publishers: { id: number; name: string; image_background: string }[];
 }
@@ -326,24 +334,6 @@ export async function getGameAchievements(
   );
 
   if (!res.ok) throw new Error("Failed to fetch game achievements");
-
-  return res.json();
-}
-
-export async function getGameAddons(slug: string) {
-  "use cache";
-  cacheLife("days");
-
-  const res = await fetch(
-    `${process.env.RAWG_URL}/games/${slug}/additions?key=${process.env.RAWG_API_KEY}`,
-    {
-      next: {
-        tags: ["game", "additions"],
-      },
-    },
-  );
-
-  if (!res.ok) throw new Error("Failed to fetch game additions");
 
   return res.json();
 }

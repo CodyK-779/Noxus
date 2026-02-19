@@ -152,3 +152,28 @@ export const parseRequirements = (text?: string) => {
 
   return result;
 };
+
+export const getStoreLogos = (store: string) => {
+  switch (store) {
+    case "Epic Games":
+      return "epic.jpg";
+    case "Steam":
+      return "steam.png";
+    case "itch.io":
+      return "itch.png";
+    case "Xbox Store":
+      return "xbox_store.png";
+    case "GOG":
+      return "gog.png";
+    case "Nintendo Store":
+      return "eshop.webp";
+    case "PlayStation Store":
+      return "ps_store.png";
+    case "Xbox 360 Store":
+      return "xbox_360.png";
+    case "App Store":
+      return "app_store.png";
+    default:
+      return "playstore.jpg";
+  }
+};

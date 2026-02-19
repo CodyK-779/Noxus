@@ -18,7 +18,7 @@ interface Props {
 const GameTabs = ({ game, screenshots, trailers, achievements }: Props) => {
   return (
     <Tabs defaultValue="overview" className="max-container mt-6">
-      <TabsList className="inline-flex h-9 items-center text-muted-foreground w-full justify-start rounded-none border-b bg-transparent p-0 mb-4">
+      <TabsList className="inline-flex h-9 items-center text-muted-foreground w-full justify-start rounded-none border-b bg-transparent p-0 md:mb-4 mb-2">
         <TabsTrigger
           className="tab-trigger min-[425px]:text-base text-sm"
           value="overview"

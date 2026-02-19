@@ -7,6 +7,8 @@ import {
 import { RAWGResponse } from "./utils/interfaceTypes";
 import GameCarousel from "./GameCarousel";
 import GameBody from "./GameBody";
+import GameInfo from "./GameInfo";
+import Deepseek from "./Deepseek";
 
 interface Props {
   game: GameDetails;
@@ -17,10 +19,14 @@ interface Props {
 
 const GameOverview = ({ game, screenshots, trailers, achievements }: Props) => {
   return (
-    <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
-      <div className="col-span-2">
+    <div className="grid md:grid-cols-3 grid-cols-1 md:gap-4">
+      <div className="col-span-2 order-2 md:order-1">
         <GameCarousel screenshots={screenshots} trailers={trailers} />
         <GameBody game={game} achievements={achievements} />
+      </div>
+      <div className="col-span-1 order-1 md:order-2">
+        {/* <GameInfo game={game} /> */}
+        <Deepseek game={game} />
       </div>
     </div>
   );
