@@ -1,20 +1,53 @@
 "use client";
 
 import { GameDetails } from "@/actions/games-action";
+import {
+  ArrowRight,
+  Award,
+  Bookmark,
+  Building2,
+  Calendar,
+  ChevronRight,
+  Clock,
+  ExternalLink,
+  Gamepad2,
+  Globe,
+  Users,
+} from "lucide-react";
 import Image from "next/image";
-import { ArrowRight, Bookmark } from "lucide-react";
-import { Button } from "./ui/button";
-import { getStoreLogos, platformIconByKey, platformIcons } from "./utils/utils";
 import { useEffect, useState } from "react";
+import { getStoreLogos, platformIconByKey, platformIcons } from "./utils/utils";
+import { Button } from "./ui/button";
 
 interface Props {
   game: GameDetails;
 }
 
-const scoreColors = (score: number) => {
-  if (score < 49) return "text-red-500";
-  if (score < 74) return "text-yellow-500";
-  return "text-green-500";
+const getScoreDetails = (score: number) => {
+  if (!score || score === 0)
+    return {
+      color: "text-neutral-500",
+      bg: "bg-neutral-500/10",
+      label: "No score",
+    };
+  if (score < 50)
+    return { color: "text-red-500", bg: "bg-red-500/10", label: "Mixed" };
+  if (score < 75)
+    return {
+      color: "text-yellow-500",
+      bg: "bg-yellow-500/10",
+      label: "Average",
+    };
+  return { color: "text-green-500", bg: "bg-green-500/10", label: "Great" };
+};
+
+const formatDate = (date: Date, detailed: boolean = false) => {
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: detailed ? "long" : "short",
+    day: "numeric",
+  };
+  return new Date(date).toLocaleDateString("en-US", options);
 };
 
 const formatWebsite = (url: string) => {
@@ -36,23 +69,29 @@ const redirectDomains = (link: string) => {
 
 const GameInfo = ({ game }: Props) => {
   const [largeScreen, setLargeScreen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showAllStores, setShowAllStores] = useState(false);
 
   useEffect(() => {
-    setLargeScreen(false);
-
     const updateSize = () => {
       setLargeScreen(window.innerWidth >= 1024);
     };
-
     updateSize();
 
     window.addEventListener("resize", updateSize);
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
+  const handleWishlist = () => {};
+
+  const scoreDetails = getScoreDetails(game.metacritic);
+
+  const gameStores = showAllStores ? game.stores : game.stores.slice(0, 4);
+
   return (
-    <section className="md:pl-[18px] mb-8">
-      <div className="relative hidden md:block aspect-video overflow-hidden rounded-lg">
+    <aside className="cm:pl-[18px] mb-8">
+      {/* Game cover */}
+      <div className="relative hidden cm:block aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800">
         {game.background_image ? (
           <Image
             src={game.background_image}
@@ -62,198 +101,291 @@ const GameInfo = ({ game }: Props) => {
             className="object-cover"
           />
         ) : (
-          <Image
-            src="/no-image.jpg"
-            alt="Image Placeholder"
-            fill
-            sizes="(max-width: 640px) 0vw, (min-width: 641px) 33vw"
-            className="object-cover"
-          />
+          <div className="w-full h-full flex items-center justify-center bg-neutral-900">
+            <Gamepad2 className="size-12 text-neutral-700" />
+          </div>
         )}
       </div>
 
-      <div className="md:mt-8 mt-0 flex flex-col gap-4">
-        {/* Metascore */}
-        <div className="flex items-center justify-between pb-3 border-b border-neutral-600">
-          <p className="xl:text-base text-sm font-medium text-neutral-400">
-            Metacrictic
-          </p>
-          {game.metacritic ? (
-            <p
-              className={`xl:text-base text-sm font-medium ${scoreColors(game.metacritic)}`}
+      {/* Info Cards */}
+      <div className="space-y-3 cm:mt-7 mt-0">
+        {/* Stat Card */}
+        <div className="bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-lg border border-neutral-800 py-4 px-3">
+          <h3 className="cm:text-xs min-[375px]:text-sm text-xs font-semibold uppercase tracking-wider mb-3">
+            Quick Stats
+          </h3>
+
+          <div className="space-y-3">
+            <InfoRow
+              icon={<Award className="cm:size-4 min-[375px]:size-5 size-4" />}
+              label="Metacritic"
             >
-              {game.metacritic}
-            </p>
-          ) : (
-            <p className="text-sm italic text-neutral-400">Unavailable</p>
-          )}
-        </div>
-
-        {/* Playtime */}
-        <div className="flex items-center justify-between pb-3 border-b border-neutral-600">
-          <p className="xl:text-base text-sm font-medium text-neutral-400">
-            Average Playtime
-          </p>
-          {game.playtime > 0 ? (
-            <p className="xl:text-base text-sm font-medium">
-              {game.playtime} hours
-            </p>
-          ) : (
-            <p className="text-sm italic text-neutral-400">Unavailable</p>
-          )}
-        </div>
-
-        {/* Genre */}
-        <div className="flex items-center justify-between gap-4 pb-3 border-b border-neutral-600">
-          <p className="xl:text-base text-sm font-medium text-neutral-400">
-            Genre
-          </p>
-          {game.genres.length > 0 ? (
-            <div className="flex items-center flex-wrap gap-1 xl:text-base text-sm font-medium">
-              {game.genres.map((g, index) => (
-                <p key={g.name}>
-                  {g.name}
-                  {index < game.genres.length - 1 && <span>,</span>}
+              {game.metacritic ? (
+                <div
+                  className={`px-2 py-1 rounded-lg text-xs font-bold ${scoreDetails.bg} ${scoreDetails.color}`}
+                >
+                  {game.metacritic}
+                </div>
+              ) : (
+                <p className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs italic text-neutral-400">
+                  Unavailable
                 </p>
-              ))}
+              )}
+            </InfoRow>
+
+            <InfoRow
+              icon={<Clock className="cm:size-4 min-[375px]:size-5 size-4" />}
+              label="Avg. Playtime"
+            >
+              {game.playtime > 0 ? (
+                <span className="xl:text-sm cm:text-xs text-sm font-medium text-white">
+                  {game.playtime} {game.playtime === 1 ? "hour" : "hours"}
+                </span>
+              ) : (
+                <p className="xl:text-sm cm:text-xs text-sm italic text-neutral-400">
+                  Unavailable
+                </p>
+              )}
+            </InfoRow>
+
+            <InfoRow
+              icon={
+                <Calendar className="cm:size-4 min-[375px]:size-5 size-4" />
+              }
+              label="Released"
+            >
+              <span
+                className="xl:text-sm cm:text-xs text-sm font-medium text-white"
+                title={formatDate(game.released, true)}
+              >
+                {formatDate(game.released, largeScreen)}
+              </span>
+            </InfoRow>
+          </div>
+        </div>
+
+        {/* Genre Card */}
+        <div className="bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-lg border border-neutral-800 py-4 px-3">
+          <h3 className="cm:text-xs min-[375px]:text-sm text-xs font-semibold uppercase tracking-wider mb-3">
+            Genres
+          </h3>
+          <div className="flex flex-wrap gap-1.5">
+            {game.genres.length > 0 ? (
+              game.genres.map((genre) => (
+                <span
+                  key={genre.name}
+                  className="px-2.5 py-1 font-medium bg-[#e91e3f] rounded-md text-xs"
+                >
+                  {genre.name}
+                </span>
+              ))
+            ) : (
+              <span className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs italic text-neutral-400">
+                No genres listed
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Team Card */}
+        <div className="bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-lg border border-neutral-800 py-4 px-3">
+          <h3 className="cm:text-xs min-[375px]:text-sm text-xs font-semibold uppercase tracking-wider mb-3">
+            Team
+          </h3>
+
+          <div className="xl:space-y-3 cm:space-y-4 space-y-3">
+            <div className="team-container">
+              <div className="flex items-center xl:gap-2 cm:gap-1.5 gap-2 text-neutral-400">
+                <Users className="cm:size-4 min-[375px]:size-5 size-4 text-purple-500" />
+                <p className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs font-medium">
+                  Developer
+                </p>
+              </div>
+              <div className="flex items-center">
+                {game.developers.length > 0 ? (
+                  <p
+                    className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs font-medium text-white truncate max-w-[180px]"
+                    title={game.developers[0].name}
+                  >
+                    {game.developers[0].name}
+                  </p>
+                ) : (
+                  <p className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs italic text-neutral-400">
+                    Unavailable
+                  </p>
+                )}
+              </div>
             </div>
-          ) : (
-            <p className="text-sm italic text-neutral-400">Unavailable</p>
-          )}
+
+            <div className="team-container">
+              <div className="flex items-center xl:gap-2 cm:gap-1.5 gap-2 text-neutral-400">
+                <Building2 className="cm:size-4 min-[375px]:size-5 size-4 text-blue-500" />
+                <p className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs font-medium">
+                  Publisher
+                </p>
+              </div>
+              <div className="flex items-center">
+                {game.developers.length > 0 ? (
+                  <p
+                    className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs font-medium text-white truncate max-w-[180px]"
+                    title={game.developers[0].name}
+                  >
+                    {game.developers[0].name}
+                  </p>
+                ) : (
+                  <p className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs italic text-neutral-400">
+                    Unavailable
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Developer */}
-        <div className="flex items-center justify-between pb-3 border-b border-neutral-600">
-          <p className="xl:text-base text-sm font-medium text-neutral-400">
-            Developer
-          </p>
-          {game.developers.length > 0 ? (
-            <p className="xl:text-base text-sm xl:max-w-[70%] md:max-w-[50%] md:truncate font-medium">
-              {game.developers[0].name}
-            </p>
-          ) : (
-            <p className="text-sm italic text-neutral-400">Unavailable</p>
-          )}
-        </div>
-
-        {/* Publisher */}
-        <div className="flex items-center justify-between pb-3 border-b border-neutral-600">
-          <p className="xl:text-base text-sm font-medium text-neutral-400">
-            Publisher
-          </p>
-          {game.publishers.length > 0 ? (
-            <p className="xl:text-base text-sm xl:max-w-[70%] md:max-w-[50%] md:truncate font-medium">
-              {game.publishers[0].name}
-            </p>
-          ) : (
-            <p className="text-sm italic text-neutral-400">Unavailable</p>
-          )}
-        </div>
-
-        {/* Date */}
-        <div className="flex items-center justify-between pb-3 border-b border-neutral-600">
-          <p className="xl:text-base text-sm font-medium text-neutral-400">
-            Release Date
-          </p>
-          <p className="xl:text-base text-sm font-medium">
-            {new Date(game.released).toLocaleDateString("en-US", {
-              month: largeScreen ? "long" : "numeric",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </p>
-        </div>
-
-        {/* Platforms */}
-        <div className="flex items-center justify-between pb-3 border-b border-neutral-600">
-          <p className="xl:text-base text-sm font-medium text-neutral-400">
+        {/* Platforms Card */}
+        <div className="bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-lg border border-neutral-800 py-4 px-3">
+          <h3 className="cm:text-xs min-[375px]:text-sm text-xs font-semibold uppercase tracking-wider mb-3">
             Platforms
-          </p>
+          </h3>
+
           {game.platforms.length > 0 ? (
-            <div className="flex items-center gap-1">
-              {platformIcons(game.platforms).map((p) => (
-                <div key={p} className="lg:text-lg text-base">
-                  {platformIconByKey(p)}
+            <div className="flex items-center gap-2 flex-wrap">
+              {platformIcons(game.platforms).map((platform, index) => (
+                <div
+                  key={`${platform}-${index}`}
+                  className="p-2 bg-neutral-800/80 hover:bg-[#e91e3f] rounded-lg xl:text-lg cm:text-base min-[375px]:text-lg text-base text-neutral-300 hover:text-white transition-colors"
+                >
+                  {platformIconByKey(platform)}
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-sm italic text-neutral-400">Unavailable</p>
+            <span className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs italic text-neutral-400">
+              No platforms listed
+            </span>
           )}
         </div>
 
-        {/* Website */}
-        <div className="flex items-center justify-between pb-3 border-b border-neutral-600">
-          <p className="xl:text-base text-sm font-medium text-neutral-400">
-            Website
-          </p>
-
-          {game.website ? (
-            <a
-              href={game.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="max-w-[50%] truncate xl:text-base text-sm font-medium transition hover:underline"
-              title={game.website}
-            >
-              {formatWebsite(game.website)}
-            </a>
-          ) : (
-            <p className="text-sm italic text-neutral-400">Unavailable</p>
-          )}
-        </div>
-      </div>
-
-      {/* Game Stores */}
-      <div className="flex flex-col gap-8 mt-4">
-        {game.stores.length > 0 && (
-          <div className="flex flex-col">
-            <p className="font-semibold mb-3">Available on:</p>
-            <div
-              className={`grid ${game.stores.length > 1 ? "xl:grid-cols-2 md:grid-cols-1 grid-cols-2" : "grid-cols-1"} gap-2`}
-            >
-              {game.stores.map((s) => {
-                const logo = getStoreLogos(s.store.name);
-
-                return (
-                  <a
-                    key={s.id}
-                    href={redirectDomains(s.store.domain)}
-                    className="group flex items-center gap-2.5 p-2.5 rounded-lg border bg-neutral-900/60 border-neutral-800  hover:bg-neutral-900 hover:border-[#e91e3f] transition-all duration-300 hover:shadow-lg hover:shadow-black/30 hover:-translate-y-0.5"
-                  >
-                    <div className="relative size-10 rounded-md overflow-hidden bg-white/90">
-                      <Image
-                        src={`/stores/${logo}`}
-                        alt={s.store.name}
-                        fill
-                        sizes="80px"
-                        className="object-contain p-1"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <p className="font-medium text-sm">{s.store.name}</p>
-                      <div className="flex items-center gap-1 text-neutral-400 group-hover:text-[#e91e3f]">
-                        <p className="text-xs">Visit store</p>
-                        <ArrowRight className="size-3 mt-0.5 group-hover:translate-x-1 transition-transform duration-200 ease-in" />
-                      </div>
-                    </div>
-                  </a>
-                );
-              })}
+        {/* Website Card */}
+        {game.website && (
+          <a
+            href={game.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between py-4 px-3 bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-lg border border-neutral-800 hover:border-[#e91e3f]/50 transition-all group"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="p-2 bg-neutral-800 rounded-lg">
+                <Globe className="xl:size-[18px] cm:size-4 size-[18px] text-neutral-400 group-hover:text-[#e91e3f]" />
+              </div>
+              <div>
+                <p className="text-xs font-medium text-neutral-500">
+                  Official Website
+                </p>
+                <p className="xl:text-sm cm:text-[13px] text-sm xl:max-w-[200px] cm:max-w-[160px] w-full font-medium truncate text-white group-hover:text-[#e91e3f] transition-colors">
+                  {formatWebsite(game.website)}
+                </p>
+              </div>
             </div>
-          </div>
+            <ExternalLink className="size-4 xl:block md:hidden block text-neutral-400 group-hover:text-[#e91e3f] transition-colors" />
+          </a>
         )}
-
-        <Button
-          size="lg"
-          className="flex items-center gap-2 w-full font-semibold bg-[#e91e3f] hover:bg-[#960f26] text-white"
-        >
-          <Bookmark className="size-4" />
-          Wishlist
-        </Button>
       </div>
-    </section>
+
+      {game.stores.length > 0 && (
+        <div className="space-y-3 mt-6">
+          <div className="flex items-center justify-between">
+            <p className="font-semibold text-white flex items-center gap-2">
+              <span className="w-1 h-4 bg-[#e91e3f] rounded-full" />
+              Available on
+            </p>
+            <span className="text-xs px-2 py-1 font-medium bg-neutral-800 rounded-full text-neutral-400">
+              {game.stores.length}{" "}
+              {game.stores.length === 1 ? "store" : "stores"}
+            </span>
+          </div>
+
+          <div
+            className={`grid ${game.stores.length > 1 ? "xl:grid-cols-2 md:grid-cols-1 min-[375px]:grid-cols-2 grid-cols-1" : "grid-cols-1"} gap-2`}
+          >
+            {gameStores.map((s) => {
+              const logo = getStoreLogos(s.store.name);
+
+              return (
+                <a
+                  key={s.id}
+                  href={redirectDomains(s.store.domain)}
+                  className="group flex items-center gap-2.5 p-2.5 rounded-lg border bg-neutral-900/60 border-neutral-800  hover:bg-neutral-900 hover:border-[#e91e3f] transition-all duration-300 hover:shadow-lg hover:shadow-black/30 hover:-translate-y-0.5"
+                >
+                  <div className="relative min-[406px]:size-10 min-[375px]:size-9 size-10 rounded-md overflow-hidden bg-white/90">
+                    <Image
+                      src={`/stores/${logo}`}
+                      alt={s.store.name}
+                      fill
+                      sizes="80px"
+                      className="object-contain rounded-lg p-1"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="font-medium lg:text-sm cm:text-xs min-[406px]:text-sm text-xs">
+                      {s.store.name}
+                    </p>
+                    <div className="flex items-center gap-1 text-neutral-400 group-hover:text-[#e91e3f]">
+                      <p className="text-xs">Visit store</p>
+                      <ArrowRight className="size-3 mt-0.5 group-hover:translate-x-1 transition-transform duration-200 ease-in" />
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+
+          {/* Show More Stores Btn */}
+          {game.stores.length > 4 && !showAllStores && (
+            <button
+              onClick={() => setShowAllStores(true)}
+              className="w-full py-2.5 mt-2 text-sm text-neutral-400 hover:text-white bg-neutral-900/50 hover:bg-neutral-900 rounded-lg border border-neutral-800 transition-colors flex items-center justify-center gap-1.5 group"
+            >
+              <span className="font-medium">
+                View {game.stores.length - 4} more{" "}
+                {game.stores.length - 4 === 1 ? "store" : "stores"}
+              </span>
+              <ChevronRight className="size-4 group-hover:translate-x-1 transition-transform mt-[3px]" />
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Wishlist Btn */}
+      <Button
+        size="lg"
+        className="flex items-center gap-2 w-full mt-6 font-semibold bg-gradient-to-r from-[#e91e3f] to-[#c01030] hover:from-[#c01030] hover:to-[#a00d26] text-white border-0 shadow-lg shadow-[#e91e3f]/25 transition-all hover:scale-[1.02]"
+      >
+        <Bookmark className="size-4" />
+        Add to Wishlist
+      </Button>
+    </aside>
   );
 };
+
+const InfoRow = ({
+  icon,
+  label,
+  children,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  children: React.ReactNode;
+}) => (
+  <div className="flex items-center justify-between">
+    <div className="flex items-center xl:gap-2 cm:gap-1.5 gap-2 text-neutral-400">
+      <span className="text-[#e91e3f]">{icon}</span>
+      <span className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs font-medium">
+        {label}
+      </span>
+    </div>
+    <div className="flex items-center">{children}</div>
+  </div>
+);
 
 export default GameInfo;

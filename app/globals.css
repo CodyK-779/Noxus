@@ -131,4 +131,8 @@
   .tab-trigger {
     @apply inline-flex items-center justify-center whitespace-nowrap py-1 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-[#e91e3f]  data-[state=active]:text-foreground data-[state=active]:shadow-none
   }
+
+  .team-container {
+    @apply flex xl:flex-row cm:flex-col flex-row xl:items-center cm:items-start items-center xl:justify-between cm:justify-start justify-between xl:gap-2 cm:gap-1 gap-2
+  }
 }
