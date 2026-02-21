@@ -12,15 +12,27 @@ import {
   ExternalLink,
   Gamepad2,
   Globe,
+  Loader2,
   Users,
 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { getStoreLogos, platformIconByKey, platformIcons } from "./utils/utils";
+import {
+  convertPlatformArray,
+  getStoreLogos,
+  platformIconByKey,
+  platformIcons,
+} from "./utils/utils";
 import { Button } from "./ui/button";
+import { WishlistItemType } from "./utils/interfaceTypes";
+import { toggleWishList } from "@/actions/wishlist-action";
+import { toast } from "sonner";
+import { useSession } from "@/app/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 interface Props {
   game: GameDetails;
+  wishlistItem: WishlistItemType[] | undefined;
 }
 
 const getScoreDetails = (score: number) => {
@@ -67,10 +79,15 @@ const redirectDomains = (link: string) => {
   }
 };
 
-const GameInfo = ({ game }: Props) => {
+const GameInfo = ({ game, wishlistItem }: Props) => {
+  const { data: session } = useSession();
+  const router = useRouter();
   const [largeScreen, setLargeScreen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showAllStores, setShowAllStores] = useState(false);
+  const [wishlisted, setWishlisted] = useState(
+    wishlistItem?.some((item) => Number(item.id) === game.id) ?? false,
+  );
 
   useEffect(() => {
     const updateSize = () => {
@@ -82,7 +99,38 @@ const GameInfo = ({ game }: Props) => {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  const handleWishlist = () => {};
+  const handleWishlist = async () => {
+    if (!session) {
+      return router.push("/signIn");
+    }
+
+    setLoading(true);
+
+    try {
+      const result = await toggleWishList(
+        game.id,
+        game.name,
+        game.background_image,
+        game.slug,
+        String(game.released),
+        game.rating,
+        convertPlatformArray(game.platforms),
+        `/browse/games/${game.slug}?from=Discover`,
+      );
+
+      if (result.success) {
+        if (!wishlisted) toast.success("Game added to wishlist!");
+        setWishlisted(!wishlisted);
+      } else {
+        setWishlisted(
+          wishlistItem?.some((item) => Number(item.game.id) === game.id) ??
+            false,
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const scoreDetails = getScoreDetails(game.metacritic);
 
@@ -355,10 +403,21 @@ const GameInfo = ({ game }: Props) => {
       {/* Wishlist Btn */}
       <Button
         size="lg"
+        disabled={loading}
+        onClick={handleWishlist}
         className="flex items-center gap-2 w-full mt-6 font-semibold bg-gradient-to-r from-[#e91e3f] to-[#c01030] hover:from-[#c01030] hover:to-[#a00d26] text-white border-0 shadow-lg shadow-[#e91e3f]/25 transition-all hover:scale-[1.02]"
       >
-        <Bookmark className="size-4" />
-        Add to Wishlist
+        {loading ? (
+          <>
+            <Loader2 className="size-4 animate-spin" />
+            Loading...
+          </>
+        ) : (
+          <>
+            <Bookmark className={`size-4 ${wishlisted && "fill-white"}`} />
+            {wishlisted ? "Remove Wishlist" : "Add to Wishlist"}
+          </>
+        )}
       </Button>
     </aside>
   );

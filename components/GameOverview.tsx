@@ -4,7 +4,7 @@ import {
   GameScreenShots,
   GameTrailers,
 } from "@/actions/games-action";
-import { RAWGResponse } from "./utils/interfaceTypes";
+import { RAWGResponse, WishlistItemType } from "./utils/interfaceTypes";
 import GameCarousel from "./GameCarousel";
 import GameBody from "./GameBody";
 import GameInfo from "./GameInfo";
@@ -14,9 +14,16 @@ interface Props {
   screenshots: RAWGResponse<GameScreenShots>;
   trailers: RAWGResponse<GameTrailers>;
   achievements: RAWGResponse<GameAchievements>;
+  wishlistItem: WishlistItemType[] | undefined;
 }
 
-const GameOverview = ({ game, screenshots, trailers, achievements }: Props) => {
+const GameOverview = ({
+  game,
+  screenshots,
+  trailers,
+  achievements,
+  wishlistItem,
+}: Props) => {
   return (
     <div className="grid cm:grid-cols-3 grid-cols-1 cm:gap-4">
       <div className="col-span-2 order-2 cm:order-1">
@@ -24,7 +31,7 @@ const GameOverview = ({ game, screenshots, trailers, achievements }: Props) => {
         <GameBody game={game} achievements={achievements} />
       </div>
       <div className="col-span-1 order-1 cm:order-2">
-        <GameInfo game={game} />
+        <GameInfo game={game} wishlistItem={wishlistItem} />
       </div>
     </div>
   );

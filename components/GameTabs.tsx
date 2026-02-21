@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import GameOverview from "./GameOverview";
-import { RAWGResponse } from "./utils/interfaceTypes";
+import { RAWGResponse, WishlistItemType } from "./utils/interfaceTypes";
 import {
   GameAchievements,
   GameDetails,
@@ -13,9 +13,16 @@ interface Props {
   screenshots: RAWGResponse<GameScreenShots>;
   trailers: RAWGResponse<GameTrailers>;
   achievements: RAWGResponse<GameAchievements>;
+  wishlistItem: WishlistItemType[] | undefined;
 }
 
-const GameTabs = ({ game, screenshots, trailers, achievements }: Props) => {
+const GameTabs = ({
+  game,
+  screenshots,
+  trailers,
+  achievements,
+  wishlistItem,
+}: Props) => {
   return (
     <Tabs defaultValue="overview" className="max-container mt-6">
       <TabsList className="inline-flex h-9 items-center text-muted-foreground w-full justify-start rounded-none border-b bg-transparent p-0 md:mb-4 mb-2">
@@ -38,6 +45,7 @@ const GameTabs = ({ game, screenshots, trailers, achievements }: Props) => {
           screenshots={screenshots}
           trailers={trailers}
           achievements={achievements}
+          wishlistItem={wishlistItem}
         />
       </TabsContent>
       <TabsContent value="achievements">

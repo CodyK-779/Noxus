@@ -8,7 +8,7 @@ import { platformsArray } from "@/data/platform-data";
 import { genresArray } from "@/data/genre-data";
 
 interface Props {
-  name?: string;
+  name: string;
   skeleton?: boolean;
 }
 
