@@ -85,10 +85,8 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
   const [largeScreen, setLargeScreen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showAllStores, setShowAllStores] = useState(false);
-  const [wishlisted, setWishlisted] = useState(
-    wishlistItem?.some((item) => Number(item.id) === game.id) ?? false,
-  );
-
+  const wishlisted =
+    wishlistItem?.some((item) => item.gameId === game.id) || false;
   useEffect(() => {
     const updateSize = () => {
       setLargeScreen(window.innerWidth >= 1024);
@@ -120,12 +118,8 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
 
       if (result.success) {
         if (!wishlisted) toast.success("Game added to wishlist!");
-        setWishlisted(!wishlisted);
       } else {
-        setWishlisted(
-          wishlistItem?.some((item) => Number(item.game.id) === game.id) ??
-            false,
-        );
+        toast.error("Something went wrong");
       }
     } finally {
       setLoading(false);

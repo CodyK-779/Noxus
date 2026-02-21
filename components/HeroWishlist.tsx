@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/app/lib/auth-client";
 import { toggleWishList } from "@/actions/wishlist-action";
-import { useMenu } from "./MenuProvider";
+import { toast } from "sonner";
 
 interface Props {
   gameId: number;
@@ -33,9 +33,8 @@ const HeroWishlist = ({
   const { data: session } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [wishlisted, setWishlisted] = useState(
-    wishlistItems?.some((item) => item.gameId === gameId) || false,
-  );
+  const wishlisted =
+    wishlistItems?.some((item) => item.gameId === gameId) || false;
 
   const handleWishlist = async () => {
     if (!session) {
@@ -58,15 +57,10 @@ const HeroWishlist = ({
       );
 
       if (results.success) {
-        setWishlisted(!wishlisted);
+        if (!wishlisted) toast.success("Game added to wishlist!");
       } else {
-        console.error("Failed to update wishlist:", results.error);
+        toast.error("Something went wrong");
       }
-    } catch (error) {
-      console.error("Error updating wishlist:", error);
-      setWishlisted(
-        wishlistItems?.some((item) => item.gameId === gameId) || false,
-      );
     } finally {
       setLoading(false);
     }

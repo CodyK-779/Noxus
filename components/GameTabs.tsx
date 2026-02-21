@@ -7,6 +7,7 @@ import {
   GameScreenShots,
   GameTrailers,
 } from "@/actions/games-action";
+import GameAchievementsTab from "./GameAchievementsTab";
 
 interface Props {
   game: GameDetails;
@@ -49,7 +50,7 @@ const GameTabs = ({
         />
       </TabsContent>
       <TabsContent value="achievements">
-        <p>Grammy</p>
+        <GameAchievementsTab achievements={achievements} />
       </TabsContent>
     </Tabs>
   );
