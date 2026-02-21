@@ -1,4 +1,5 @@
 import GameDetailsContainer from "@/components/GameDetailsContainer";
+import GameDetailsSkeleton from "@/components/skeletons/GameDetailsSkeleton";
 import { Suspense } from "react";
 
 export default function GameDetailsPage({
@@ -7,7 +8,7 @@ export default function GameDetailsPage({
   params: Promise<{ slug: string }>;
 }) {
   return (
-    <Suspense>
+    <Suspense fallback={<GameDetailsSkeleton />}>
       <GameDetailsContainer params={params} />
     </Suspense>
   );

@@ -8,7 +8,7 @@ import { platformsArray } from "@/data/platform-data";
 import { genresArray } from "@/data/genre-data";
 
 interface Props {
-  name: string;
+  name?: string;
   skeleton?: boolean;
 }
 
@@ -36,7 +36,6 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           )}
         </>
       )}
-
       {from === "browser" && (
         <>
           <div
@@ -53,7 +52,6 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           )}
         </>
       )}
-
       {/* HR Route */}
       {from === "high-ratings" && (
         <>
@@ -75,7 +73,6 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           )}
         </>
       )}
-
       {/* New Games Route */}
       {from === "new-releases" && (
         <>
@@ -97,7 +94,6 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           )}
         </>
       )}
-
       {/* Upcomings Route */}
       {from === "upcoming" && (
         <>
@@ -119,7 +115,6 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           )}
         </>
       )}
-
       {/* Platforms Route */}
       {platformsArray.includes(from) && (
         <>
@@ -148,7 +143,6 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           )}
         </>
       )}
-
       {/* Genres Route */}
       {genresArray.includes(from) && (
         <>

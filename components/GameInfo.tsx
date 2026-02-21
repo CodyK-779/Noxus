@@ -201,20 +201,18 @@ const GameInfo = ({ game }: Props) => {
                   Developer
                 </p>
               </div>
-              <div className="flex items-center">
-                {game.developers.length > 0 ? (
-                  <p
-                    className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs font-medium text-white truncate max-w-[180px]"
-                    title={game.developers[0].name}
-                  >
-                    {game.developers[0].name}
-                  </p>
-                ) : (
-                  <p className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs italic text-neutral-400">
-                    Unavailable
-                  </p>
-                )}
-              </div>
+              {game.developers.length > 0 ? (
+                <p
+                  className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs font-medium text-white truncate max-w-[180px]"
+                  title={game.developers[0].name}
+                >
+                  {game.developers[0].name}
+                </p>
+              ) : (
+                <p className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs italic text-neutral-400">
+                  Unavailable
+                </p>
+              )}
             </div>
 
             <div className="team-container">
@@ -224,20 +222,18 @@ const GameInfo = ({ game }: Props) => {
                   Publisher
                 </p>
               </div>
-              <div className="flex items-center">
-                {game.developers.length > 0 ? (
-                  <p
-                    className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs font-medium text-white truncate max-w-[180px]"
-                    title={game.developers[0].name}
-                  >
-                    {game.developers[0].name}
-                  </p>
-                ) : (
-                  <p className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs italic text-neutral-400">
-                    Unavailable
-                  </p>
-                )}
-              </div>
+              {game.developers.length > 0 ? (
+                <p
+                  className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs font-medium text-white truncate max-w-[180px]"
+                  title={game.developers[0].name}
+                >
+                  {game.developers[0].name}
+                </p>
+              ) : (
+                <p className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs italic text-neutral-400">
+                  Unavailable
+                </p>
+              )}
             </div>
           </div>
         </div>
