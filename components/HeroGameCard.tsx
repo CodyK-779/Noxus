@@ -74,6 +74,7 @@ const HeroGameCard = ({ data, isActive, wishlistItems }: Props) => {
         slug={data.link}
         rating={data.rating}
         platforms={data.platforms}
+        genres={data.genres}
         createdAt={data.date}
         wishlistItems={wishlistItems}
         path="/"

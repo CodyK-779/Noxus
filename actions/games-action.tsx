@@ -24,6 +24,7 @@ export interface GamesType {
   rating: number;
   metacritic: number;
   platforms: GamePlatforms[];
+  genres: { name: string }[];
 }
 
 export interface GameStore {

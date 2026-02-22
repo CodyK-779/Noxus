@@ -116,6 +116,7 @@ const HeroLeft = ({ showGame, wishlistItems, setIsPaused }: Props) => {
                   createdAt={heroData[showGame].date}
                   rating={heroData[showGame].rating}
                   platforms={heroData[showGame].platforms}
+                  genres={heroData[showGame].genres}
                   wishlistItems={wishlistItems}
                 />
               </div>

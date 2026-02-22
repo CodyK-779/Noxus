@@ -18,6 +18,7 @@ import {
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
+  convertGenreArray,
   convertPlatformArray,
   getStoreLogos,
   platformIconByKey,
@@ -113,6 +114,7 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
         String(game.released),
         game.rating,
         convertPlatformArray(game.platforms),
+        convertGenreArray(game.genres),
         `/browse/games/${game.slug}?from=Discover`,
       );
 

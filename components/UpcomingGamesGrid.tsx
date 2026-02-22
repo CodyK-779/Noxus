@@ -5,6 +5,7 @@ import {
   platformIcons,
   platformIconByKey,
   convertPlatformArray,
+  convertGenreArray,
 } from "@/components/utils/utils";
 import {
   RAWGResponse,
@@ -60,6 +61,7 @@ const UpcomingGamesGrid = ({ games, wishlistItems }: Props) => {
                 image={game.background_image}
                 rating={game.rating}
                 platforms={convertPlatformArray(game.platforms)}
+                genres={convertGenreArray(game.genres)}
                 createdAt={String(game.released)}
                 path="/discover/upcoming_games"
                 hidden="hidden"

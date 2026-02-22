@@ -31,6 +31,7 @@ model Game {
   rating       Int
   slug         String
   platforms    String[]
+  genres       String[]
   wishlistItem WishlistItem[]
   createdAt    DateTime
 }

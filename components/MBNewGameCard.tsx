@@ -2,6 +2,7 @@ import { GamesType } from "@/actions/games-action";
 import Image from "next/image";
 import Link from "next/link";
 import {
+  convertGenreArray,
   convertPlatformArray,
   gameRating,
   platformIconByKey,
@@ -59,6 +60,7 @@ const MBNewGameCard = ({ data, wishlistItems }: Props) => {
         slug={data.slug}
         rating={data.rating}
         platforms={convertPlatformArray(data.platforms)}
+        genres={convertGenreArray(data.genres)}
         createdAt={data.released.toString()}
         wishlistItems={wishlistItems}
         path="/"

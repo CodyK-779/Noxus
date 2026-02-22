@@ -66,6 +66,10 @@ export const convertPlatformArray = (platforms: GamePlatforms[]) => {
   return platforms?.map((p) => p.platform.name);
 };
 
+export const convertGenreArray = (genres: { name: string }[]) => {
+  return genres.map((g) => g.name);
+};
+
 export const getRarityDetails = (percent: number) => {
   if (percent >= 40) {
     return {

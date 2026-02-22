@@ -1,6 +1,7 @@
 import { GamesType } from "@/actions/games-action";
 import Image from "next/image";
 import {
+  convertGenreArray,
   convertPlatformArray,
   gameRating,
   platformIconByKey,
@@ -67,6 +68,7 @@ const NewGamesGrid = ({ games, wishlistItems }: Props) => {
                 image={game.background_image}
                 rating={game.rating}
                 platforms={convertPlatformArray(game.platforms)}
+                genres={convertGenreArray(game.genres)}
                 createdAt={String(game.released)}
                 hidden="sm:hidden"
                 path="/discover/new-releases"

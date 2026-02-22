@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import WishlistButton from "./WishlistButton";
 import {
+  convertGenreArray,
   convertPlatformArray,
   platformIconByKey,
   platformIcons,
@@ -68,6 +69,7 @@ const GamesGrid = ({ games, wishlistItems, path, from }: Props) => {
                 image={game.background_image}
                 rating={game.rating}
                 platforms={convertPlatformArray(game.platforms)}
+                genres={convertGenreArray(game.genres)}
                 createdAt={String(game.released)}
                 hidden="sm:hidden"
                 path={path}

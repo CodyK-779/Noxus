@@ -6,6 +6,7 @@ import {
   platformIcons,
   platformIconByKey,
   convertPlatformArray,
+  convertGenreArray,
 } from "@/components/utils/utils";
 import {
   RAWGResponse,
@@ -56,6 +57,7 @@ const UpcomingGames = ({ paginate, games, wishlistItems }: Props) => {
             rating={game.rating}
             createdAt={game.released.toString()}
             platforms={convertPlatformArray(game.platforms)}
+            genres={convertGenreArray(game.genres)}
             wishlistItems={wishlistItems}
             hidden="hidden"
             path="/"

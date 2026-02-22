@@ -19,6 +19,7 @@ interface Props {
   createdAt: string;
   rating: number;
   platforms: string[];
+  genres: string[];
   wishlistItems: WishlistItemType[] | undefined;
   hidden?: string;
   hero?: boolean;
@@ -35,6 +36,7 @@ const WishlistButton = ({
   createdAt,
   rating,
   platforms,
+  genres,
   wishlistItems,
   hidden,
   hero,
@@ -62,6 +64,7 @@ const WishlistButton = ({
         createdAt,
         rating,
         platforms,
+        genres,
         path,
       );
 

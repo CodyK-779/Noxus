@@ -50,7 +50,7 @@ const UpcomingContainer = ({ games, wishlistItems }: Props) => {
         games={games}
         wishlistItems={wishlistItems}
       />
-      <MBUpcomingGamesSwiper games={games} />
+      <MBUpcomingGamesSwiper games={games} wishlistItems={wishlistItems} />
     </>
   );
 };

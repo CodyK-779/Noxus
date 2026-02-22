@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import WishlistButton from "./WishlistButton";
 import {
+  convertGenreArray,
   convertPlatformArray,
   platformIconByKey,
   platformIcons,
@@ -64,6 +65,7 @@ const HighRatedGames = ({ games, wishlistItems, paginate }: Props) => {
             rating={game.rating}
             createdAt={game.released.toString()}
             platforms={convertPlatformArray(game.platforms)}
+            genres={convertGenreArray(game.genres)}
             wishlistItems={wishlistItems}
             hidden="hidden"
             path="/"

@@ -5,8 +5,8 @@ import Link from "next/link";
 import WishlistButton from "./WishlistButton";
 import { useSwiperSlide } from "swiper/react";
 import {
+  convertGenreArray,
   convertPlatformArray,
-  gameRating,
   platformIconByKey,
   platformIcons,
 } from "@/components/utils/utils";
@@ -59,6 +59,7 @@ const MBHRGames = ({ game, wishlistItems }: Props) => {
         slug={game.slug}
         rating={game.rating}
         platforms={convertPlatformArray(game.platforms)}
+        genres={convertGenreArray(game.genres)}
         createdAt={game.released.toString()}
         wishlistItems={wishlistItems}
         path="/"

@@ -10,6 +10,7 @@ export const heroData = [
     date: "2025-05-30",
     rating: 3.92,
     platforms: ["PC", "Xbox One", "PlayStation 4", "Xbox Series S/X", "PlayStation 5"],
+    genres: ["Action", "RPG"],
     desc: "Elden Ring Nightreign is a standalone, three-player cooperative survival game where heroes battle through a shifting landscape to defeat powerful bosses across a three-day roguelike loop.",
   },
   {
@@ -23,6 +24,7 @@ export const heroData = [
     date: "2025-04-24",
     rating: 4.5,
     platforms: ["PC", "PlayStation 5", "Xbox Series S/X"],
+    genres: ["RPG"],
     desc: "Clair Obscur: Expedition 33 is a turn-based RPG set in a Belle Époque-inspired world where a party of survivors must journey to destroy an entity known as 'The Paintress' before she can erase the last of humanity.",
   },
   {
@@ -36,6 +38,7 @@ export const heroData = [
     date: "2025-10-30",
     rating: 3.64,
     platforms: ["PC", "PlayStation 5", "Xbox Series S/X"],
+    genres: ["Action"],
     desc: "ARC Raiders is a third-person extraction shooter where players scavenge a lethal, machine-ravaged future Earth while contending with both deadly robots and rival Raiders.",
   },
   {
@@ -49,6 +52,7 @@ export const heroData = [
     date: "2025-10-10",
     rating: 4.21,
     platforms: ["PC", "PlayStation 5", "Xbox Series S/X"],
+    genres: ["Action", "Shooter"],
     desc: "A modern-day military shooter returning to the series's roots with 64-player matches, a classic four-class system, and large-scale environmental destruction.",
   },
   {
@@ -62,6 +66,7 @@ export const heroData = [
     date: "2026-02-27",
     rating: 0,
     platforms: ["PlayStation 5", "Xbox Series S/X", "PC"],
+    genres: ["Action"],
     desc: "A survival horror journey returning to the ruins of Raccoon City, featuring dual campaigns split between stealth-focused newcomer Grace Ashcroft and action-oriented veteran Leon S. Kennedy.",
   },
   {
@@ -75,6 +80,7 @@ export const heroData = [
     date: "2025-09-04",
     rating: 4.33,
     platforms: ["Xbox Series S/X", "Xbox One", "PlayStation 5", "PlayStation 4", "PC", "Linux", "macOS", "Nintendo Switch"],
+    genres: ["ActionAdventure", "Indie", "Platformer"],
     desc: "Hollow Knight: Silksong is the Metroidvania sequel where you play as Hornet, an agile princess-protector battling through a vertical kingdom of silk and song to reach a shining citadel.",
   }
 ]
@@ -118,6 +124,7 @@ export const heroMobile = [
     date: "2025-05-30",
     rating: 3.92,
     platforms: ["PC", "Xbox One", "PlayStation 4", "Xbox Series S/X", "PlayStation 5"],
+    genres: ["Action", "RPG"],
     desc: "A darker expansion to Elden Ring that deepens its brutal combat and mysterious world."
   },
   {
@@ -131,6 +138,7 @@ export const heroMobile = [
     date: "2025-04-24",
     rating: 4.5,
     platforms: ["PC", "PlayStation 5", "Xbox Series S/X"],
+    genres: ["RPG"],
     desc: "A stylish turn-based RPG blending surreal art, emotional storytelling, and strategic combat.",
   },
   {
@@ -144,6 +152,7 @@ export const heroMobile = [
     date: "2025-10-30",
     rating: 3.64,
     platforms: ["PC", "PlayStation 5", "Xbox Series S/X"],
+    genres: ["Action"],
     desc: "A cooperative sci-fi shooter where players fight deadly machines in a ruined future Earth.",
   },
   {
@@ -157,6 +166,7 @@ export const heroMobile = [
     date: "2025-10-10",
     rating: 4.21,
     platforms: ["PC", "PlayStation 5", "Xbox Series S/X"],
+    genres: ["Action", "Shooter"],
     desc: "A large-scale modern warfare shooter focused on massive battles, vehicles, and destruction.",
   },
   {
@@ -170,6 +180,7 @@ export const heroMobile = [
     date: "2026-02-27",
     rating: 0,
     platforms: ["PlayStation 5", "Xbox Series S/X", "PC"],
+    genres: ["Action"],
     desc: "A survival horror experience that returns the series to tense, atmospheric terror.",
   },
   {
@@ -183,6 +194,7 @@ export const heroMobile = [
     date: "2025-09-04",
     rating: 4.33,
     platforms: ["Xbox Series S/X", "Xbox One", "PlayStation 5", "PlayStation 4", "PC", "Linux", "macOS", "Nintendo Switch"],
+    genres: ["ActionAdventure", "Indie", "Platformer"],
     desc: "A fast-paced metroidvania adventure starring Hornet in a beautifully haunting new kingdom.",
   },
 ]
@@ -196,6 +208,7 @@ export interface HeroMobile {
   image: string;
   rating: number;
   platforms: string[];
+  genres: string[];
   date: string;
   saleText: string;
   desc: string;

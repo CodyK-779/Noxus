@@ -17,6 +17,7 @@ interface Props {
   createdAt: string;
   rating: number;
   platforms: string[];
+  genres: string[];
   wishlistItems: WishlistItemType[] | undefined;
 }
 
@@ -28,6 +29,7 @@ const HeroWishlist = ({
   createdAt,
   rating,
   platforms,
+  genres,
   wishlistItems,
 }: Props) => {
   const { data: session } = useSession();
@@ -35,6 +37,8 @@ const HeroWishlist = ({
   const [loading, setLoading] = useState(false);
   const wishlisted =
     wishlistItems?.some((item) => item.gameId === gameId) || false;
+
+  const convertGenreArray = (genres: string[]) => {};
 
   const handleWishlist = async () => {
     if (!session) {
@@ -53,6 +57,7 @@ const HeroWishlist = ({
         createdAt,
         rating,
         platforms,
+        genres,
         "/",
       );
 

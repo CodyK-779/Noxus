@@ -13,7 +13,8 @@ export async function toggleWishList(
   createdAt: string,
   rating: number,
   platforms: string[],
-  path: string
+  genres: string[],
+  path: string,
 ) {
   try {
     const session = await auth.api.getSession({
@@ -47,6 +48,7 @@ export async function toggleWishList(
             slug,
             rating,
             platforms,
+            genres,
             createdAt: new Date(createdAt),
           },
         }),
