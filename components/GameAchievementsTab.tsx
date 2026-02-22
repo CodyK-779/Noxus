@@ -21,7 +21,7 @@ const GameAchievementsTab = ({ game, achievements }: Props) => {
   return (
     <>
       {/* Header */}
-      <div className="hidden md:flex w-full rounded-xl overflow-hidden ">
+      <div className="hidden md:flex w-full rounded-xl overflow-hidden">
         <div className="relative w-[40%] aspect-video">
           <Image
             src={game.background_image}
@@ -33,10 +33,10 @@ const GameAchievementsTab = ({ game, achievements }: Props) => {
         </div>
         <div className="w-[60%] flex items-center pl-20 bg-neutral-900">
           <div className="flex flex-col gap-1">
-            <p className="font-medium text-neutral-400">
+            <p className="lg:text-base text-sm font-medium text-neutral-400">
               Available Achievements
             </p>
-            <h2 className="text-3xl font-bold">
+            <h2 className="lg:text-3xl text-2xl font-bold">
               {achievements.count} Achievements
             </h2>
           </div>
@@ -53,7 +53,7 @@ const GameAchievementsTab = ({ game, achievements }: Props) => {
       </div>
 
       {/* Achievements */}
-      {achievements.results.map((a, index) => (
+      {achievements.results.map((a) => (
         <div key={a.id}>
           <div className="flex items-center sm:gap-7 min-[375px]:gap-5 gap-4">
             <div className="relative md:size-28 sm:size-24 min-[375px]:size-20 size-16 rounded-lg overflow-hidden bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 shrink-0">
