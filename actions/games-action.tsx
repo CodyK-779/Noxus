@@ -325,7 +325,7 @@ export async function getGameAchievements(
   cacheLife("days");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games/${slug}/achievements?key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games/${slug}/achievements?page_size=50&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["game", "achievements"],

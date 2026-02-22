@@ -50,7 +50,7 @@ const GameTabs = ({
         />
       </TabsContent>
       <TabsContent value="achievements">
-        <GameAchievementsTab achievements={achievements} />
+        <GameAchievementsTab game={game} achievements={achievements} />
       </TabsContent>
     </Tabs>
   );
