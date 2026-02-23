@@ -19,7 +19,6 @@ const GameNavigation = ({ name, skeleton }: Props) => {
 
   return (
     <div className="max-container flex items-center min-[375px]:gap-2 gap-1.5 min-[400px]:text-sm text-xs font-medium text-gray-400">
-      {/* Home Route */}
       {from === "Discover" && (
         <>
           <div
@@ -36,6 +35,24 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           )}
         </>
       )}
+
+      {from === "wishlist" && (
+        <>
+          <div
+            onClick={() => router.back()}
+            className="hover:text-white transition-colors cursor-pointer"
+          >
+            Wishlist
+          </div>
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
+          {!skeleton ? (
+            <p className="text-white cursor-pointer truncate">{name}</p>
+          ) : (
+            <Skeleton className="w-20 h-3" />
+          )}
+        </>
+      )}
+
       {from === "browser" && (
         <>
           <div

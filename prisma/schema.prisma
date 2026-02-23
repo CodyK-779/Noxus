@@ -28,7 +28,7 @@ model Game {
   id           Int            @id
   name         String
   image        String?
-  rating       Int
+  rating       Float
   slug         String
   platforms    String[]
   genres       String[]

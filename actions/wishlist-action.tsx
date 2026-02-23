@@ -73,3 +73,23 @@ export async function toggleWishList(
     };
   }
 }
+
+export async function removeWishlistItem(id: string) {
+  try {
+    await prisma.wishlistItem.delete({
+      where: { id },
+    });
+
+    revalidatePath("/wishlist");
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting wishlist item:", error);
+    return {
+      success: false,
+      error:
+        error instanceof Error
+          ? error.message
+          : "Failed to delete wishlist item",
+    };
+  }
+}

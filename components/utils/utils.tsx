@@ -1,7 +1,7 @@
 import { GamePlatforms } from "@/actions/games-action";
 import { Award, Sparkles, Star, Trophy } from "lucide-react";
 
-const getPlatformKey = (name: string) => {
+export const getPlatformKey = (name: string) => {
   if (name.includes("PC")) return "pc";
   if (name.includes("PlayStation") || name.includes("PS")) return "playstation";
   if (name.includes("Nintendo")) return "nintendo";

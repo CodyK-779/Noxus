@@ -84,7 +84,7 @@ const GameBody = ({ game, achievements }: Props) => {
 
       <hr className="my-6" />
 
-      {/* Genres */}
+      {/* Tags */}
       <h1 className="md:text-3xl min-[400px]:text-2xl text-xl font-bold mb-[18px]">
         <span className="text-[#e91e3f]">▸</span> Tags
       </h1>
@@ -117,6 +117,7 @@ const GameBody = ({ game, achievements }: Props) => {
 
       <hr className="mt-8 mb-6" />
 
+      {/* Platforms */}
       <h1 className="md:text-3xl min-[400px]:text-2xl text-xl font-bold mb-[18px]">
         <span className="text-[#e91e3f]">▸</span> Platforms
       </h1>
@@ -140,6 +141,7 @@ const GameBody = ({ game, achievements }: Props) => {
 
       <hr className="mt-8 mb-6" />
 
+      {/* Dev & Publisher */}
       <h1 className="md:text-3xl min-[400px]:text-2xl text-xl font-bold mb-5">
         <span className="text-[#e91e3f]">▸</span> Developers and Publishers
       </h1>
@@ -189,6 +191,7 @@ const GameBody = ({ game, achievements }: Props) => {
         </p>
       )}
 
+      {/* Achievements */}
       {achievements.results.length > 0 && (
         <>
           <hr className="mt-10 mb-6" />
@@ -198,6 +201,7 @@ const GameBody = ({ game, achievements }: Props) => {
 
       <hr className="my-6" />
 
+      {/* Requirements */}
       <h1 className="md:text-3xl min-[400px]:text-2xl text-xl font-bold mb-6 underline underline-offset-8 decoration-[#e91e3f]">
         System Requirements
       </h1>

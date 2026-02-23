@@ -75,7 +75,7 @@ const HeroWishlist = ({
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
         <button
-          className="size-9 bg-white rounded-md flex items-center justify-center"
+          className="size-[38px] bg-white rounded-md flex items-center justify-center"
           onClick={handleWishlist}
           disabled={loading}
         >
