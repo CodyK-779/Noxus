@@ -41,7 +41,7 @@ const DeleteWishlist = ({ id }: Props) => {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <button
-          className="nox-btn text-xs font-semibold px-4 tracking-wide"
+          className="nox-btn lg:text-xs text-[10px] font-semibold px-4 tracking-wide sm:w-fit w-full"
           disabled={loading}
         >
           {loading ? (
