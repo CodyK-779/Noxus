@@ -84,7 +84,7 @@ const GameAchievementsTab = ({ game, achievements }: Props) => {
               </p>
             </div>
           </div>
-          <p className="mt-2.5 font-medium md:text-base text-sm text-neutral-400">
+          <p className="sm:hidden mt-2.5 font-medium md:text-base text-sm text-neutral-400">
             {a.description}
           </p>
           <hr className="sm:my-6 my-5" />

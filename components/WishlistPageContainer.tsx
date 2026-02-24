@@ -61,7 +61,7 @@ const WishlistPageContainer = async () => {
                       className="object-cover"
                     />
                   ) : (
-                    <LucideGamepad2 className="sm:size-12 size-16 text-neutral-500" />
+                    <LucideGamepad2 className="sm:size-12 min-[425px]:size-16 min-[350px]:size-12 size-10 text-neutral-500" />
                   )}
                 </div>
                 <div className="flex flex-col justify-between w-full">
