@@ -58,6 +58,7 @@ const WishlistPageContainer = async () => {
                       src={item.game.image}
                       alt={item.game.name}
                       fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 250px, 300px"
                       className="object-cover"
                     />
                   ) : (
