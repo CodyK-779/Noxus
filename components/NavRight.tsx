@@ -27,7 +27,10 @@ const NavRight = () => {
           </button>
         </Link>
       )}
-      <div className="min-[850px]:hidden" onClick={() => setOpenMenu(true)}>
+      <div
+        className="min-[850px]:hidden cursor-pointer"
+        onClick={() => setOpenMenu(true)}
+      >
         <Menu className="min-[400px]:size-8 size-7" />
       </div>
     </div>

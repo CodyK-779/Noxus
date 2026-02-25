@@ -27,14 +27,7 @@ const StoresPageSkeleton = () => {
       <hr className="my-4 border-neutral-800" />
 
       {/* Stores Grid */}
-      <div
-        className="max-w-7xl mx-auto grid 
-                      grid-cols-1 
-                      sm:grid-cols-2 
-                      lg:grid-cols-3 
-                      xl:grid-cols-4 
-                      gap-6"
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {Array.from({ length: 10 }).map((_, index) => (
           <Skeleton key={index} className="w-full h-56 rounded-2xl" />
         ))}

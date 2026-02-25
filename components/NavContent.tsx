@@ -31,7 +31,7 @@ const NavContent = () => {
                 className="object-cover"
               />
             </div>
-            <h1 className="min-[400px]:text-2xl text-xl font-bold font-orbitron tracking-wide">
+            <h1 className="min-[400px]:text-2xl text-xl font-bold font-orbitron tracking-wide bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
               Noxus
             </h1>
           </Link>

@@ -34,7 +34,7 @@ export function AuthForm() {
               />
             </div>
             {/* <p className="text-[22px] font-bold">Noxus</p> */}
-            <p className="text-[22px] font-orbitron tracking-wide font-bold">
+            <p className="text-[22px] font-orbitron tracking-wide font-bold bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
               Noxus
             </p>
           </div>
