@@ -1,4 +1,12 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+
 const BrowseBanner = () => {
+  const searchParams = useSearchParams();
+
+  const initialSearch = searchParams.get("search") || "";
+
   return (
     <section className="mt-[70px] bg-gradient-to-tr from-[#2d0a0a] via-[#5c1010] to-[#e91e3f] w-full py-20">
       <div className="flex flex-col items-center justify-center">

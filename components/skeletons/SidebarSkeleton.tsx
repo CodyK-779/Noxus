@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useMenu } from "../MenuProvider";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ChevronRight, Compass, Home, Store, User, X } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
@@ -17,7 +17,6 @@ const navLinks = [
 const SidebarSkeleton = () => {
   const { openMenu, setOpenMenu } = useMenu();
   const router = useRouter();
-  const pathname = usePathname();
 
   const handleNavigation = (path: string) => {
     router.push(path);
@@ -103,28 +102,18 @@ const SidebarSkeleton = () => {
           <ul className="space-y-1">
             {navLinks.map((link, index) => {
               const Icon = link.icon;
-              const isActive =
-                pathname === link.link ||
-                (link.link !== "/" && pathname.startsWith(link.link));
+              // const isActive = getIsActive(link.link, link.title);
 
               return (
                 <li key={link.title}>
                   <Link
                     href={link.link}
                     onClick={handleClose}
-                    className={`relative flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-300 group overflow-hidden ${
-                      isActive ||
-                      (pathname.includes("/discover") &&
-                        link.title === "Discover")
-                        ? "text-[#e91e3f]"
-                        : "text-neutral-400 hover:text-white"
-                    }`}
+                    className={`relative flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-300 group overflow-hidden ${link.title === "Discover" ? "text-[#e91e3f]" : "text-neutral-400 hover:text-white"}`}
                   >
                     <div
                       className={`absolute inset-0 bg-gradient-to-r from-[#e91e3f]/10 to-transparent transition-opacity duration-300 ${
-                        isActive ||
-                        (pathname.includes("/discover") &&
-                          link.title === "Discover")
+                        link.title === "Discover"
                           ? "opacity-100"
                           : "opacity-0 group-hover:opacity-100"
                       }`}
@@ -139,7 +128,7 @@ const SidebarSkeleton = () => {
                     <span className="relative z-10 flex-1">{link.title}</span>
 
                     {/* Active indicator dot */}
-                    {isActive && (
+                    {link.title === "Discover" && (
                       <div className="relative z-10 size-1.5 rounded-full bg-[#e91e3f] animate-pulse" />
                     )}
                   </Link>
