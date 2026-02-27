@@ -7,22 +7,16 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { addRecentSearch, getRecentSearches } from "./utils/recentSearches";
 
 const MobileNavSearch = () => {
-  const {
-    openSearch,
-    search,
-    setOpenSearch,
-    setSearch,
-    setRecents,
-    mbInputRef,
-  } = useMenu();
+  const { openSearch, search, setOpenSearch, setSearch, setRecents, inputRef } =
+    useMenu();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     if (openSearch) {
-      if (mbInputRef.current) mbInputRef.current.value = "";
-      mbInputRef.current?.focus();
+      if (inputRef.current) inputRef.current.value = "";
+      inputRef.current?.focus();
     }
   }, [openSearch]);
 
@@ -30,7 +24,7 @@ const MobileNavSearch = () => {
     e.preventDefault();
 
     const params = new URLSearchParams(searchParams.toString());
-    const query = mbInputRef.current?.value || "";
+    const query = inputRef.current?.value || "";
 
     if (query) {
       params.set("search", query);
@@ -51,9 +45,9 @@ const MobileNavSearch = () => {
     params.delete("search");
     setSearch("");
 
-    if (mbInputRef.current) {
-      mbInputRef.current.value = "";
-      mbInputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.value = "";
+      inputRef.current.focus();
     }
     router.push(pathname, { scroll: false });
   };
@@ -61,7 +55,7 @@ const MobileNavSearch = () => {
   const handleCloseSearch = () => {
     setOpenSearch(false);
     setSearch("");
-    if (mbInputRef.current) mbInputRef.current.value = "";
+    if (inputRef.current) inputRef.current.value = "";
   };
 
   const selectedSearch = searchParams.get("search") || "";
@@ -73,7 +67,7 @@ const MobileNavSearch = () => {
       </div>
       <form onSubmit={handleSubmit} className="relative w-full">
         <input
-          ref={mbInputRef}
+          ref={inputRef}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search Games"
           defaultValue={selectedSearch}

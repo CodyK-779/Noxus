@@ -14,8 +14,7 @@ import { addRecentSearch, getRecentSearches } from "./utils/recentSearches";
 import NoResults from "./NoResults";
 
 const MBSearchSuggestions = () => {
-  const { search, setSearch, setOpenSearch, setRecents, mbInputRef } =
-    useMenu();
+  const { search, setSearch, setOpenSearch, setRecents, inputRef } = useMenu();
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<GamesType[]>([]);
   const debouncedValue = useDebounce(search, 300);
@@ -44,12 +43,12 @@ const MBSearchSuggestions = () => {
   const handleNavigate = () => {
     setOpenSearch(false);
     setSearch("");
-    if (mbInputRef.current) mbInputRef.current.value = "";
+    if (inputRef.current) inputRef.current.value = "";
   };
 
   const handleSearch = () => {
     const params = new URLSearchParams(searchParams.toString());
-    const query = mbInputRef.current?.value || "";
+    const query = inputRef.current?.value || "";
 
     params.set("search", query);
     setOpenSearch(false);
@@ -57,7 +56,7 @@ const MBSearchSuggestions = () => {
     addRecentSearch(query);
     setRecents(getRecentSearches());
     setSearch("");
-    if (mbInputRef.current) mbInputRef.current.value = "";
+    if (inputRef.current) inputRef.current.value = "";
   };
 
   return (

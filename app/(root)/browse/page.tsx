@@ -1,10 +1,18 @@
 import BrowseContainer from "@/components/BrowseContainer";
 import { Suspense } from "react";
 
-export default function BrowsePage() {
+export interface BrowseSearch {
+  search: string;
+}
+
+export default function BrowsePage({
+  searchParams,
+}: {
+  searchParams: Promise<BrowseSearch>;
+}) {
   return (
     <Suspense>
-      <BrowseContainer />
+      <BrowseContainer searchParams={searchParams} />
     </Suspense>
   );
 }

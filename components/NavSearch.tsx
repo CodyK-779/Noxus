@@ -9,7 +9,6 @@ import { GamesType, searchSuggestions } from "@/actions/games-action";
 import SearchResults from "./SearchResults";
 
 const NavSearch = () => {
-  const [search, setSearch] = useState("");
   const [result, setResult] = useState<GamesType[]>([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -17,8 +16,7 @@ const NavSearch = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { setOpenSearch } = useMenu();
+  const { search, inputRef, setOpenSearch, setSearch } = useMenu();
   const debouncedValue = useDebounce(search, 500);
 
   useEffect(() => {

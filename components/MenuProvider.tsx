@@ -24,7 +24,7 @@ interface MenuContextType {
   setOpenMenu: Dispatch<SetStateAction<boolean>>;
   setOpenSearch: Dispatch<SetStateAction<boolean>>;
   setRecents: Dispatch<SetStateAction<string[] | []>>;
-  mbInputRef: RefObject<HTMLInputElement | null>;
+  inputRef: RefObject<HTMLInputElement | null>;
 }
 
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
@@ -44,7 +44,7 @@ const MenuProvider = ({ children }: Props) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [recents, setRecents] = useState<string[] | []>([]);
-  const mbInputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <MenuContext.Provider
@@ -57,7 +57,7 @@ const MenuProvider = ({ children }: Props) => {
         setOpenMenu,
         setOpenSearch,
         setRecents,
-        mbInputRef,
+        inputRef,
       }}
     >
       {children}
