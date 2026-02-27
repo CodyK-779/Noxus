@@ -38,7 +38,7 @@ const SearchResults = ({
               <>
                 {games.map((game) => (
                   <Link
-                    href={`/browse/games/${game.slug}?from=browser`}
+                    href={`/browse/games/${game.slug}?from=search`}
                     onClick={handleSearch}
                     key={game.id}
                     className="flex items-center gap-3 mb p-2.5 rounded hover:bg-neutral-800 cursor-pointer transition"

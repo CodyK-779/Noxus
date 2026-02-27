@@ -1,59 +1,30 @@
 "use client";
 
-import { useMenu } from "./MenuProvider";
 import Image from "next/image";
-import {
-  X,
-  Home,
-  Compass,
-  Store,
-  Heart,
-  LogOut,
-  ChevronRight,
-  User,
-  Loader2,
-} from "lucide-react";
+import { useMenu } from "../MenuProvider";
 import { usePathname, useRouter } from "next/navigation";
+import { ChevronRight, Compass, Home, Store, User, X } from "lucide-react";
+import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
-import { signOut, useSession } from "@/app/lib/auth-client";
-import { Button } from "./ui/button";
-import { useState } from "react";
-import { toast } from "sonner";
+import { Button } from "../ui/button";
 
 const navLinks = [
   { title: "Discover", link: "/", icon: Home },
   { title: "Browse", link: "/browse", icon: Compass },
   { title: "Stores", link: "/stores", icon: Store },
-  { title: "Wishlist", link: "/wishlist", icon: Heart },
 ];
 
-const Sidebar = () => {
+const SidebarSkeleton = () => {
   const { openMenu, setOpenMenu } = useMenu();
-  const pathname = usePathname();
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const { data: session } = useSession();
-
-  const handleClose = () => setOpenMenu(false);
+  const pathname = usePathname();
 
   const handleNavigation = (path: string) => {
     router.push(path);
     setOpenMenu(false);
   };
 
-  const handleSignout = async () => {
-    setLoading(true);
-
-    try {
-      await signOut();
-      window.location.href = "/signIn";
-      toast.success("User Signed out successfully!");
-    } catch (error) {
-      toast.error("Failed to Log Out user");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const handleClose = () => setOpenMenu(false);
 
   return (
     <>
@@ -113,29 +84,16 @@ const Sidebar = () => {
         </div>
 
         {/* User Profile */}
-        {session && (
-          <div className="px-4 mt-6">
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all cursor-pointer group">
-              <div className="relative min-[375px]:size-12 size-11 flex items-center justify-center rounded-full overflow-hidden transition-all bg-neutral-600 text-white">
-                {session.user.image ? (
-                  <Image
-                    src={session.user.image}
-                    alt="User"
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  <User className="size-5" />
-                )}
-              </div>
-              <div className="flex-1">
-                <p className="font-semibold text-sm">{session.user.name}</p>
-                <p className="text-xs text-neutral-400">{session.user.email}</p>
-              </div>
-              <ChevronRight className="size-4 text-neutral-500 group-hover:text-white group-hover:translate-x-1 transition-all" />
+        <div className="px-4 mt-6">
+          <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all cursor-pointer group">
+            <Skeleton className="min-[375px]:size-12 size-11 rounded-full" />
+            <div className="flex-1">
+              <Skeleton className="h-3 w-24 mb-2" />
+              <Skeleton className="h-2.5 w-32" />
             </div>
+            <ChevronRight className="size-4 text-neutral-500 group-hover:text-white group-hover:translate-x-1 transition-all" />
           </div>
-        )}
+        </div>
 
         {/* Main navigation */}
         <div className="relative px-4 py-6">
@@ -148,8 +106,6 @@ const Sidebar = () => {
               const isActive =
                 pathname === link.link ||
                 (link.link !== "/" && pathname.startsWith(link.link));
-
-              if (link.title === "Wishlist" && !session) return;
 
               return (
                 <li key={link.title}>
@@ -195,47 +151,17 @@ const Sidebar = () => {
 
         {/* Footer actions */}
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/5 bg-gradient-to-t from-neutral-900 to-transparent">
-          {session ? (
-            <Button
-              size="lg"
-              onClick={handleSignout}
-              className="flex items-center gap-2 w-full font-semibold bg-gradient-to-r from-[#e91e3f] to-[#c01030] hover:from-[#c01030] hover:to-[#a00d26] text-white border-0 shadow-lg shadow-[#e91e3f]/25 transition-all hover:scale-[1.02]"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="size-4 animate-spin" />
-                  Loading...
-                </>
-              ) : (
-                <>
-                  <LogOut className="size-4" />
-                  Logout
-                </>
-              )}
-            </Button>
-          ) : (
-            <Button
-              size="lg"
-              asChild
-              className="flex items-center gap-2 w-full font-semibold bg-gradient-to-r from-[#e91e3f] to-[#c01030] hover:from-[#c01030] hover:to-[#a00d26] text-white border-0 shadow-lg shadow-[#e91e3f]/25 transition-all hover:scale-[1.02]"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="size-4 animate-spin" />
-                  Loading...
-                </>
-              ) : (
-                <Link href="/signIn">
-                  <User className="size-4" />
-                  Sign In
-                </Link>
-              )}
-            </Button>
-          )}
+          <Button
+            size="lg"
+            className="flex items-center gap-2 w-full font-semibold bg-gradient-to-r from-[#e91e3f] to-[#c01030] hover:from-[#c01030] hover:to-[#a00d26] text-white border-0 shadow-lg shadow-[#e91e3f]/25 transition-all hover:scale-[1.02]"
+          >
+            <User className="size-4" />
+            Sign In
+          </Button>
         </div>
       </aside>
     </>
   );
 };
 
-export default Sidebar;
+export default SidebarSkeleton;

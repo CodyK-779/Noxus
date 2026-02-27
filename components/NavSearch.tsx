@@ -62,7 +62,9 @@ const NavSearch = () => {
 
     if (query) {
       params.set("search", query);
-      router.push(`/browse/games?${params.toString()}`);
+      router.push(`/browse?${params.toString()}`);
+      setSearch("");
+      if (inputRef.current) inputRef.current.value = "";
     } else {
       params.delete("search");
       setSearch("");

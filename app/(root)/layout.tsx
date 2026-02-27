@@ -3,7 +3,8 @@ import MenuProvider from "@/components/MenuProvider";
 import Navbar from "@/components/Navbar";
 import Overlay from "@/components/Overlay";
 import Sidebar from "@/components/Sidebar";
-import { PropsWithChildren } from "react";
+import SidebarSkeleton from "@/components/skeletons/SidebarSkeleton";
+import { PropsWithChildren, Suspense } from "react";
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
@@ -11,7 +12,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <MenuProvider>
         <Navbar />
         <Overlay />
-        <Sidebar />
+        <Suspense fallback={<SidebarSkeleton />}>
+          <Sidebar />
+        </Suspense>
         <MBSearchResults />
         <main className="overflow-hidden pb-20">{children}</main>
       </MenuProvider>

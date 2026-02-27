@@ -69,6 +69,24 @@ const GameNavigation = ({ name, skeleton }: Props) => {
           )}
         </>
       )}
+
+      {from === "search" && (
+        <>
+          <div
+            onClick={() => router.back()}
+            className="hover:text-white transition-colors cursor-pointer"
+          >
+            Go Back
+          </div>
+          <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
+          {!skeleton ? (
+            <p className="text-white cursor-pointer truncate">{name}</p>
+          ) : (
+            <Skeleton className="w-20 h-3" />
+          )}
+        </>
+      )}
+
       {/* HR Route */}
       {from === "high-ratings" && (
         <>
