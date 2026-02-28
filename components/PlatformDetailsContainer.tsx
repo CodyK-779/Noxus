@@ -36,8 +36,11 @@ const PlatformDetailsContainer = async ({ params, searchParams }: Props) => {
   return (
     <section className="max-container mt-24">
       <PlatformDetailsNavigation path={platform.name} />
-      <h1 className="md:text-5xl sm:text-4xl min-[400px]:text-3xl text-2xl font-bold my-6 text-[#e91e3f]">
-        Games for {platform.name}
+      <h1 className="md:text-5xl sm:text-4xl min-[400px]:text-3xl text-2xl font-bold my-6">
+        <span className="bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
+          Games for
+        </span>{" "}
+        <span className="text-[#e91e3f]">{platform.name}</span>
       </h1>
       <PlatformPageFilters />
 

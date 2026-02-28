@@ -32,10 +32,12 @@ const MobileNavSearch = () => {
       addRecentSearch(query);
       setRecents(getRecentSearches());
       setSearch("");
+      if (inputRef.current) inputRef.current.value = "";
       setOpenSearch(false);
     } else {
       params.delete("search");
       setSearch("");
+      if (inputRef.current) inputRef.current.value = "";
       router.push(pathname);
     }
   };

@@ -66,6 +66,7 @@ const NavSearch = () => {
     } else {
       params.delete("search");
       setSearch("");
+      if (inputRef.current) inputRef.current.value = "";
       router.push(pathname);
     }
   };

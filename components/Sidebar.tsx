@@ -17,7 +17,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { signOut, useSession } from "@/app/lib/auth-client";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const navLinks = [
@@ -32,7 +32,12 @@ const Sidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { data: session } = useSession();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleClose = () => setOpenMenu(false);
 
@@ -113,7 +118,7 @@ const Sidebar = () => {
         </div>
 
         {/* User Profile */}
-        {session && (
+        {mounted && session && (
           <div className="px-4 mt-6">
             <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all cursor-pointer group">
               <div className="relative min-[375px]:size-12 size-11 flex items-center justify-center rounded-full overflow-hidden transition-all bg-neutral-600 text-white">
