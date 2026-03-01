@@ -107,7 +107,7 @@ const BrowseBanner = () => {
           {/* Description with better typography */}
           <p className="text-sm min-[375px]:text-base sm:text-lg md:text-xl text-white/60 max-w-2xl mt-2 min-[350px]:mt-2.5 sm:mt-4">
             Explore our massive collection of{" "}
-            <span className="text-[#e91e3f] font-semibold">500,000+ games</span>{" "}
+            <span className="text-[#e91e3f] font-semibold">890,000+ games</span>{" "}
             across every genres and platforms. Find your favourite games with
             advance filters.
           </p>
@@ -171,10 +171,10 @@ const BrowseBanner = () => {
           </div>
 
           {/* Quick stats */}
-          <div className="flex items-center justify-center gap-6 md:gap-10 mt-12">
+          <div className="flex items-center justify-center gap-6 md:gap-10 min-[375px]:mt-12 mt-9">
             <div className="text-center">
               <div className="text-lg min-[350px]:text-xl min-[375px]:text-2xl md:text-3xl font-bold text-white">
-                500k+
+                890k+
               </div>
               <div className="text-[10px] min-[375px]:text-xs text-white/40 uppercase tracking-wider mt-1">
                 Games

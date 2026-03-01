@@ -74,12 +74,15 @@ export interface GameAchievements {
   percent: string;
 }
 
-export async function getGames(): Promise<RAWGResponse<GamesType>> {
+export async function getGames(
+  search: string,
+  page?: number,
+): Promise<RAWGResponse<GamesType>> {
   "use cache";
   cacheLife("hours");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games?&page_size=50&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?search=${encodeURIComponent(search)}&page=${page ? page : "1"}&page_size=50&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["games"],

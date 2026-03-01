@@ -53,13 +53,13 @@ const GameNavigation = ({ name, skeleton }: Props) => {
         </>
       )}
 
-      {from === "browser" && (
+      {from === "browse" && (
         <>
           <div
             onClick={() => router.back()}
             className="hover:text-white transition-colors cursor-pointer"
           >
-            Browser
+            Browse
           </div>
           <ChevronRight className="min-[400px]:size-4 size-3.5 min-[400px]:mt-0 mt-[3px] shrink-0" />
           {!skeleton ? (

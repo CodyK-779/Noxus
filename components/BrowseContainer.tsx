@@ -1,6 +1,8 @@
-import { getGames } from "@/actions/games-action";
 import { BrowseSearch } from "@/app/(root)/browse/page";
 import BrowseBanner from "@/components/BrowseBanner";
+import BrowseBody from "./BrowseBody";
+import { getUser } from "@/actions/user-action";
+import BrowseFeatured from "./BrowseFeatured";
 
 interface Props {
   searchParams: Promise<BrowseSearch>;
@@ -8,11 +10,14 @@ interface Props {
 
 const BrowseContainer = async ({ searchParams }: Props) => {
   const search = (await searchParams).search || "";
-  const games = await getGames();
+  const user = await getUser();
+
+  const wishlistItems = user?.wishlist?.items;
 
   return (
     <>
       <BrowseBanner />
+      <BrowseFeatured />
     </>
   );
 };
