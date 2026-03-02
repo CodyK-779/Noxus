@@ -14,9 +14,11 @@ import {
 import { WishlistItemType } from "./utils/interfaceTypes";
 import GamesCount from "./GamesCount";
 import { Skeleton } from "./ui/skeleton";
+import useDebounce from "./utils/useDebounce";
+import { useMenu } from "./MenuProvider";
 
 interface Props {
-  search: string;
+  initialSearch: string;
   count: number;
   wishlistItems: WishlistItemType[] | undefined;
 }
@@ -27,22 +29,24 @@ const scoreColors = (score: number) => {
   return "text-green-500";
 };
 
-const BrowseGames = ({ search, count, wishlistItems }: Props) => {
+const BrowseGames = ({ initialSearch, count, wishlistItems }: Props) => {
   const [games, setGames] = useState<GamesType[]>([]);
+  const { browseSearch } = useMenu();
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+  const debouncedValue = useDebounce(browseSearch, 500);
 
   const observerRef = useRef<HTMLDivElement | null>(null);
   const loadingRef = useRef(false);
 
   const fetchGames = useCallback(async () => {
-    if (!hasMore || loadingRef.current) return;
+    if (!hasMore || loadingRef.current || loading) return;
 
     loadingRef.current = true;
     setLoading(true);
 
-    const data = await getGames(search, page);
+    const data = await getGames(initialSearch, page);
 
     setGames((prev) => [...prev, ...data.results]);
     setHasMore(Boolean(data.next));
@@ -50,17 +54,19 @@ const BrowseGames = ({ search, count, wishlistItems }: Props) => {
 
     loadingRef.current = false;
     setLoading(false);
-  }, [search, page, hasMore]);
+  }, [initialSearch, page, hasMore]);
 
   useEffect(() => {
-    fetchGames();
+    if (games.length === 0) {
+      fetchGames();
+    }
   }, []);
 
   useEffect(() => {
     setGames([]);
     setPage(1);
     setHasMore(true);
-  }, [search]);
+  }, [initialSearch]);
 
   useEffect(() => {
     if (!observerRef.current) return;
@@ -82,7 +88,7 @@ const BrowseGames = ({ search, count, wishlistItems }: Props) => {
   return (
     <div className="col-span-4">
       <GamesCount count={count} />
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
+      <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-4 gap-2.5 mt-6">
         {games.map((game) => (
           <div key={game.id} className="relative group min-[400px]:mb-8 mb-4">
             <Link href={`/browse/games/${game.slug}?from=browse`}>

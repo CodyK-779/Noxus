@@ -22,7 +22,7 @@ const BrowseFeatured = () => {
     <section className="max-container mt-6">
       {/* Header */}
       <div className="flex items-end justify-between">
-        <h1 className="text-2xl min-[425px]:text-3xl sm:text-4xl font-bold ">
+        <h1 className="text-[22px] min-[350px]:text-2xl min-[425px]:text-3xl sm:text-4xl font-bold ">
           <span className="bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
             Explore
           </span>{" "}
@@ -74,7 +74,7 @@ const BrowseFeatured = () => {
           1024: { slidesPerView: 4, spaceBetween: 14 },
           1280: { slidesPerView: 4, spaceBetween: 20 },
         }}
-        className="mt-6"
+        className="mt-5 min-[350px]:mt-6"
       >
         {cards.map((card) => (
           <SwiperSlide key={card.title}>

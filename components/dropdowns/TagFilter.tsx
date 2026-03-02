@@ -54,7 +54,9 @@ const TagFilter = () => {
           variant="outline"
           className={`flex items-center justify-between gap-4 min-[350px]:text-sm text-xs ${tag.name === "" ? "text-muted-foreground" : ""} `}
         >
-          <p>{tag.name !== "" ? tag.name : "Filter Tags"}</p>
+          <p className="truncate">
+            {tag.name !== "" ? tag.name : "Filter Tags"}
+          </p>
           <ChevronDown className="size-4" />
         </Button>
       </DropdownMenuTrigger>

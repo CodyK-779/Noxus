@@ -2,7 +2,8 @@
 
 import { FilterIcon, SearchIcon, XIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { useMenu } from "./MenuProvider";
 
 const popularGenres = [
   { name: "Action", id: 4 },
@@ -14,9 +15,14 @@ const popularGenres = [
 const BrowseBanner = () => {
   const searchParams = useSearchParams();
   const initialSearch = searchParams.get("search") || "";
-  const [search, setSearch] = useState(initialSearch);
+  // const { browseSearch, setBrowseSearch } = useMenu();
+  const [search, setSearch] = useState("");
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
-  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setSearch(initialSearch);
+  }, []);
 
   const handleSearch = (e: FormEvent) => {
     e.preventDefault();
@@ -122,7 +128,7 @@ const BrowseBanner = () => {
                 ref={inputRef}
                 enterKeyHint="search"
                 placeholder="Search by game title, genre, or platform..."
-                className="w-full sm:text-base min-[375px]:text-sm text-[13px] py-3 sm:pl-14 min-[375px]:pl-11 pl-10 sm:pr-24 min-[375px]:pr-[85px] pr-20 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl text-white placeholder:text-white/40 font-medium focus:outline-none focus:border-[#e91e3f]/50 focus:ring-2 focus:ring-[#e91e3f]/20 transition-all duration-300 group-hover:border-white/20"
+                className="w-full sm:text-base min-[375px]:text-sm text-[13px] py-3 sm:pl-14 min-[375px]:pl-11 pl-10 sm:pr-24 min-[375px]:pr-[85px] pr-20 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 font-medium focus:outline-none focus:border-[#e91e3f]/50 focus:ring-2 focus:ring-[#e91e3f]/20 transition-all duration-300 group-hover:border-white/20"
               />
 
               {/* Search icon */}

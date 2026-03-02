@@ -18,11 +18,13 @@ interface Props {
 interface MenuContextType {
   search: string;
   openMenu: boolean;
+  browseSearch: string;
   openSearch: boolean;
   recents: string[] | [];
   setSearch: Dispatch<SetStateAction<string>>;
   setOpenMenu: Dispatch<SetStateAction<boolean>>;
   setOpenSearch: Dispatch<SetStateAction<boolean>>;
+  setBrowseSearch: Dispatch<SetStateAction<string>>;
   setRecents: Dispatch<SetStateAction<string[] | []>>;
   inputRef: RefObject<HTMLInputElement | null>;
 }
@@ -43,6 +45,7 @@ const MenuProvider = ({ children }: Props) => {
   const [search, setSearch] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
+  const [browseSearch, setBrowseSearch] = useState("");
   const [recents, setRecents] = useState<string[] | []>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -53,9 +56,11 @@ const MenuProvider = ({ children }: Props) => {
         openMenu,
         openSearch,
         recents,
+        browseSearch,
         setSearch,
         setOpenMenu,
         setOpenSearch,
+        setBrowseSearch,
         setRecents,
         inputRef,
       }}

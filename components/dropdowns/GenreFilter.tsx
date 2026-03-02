@@ -54,7 +54,9 @@ const GenreFilter = () => {
           variant="outline"
           className={`flex items-center justify-between gap-4 min-[350px]:text-sm text-xs ${genre.name === "" ? "text-muted-foreground" : ""} `}
         >
-          <p>{genre.name !== "" ? genre.name : "Filter Genre"}</p>
+          <p className="truncate">
+            {genre.name !== "" ? genre.name : "Filter Genre"}
+          </p>
           <ChevronDown className="size-4" />
         </Button>
       </DropdownMenuTrigger>

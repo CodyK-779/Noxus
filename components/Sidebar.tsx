@@ -154,7 +154,7 @@ const Sidebar = () => {
                 pathname === link.link ||
                 (link.link !== "/" && pathname.startsWith(link.link));
 
-              if (link.title === "Wishlist" && !session) return;
+              if (mounted && link.title === "Wishlist" && !session) return;
 
               return (
                 <li key={link.title}>
@@ -200,7 +200,7 @@ const Sidebar = () => {
 
         {/* Footer actions */}
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/5 bg-gradient-to-t from-neutral-900 to-transparent">
-          {session ? (
+          {mounted && session ? (
             <Button
               size="lg"
               onClick={handleSignout}

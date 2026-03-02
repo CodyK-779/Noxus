@@ -74,7 +74,7 @@ const PlatformFilter = ({ platforms }: Props) => {
           variant="outline"
           className={`flex items-center justify-between gap-4 min-[350px]:text-sm text-xs ${platformValue.label === "" ? "text-muted-foreground" : ""} `}
         >
-          <p>
+          <p className="truncate">
             {platformValue.label !== ""
               ? platformValue.label
               : "Filter Platform"}

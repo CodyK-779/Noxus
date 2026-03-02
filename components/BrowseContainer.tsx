@@ -4,6 +4,7 @@ import BrowseBody from "./BrowseBody";
 import { getUser } from "@/actions/user-action";
 import BrowseFeatured from "./BrowseFeatured";
 import { getGames } from "@/actions/games-action";
+import { getParentPlatforms } from "@/actions/platforms-action";
 
 interface Props {
   searchParams: Promise<BrowseSearch>;
@@ -11,7 +12,11 @@ interface Props {
 
 const BrowseContainer = async ({ searchParams }: Props) => {
   const search = (await searchParams).search || "";
-  const [games, user] = await Promise.all([getGames(search), getUser()]);
+  const [games, platforms, user] = await Promise.all([
+    getGames(search),
+    getParentPlatforms(),
+    getUser(),
+  ]);
 
   const wishlistItems = user?.wishlist?.items;
 
@@ -21,6 +26,7 @@ const BrowseContainer = async ({ searchParams }: Props) => {
       <BrowseFeatured />
       <BrowseBody
         search={search}
+        platforms={platforms}
         wishlistItems={wishlistItems}
         count={games.count}
       />
