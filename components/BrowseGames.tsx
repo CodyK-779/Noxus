@@ -3,7 +3,7 @@
 import { GamesType, getGames } from "@/actions/games-action";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import WishlistButton from "./WishlistButton";
 import {
   convertGenreArray,
@@ -12,9 +12,12 @@ import {
   platformIcons,
 } from "./utils/utils";
 import { WishlistItemType } from "./utils/interfaceTypes";
+import GamesCount from "./GamesCount";
+import { Skeleton } from "./ui/skeleton";
 
 interface Props {
   search: string;
+  count: number;
   wishlistItems: WishlistItemType[] | undefined;
 }
 
@@ -24,43 +27,43 @@ const scoreColors = (score: number) => {
   return "text-green-500";
 };
 
-const BrowseGames = ({ search, wishlistItems }: Props) => {
+const BrowseGames = ({ search, count, wishlistItems }: Props) => {
   const [games, setGames] = useState<GamesType[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
 
-  const observeRef = useRef<HTMLDivElement | null>(null);
+  const observerRef = useRef<HTMLDivElement | null>(null);
+  const loadingRef = useRef(false);
 
-  const fetchGames = async () => {
-    if (loading || !hasMore) return;
+  const fetchGames = useCallback(async () => {
+    if (!hasMore || loadingRef.current) return;
 
+    loadingRef.current = true;
     setLoading(true);
 
-    try {
-      const data = await getGames(search, page);
+    const data = await getGames(search, page);
 
-      setGames((prev) => [...prev, ...data.results]);
-      // setGames((prev) => {
-      //   const newGames = data.results.filter((ng) =>
-      //     prev.some((existing) => existing.id === ng.id),
-      //   );
+    setGames((prev) => [...prev, ...data.results]);
+    setHasMore(Boolean(data.next));
+    setPage((prev) => prev + 1);
 
-      //   return [...prev, ...newGames];
-      // });
-      setHasMore(Boolean(data.next));
-      setPage((prev) => prev + 1);
-    } finally {
-      setLoading(false);
-    }
-  };
+    loadingRef.current = false;
+    setLoading(false);
+  }, [search, page, hasMore]);
 
   useEffect(() => {
     fetchGames();
   }, []);
 
   useEffect(() => {
-    if (!observeRef.current) return;
+    setGames([]);
+    setPage(1);
+    setHasMore(true);
+  }, [search]);
+
+  useEffect(() => {
+    if (!observerRef.current) return;
 
     const observe = new IntersectionObserver(
       (entries) => {
@@ -71,16 +74,17 @@ const BrowseGames = ({ search, wishlistItems }: Props) => {
       { rootMargin: "200px" },
     );
 
-    observe.observe(observeRef.current);
+    observe.observe(observerRef.current);
 
     return () => observe.disconnect();
   }, [fetchGames, hasMore]);
 
   return (
     <div className="col-span-4">
-      <div className="grid grid-cols-4 gap-4">
+      <GamesCount count={count} />
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
         {games.map((game) => (
-          <div key={game.id} className="relative group min-[400px]:mb-10 mb-4">
+          <div key={game.id} className="relative group min-[400px]:mb-8 mb-4">
             <Link href={`/browse/games/${game.slug}?from=browse`}>
               <div className="relative aspect-[3/4] rounded-md overflow-hidden">
                 {game.background_image ? (
@@ -155,9 +159,16 @@ const BrowseGames = ({ search, wishlistItems }: Props) => {
 
       {/* Sentinel */}
       {hasMore && (
-        <div ref={observeRef} className="h-20 flex items-center justify-center">
+        <div ref={observerRef} className="h-20">
           {loading && (
-            <p className="text-neutral-400 text-sm">Loading more games...</p>
+            <div className=" grid grid-cols-4 gap-4">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <Skeleton
+                  key={i}
+                  className="aspect-[3/4] rounded-md min-[400px]:mb-8 mb-4"
+                />
+              ))}
+            </div>
           )}
         </div>
       )}
