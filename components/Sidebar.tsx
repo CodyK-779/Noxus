@@ -72,9 +72,6 @@ const Sidebar = () => {
 
       <aside
         className={`fixed min-[850px]:hidden top-0 right-0 z-30 min-h-screen w-[380px] max-[640px]:w-full bg-gradient-to-b from-neutral-900 via-neutral-900/95 to-[#0a0a0a] backdrop-blur-xl shadow-2xl transition-transform duration-300 ease-out ${openMenu ? "translate-x-0" : "translate-x-full"}`}
-        style={{
-          boxShadow: "-10px 0 30px -15px rgba(233,30,63,0.3)",
-        }}
       >
         {/* Animated background pattern */}
         <div className="absolute inset-0 opacity-5">

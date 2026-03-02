@@ -7,8 +7,16 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { addRecentSearch, getRecentSearches } from "./utils/recentSearches";
 
 const MobileNavSearch = () => {
-  const { openSearch, search, setOpenSearch, setSearch, setRecents, inputRef } =
-    useMenu();
+  const {
+    openSearch,
+    search,
+    setOpenSearch,
+    setSearch,
+    setRecents,
+    setBrowseSearch,
+    inputRef,
+    filterRef,
+  } = useMenu();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -32,13 +40,15 @@ const MobileNavSearch = () => {
       addRecentSearch(query);
       setRecents(getRecentSearches());
       setSearch("");
+      setBrowseSearch("");
       if (inputRef.current) inputRef.current.value = "";
+      if (filterRef.current) filterRef.current.value = "";
       setOpenSearch(false);
     } else {
       params.delete("search");
       setSearch("");
       if (inputRef.current) inputRef.current.value = "";
-      router.push(pathname);
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
     }
   };
 
@@ -51,7 +61,7 @@ const MobileNavSearch = () => {
       inputRef.current.value = "";
       inputRef.current.focus();
     }
-    router.push(pathname, { scroll: false });
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   const handleCloseSearch = () => {

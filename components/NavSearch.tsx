@@ -16,7 +16,14 @@ const NavSearch = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { search, inputRef, setOpenSearch, setSearch } = useMenu();
+  const {
+    search,
+    inputRef,
+    setOpenSearch,
+    setSearch,
+    setBrowseSearch,
+    filterRef,
+  } = useMenu();
   const debouncedValue = useDebounce(search, 500);
 
   useEffect(() => {
@@ -62,7 +69,9 @@ const NavSearch = () => {
       params.set("search", query);
       router.push(`/browse?${params.toString()}`);
       setSearch("");
+      setBrowseSearch("");
       if (inputRef.current) inputRef.current.value = "";
+      if (filterRef.current) filterRef.current.value = "";
     } else {
       params.delete("search");
       setSearch("");
@@ -79,7 +88,7 @@ const NavSearch = () => {
 
     if (inputRef.current) inputRef.current.value = "";
 
-    router.push(pathname, { scroll: false });
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   const selectedSearch = searchParams.get("search") || "";

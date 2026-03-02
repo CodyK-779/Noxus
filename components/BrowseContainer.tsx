@@ -1,4 +1,4 @@
-import { BrowseSearch } from "@/app/(root)/browse/page";
+import { BrowseParams, BrowseSearch } from "@/app/(root)/browse/page";
 import BrowseBanner from "@/components/BrowseBanner";
 import BrowseBody from "./BrowseBody";
 import { getUser } from "@/actions/user-action";
@@ -8,12 +8,18 @@ import { getParentPlatforms } from "@/actions/platforms-action";
 
 interface Props {
   searchParams: Promise<BrowseSearch>;
+  params: Promise<BrowseParams>;
 }
 
-const BrowseContainer = async ({ searchParams }: Props) => {
+const BrowseContainer = async ({ searchParams, params }: Props) => {
   const search = (await searchParams).search || "";
+  const platformId = (await params).platform || "";
+  const genreId = (await params).genre || "";
+  const dates = (await params).date || "";
+  const tagId = (await params).tag || "";
+  const score = (await params).metascore || "";
   const [games, platforms, user] = await Promise.all([
-    getGames(search),
+    getGames(search, platformId, genreId, dates, tagId, score),
     getParentPlatforms(),
     getUser(),
   ]);

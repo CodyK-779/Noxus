@@ -17,10 +17,9 @@ interface Props {
 }
 
 const BrowseFilter = ({ platforms }: Props) => {
-  const { browseSearch, setBrowseSearch } = useMenu();
+  const { browseSearch, filterRef, setBrowseSearch } = useMenu();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (!browseSearch) return;
@@ -42,22 +41,22 @@ const BrowseFilter = ({ platforms }: Props) => {
     if (search) {
       params.delete("search");
       setBrowseSearch("");
-      if (inputRef.current) inputRef.current.value = "";
+      if (filterRef.current) filterRef.current.value = "";
       router.push("/browse", { scroll: false });
     }
 
     setBrowseSearch("");
-    if (inputRef.current) inputRef.current.value = "";
+    if (filterRef.current) filterRef.current.value = "";
   };
 
   return (
     <div className="sticky h-fit lg:block hidden col-span-1 rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 py-4 px-3 mt-6">
       <h3 className="text-xl font-semibold">Filters</h3>
-      <form className="relative mt-5">
+      <div className="relative mt-5">
         <input
           type="text"
           onChange={(e) => setBrowseSearch(e.target.value)}
-          ref={inputRef}
+          ref={filterRef}
           placeholder="Game name"
           className="w-full text-sm bg-neutral-800 text-neutral-100 pl-8 pr-8 py-2 focus:outline-none rounded-md"
         />
@@ -68,7 +67,7 @@ const BrowseFilter = ({ platforms }: Props) => {
             <X className="absolute right-2 top-1/2 -translate-y-1/2 size-3.5 text-neutral-200 cursor-pointer" />
           </button>
         )}
-      </form>
+      </div>
 
       <hr className="my-6" />
 

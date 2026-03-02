@@ -76,13 +76,18 @@ export interface GameAchievements {
 
 export async function getGames(
   search: string,
+  platformId?: string,
+  genreId?: string,
+  dates?: string,
+  tagId?: string,
+  score?: string,
   page?: number,
 ): Promise<RAWGResponse<GamesType>> {
   "use cache";
   cacheLife("hours");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games?search=${encodeURIComponent(search)}&page=${page ? page : "1"}&page_size=50&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?search=${encodeURIComponent(search)}${platformId && `&platforms=${platformId}`}${genreId && `&genres=${genreId}`}${dates && `&dates=${dates}`}${tagId && `&tags=${tagId}`}${score && `&metacritic=${score}`}&page=${page ? page : "1"}&page_size=50&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["games"],

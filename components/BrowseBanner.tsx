@@ -15,13 +15,14 @@ const popularGenres = [
 const BrowseBanner = () => {
   const searchParams = useSearchParams();
   const initialSearch = searchParams.get("search") || "";
-  // const { browseSearch, setBrowseSearch } = useMenu();
+  const { filterRef, setBrowseSearch } = useMenu();
   const [search, setSearch] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     setSearch(initialSearch);
+    if (inputRef.current) inputRef.current.value = initialSearch;
   }, []);
 
   const handleSearch = (e: FormEvent) => {
@@ -31,6 +32,8 @@ const BrowseBanner = () => {
     const query = inputRef.current?.value;
 
     if (query) {
+      setBrowseSearch("");
+      if (filterRef.current) filterRef.current.value = "";
       params.set("search", query);
       router.push(`/browse?${params.toString()}`, { scroll: false });
     } else {
@@ -58,7 +61,7 @@ const BrowseBanner = () => {
 
     if (search) {
       params.delete("search");
-      router.push(`/browse`, { scroll: false });
+      router.push(`/browse?${params.toString()}`, { scroll: false });
     }
 
     setSearch("");

@@ -16,6 +16,7 @@ import GamesCount from "./GamesCount";
 import { Skeleton } from "./ui/skeleton";
 import useDebounce from "./utils/useDebounce";
 import { useMenu } from "./MenuProvider";
+import { useSearchParams } from "next/navigation";
 
 interface Props {
   initialSearch: string;
@@ -36,9 +37,17 @@ const BrowseGames = ({ initialSearch, count, wishlistItems }: Props) => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
   const debouncedValue = useDebounce(browseSearch, 500);
+  const searchParams = useSearchParams();
 
   const observerRef = useRef<HTMLDivElement | null>(null);
   const loadingRef = useRef(false);
+
+  const currentSearch = debouncedValue || initialSearch;
+  const platformId = searchParams.get("platform") || "";
+  const genreId = searchParams.get("genre") || "";
+  const date = searchParams.get("date") || "";
+  const tagId = searchParams.get("tag") || "";
+  const score = searchParams.get("metascore") || "";
 
   const fetchGames = useCallback(async () => {
     if (!hasMore || loadingRef.current || loading) return;
@@ -46,7 +55,15 @@ const BrowseGames = ({ initialSearch, count, wishlistItems }: Props) => {
     loadingRef.current = true;
     setLoading(true);
 
-    const data = await getGames(initialSearch, page);
+    const data = await getGames(
+      currentSearch,
+      platformId,
+      genreId,
+      date,
+      tagId,
+      score,
+      page,
+    );
 
     setGames((prev) => [...prev, ...data.results]);
     setHasMore(Boolean(data.next));
@@ -54,7 +71,7 @@ const BrowseGames = ({ initialSearch, count, wishlistItems }: Props) => {
 
     loadingRef.current = false;
     setLoading(false);
-  }, [initialSearch, page, hasMore]);
+  }, [currentSearch, platformId, genreId, date, tagId, score, page, hasMore]);
 
   useEffect(() => {
     if (games.length === 0) {
@@ -66,7 +83,7 @@ const BrowseGames = ({ initialSearch, count, wishlistItems }: Props) => {
     setGames([]);
     setPage(1);
     setHasMore(true);
-  }, [initialSearch]);
+  }, [platformId, genreId, date, tagId, score, currentSearch]);
 
   useEffect(() => {
     if (!observerRef.current) return;
