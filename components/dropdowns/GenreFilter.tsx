@@ -14,13 +14,17 @@ import { genreData } from "@/data/genre-data";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
+interface Props {
+  browseFilter?: boolean;
+}
+
 const getGenreLabel = (value: string) => {
   if (!value) return "";
 
   return genreData.find((g) => g.id === value)?.name || "";
 };
 
-const GenreFilter = () => {
+const GenreFilter = ({ browseFilter }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -44,12 +48,15 @@ const GenreFilter = () => {
       setGenre({ name: "", value: "" });
     }
 
-    router.push(`?${params.toString()}`, { scroll: false });
+    router.push(`?${params.toString()}`, { scroll: browseFilter });
   };
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="sm:min-w-36 max-[639px]:w-full">
+      <DropdownMenuTrigger
+        asChild
+        className={`${browseFilter ? "w-full" : "sm:min-w-36"} max-[639px]:w-full`}
+      >
         <Button
           variant="outline"
           className={`flex items-center justify-between gap-4 min-[350px]:text-sm text-xs ${genre.name === "" ? "text-muted-foreground" : ""} `}

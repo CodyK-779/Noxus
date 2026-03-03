@@ -14,13 +14,17 @@ import { ChevronDown, Check } from "lucide-react";
 import { Button } from "./ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 
+interface Props {
+  browseFilter?: boolean;
+}
+
 const getScoreLabel = (value: string) => {
   if (!value) return "";
 
   return metacriticData.find((m) => m.value === value)?.score || "";
 };
 
-const MetacriticFilter = () => {
+const MetacriticFilter = ({ browseFilter }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -44,12 +48,15 @@ const MetacriticFilter = () => {
       setMetaScore({ score: "", value: "" });
     }
 
-    router.push(`?${params.toString()}`, { scroll: false });
+    router.push(`?${params.toString()}`, { scroll: browseFilter });
   };
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="sm:min-w-36 max-[639px]:w-full">
+      <DropdownMenuTrigger
+        asChild
+        className={`${browseFilter ? "w-full" : "sm:min-w-36"} max-[639px]:w-full`}
+      >
         <Button
           variant="outline"
           className={`flex items-center justify-between gap-4 min-[350px]:text-sm text-xs ${metaScore.score === "" ? "text-muted-foreground" : ""} `}

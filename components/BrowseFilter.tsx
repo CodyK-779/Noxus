@@ -9,7 +9,7 @@ import MetacriticFilter from "./MetacriticFilter";
 import { RAWGResponse } from "./utils/interfaceTypes";
 import { Search, X } from "lucide-react";
 import { useMenu } from "./MenuProvider";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface Props {
@@ -50,7 +50,7 @@ const BrowseFilter = ({ platforms }: Props) => {
   };
 
   return (
-    <div className="sticky h-fit lg:block hidden col-span-1 rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 py-4 px-3 mt-6">
+    <div className="sticky top-[90px] h-fit lg:col-span-1 lg:block hidden rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 py-4 px-3 mt-6">
       <h3 className="text-xl font-semibold">Filters</h3>
       <div className="relative mt-5">
         <input
@@ -72,11 +72,11 @@ const BrowseFilter = ({ platforms }: Props) => {
       <hr className="my-6" />
 
       <div className="flex flex-col mt-5 gap-3">
-        <PlatformFilter platforms={platforms} />
-        <DateFilter />
-        <GenreFilter />
-        <TagFilter />
-        <MetacriticFilter />
+        <DateFilter browseFilter />
+        <PlatformFilter platforms={platforms} browseFilter />
+        <GenreFilter browseFilter />
+        <TagFilter browseFilter />
+        <MetacriticFilter browseFilter />
       </div>
     </div>
   );

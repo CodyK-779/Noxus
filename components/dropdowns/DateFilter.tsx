@@ -18,6 +18,10 @@ import { Button } from "../ui/button";
 import { dates } from "@/data/date-data";
 import { useRouter, useSearchParams } from "next/navigation";
 
+interface Props {
+  browseFilter?: boolean;
+}
+
 const getYearFromRange = (value: string) => {
   if (!value) return "";
 
@@ -29,7 +33,7 @@ const getYearFromRange = (value: string) => {
   return "";
 };
 
-const DateFilter = () => {
+const DateFilter = ({ browseFilter }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -53,12 +57,15 @@ const DateFilter = () => {
       setReleaseDate({ year: "", value: "" });
     }
 
-    router.push(`?${params.toString()}`, { scroll: false });
+    router.push(`?${params.toString()}`, { scroll: browseFilter });
   };
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="sm:min-w-36 max-[639px]:w-full">
+      <DropdownMenuTrigger
+        asChild
+        className={`${browseFilter ? "w-full" : "sm:min-w-36"} max-[639px]:w-full`}
+      >
         <Button
           variant="outline"
           className={`flex items-center justify-between gap-4 min-[350px]:text-sm text-xs ${releaseDate.year === "" ? "text-muted-foreground" : ""} `}

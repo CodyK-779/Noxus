@@ -14,13 +14,17 @@ import { Button } from "../ui/button";
 import { ChevronDown, Check } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 
+interface Props {
+  browseFilter?: boolean;
+}
+
 const getTagLabel = (value: string) => {
   if (!value) return "";
 
   return tagData.find((t) => t.id === value)?.name || "";
 };
 
-const TagFilter = () => {
+const TagFilter = ({ browseFilter }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -44,12 +48,15 @@ const TagFilter = () => {
       setTag({ name: "", value: "" });
     }
 
-    router.push(`?${params.toString()}`, { scroll: false });
+    router.push(`?${params.toString()}`, { scroll: browseFilter });
   };
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="sm:min-w-36 max-[639px]:w-full">
+      <DropdownMenuTrigger
+        asChild
+        className={`${browseFilter ? "w-full" : "sm:min-w-36"} max-[639px]:w-full`}
+      >
         <Button
           variant="outline"
           className={`flex items-center justify-between gap-4 min-[350px]:text-sm text-xs ${tag.name === "" ? "text-muted-foreground" : ""} `}

@@ -17,6 +17,7 @@ import { Skeleton } from "./ui/skeleton";
 import useDebounce from "./utils/useDebounce";
 import { useMenu } from "./MenuProvider";
 import { useSearchParams } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
 interface Props {
   initialSearch: string;
@@ -103,7 +104,7 @@ const BrowseGames = ({ initialSearch, count, wishlistItems }: Props) => {
   }, [fetchGames, hasMore]);
 
   return (
-    <div className="col-span-4">
+    <div className="lg:col-span-4">
       <GamesCount count={count} />
       <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-4 gap-2.5 mt-6">
         {games.map((game) => (
@@ -182,15 +183,23 @@ const BrowseGames = ({ initialSearch, count, wishlistItems }: Props) => {
 
       {/* Sentinel */}
       {hasMore && (
-        <div ref={observerRef} className="h-20">
-          {loading && (
-            <div className=" grid grid-cols-4 gap-4">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <Skeleton
-                  key={i}
-                  className="aspect-[3/4] rounded-md min-[400px]:mb-8 mb-4"
-                />
+        <div ref={observerRef} className="h-10">
+          {loading && games.length === 0 ? (
+            <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-4 gap-2.5">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="min-[400px]:mb-8 mb-4">
+                  <Skeleton className="aspect-[3/4] rounded-md " />
+
+                  <Skeleton className="mt-3 mb-0.5 w-full min-[400px]:h-3.5 h-3" />
+                  <Skeleton className="min-[400px]:mt-3 mt-2.5 w-full min-[400px]:h-4 h-3" />
+
+                  <Skeleton className="min-[400px]:w-20 w-14 min-[400px]:h-3 h-2.5 min-[400px]:mt-2.5 mt-2" />
+                </div>
               ))}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center">
+              <Loader2 className="animate-spin" />
             </div>
           )}
         </div>

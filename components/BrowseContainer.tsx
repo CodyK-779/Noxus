@@ -5,6 +5,7 @@ import { getUser } from "@/actions/user-action";
 import BrowseFeatured from "./BrowseFeatured";
 import { getGames } from "@/actions/games-action";
 import { getParentPlatforms } from "@/actions/platforms-action";
+import MBBrowseFilter from "./MBBrowseFilter";
 
 interface Props {
   searchParams: Promise<BrowseSearch>;
@@ -36,6 +37,7 @@ const BrowseContainer = async ({ searchParams, params }: Props) => {
         wishlistItems={wishlistItems}
         count={games.count}
       />
+      <MBBrowseFilter platforms={platforms} />
     </>
   );
 };

@@ -21,11 +21,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 interface Props {
   platforms: RAWGResponse<ParentPlatforms>;
+  browseFilter?: boolean;
 }
 
 const count = 40;
 
-const PlatformFilter = ({ platforms }: Props) => {
+const PlatformFilter = ({ platforms, browseFilter }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -64,12 +65,15 @@ const PlatformFilter = ({ platforms }: Props) => {
       setPlatformValue({ label: "", value: "" });
     }
 
-    router.push(`?${params.toString()}`, { scroll: false });
+    router.push(`?${params.toString()}`, { scroll: browseFilter });
   };
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="sm:min-w-36 max-[639px]:w-full">
+      <DropdownMenuTrigger
+        asChild
+        className={`${browseFilter ? "w-full" : "sm:min-w-36"} max-[639px]:w-full`}
+      >
         <Button
           variant="outline"
           className={`flex items-center justify-between gap-4 min-[350px]:text-sm text-xs ${platformValue.label === "" ? "text-muted-foreground" : ""} `}
