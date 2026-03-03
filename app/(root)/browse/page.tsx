@@ -1,4 +1,5 @@
 import BrowseContainer from "@/components/BrowseContainer";
+import BrowseSkeleton from "@/components/skeletons/BrowseSkeleton";
 import { Suspense } from "react";
 
 export interface BrowseSearch {
@@ -21,7 +22,7 @@ export default function BrowsePage({
   params: Promise<BrowseParams>;
 }) {
   return (
-    <Suspense>
+    <Suspense fallback={<BrowseSkeleton />}>
       <BrowseContainer searchParams={searchParams} params={params} />
     </Suspense>
   );

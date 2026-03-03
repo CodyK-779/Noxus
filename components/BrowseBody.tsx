@@ -12,10 +12,7 @@ interface Props {
 
 const BrowseBody = ({ search, wishlistItems, count, platforms }: Props) => {
   return (
-    <section
-      id="games"
-      className="max-container lg:grid grid-cols-5 sm:gap-5 min-[400px]:gap-4 gap-3 mt-10"
-    >
+    <section className="max-container lg:grid grid-cols-5 sm:gap-5 min-[400px]:gap-4 gap-3 mt-10">
       <BrowseGames
         initialSearch={search}
         count={count}

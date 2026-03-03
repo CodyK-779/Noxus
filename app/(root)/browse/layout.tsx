@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function BrowseLayout({ children }: PropsWithChildren) {
   return (
-    <div className="scroll-smooth">
+    <div>
       <main>{children}</main>
     </div>
   );
