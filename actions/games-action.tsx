@@ -214,6 +214,24 @@ export async function getHighRatedGames(
   return res.json();
 }
 
+export async function getBOTY2025(): Promise<RAWGResponse<GamesType>> {
+  "use cache";
+  cacheLife("hours");
+
+  const res = await fetch(
+    `${process.env.RAWG_URL}/games?dates=2025-01-01,2025-12-31&ordering=-rating&page_size=40&key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["trending", "games"],
+      },
+    },
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch trending games");
+
+  return res.json();
+}
+
 export async function getPlatformGames(
   platformId: number,
   dates?: string,

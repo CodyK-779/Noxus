@@ -6,6 +6,8 @@ import { cacheLife } from "next/cache";
 export interface TagType {
   id: number;
   name: string;
+  games_count: number;
+  image_background: string;
 }
 
 export async function getTags(): Promise<RAWGResponse<TagType>> {
@@ -13,7 +15,7 @@ export async function getTags(): Promise<RAWGResponse<TagType>> {
   cacheLife("days");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/tags?key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/tags?page_size=18&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["tags"],

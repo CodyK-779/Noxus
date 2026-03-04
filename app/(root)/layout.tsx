@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import MBSearchResults from "@/components/MBSearchResults";
 import MenuProvider from "@/components/MenuProvider";
 import Navbar from "@/components/Navbar";
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         </Suspense>
         <MBSearchResults />
         <main className="pb-20">{children}</main>
+        <Footer />
       </MenuProvider>
     </div>
   );
