@@ -11,6 +11,7 @@ const Footer = () => {
                 src="/logo-red.png"
                 alt="Logo"
                 fill
+                sizes="44px"
                 className="object-cover"
               />
             </div>

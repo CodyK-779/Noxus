@@ -15,6 +15,7 @@ import UpcomingContainer from "./UpcomingContainer";
 import GameTagsContainer from "./GameTagsContainer";
 import { getTags } from "@/actions/tags-action";
 import Best2025Container from "./Best2025Container";
+import ExploreSection from "./ExploreSection";
 
 const HomeContainer = async () => {
   const [hrGames, genres, newGames, upcomingGames, tags, bGames, user] =
@@ -40,6 +41,7 @@ const HomeContainer = async () => {
       <UpcomingContainer games={upcomingGames} wishlistItems={wishlistItems} />
       <GameTagsContainer tags={tags} />
       <Best2025Container games={bGames} wishlistItems={wishlistItems} />
+      <ExploreSection />
     </>
   );
 };

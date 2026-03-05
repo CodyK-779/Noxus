@@ -17,7 +17,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <Sidebar />
         </Suspense>
         <MBSearchResults />
-        <main className="pb-20">{children}</main>
+        <main className="pb-20 min-h-screen">{children}</main>
         <Footer />
       </MenuProvider>
     </div>
