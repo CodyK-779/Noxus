@@ -1,18 +1,8 @@
 import { getStores } from "@/actions/stores-action";
 import Image from "next/image";
-import Link from "next/link";
-import { platformIcons, platformIconByKey } from "./utils/utils";
-import { getBOTY2025 } from "@/actions/games-action";
-
-const scoreColors = (score: number) => {
-  if (score < 49) return "text-red-500";
-  if (score < 74) return "text-yellow-500";
-  return "text-green-500";
-};
 
 const StoresContainer = async () => {
   const stores = await getStores();
-  const games = await getBOTY2025();
 
   const formatDomain = (domain: string) => {
     try {
@@ -95,65 +85,6 @@ const StoresContainer = async () => {
           </a>
         ))}
       </div>
-
-      <section className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-5 min-[400px]:gap-4 gap-3 pt-14">
-        {games.results.map((game) => (
-          <div key={game.id} className="relative group min-[400px]:mb-10 mb-4">
-            <Link href={`/browse/games/${game.slug}`}>
-              <div className="relative aspect-[3/4] rounded-md overflow-hidden">
-                {game.background_image ? (
-                  <Image
-                    src={game.background_image}
-                    alt={game.name}
-                    fill
-                    sizes="(max-width: 768px) 80vw"
-                    className="object-cover"
-                  />
-                ) : (
-                  <Image
-                    src="/image-placeholder.webp"
-                    alt="Image placeholder"
-                    fill
-                    sizes="(max-width: 768px) 80vw"
-                    className="object-cover"
-                  />
-                )}
-              </div>
-            </Link>
-
-            <div className="flex items-center justify-between mt-2 mb-0.5">
-              <p className="font-medium lg:text-sm text-xs text-neutral-400">
-                {new Date(game.released).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </p>
-              {game.metacritic && (
-                <p
-                  className={`${scoreColors(game.metacritic)} min-[400px]:text-sm text-[13px] font-semibold`}
-                >
-                  {game.metacritic}
-                </p>
-              )}
-            </div>
-
-            <p className="lg:text-base min-[350px]:text-sm text-xs font-bold">
-              {game.name}
-            </p>
-
-            {game.platforms && (
-              <div className="flex items-center gap-1 max-[350px]:mt-0.5">
-                {platformIcons(game.platforms).map((p) => (
-                  <p key={p} className="max-[350px]:text-sm">
-                    {platformIconByKey(p)}
-                  </p>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </section>
     </main>
   );
 };

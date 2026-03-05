@@ -21,6 +21,13 @@ export const cards = [
     tag: "Collection"
   },
   {
+    title: "Best Of 2025",
+    image: "/cards/Best2025.png",
+    link: "/discover/best_2025?from=browse",
+    desc: "Best games of 2025 all in one place.",
+    tag: "Collection"
+  },
+  {
     title: "Platforms",
     image: "/cards/All-Platforms.jpg",
     link: "/discover/platforms",

@@ -1,4 +1,5 @@
 import {
+  getBOTY2025,
   getHighRatedGames,
   getNewGames,
   getUpcomingGames,
@@ -13,15 +14,17 @@ import GamePlatformsContainer from "./GamePlatformsContainer";
 import UpcomingContainer from "./UpcomingContainer";
 import GameTagsContainer from "./GameTagsContainer";
 import { getTags } from "@/actions/tags-action";
+import Best2025Container from "./Best2025Container";
 
 const HomeContainer = async () => {
-  const [hrGames, genres, newGames, upcomingGames, tags, user] =
+  const [hrGames, genres, newGames, upcomingGames, tags, bGames, user] =
     await Promise.all([
       getHighRatedGames(),
       getGenres(),
       getNewGames(),
       getUpcomingGames(),
       getTags(),
+      getBOTY2025(),
       getUser(),
     ]);
 
@@ -36,6 +39,7 @@ const HomeContainer = async () => {
       <GamePlatformsContainer />
       <UpcomingContainer games={upcomingGames} wishlistItems={wishlistItems} />
       <GameTagsContainer tags={tags} />
+      <Best2025Container games={bGames} wishlistItems={wishlistItems} />
     </>
   );
 };

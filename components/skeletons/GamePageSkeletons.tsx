@@ -7,12 +7,14 @@ import PageNavigation from "../PageNavigation";
 interface Props {
   header: string;
   desc: string;
-  filterFor: "new" | "upcoming" | "high";
+  filterFor: "new" | "upcoming" | "high" | "2025";
   path: string;
 }
 
 const GamePageSkeletons = ({ header, desc, filterFor, path }: Props) => {
   const upcomingLabels = ["Filter Platform", "Filter Genre", "Filter Tags"];
+  const bo2025Labels = ["Filter Platform", "Filter Genre", "Filter Tags"];
+
   const newGamesLabels = [
     "Filter Platform",
     "Filter Genre",
@@ -26,9 +28,10 @@ const GamePageSkeletons = ({ header, desc, filterFor, path }: Props) => {
     "Filter Tags",
   ];
 
-  const dropdown = (filterFor: "new" | "upcoming" | "high") => {
+  const dropdown = (filterFor: "new" | "upcoming" | "high" | "2025") => {
     if (filterFor === "new") return newGamesLabels;
     if (filterFor === "high") return hrLabels;
+    if (filterFor === "2025") return bo2025Labels;
     return upcomingLabels;
   };
 

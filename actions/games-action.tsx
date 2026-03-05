@@ -214,12 +214,18 @@ export async function getHighRatedGames(
   return res.json();
 }
 
-export async function getBOTY2025(): Promise<RAWGResponse<GamesType>> {
+export async function getBOTY2025(
+  page?: string,
+  platformId?: string,
+  genreId?: string,
+  tagId?: string,
+  score?: string,
+): Promise<RAWGResponse<GamesType>> {
   "use cache";
   cacheLife("hours");
 
   const res = await fetch(
-    `${process.env.RAWG_URL}/games?dates=2025-01-01,2025-12-31&ordering=-rating&page_size=40&key=${process.env.RAWG_API_KEY}`,
+    `${process.env.RAWG_URL}/games?dates=2025-01-01,2025-12-31&ordering=-rating${platformId && `&platforms=${platformId}`}${genreId && `&genres=${genreId}`}${tagId && `&tags=${tagId}`}${score && `&metacritic=${score}`}&page=${page ? page : "1"}&page_size=40&key=${process.env.RAWG_API_KEY}`,
     {
       next: {
         tags: ["trending", "games"],
@@ -228,6 +234,24 @@ export async function getBOTY2025(): Promise<RAWGResponse<GamesType>> {
   );
 
   if (!res.ok) throw new Error("Failed to fetch trending games");
+
+  return res.json();
+}
+
+export async function getFreeGames(
+  slug: string,
+  page?: number,
+): Promise<RAWGResponse<GamesType>> {
+  const res = await fetch(
+    `${process.env.RAWG_URL}/games?tags=${slug}&page=${page ? page : "1"}&page_size=40&key=${process.env.RAWG_API_KEY}`,
+    {
+      next: {
+        tags: ["free", "games"],
+      },
+    },
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch free games");
 
   return res.json();
 }

@@ -18,6 +18,7 @@ import EmptyResults from "./EmptyResults";
 interface Props {
   games: RAWGResponse<GamesType>;
   wishlistItems: WishlistItemType[] | undefined;
+  bo2025?: boolean;
 }
 
 const scoreColors = (score: number) => {
@@ -26,7 +27,9 @@ const scoreColors = (score: number) => {
   return "text-green-500";
 };
 
-const NewGamesGrid = ({ games, wishlistItems }: Props) => {
+const NewGamesGrid = ({ games, wishlistItems, bo2025 }: Props) => {
+  const revalidatePath = bo2025 ? "best_2025" : "new-releases";
+
   return (
     <>
       {games.count > 0 ? (
@@ -71,7 +74,7 @@ const NewGamesGrid = ({ games, wishlistItems }: Props) => {
                 genres={convertGenreArray(game.genres)}
                 createdAt={String(game.released)}
                 hidden="sm:hidden"
-                path="/discover/new-releases"
+                path={`/discover/${revalidatePath}`}
               />
 
               <div className="flex items-center justify-between mt-2 mb-0.5">
