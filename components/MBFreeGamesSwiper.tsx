@@ -1,6 +1,6 @@
 "use client";
 
-import { exploreData } from "@/data/explore-data";
+import { freeGames } from "@/data/free-data";
 import Image from "next/image";
 import Link from "next/link";
 import { Pagination } from "swiper/modules";
@@ -10,9 +10,9 @@ import "swiper/css";
 // @ts-ignore
 import "swiper/css/pagination";
 
-const MBExploreSection = () => {
+const MBFreeGamesSwiper = () => {
   return (
-    <section className="max-container md:hidden mt-20">
+    <section className="md:hidden mt-20">
       <Swiper
         modules={[Pagination]}
         slidesPerView={1.25}
@@ -28,10 +28,10 @@ const MBExploreSection = () => {
           375: { spaceBetween: 20 },
         }}
       >
-        {exploreData.map((data) => (
+        {freeGames.map((data) => (
           <SwiperSlide key={data.id}>
             <div className="group">
-              <Link href={data.link}>
+              <Link href={`/browse/games/${data.slug}?from=free_games`}>
                 <div className="relative w-full aspect-video rounded-lg overflow-hidden group">
                   <Image
                     src={data.image}
@@ -51,7 +51,7 @@ const MBExploreSection = () => {
                     {data.desc}
                   </p>
                 </div>
-                <Link href={data.link}>
+                <Link href={`/browse/games/${data.slug}?from=free_games`}>
                   <button className="justify-end nox-hollow sm:text-sm min-[350px]:text-xs text-[11px] font-bold px-4 tracking-wide">
                     Learn more
                   </button>
@@ -67,4 +67,4 @@ const MBExploreSection = () => {
   );
 };
 
-export default MBExploreSection;
+export default MBFreeGamesSwiper;

@@ -239,7 +239,7 @@ export async function getBOTY2025(
 }
 
 export async function getFreeGames(
-  page?: number,
+  page?: string,
 ): Promise<RAWGResponse<GamesType>> {
   const res = await fetch(
     `${process.env.RAWG_URL}/games?tags=free-to-play&page=${page ? page : "1"}&page_size=40&key=${process.env.RAWG_API_KEY}`,

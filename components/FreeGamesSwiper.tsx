@@ -1,13 +1,13 @@
-import { exploreData } from "@/data/explore-data";
+import { freeGames } from "@/data/free-data";
 import Image from "next/image";
 import Link from "next/link";
 
-const ExploreContainer = () => {
+const FreeGamesSwiper = () => {
   return (
-    <section className="max-container hidden md:grid grid-cols-3 lg:gap-6 gap-5 mt-20">
-      {exploreData.map((data) => (
+    <section className="hidden md:grid grid-cols-3 lg:gap-6 gap-5 mt-24 mb-20">
+      {freeGames.map((data) => (
         <div key={data.id} className="group">
-          <Link href={data.link}>
+          <Link href={`/browse/games/${data.slug}?from=free_games`}>
             <div className="relative w-full aspect-video rounded-lg overflow-hidden group">
               <Image
                 src={data.image}
@@ -18,7 +18,7 @@ const ExploreContainer = () => {
               />
             </div>
           </Link>
-          <div className="flex flex-col justify-between h-[190px] lg:h-[180px]">
+          <div className="flex flex-col justify-between h-[190px] lg:h-[200px]">
             <div>
               <p className="mt-3.5 text-lg lg:text-xl font-bold group-hover:text-[#e91e3f] transition-colors">
                 {data.title}
@@ -27,7 +27,7 @@ const ExploreContainer = () => {
                 {data.desc}
               </p>
             </div>
-            <Link href={data.link}>
+            <Link href={`/browse/games/${data.slug}?from=free_games`}>
               <button className="nox-hollow text-xs font-bold px-4 tracking-wide mt-4">
                 Learn more
               </button>
@@ -39,4 +39,4 @@ const ExploreContainer = () => {
   );
 };
 
-export default ExploreContainer;
+export default FreeGamesSwiper;
