@@ -218,7 +218,7 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
               game.genres.map((genre) => (
                 <span
                   key={genre.name}
-                  className="px-2.5 py-1 font-medium bg-[#e91e3f] rounded-md text-xs"
+                  className="px-2.5 py-1 font-medium bg-nox rounded-md text-xs"
                 >
                   {genre.name}
                 </span>
@@ -293,7 +293,7 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
               {platformIcons(game.platforms).map((platform, index) => (
                 <div
                   key={`${platform}-${index}`}
-                  className="p-2 bg-neutral-800/80 hover:bg-[#e91e3f] rounded-lg xl:text-lg cm:text-base min-[375px]:text-lg text-base text-neutral-300 hover:text-white transition-colors"
+                  className="p-2 bg-neutral-800/80 hover:bg-nox rounded-lg xl:text-lg cm:text-base min-[375px]:text-lg text-base text-neutral-300 hover:text-white transition-colors"
                 >
                   {platformIconByKey(platform)}
                 </div>
@@ -312,22 +312,22 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
             href={game.website}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between py-4 px-3 bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-lg border border-neutral-800 hover:border-[#e91e3f]/50 transition-all group"
+            className="flex items-center justify-between py-4 px-3 bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-lg border border-neutral-800 hover:border-nox/50 transition-all group"
           >
             <div className="flex items-center gap-2.5">
               <div className="p-2 bg-neutral-800 rounded-lg">
-                <Globe className="xl:size-[18px] cm:size-4 size-[18px] text-neutral-400 group-hover:text-[#e91e3f]" />
+                <Globe className="xl:size-[18px] cm:size-4 size-[18px] text-neutral-400 group-hover:text-nox" />
               </div>
               <div>
                 <p className="text-xs font-medium text-neutral-500">
                   Official Website
                 </p>
-                <p className="xl:text-sm cm:text-[13px] text-sm xl:max-w-[200px] cm:max-w-[160px] w-full font-medium truncate text-white group-hover:text-[#e91e3f] transition-colors">
+                <p className="xl:text-sm cm:text-[13px] text-sm xl:max-w-[200px] cm:max-w-[160px] w-full font-medium truncate text-white group-hover:text-nox transition-colors">
                   {formatWebsite(game.website)}
                 </p>
               </div>
             </div>
-            <ExternalLink className="size-4 xl:block md:hidden block text-neutral-400 group-hover:text-[#e91e3f] transition-colors" />
+            <ExternalLink className="size-4 xl:block md:hidden block text-neutral-400 group-hover:text-nox transition-colors" />
           </a>
         )}
       </div>
@@ -336,7 +336,7 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
         <div className="space-y-3 mt-6">
           <div className="flex items-center justify-between">
             <p className="font-semibold text-white flex items-center gap-2">
-              <span className="w-1 h-4 bg-[#e91e3f] rounded-full" />
+              <span className="w-1 h-4 bg-nox rounded-full" />
               Available on
             </p>
             <span className="text-xs px-2 py-1 font-medium bg-neutral-800 rounded-full text-neutral-400">
@@ -355,7 +355,7 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
                 <a
                   key={s.id}
                   href={redirectDomains(s.store.domain)}
-                  className="group flex items-center gap-2.5 p-2.5 rounded-lg border bg-neutral-900/60 border-neutral-800  hover:bg-neutral-900 hover:border-[#e91e3f] transition-all duration-300 hover:shadow-lg hover:shadow-black/30 hover:-translate-y-0.5"
+                  className="group flex items-center gap-2.5 p-2.5 rounded-lg border bg-neutral-900/60 border-neutral-800  hover:bg-neutral-900 hover:border-nox transition-all duration-300 hover:shadow-lg hover:shadow-black/30 hover:-translate-y-0.5"
                 >
                   <div className="relative min-[406px]:size-10 min-[375px]:size-9 size-10 rounded-md overflow-hidden bg-white/90">
                     <Image
@@ -370,7 +370,7 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
                     <p className="font-medium lg:text-sm cm:text-xs min-[406px]:text-sm text-xs">
                       {s.store.name}
                     </p>
-                    <div className="flex items-center gap-1 text-neutral-400 group-hover:text-[#e91e3f]">
+                    <div className="flex items-center gap-1 text-neutral-400 group-hover:text-nox">
                       <p className="text-xs">Visit store</p>
                       <ArrowRight className="size-3 mt-0.5 group-hover:translate-x-1 transition-transform duration-200 ease-in" />
                     </div>
@@ -401,7 +401,7 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
         size="lg"
         disabled={loading}
         onClick={handleWishlist}
-        className="flex items-center gap-2 w-full mt-6 font-semibold bg-gradient-to-r from-[#e91e3f] to-[#c01030] hover:from-[#c01030] hover:to-[#a00d26] text-white border-0 shadow-lg shadow-[#e91e3f]/25 transition-all hover:scale-[1.02]"
+        className="flex items-center gap-2 w-full mt-6 font-semibold bg-gradient-to-r from-nox to-[#c01030] hover:from-[#c01030] hover:to-[#a00d26] text-white border-0 shadow-lg shadow-nox/25 transition-all hover:scale-[1.02]"
       >
         {loading ? (
           <>
@@ -430,7 +430,7 @@ const InfoRow = ({
 }) => (
   <div className="flex items-center justify-between">
     <div className="flex items-center xl:gap-2 cm:gap-1.5 gap-2 text-neutral-400">
-      <span className="text-[#e91e3f]">{icon}</span>
+      <span className="text-nox">{icon}</span>
       <span className="xl:text-sm cm:text-xs min-[375px]:text-sm text-xs font-medium">
         {label}
       </span>

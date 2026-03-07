@@ -78,7 +78,7 @@ const GameBody = ({ game, achievements }: Props) => {
     <>
       {/* Description */}
       <h1 className="md:text-3xl min-[400px]:text-2xl text-xl font-bold mb-2">
-        <span className="text-[#e91e3f]">▸</span> About This Game
+        <span className="text-nox">▸</span> About This Game
       </h1>
       <TextExtender description={game.description} />
 
@@ -86,7 +86,7 @@ const GameBody = ({ game, achievements }: Props) => {
 
       {/* Tags */}
       <h1 className="md:text-3xl min-[400px]:text-2xl text-xl font-bold mb-[18px]">
-        <span className="text-[#e91e3f]">▸</span> Tags
+        <span className="text-nox">▸</span> Tags
       </h1>
 
       {game.tags.length > 0 ? (
@@ -103,7 +103,7 @@ const GameBody = ({ game, achievements }: Props) => {
           {isMobile && !expanded && remainingTags > 0 && (
             <button
               onClick={() => setExpanded(true)}
-              className="font-medium text-xs px-2 py-1 rounded text-white bg-[#e91e3f] hover:bg-[#960f26] transition"
+              className="font-medium text-xs px-2 py-1 rounded text-white bg-nox hover:bg-[#960f26] transition"
             >
               +{remainingTags} more
             </button>
@@ -119,7 +119,7 @@ const GameBody = ({ game, achievements }: Props) => {
 
       {/* Platforms */}
       <h1 className="md:text-3xl min-[400px]:text-2xl text-xl font-bold mb-[18px]">
-        <span className="text-[#e91e3f]">▸</span> Platforms
+        <span className="text-nox">▸</span> Platforms
       </h1>
 
       {game.platforms ? (
@@ -143,7 +143,7 @@ const GameBody = ({ game, achievements }: Props) => {
 
       {/* Dev & Publisher */}
       <h1 className="md:text-3xl min-[400px]:text-2xl text-xl font-bold mb-5">
-        <span className="text-[#e91e3f]">▸</span> Developers and Publishers
+        <span className="text-nox">▸</span> Developers and Publishers
       </h1>
 
       {mergedData.length > 0 ? (
@@ -172,11 +172,11 @@ const GameBody = ({ game, achievements }: Props) => {
               </div>
 
               <div className="flex flex-col min-[375px]:gap-0 gap-0.5 leading-tight">
-                <p className="lg:text-sm md:text-xs min-[375px]:text-sm text-xs font-semibold text-white group-hover:text-[#e91e3f] transition-colors">
+                <p className="lg:text-sm md:text-xs min-[375px]:text-sm text-xs font-semibold text-white group-hover:text-nox transition-colors">
                   {data.name}
                 </p>
                 <div className="flex items-center gap-1.5">
-                  <div className="lg:size-[5px] md:size-1 min-[375px]:size-[5px] size-1 rounded-full bg-[#e91e3f]" />
+                  <div className="lg:size-[5px] md:size-1 min-[375px]:size-[5px] size-1 rounded-full bg-nox" />
                   <p className="lg:text-xs md:text-[11px] min-[375px]:text-xs text-[11px] font-medium text-neutral-300">
                     {data.role}
                   </p>
@@ -202,7 +202,7 @@ const GameBody = ({ game, achievements }: Props) => {
       <hr className="my-6" />
 
       {/* Requirements */}
-      <h1 className="md:text-3xl min-[400px]:text-2xl text-xl font-bold mb-6 underline underline-offset-8 decoration-[#e91e3f]">
+      <h1 className="md:text-3xl min-[400px]:text-2xl text-xl font-bold mb-6 underline underline-offset-8 decoration-nox">
         System Requirements
       </h1>
 

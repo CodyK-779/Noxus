@@ -21,7 +21,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <MBSearchResults />
         <main className="pb-20 min-h-screen">{children}</main>
         <Footer />
-        <Deepseek1 />
+        {/* <Deepseek1 /> */}
         {/* <Deepseek2 /> */}
       </MenuProvider>
     </div>

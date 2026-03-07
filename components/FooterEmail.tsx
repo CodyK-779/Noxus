@@ -34,11 +34,11 @@ const FooterEmail = () => {
           }
         }}
         placeholder="Email Address"
-        className="w-full bg-transparent text-sm focus:outline-none"
+        className="w-full bg-transparent min-[375px]:text-sm text-[13px] focus:outline-none"
       />
       <button
         type="submit"
-        className="text-sm font-medium bg-nox text-white px-4 py-2 rounded-full mr-1"
+        className="min-[375px]:text-sm text-xs font-medium bg-nox text-white px-4 py-2 rounded-full mr-1"
       >
         Subscribe
       </button>

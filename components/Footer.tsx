@@ -90,11 +90,11 @@ const socialLinks = [
 const Footer = () => {
   return (
     <footer className="border-t py-10 bg-black border-nox">
-      <div className="max-container grid grid-cols-6 gap-6">
-        <div className="max-w-sm col-span-2">
+      <div className="max-container md:grid lg:grid-cols-6 md:grid-cols-4 flex flex-col lg:gap-6 md:gap-6 gap-8">
+        <div className="md:max-w-sm sm:max-w-md w-full col-span-2 lg:mb-0 md:mb-3 mb-0">
           {/* Logo + Name */}
           <div className="flex items-center gap-3.5">
-            <div className="relative size-[54px]">
+            <div className="relative min-[350px]:size-[54px] size-12">
               <Image
                 src="/logo-red.png"
                 alt="Logo"
@@ -104,10 +104,10 @@ const Footer = () => {
               />
             </div>
             <div>
-              <p className="text-[27px] font-bold font-orbitron tracking-wide bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
+              <p className="min-[350px]:text-[27px] text-2xl font-bold font-orbitron tracking-wide bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
                 Noxus
               </p>
-              <p className="text-xs font-medium -mt-0.5 text-nox">
+              <p className="min-[350px]:text-xs text-[11px] font-medium min-[350px]:-mt-0.5 mt-0 text-nox">
                 Game Discovery Platform
               </p>
             </div>
@@ -138,7 +138,7 @@ const Footer = () => {
         </div>
 
         {/* Quick Links */}
-        <div className="col-span-1 max-w-[150px]">
+        <div className="col-span-1 xl:max-w-[150px] md:max-w-[160px] w-full">
           {/* Header */}
           <div className="flex items-center gap-2 mb-4">
             <div className="w-1 h-4 rounded-full bg-nox" />
@@ -216,6 +216,33 @@ const Footer = () => {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      <hr className="max-container my-10" />
+
+      {/* Legal Info */}
+      <div className="max-container flex md:flex-row flex-col items-center justify-center md:gap-0 gap-1">
+        {/* 1st row */}
+        <p className="lg:text-sm md:text-xs min-[350px]:text-sm text-xs font-medium text-neutral-400">
+          © 2026, Noxus. All rights reserved.
+        </p>
+
+        <span className="mx-4 hidden md:block">|</span>
+
+        {/* 2nd row */}
+        <div className="flex items-center min-[375px]:gap-3 gap-2.5">
+          <p className="lg:text-sm md:text-xs min-[350px]:text-sm text-xs font-medium text-neutral-400 hover:text-white transition-colors cursor-pointer">
+            Privacy Policy
+          </p>
+          <span className="text-neutral-400 rounded-full">•</span>
+          <p className="lg:text-sm md:text-xs min-[350px]:text-sm text-xs font-medium text-neutral-400 hover:text-white transition-colors cursor-pointer">
+            Terms of Service
+          </p>
+          <span className="text-neutral-400 rounded-full">•</span>
+          <p className="lg:text-sm md:text-xs min-[350px]:text-sm text-xs font-medium text-neutral-400 hover:text-white transition-colors cursor-pointer">
+            Cookies
+          </p>
         </div>
       </div>
     </footer>
