@@ -27,11 +27,19 @@ const ExploreContainer = () => {
                 {data.desc}
               </p>
             </div>
-            <Link href={data.link}>
-              <button className="nox-hollow text-xs font-bold px-4 tracking-wide mt-4">
-                Learn more
-              </button>
-            </Link>
+            {data.title !== "Sales & Specials" ? (
+              <Link href={data.link}>
+                <button className="nox-hollow text-xs font-bold px-4 tracking-wide mt-4">
+                  Learn more
+                </button>
+              </Link>
+            ) : (
+              <a href={data.link}>
+                <button className="nox-hollow text-xs font-bold px-4 tracking-wide mt-4">
+                  Learn more
+                </button>
+              </a>
+            )}
           </div>
         </div>
       ))}

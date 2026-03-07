@@ -1,10 +1,10 @@
 export const exploreData = [
   {
     id: 1,
-    title: "Trending 2026",
-    desc: "The most talked-about and played games of the year. From groundbreaking AAA releases to viral indie sensations, discover what everyone's playing right now.",
-    link: "/discover/trending_2026",
-    image: "/trending_2026.png"
+    title: "Sales & Specials",
+    desc: "Save big on hit titles and hidden gems. There's always something on sale at the Epic Games Store!",
+    link: "https://store.epicgames.com/en-US/sales-and-specials",
+    image: "/sales.jpeg"
   },
   {
     id: 2,

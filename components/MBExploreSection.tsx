@@ -51,11 +51,19 @@ const MBExploreSection = () => {
                     {data.desc}
                   </p>
                 </div>
-                <Link href={data.link}>
-                  <button className="justify-end nox-hollow sm:text-sm min-[350px]:text-xs text-[11px] font-bold px-4 tracking-wide">
-                    Learn more
-                  </button>
-                </Link>
+                {data.title !== "Sales & Specials" ? (
+                  <Link href={data.link}>
+                    <button className="justify-end nox-hollow sm:text-sm min-[350px]:text-xs text-[11px] font-bold px-4 tracking-wide">
+                      Learn more
+                    </button>
+                  </Link>
+                ) : (
+                  <a href={data.link}>
+                    <button className="justify-end nox-hollow sm:text-sm min-[350px]:text-xs text-[11px] font-bold px-4 tracking-wide">
+                      Learn more
+                    </button>
+                  </a>
+                )}
               </div>
             </div>
           </SwiperSlide>
