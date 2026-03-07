@@ -151,7 +151,7 @@ const Sidebar = () => {
                 pathname === link.link ||
                 (link.link !== "/" && pathname.startsWith(link.link));
 
-              if (mounted && link.title === "Wishlist" && !session) return;
+              // if (mounted && link.title === "Wishlist" && !session) return;
 
               return (
                 <li key={link.title}>

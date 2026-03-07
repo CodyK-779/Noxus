@@ -28,6 +28,7 @@ module.exports = {
   			'custom-ease': 'cubic-bezier(0.25, 0.8, 0.25, 1)'
   		},
   		colors: {
+				'nox': '#e91e3f',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

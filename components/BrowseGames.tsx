@@ -51,7 +51,7 @@ const BrowseGames = ({ initialSearch, count, wishlistItems }: Props) => {
   const score = searchParams.get("metascore") || "";
 
   const fetchGames = useCallback(async () => {
-    if (!hasMore || loadingRef.current || loading) return;
+    if (!hasMore || loadingRef.current) return;
 
     loadingRef.current = true;
     setLoading(true);

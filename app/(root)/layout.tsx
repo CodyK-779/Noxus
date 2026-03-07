@@ -1,3 +1,5 @@
+import Deepseek1 from "@/components/Deepseek1";
+import Deepseek2 from "@/components/Deepseek2";
 import Footer from "@/components/Footer";
 import MBSearchResults from "@/components/MBSearchResults";
 import MenuProvider from "@/components/MenuProvider";
@@ -19,6 +21,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <MBSearchResults />
         <main className="pb-20 min-h-screen">{children}</main>
         <Footer />
+        <Deepseek1 />
+        {/* <Deepseek2 /> */}
       </MenuProvider>
     </div>
   );

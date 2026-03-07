@@ -22,10 +22,10 @@ const WishlistPageContainer = async () => {
   return (
     <main className="max-container mt-24">
       <div className="flex items-center gap-3 mb-4">
-        <div className="w-1.5 min-[375px]:h-16 h-14 bg-[#e91e3f] rounded-full" />
+        <div className="w-1.5 min-[375px]:h-16 h-14 bg-nox rounded-full" />
         <div>
           <h1 className="md:text-5xl min-[375px]:text-4xl text-3xl font-bold">
-            My <span className="text-[#e91e3f]">Wishlist</span>
+            My <span className="text-nox">Wishlist</span>
           </h1>
           <p className="text-neutral-400 min-[375px]:text-sm text-xs mt-1">
             Your personal collection of dream games
@@ -36,7 +36,7 @@ const WishlistPageContainer = async () => {
       <div className="flex items-center gap-3 mt-10">
         <h3 className="text-xl font-bold flex items-center gap-2">
           Wishlisted Games
-          <span className="text-sm px-2 py-0.5 bg-[#e91e3f]/10 rounded-full text-[#e91e3f]">
+          <span className="text-sm px-2 py-0.5 bg-nox/10 rounded-full text-nox">
             {gameCount}
           </span>
         </h3>
@@ -117,7 +117,7 @@ const WishlistPageContainer = async () => {
                           {item.game.genres.map((g, index) => (
                             <div
                               key={index}
-                              className="px-2.5 py-1 font-medium rounded-md lg:text-xs sm:text-[11px] min-[375px]:text-xs text-[11px] bg-[#e91e3f]/10 text-[#e91e3f] border border-[#e91e3f]/20"
+                              className="px-2.5 py-1 font-medium rounded-md lg:text-xs sm:text-[11px] min-[375px]:text-xs text-[11px] bg-nox/10 text-nox border border-[#e91e3f]/20"
                             >
                               {g}
                             </div>

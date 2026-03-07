@@ -19,7 +19,10 @@ const StoresContainer = async () => {
         <div className="w-1.5 min-[375px]:h-16 h-14 bg-[#e91e3f] rounded-full" />
         <div>
           <h1 className="md:text-5xl min-[375px]:text-4xl text-3xl font-bold">
-            Game <span className="text-[#e91e3f]">Stores</span>
+            <span className="bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
+              Game
+            </span>{" "}
+            <span className="text-[#e91e3f]">Stores</span>
           </h1>
           <p className="text-neutral-400 min-[375px]:text-sm text-xs mt-1">
             Discover where to buy your favorite games
