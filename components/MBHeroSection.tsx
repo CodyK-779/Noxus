@@ -9,8 +9,8 @@ import { Pagination, Autoplay, A11y } from "swiper/modules";
 import HeroGameCard from "./HeroGameCard";
 import { heroMobile } from "@/data/hero-data";
 import { Suspense, useState } from "react";
-import { Skeleton } from "./ui/skeleton";
 import { WishlistItemType } from "@/components/utils/interfaceTypes";
+import MBHeroSwiperSkeleton from "./skeletons/MBHeroSwiperSkeleton";
 
 interface Props {
   wishlistItems: WishlistItemType[] | undefined;
@@ -21,9 +21,7 @@ const MBHeroSection = ({ wishlistItems }: Props) => {
 
   return (
     <section className="min-[768px]:hidden pt-[90px]">
-      <Suspense
-        fallback={<Skeleton className="aspect-[3/4] rounded-xl mx-12" />}
-      >
+      <Suspense fallback={<MBHeroSwiperSkeleton />}>
         <Swiper
           onSwiper={(swiper) => setActiveIndex(swiper.realIndex)}
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}

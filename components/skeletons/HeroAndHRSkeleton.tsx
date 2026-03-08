@@ -5,7 +5,10 @@ const HeroAndHRSkeleton = () => {
   return (
     <>
       <HeroSectionSkeleton />
-      <GameSkeletonContainer header="Discover Highly Rated Games" />
+      <GameSkeletonContainer
+        link="/discover/high-ratings"
+        header="Discover Highly Rated Games"
+      />
     </>
   );
 };

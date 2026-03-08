@@ -25,7 +25,12 @@ export default function Home() {
       <GameGenresContainer />
 
       <Suspense
-        fallback={<GameSkeletonContainer header="Discover New Releases" />}
+        fallback={
+          <GameSkeletonContainer
+            link="/discover/new-releases"
+            header="Discover New Releases"
+          />
+        }
       >
         <NewReleasesWrapper userPromise={userPromise} />
       </Suspense>
@@ -33,7 +38,12 @@ export default function Home() {
       <GamePlatformsContainer />
 
       <Suspense
-        fallback={<GameSkeletonContainer header="Discover Upcoming Games" />}
+        fallback={
+          <GameSkeletonContainer
+            link="/discover/upcoming_games"
+            header="Discover Upcoming Games"
+          />
+        }
       >
         <UpcomingGamesWrapper userPromise={userPromise} />
       </Suspense>
@@ -41,7 +51,12 @@ export default function Home() {
       <GameTagsContainer />
 
       <Suspense
-        fallback={<GameSkeletonContainer header="Discover Best of 2025" />}
+        fallback={
+          <GameSkeletonContainer
+            link="/discover/best_2025"
+            header="Discover Best of 2025"
+          />
+        }
       >
         <Best2025Wrapper userPromise={userPromise} />
       </Suspense>

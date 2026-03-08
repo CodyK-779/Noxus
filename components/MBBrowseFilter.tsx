@@ -42,8 +42,8 @@ const MBBrowseFilter = ({ platforms }: Props) => {
 
   useEffect(() => {
     const updateSize = () => {
-      const isLargeScreen = window.innerWidth < 1024;
-      setOpen(isLargeScreen);
+      const isLargeScreen = window.innerWidth >= 1024;
+      if (isLargeScreen) setOpen(false);
     };
 
     updateSize();

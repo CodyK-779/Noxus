@@ -24,9 +24,6 @@ const OauthButtons = ({ provider }: Props) => {
         onError: (cxt) => {
           toast.error(cxt.error.message);
         },
-        onSuccess: () => {
-          toast.success("Successful SignIn, Welcome to Noxus!");
-        },
       },
     });
   };

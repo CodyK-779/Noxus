@@ -3,13 +3,14 @@ import MBGameSectionSkeletons from "./MBGameSectionSkeletons";
 import SectionHeaderShell from "./SectionHeaderShell";
 
 interface Props {
+  link: string;
   header: string;
 }
 
-const GameSkeletonContainer = ({ header }: Props) => {
+const GameSkeletonContainer = ({ link, header }: Props) => {
   return (
     <>
-      <SectionHeaderShell header={header} />
+      <SectionHeaderShell link={link} header={header} />
       <GameSectionSkeletons />
 
       <MBGameSectionSkeletons />

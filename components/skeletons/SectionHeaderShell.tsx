@@ -1,16 +1,20 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 export interface Props {
+  link: string;
   header: string;
 }
 
-const SectionHeaderShell = ({ header }: Props) => {
+const SectionHeaderShell = ({ link, header }: Props) => {
   return (
     <section className="max-container flex items-center justify-between mt-[70px] mb-6">
       <div className="w-fit flex items-center gap-1.5 group cursor-pointer hover:underline underline-offset-2">
-        <h1 className="sm:text-2xl min-[400px]:text-[21px] min-[350px]:text-[18px] text-base font-bold">
-          {header}
-        </h1>
+        <Link href={link}>
+          <h1 className="sm:text-2xl min-[400px]:text-[21px] min-[350px]:text-[18px] text-base font-bold">
+            {header}
+          </h1>
+        </Link>
 
         <ChevronRight className="min-[400px]:mt-[7px] min-[350px]:mt-[3.5px] mt-[4px] min-[400px]:size-7 min-[350px]:size-6 size-5 group-hover:translate-x-1 transition-transform duration-300" />
       </div>
