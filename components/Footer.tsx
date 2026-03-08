@@ -114,11 +114,10 @@ const Footer = () => {
           </div>
           {/* Description */}
           <p className="text-sm font-medium text-neutral-400 mt-4">
-            <strong className="text-white">Noxus</strong> is your ultimate
-            gaming companion. Discover top-rated titles, track new releases, and
-            build your dream wishlist across every major platform — all powered
-            by comprehensive data from{" "}
-            <strong className="text-white">RAWG</strong>.
+            <strong className="text-nox">Noxus</strong> is your ultimate gaming
+            companion. Discover top-rated titles, track new releases, and build
+            your dream wishlist across every major platform — all powered by
+            comprehensive data from <strong className="text-nox">RAWG</strong>.
           </p>
           {/* Stat cards */}
           <div className="grid grid-cols-3 gap-3 mt-8">
@@ -228,7 +227,7 @@ const Footer = () => {
           © 2026, Noxus. All rights reserved.
         </p>
 
-        <span className="mx-4 hidden md:block">|</span>
+        <span className="mx-4 hidden text-neutral-400 md:block">|</span>
 
         {/* 2nd row */}
         <div className="flex items-center min-[375px]:gap-3 gap-2.5">

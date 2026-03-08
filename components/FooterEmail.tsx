@@ -22,7 +22,7 @@ const FooterEmail = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-4 w-full rounded-full py-1 pl-5 flex items-center gap-2 bg-neutral-950 border border-neutral-800"
+      className="mt-4 md:w-full min-[500px]:w-[400px] w-full rounded-full py-1 pl-5 flex items-center gap-2 bg-neutral-950 border border-neutral-800"
     >
       <input
         type="text"
