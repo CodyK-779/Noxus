@@ -2,13 +2,17 @@ import { Gamepad2 } from "lucide-react";
 import PageNavigation from "../PageNavigation";
 import { Skeleton } from "../ui/skeleton";
 import DropdownSkeleton from "./DropdownSkeleton";
+import { Suspense } from "react";
+import PageNavigationSkeleton from "./PageNavigationSkeleton";
 
 const GenreDetailSkeleton = () => {
   return (
     <>
       <Skeleton className="w-full sm:h-[300px] min-[425px]:h-[250px] min-[375px]:h-[225px] h-[200px] min-[400px]:mt-[71px] mt-[68px]" />
       <div className="max-container mt-8">
-        <PageNavigation skeleton />
+        <Suspense fallback={<PageNavigationSkeleton />}>
+          <PageNavigation skeleton />
+        </Suspense>
         <div className="flex items-center gap-2 mb-2">
           <span className="text-[#e91e3f] md:text-3xl min-[400px]:text-2xl text-xl">
             ▸

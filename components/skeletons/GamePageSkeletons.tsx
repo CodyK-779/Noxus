@@ -3,6 +3,8 @@ import PageHeaders from "../PageHeaders";
 import { Skeleton } from "../ui/skeleton";
 import DropdownSkeleton from "./DropdownSkeleton";
 import PageNavigation from "../PageNavigation";
+import { Suspense } from "react";
+import PageNavigationSkeleton from "./PageNavigationSkeleton";
 
 interface Props {
   header: string;
@@ -37,7 +39,9 @@ const GamePageSkeletons = ({ header, desc, filterFor, path }: Props) => {
 
   return (
     <main className="max-container min-[400px]:mt-28 mt-24">
-      <PageNavigation path={path} />
+      <Suspense fallback={<PageNavigationSkeleton />}>
+        <PageNavigation path={path} />
+      </Suspense>
       <PageHeaders header={header} desc={desc} />
       <div className="md:flex items-center grid md:grid-cols-4 grid-cols-2 sm:gap-3 gap-2.5 mt-6 mb-8">
         {dropdown(filterFor).map((d) => (

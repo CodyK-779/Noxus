@@ -2,7 +2,7 @@
 
 import { ChevronRight } from "lucide-react";
 import { Skeleton } from "./ui/skeleton";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 interface Props {
@@ -12,7 +12,6 @@ interface Props {
 }
 
 const PageNavigation = ({ path, skeleton, isgenre }: Props) => {
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   const from = searchParams.get("from");
@@ -27,12 +26,12 @@ const PageNavigation = ({ path, skeleton, isgenre }: Props) => {
           {from === "browse" ? "Browse" : "Discover"}
         </Link>
       ) : (
-        <div
-          onClick={() => router.back()}
-          className="text-neutral-400 hover:text-white transition-colors cursor-pointer"
+        <Link
+          href={from === "browse" ? "/browse" : "/"}
+          className="text-neutral-400 hover:text-white transition-colors"
         >
           {from === "browse" ? "Browse" : "Discover"}
-        </div>
+        </Link>
       )}
       <ChevronRight className="size-4 text-gray-400" />
       {!skeleton ? (

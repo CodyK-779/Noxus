@@ -11,6 +11,8 @@ import { HRSearches } from "@/app/(root)/discover/high-ratings/page";
 import GamesCount from "./GamesCount";
 import PageNavigation from "./PageNavigation";
 import GamesGrid from "./GamesGrid";
+import { Suspense } from "react";
+import PageNavigationSkeleton from "./skeletons/PageNavigationSkeleton";
 
 interface Props {
   header: string;
@@ -34,7 +36,9 @@ const HRPageContainer = async ({ header, desc, searchParams }: Props) => {
 
   return (
     <main className="max-container min-[400px]:mt-28 mt-24">
-      <PageNavigation path="High-ratings" />
+      <Suspense fallback={<PageNavigationSkeleton />}>
+        <PageNavigation path="High-ratings" />
+      </Suspense>
       <PageHeaders header={header} desc={desc} />
       <div className="md:flex items-center grid md:grid-cols-4 grid-cols-2 sm:gap-3 gap-2.5 mt-6 min-[375px]:mb-8 mb-6">
         <DateFilter />
