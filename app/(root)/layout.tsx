@@ -5,7 +5,13 @@ import Navbar from "@/components/Navbar";
 import Overlay from "@/components/Overlay";
 import Sidebar from "@/components/Sidebar";
 import SidebarSkeleton from "@/components/skeletons/SidebarSkeleton";
+import { Metadata } from "next";
 import { PropsWithChildren, Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Noxus | Discover",
+  description: "Noxus Discover Home Page",
+};
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (

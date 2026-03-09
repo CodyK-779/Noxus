@@ -1,5 +1,6 @@
 import { getUser } from "@/actions/user-action";
 import Best2025Wrapper from "@/components/Best2025Wrapper";
+import BrowseNavigation from "@/components/BrowseNavigation";
 import ExploreSection from "@/components/ExploreSection";
 import GameGenresContainer from "@/components/GameGenresContainer";
 import GamePlatformsContainer from "@/components/GamePlatformsContainer";
@@ -62,6 +63,8 @@ export default function Home() {
       </Suspense>
 
       <ExploreSection />
+
+      <BrowseNavigation />
     </>
   );
 }
