@@ -23,7 +23,7 @@ const BrowseBanner = () => {
   useEffect(() => {
     setSearch(initialSearch);
     if (inputRef.current) inputRef.current.value = initialSearch;
-  }, []);
+  }, [initialSearch]);
 
   const handleSearch = (e: FormEvent) => {
     e.preventDefault();
