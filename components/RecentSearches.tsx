@@ -9,8 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import DeleteRecent from "./dialogs/DeleteRecent";
 
 const RecentSearches = () => {
-  const { recents, setRecents, setSearch, setOpenSearch, mbInputRef } =
-    useMenu();
+  const { recents, setRecents, setSearch, setOpenSearch, inputRef } = useMenu();
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedSearch, setSelectedSearch] = useState<string | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -22,9 +21,9 @@ const RecentSearches = () => {
   }, []);
 
   const reselectRecent = (recent: string) => {
-    if (mbInputRef.current) {
-      mbInputRef.current.value = recent;
-      mbInputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.value = recent;
+      inputRef.current.focus();
       setSearch(recent);
     }
   };

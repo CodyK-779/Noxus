@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
         hostname: 'image.api.playstation.com',
       },
     ]
-  }
+  },
 };
 
 export default nextConfig;
