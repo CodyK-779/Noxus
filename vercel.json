@@ -1,8 +1,7 @@
 {
   "functions": {
     "api/**/*": {
-      "runtime": "nodejs@18.x",
-      "maxDuration": 10
+      "runtime": "nodejs@18"
     }
   },
   "buildCommand": "prisma generate && next build",
