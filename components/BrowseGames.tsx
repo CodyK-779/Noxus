@@ -140,7 +140,7 @@ const BrowseGames = ({ initialSearch, count, wishlistItems }: Props) => {
   }, [fetchGames, hasMore, loading]);
 
   return (
-    <div className="lg:col-span-4">
+    <div className="lg:col-span-4 -mb-14">
       <GamesCount count={count} />
 
       {/* Initial load skeleton */}

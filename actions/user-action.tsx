@@ -3,14 +3,19 @@
 import { auth } from "@/app/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { headers } from "next/headers";
+import { connection } from "next/server";
 
 export async function getUser() {
   try {
+    await connection();
+
+    const headerList = await headers();
+
     const session = await auth.api.getSession({
-      headers: await headers(),
+      headers: headerList,
     });
 
-    if (!session) return;
+    if (!session) return null;
 
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
@@ -31,6 +36,6 @@ export async function getUser() {
     return user;
   } catch (error) {
     console.error("Failed to get user", error);
-    throw new Error("Failed to get user");
+    return null;
   }
 }
