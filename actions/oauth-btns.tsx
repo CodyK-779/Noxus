@@ -15,17 +15,24 @@ const OauthButtons = ({ provider }: Props) => {
   const oauthType = provider === "github" ? "GitHub" : "Google";
 
   const handleClick = async () => {
-    await signIn.social({
-      provider,
-      callbackURL: "/",
-      fetchOptions: {
-        onRequest: () => setLoading(true),
-        onResponse: () => setLoading(false),
-        onError: (cxt) => {
-          toast.error(cxt.error.message);
+    try {
+      await signIn.social({
+        provider,
+        callbackURL: "/",
+        fetchOptions: {
+          onRequest: () => setLoading(true),
+          onResponse: () => setLoading(false),
+          onError: (cxt) => {
+            console.error("Full error context:", cxt);
+            console.error("Error object:", cxt.error);
+            toast.error(cxt.error?.message || "Unknown error occurred");
+          },
         },
-      },
-    });
+      });
+    } catch (error) {
+      console.error("Exception in signIn:", error);
+      toast.error("Failed to initiate sign in");
+    }
   };
 
   return (
