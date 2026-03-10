@@ -42,16 +42,6 @@ export interface WishlistItemType {
 
 // Session Type
 
-interface User {
-  id: string;
-  email: string;
-  emailVerified: boolean;
-  name: string;
-  createdAt: Date;
-  updatedAt: Date;
-  image?: string | null;
-}
-
 interface SessionData {
   id: string;
   userId: string;
@@ -61,6 +51,16 @@ interface SessionData {
   token: string;
   ipAddress?: string | null;
   userAgent?: string | null;
+}
+
+interface User {
+  id: string;
+  email: string;
+  emailVerified: boolean;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+  image?: string | null;
 }
 
 export interface Session {
