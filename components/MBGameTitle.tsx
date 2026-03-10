@@ -22,7 +22,18 @@ const MBGameTitle = ({ game }: Props) => {
               const starPosition = i + 1;
 
               if (rating >= starPosition) return <span key={i}>★</span>;
-              if (rating >= starPosition - 0.5) return <span key={i}>⯪</span>;
+              if (rating >= starPosition - 0.5)
+                return (
+                  <span key={i} className="relative inline-block">
+                    <span className="text-neutral-300">☆</span>
+                    <span
+                      className="absolute left-0 top-0 overflow-hidden text-white"
+                      style={{ width: "48%" }}
+                    >
+                      ★
+                    </span>
+                  </span>
+                );
               return <span key={i}>☆</span>;
             })}
           </div>

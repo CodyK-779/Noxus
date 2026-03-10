@@ -49,18 +49,12 @@ const GameBanner = ({ game }: Props) => {
                 if (rating >= starPosition) return <span key={i}>★</span>;
                 if (rating >= starPosition - 0.5)
                   return (
-                    // <span key={i} className="relative inline-block">
-                    //   <span className="text-neutral-400">☆</span>
-                    //   <span
-                    //     className="absolute left-0 top-0 overflow-hidden text-white"
-                    //     style={{ width: "50%" }}
-                    //   >
-                    //     ★
-                    //   </span>
-                    // </span>
                     <span key={i} className="relative inline-block">
-                      <span className="text-neutral-600">★</span>
-                      <span className="absolute inset-0 w-1/2 overflow-hidden text-white">
+                      <span className="text-neutral-300">☆</span>
+                      <span
+                        className="absolute left-0 top-0 overflow-hidden text-white"
+                        style={{ width: "48%" }}
+                      >
                         ★
                       </span>
                     </span>
