@@ -5,6 +5,7 @@ import HeroLeft from "./HeroLeft";
 import HeroRight from "./HeroRight";
 import MBHeroSection from "./MBHeroSection";
 import { WishlistItemType } from "@/components/utils/interfaceTypes";
+import MBHeroSwiperSkeleton from "./skeletons/MBHeroSwiperSkeleton";
 
 interface Props {
   wishlistItems: WishlistItemType[] | undefined;
@@ -31,6 +32,7 @@ const HeroSection = ({ wishlistItems }: Props) => {
       </section>
 
       <MBHeroSection wishlistItems={wishlistItems} />
+      {/* <MBHeroSwiperSkeleton /> */}
     </>
   );
 };

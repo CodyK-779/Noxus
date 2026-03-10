@@ -1,7 +1,9 @@
 import OauthButtons from "@/actions/oauth-btns";
 import { Particles } from "@/components/ui/particles";
 import Image from "next/image";
-import AuthBackBtn from "./AuthBackBtn";
+import { Button } from "./ui/button";
+import { ChevronLeftIcon } from "lucide-react";
+import Link from "next/link";
 
 export function AuthForm() {
   return (
@@ -13,7 +15,12 @@ export function AuthForm() {
         quantity={120}
       />
       <div className="relative mx-auto flex min-h-screen max-w-5xl flex-col justify-center">
-        <AuthBackBtn />
+        <Button className="absolute top-4" variant="ghost" asChild>
+          <Link href="/">
+            <ChevronLeftIcon />
+            <p className="font-medium">Go Back</p>
+          </Link>
+        </Button>
 
         <div className="mx-auto space-y-4 sm:w-sm">
           <div className="flex items-center gap-2.5 -mb-2">

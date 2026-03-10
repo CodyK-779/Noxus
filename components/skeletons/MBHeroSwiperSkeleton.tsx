@@ -1,8 +1,8 @@
 "use client";
 
 import { heroMobile } from "@/data/hero-data";
-import { Suspense, useState } from "react";
-import { A11y, Pagination } from "swiper/modules";
+import { useState } from "react";
+import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import HeroGameCardSkeleton from "./HeroGameCardSkeleton";
 
@@ -10,11 +10,11 @@ const MBHeroSwiperSkeleton = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <section className="min-[768px]:hidden pt-[90px]">
       <Swiper
         onSwiper={(swiper) => setActiveIndex(swiper.realIndex)}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-        modules={[Pagination, A11y]}
+        modules={[Pagination]}
         spaceBetween={15}
         slidesPerView={1.25}
         centeredSlides={true}
@@ -36,7 +36,7 @@ const MBHeroSwiperSkeleton = () => {
         ))}
         <div className="swiper-pagination-container flex gap-1.5 items-center justify-center py-5" />
       </Swiper>
-    </Suspense>
+    </section>
   );
 };
 

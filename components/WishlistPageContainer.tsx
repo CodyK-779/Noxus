@@ -5,8 +5,13 @@ import { Calendar, Clock, LucideGamepad2 } from "lucide-react";
 import { getPlatformKey, platformIconByKey } from "./utils/utils";
 import Link from "next/link";
 import DeleteWishlist from "./dialogs/DeleteWishlist";
+import WishlistPageSkeleton from "./skeletons/WishlistPageSkeleton";
 
 const WishlistPageContainer = async () => {
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return <WishlistPageSkeleton />;
+  }
+
   const user = await getUser();
 
   const platformIcons = (platforms: string[]) => {
