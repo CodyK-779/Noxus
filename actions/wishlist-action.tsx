@@ -4,6 +4,7 @@ import { auth } from "@/app/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
+import { connection } from "next/server";
 
 export async function toggleWishList(
   gameId: number,
@@ -16,9 +17,18 @@ export async function toggleWishList(
   genres: string[],
   path: string,
 ) {
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    console.log("Skipping getUser during build");
+    return null;
+  }
+
   try {
+    await connection();
+
+    const headerList = await headers();
+
     const session = await auth.api.getSession({
-      headers: await headers(),
+      headers: headerList,
     });
 
     if (!session) throw new Error("Unauthorized");
