@@ -58,7 +58,7 @@ const FreeGamesImages = ({
         "/discover/free_games",
       );
 
-      if (results.success) {
+      if (results?.success) {
         if (!wishlisted) toast.success("Game added to wishlist!");
       } else {
         toast.error("Something went wrong");

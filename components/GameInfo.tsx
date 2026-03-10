@@ -118,7 +118,7 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
         `/browse/games/${game.slug}?from=Discover`,
       );
 
-      if (result.success) {
+      if (result?.success) {
         if (!wishlisted) toast.success("Game added to wishlist!");
       } else {
         toast.error("Something went wrong");
