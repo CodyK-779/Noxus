@@ -73,6 +73,7 @@ export async function toggleWishList(
     }
 
     revalidatePath(path);
+    revalidatePath("/wishlist");
     return { success: true };
   } catch (error) {
     console.error("Error toggling wishlist:", error);

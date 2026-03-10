@@ -12,7 +12,13 @@ import HeroAndHRSkeleton from "@/components/skeletons/HeroAndHRSkeleton";
 import UpcomingGamesWrapper from "@/components/UpcomingGamesWrapper";
 import { cache, Suspense } from "react";
 
-export const getUserPromise = cache(() => getUser());
+export const getUserPromise = cache(() => {
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return Promise.resolve(null);
+  }
+
+  return getUser();
+});
 
 export default function Home() {
   const userPromise = getUserPromise();
