@@ -88,7 +88,7 @@ const WishlistPageContainer = async () => {
                             if (item.game.rating >= starPosition - 0.5)
                               return (
                                 <span key={i} className="relative inline-block">
-                                  <span className="text-neutral-300">☆</span>
+                                  <span className="text-yellow-500">☆</span>
                                   <span
                                     className="absolute left-0 top-0 overflow-hidden"
                                     style={{ width: "48%" }}

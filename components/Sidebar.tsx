@@ -36,6 +36,18 @@ const Sidebar = () => {
   const { data: session } = useSession();
 
   useEffect(() => {
+    if (openMenu) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [openMenu]);
+
+  useEffect(() => {
     setMounted(true);
   }, []);
 

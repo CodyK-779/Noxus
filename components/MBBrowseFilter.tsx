@@ -41,15 +41,16 @@ const MBBrowseFilter = ({ platforms }: Props) => {
   }, []);
 
   useEffect(() => {
-    const updateSize = () => {
-      const isLargeScreen = window.innerWidth >= 1024;
-      if (isLargeScreen) setOpen(false);
-      setOpen(false);
+    const media = window.matchMedia("(min-width: 1024px)");
+
+    const handleChange = () => {
+      if (media.matches) setOpen(false);
     };
 
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
+    handleChange();
+    media.addEventListener("change", handleChange);
+
+    return () => media.removeEventListener("change", handleChange);
   }, []);
 
   const handleSubmit = (e: FormEvent) => {
