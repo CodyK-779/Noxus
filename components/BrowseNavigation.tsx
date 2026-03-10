@@ -14,12 +14,11 @@ const BrowseNavigation = () => {
         className="object-cover"
       />
 
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent md:via-black/80 max-sm:via-black/90 max-sm:to-black/70" />
-
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+      {/* Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent md:via-black/80 max-sm:via-black/85 max-sm:to-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_#e91e3f20,_transparent_50%)]" />
-
-      <div className="absolute inset-0 bg-black/20 sm:hidden" />
+      <div className="absolute inset-0 bg-black/15 sm:hidden" />
 
       <div className="relative max-container h-full flex flex-col items-start justify-center">
         <h1 className="lg:text-[44px] sm:text-4xl min-[425px]:text-3xl min-[350px]:text-2xl text-[22px] font-bold">
