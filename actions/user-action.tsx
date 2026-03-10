@@ -6,6 +6,11 @@ import { headers } from "next/headers";
 import { connection } from "next/server";
 
 export async function getUser() {
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    console.log("Skipping getUser during build");
+    return null;
+  }
+
   try {
     await connection();
 
