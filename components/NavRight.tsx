@@ -1,25 +1,28 @@
-"use client";
-
-import { useSession } from "@/app/lib/auth-client";
 import Link from "next/link";
 import ProfileDropdown from "./ProfileDropdown";
 import NavSearch from "./NavSearch";
-import { Suspense } from "react";
+import { Dispatch, SetStateAction, Suspense } from "react";
 import NavSearchShell from "./skeletons/NavSearchShell";
 import { Menu } from "lucide-react";
-import { useMenu } from "./MenuProvider";
+import { Session } from "./utils/interfaceTypes";
+import { Skeleton } from "./ui/skeleton";
 
-const NavRight = () => {
-  const { data: session } = useSession();
-  const { setOpenMenu } = useMenu();
+interface Props {
+  session: Session | null;
+  isPending: Boolean;
+  setOpenMenu: Dispatch<SetStateAction<boolean>>;
+}
 
+const NavRight = ({ session, isPending, setOpenMenu }: Props) => {
   return (
     <div className="flex items-center min-[350px]:gap-4 gap-3.5">
       <Suspense fallback={<NavSearchShell />}>
         <NavSearch />
       </Suspense>
-      {session ? (
-        <ProfileDropdown />
+      {isPending ? (
+        <Skeleton className="min-[400px]:size-[38px] size-[35px] rounded-full" />
+      ) : session ? (
+        <ProfileDropdown session={session} />
       ) : (
         <Link href="/signIn">
           <button className="min-[400px]:text-sm text-xs sm:px-5 px-4 font-bold nox-btn">

@@ -1,4 +1,3 @@
-import { useSession } from "@/app/lib/auth-client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,10 +10,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Bookmark } from "lucide-react";
 import DropdownSignout from "./DropdownSignout";
+import { Session } from "./utils/interfaceTypes";
 
-const ProfileDropdown = () => {
-  const { data: session } = useSession();
+interface Props {
+  session: Session | null;
+}
 
+const ProfileDropdown = ({ session }: Props) => {
   if (!session) return null;
 
   return (

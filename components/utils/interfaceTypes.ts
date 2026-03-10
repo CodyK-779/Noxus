@@ -39,3 +39,31 @@ export interface WishlistItemType {
   gameId: number;
   game: Game
 }
+
+// Session Type
+
+interface User {
+  id: string;
+  email: string;
+  emailVerified: boolean;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+  image?: string | null;
+}
+
+interface SessionData {
+  id: string;
+  userId: string;
+  expiresAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  token: string;
+  ipAddress?: string | null;
+  userAgent?: string | null;
+}
+
+export interface Session {
+  user: User;
+  session: SessionData;
+}

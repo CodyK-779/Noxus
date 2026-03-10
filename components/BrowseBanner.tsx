@@ -71,7 +71,7 @@ const BrowseBanner = () => {
   const initialGenre = searchParams.get("genre") || "";
 
   return (
-    <section className="relative mt-[65.5px] min-[400px]:mt-[70px] w-full overflow-hidden">
+    <section className="relative mt-[65px] sm:mt-[70px] min-[400px]:mt-[69px] w-full overflow-hidden">
       {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#1a0808] via-[#2d0a0a] to-[#5c1010]">
         {/* Moving light effects */}

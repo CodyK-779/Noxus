@@ -1,10 +1,55 @@
-import NavContent from "./NavContent";
+"use client";
+
+import { useSession } from "@/app/lib/auth-client";
+import { useMenu } from "./MenuProvider";
+import Image from "next/image";
+import Link from "next/link";
+import Navlinks from "./Navlinks";
+import NavRight from "./NavRight";
+import MobileNavSearch from "./MobileNavSearch";
 
 const Navbar = () => {
+  const { openSearch, setOpenMenu } = useMenu();
+  const { data: session, isPending } = useSession();
+
   return (
-    <>
-      <NavContent />
-    </>
+    <nav
+      className={`fixed w-full top-0 border-b border-[#e91e3f] py-4 ${openSearch ? "bg-neutral-950" : "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"} z-20`}
+    >
+      <div
+        className={`max-container ${
+          openSearch ? "hidden min-[580px]:flex" : "flex"
+        } items-center justify-between`}
+      >
+        {/* First Row */}
+        <div className="flex items-center lg:gap-10 gap-8">
+          <Link href="/" className="flex items-center gap-3">
+            <div className="relative min-[400px]:size-9 size-8 overflow-hidden">
+              <Image
+                src="/logo-red.png"
+                alt="Logo"
+                fill
+                sizes="(min-width: 400px) 72px, 64px"
+                className="object-cover"
+              />
+            </div>
+            <h1 className="min-[400px]:text-2xl text-xl font-bold font-orbitron tracking-wide bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
+              Noxus
+            </h1>
+          </Link>
+          {/* Second Row */}
+          <Navlinks />
+        </div>
+
+        {/* Third Row */}
+        <NavRight
+          session={session}
+          isPending={isPending}
+          setOpenMenu={setOpenMenu}
+        />
+      </div>
+      {openSearch && <MobileNavSearch />}
+    </nav>
   );
 };
 
