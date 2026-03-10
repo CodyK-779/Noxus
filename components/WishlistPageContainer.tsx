@@ -85,7 +85,7 @@ const WishlistPageContainer = async () => {
                                 <span key={i} className="relative inline-block">
                                   <span className="text-neutral-300">☆</span>
                                   <span
-                                    className="absolute left-0 top-0 overflow-hidden text-white"
+                                    className="absolute left-0 top-0 overflow-hidden"
                                     style={{ width: "48%" }}
                                   >
                                     ★
