@@ -26,27 +26,32 @@ export async function toggleWishList(
     await connection();
 
     const headerList = await headers();
-
     const session = await auth.api.getSession({
       headers: headerList,
     });
 
     if (!session) throw new Error("Unauthorized");
 
-    const wishlist = await prisma.wishlist.upsert({
-      where: { userId: session.user.id },
-      update: {},
-      create: { userId: session.user.id },
-      include: { items: true },
+    const existingItem = await prisma.wishlistItem.findFirst({
+      where: {
+        wishlist: { userId: session.user.id },
+        gameId,
+      },
+      select: { id: true },
     });
-
-    const existingItem = wishlist.items.find((i) => i.gameId === gameId);
 
     if (existingItem) {
       await prisma.wishlistItem.delete({
         where: { id: existingItem.id },
       });
     } else {
+      const wishlist = await prisma.wishlist.upsert({
+        where: { userId: session.user.id },
+        update: {},
+        create: { userId: session.user.id },
+        select: { id: true },
+      });
+
       await prisma.$transaction([
         prisma.game.upsert({
           where: { id: gameId },
@@ -62,7 +67,6 @@ export async function toggleWishList(
             createdAt: new Date(createdAt),
           },
         }),
-
         prisma.wishlistItem.create({
           data: {
             wishlistId: wishlist.id,
