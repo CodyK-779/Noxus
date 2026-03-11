@@ -3,7 +3,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
-import { Bookmark } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 interface Props {
   showGame: number;
@@ -103,7 +103,7 @@ const HeroLeftSkeleton = ({ showGame, setIsPaused }: Props) => {
                 </Link>
 
                 <button className="size-9 bg-white rounded-md flex items-center justify-center">
-                  <Bookmark className={`size-4 text-neutral-900 `} />
+                  <Loader2 className="size-4 text-neutral-900 animate-spin" />
                 </button>
               </div>
             </motion.div>

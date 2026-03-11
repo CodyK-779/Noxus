@@ -10,7 +10,7 @@ const MBHeroSwiperSkeleton = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="min-[768px]:hidden pt-[90px]">
+    <>
       <Swiper
         onSwiper={(swiper) => setActiveIndex(swiper.realIndex)}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
@@ -36,7 +36,7 @@ const MBHeroSwiperSkeleton = () => {
         ))}
         <div className="swiper-pagination-container flex gap-1.5 items-center justify-center py-5" />
       </Swiper>
-    </section>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import { HeroMobile } from "@/data/hero-data";
-import { Bookmark } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -64,7 +64,7 @@ const HeroGameCardSkeleton = ({ data, isActive }: Props) => {
         </div>
       </Link>
       <button className="absolute min-[350px]:top-5 min-[350px]:right-5 top-4 right-4 flex items-center justify-center bg-black border border-white p-1 rounded-full cursor-pointer z-10">
-        <Bookmark className="sm:size-5 min-[350px]:size-4 size-3.5" />
+        <Loader2 className="sm:size-5 min-[350px]:size-4 size-3.5 animate-spin" />
       </button>
     </div>
   );

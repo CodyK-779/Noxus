@@ -1,4 +1,4 @@
-import { Bookmark, Eye } from "lucide-react";
+import { Bookmark, Eye, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -38,8 +38,8 @@ const FreeGamesImgSkeleton = ({ image, title, desc, slug }: Props) => {
             </button>
           </Link>
           <button className="nox-white flex items-center gap-2 text-[10px] min-[350px]:text-[11px] sm:text-xs md:text-[11px] lg:text-xs xl:text-[13px] font-bold px-4 tracking-wide">
-            <Bookmark className="size-3.5" />
-            Wishlist
+            <Loader2 className="size-4 animate-spin" />
+            Loading...
           </button>
         </div>
       </div>
