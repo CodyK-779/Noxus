@@ -24,8 +24,6 @@ interface Props {
   browseFilter?: boolean;
 }
 
-const count = 40;
-
 const PlatformFilter = ({ platforms, browseFilter }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
