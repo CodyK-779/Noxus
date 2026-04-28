@@ -83,13 +83,13 @@ Some API responses (e.g., system requirements) were unstructured or inconsistent
 ## 🌐 Live Demo
 
 👉 [Live Site](https://noxus-kzt.vercel.app)  
-👉 [GitHub Repository](#)
+👉 [GitHub Repository](https://github.com/CodyK-779/Noxus.git)
 
 ---
 
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/CodyK-779/noxus.git
+git clone https://github.com/CodyK-779/Noxus.git
 cd noxus
 npm install
