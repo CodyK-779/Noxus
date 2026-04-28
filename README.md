@@ -76,7 +76,10 @@ Some API responses (e.g., system requirements) were unstructured or inconsistent
 
 ## 📸 Screenshots
 
-> Add screenshots here (homepage, browse page, game details, wishlist)
+![image alt](https://github.com/CodyK-779/Noxus/blob/0c5e3cf57ddedf368730a3c121fe392605936c96/home_page.png)
+![image alt](https://github.com/CodyK-779/Noxus/blob/0c5e3cf57ddedf368730a3c121fe392605936c96/game_details.png)
+![image alt](https://github.com/CodyK-779/Noxus/blob/0c5e3cf57ddedf368730a3c121fe392605936c96/browse_page.png)
+![image alt](https://github.com/CodyK-779/Noxus/blob/0c5e3cf57ddedf368730a3c121fe392605936c96/wishlist.png)
 
 ---
 
