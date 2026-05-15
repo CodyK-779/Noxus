@@ -24,7 +24,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
         </Suspense>
         <MBSearchResults />
         <main className="pb-20 min-h-screen">{children}</main>
-        <FooterVisibility />
+        <Suspense fallback={null}>
+          <FooterVisibility />
+        </Suspense>
       </MenuProvider>
     </div>
   );
