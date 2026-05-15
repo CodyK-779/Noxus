@@ -1,4 +1,4 @@
-import Footer from "@/components/Footer";
+import FooterVisibility from "@/components/FooterVisibility";
 import MBSearchResults from "@/components/MBSearchResults";
 import MenuProvider from "@/components/MenuProvider";
 import Navbar from "@/components/Navbar";
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         </Suspense>
         <MBSearchResults />
         <main className="pb-20 min-h-screen">{children}</main>
-        <Footer />
+        <FooterVisibility />
       </MenuProvider>
     </div>
   );
