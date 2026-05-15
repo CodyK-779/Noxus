@@ -92,7 +92,7 @@ const BrowseGames = ({ initialSearch, count, wishlistItems }: Props) => {
     initialFetch.current = false;
 
     const fetchNewGames = async () => {
-      if (!hasMore || !loadingRef.current) return;
+      if (!hasMore || loadingRef.current) return;
 
       loadingRef.current = true;
       setLoading(true);
@@ -117,9 +117,9 @@ const BrowseGames = ({ initialSearch, count, wishlistItems }: Props) => {
         loadingRef.current = false;
         setLoading(false);
       }
-
-      fetchNewGames();
     };
+
+    fetchNewGames();
   }, [platformId, genreId, date, tagId, score, currentSearch]);
 
   useEffect(() => {
