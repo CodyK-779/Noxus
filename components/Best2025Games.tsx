@@ -11,6 +11,7 @@ import {
   platformIconByKey,
   platformIcons,
 } from "./utils/utils";
+import { LucideGamepad2 } from "lucide-react";
 
 interface Props {
   paginate: PaginateType;
@@ -30,15 +31,18 @@ const Best2025Games = ({ paginate, games, wishlistItems }: Props) => {
       {games.results.slice(paginate.start, paginate.end).map((game) => (
         <div key={game.id} className="relative group">
           <Link href={`/browse/games/${game.slug}?from=Discover`}>
-            <div className="relative aspect-[3/4] rounded-md overflow-hidden ">
+            <div className="relative aspect-[3/4] rounded-md overflow-hidden flex items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-[#e91e3f]/20">
               {game.background_image ? (
-                <Image
-                  src={game.background_image}
-                  alt={game.name}
-                  fill
-                  sizes="(max-width: 768px) 80vw"
-                  className="object-cover"
-                />
+                <>
+                  <Image
+                    src={game.background_image}
+                    alt={game.name}
+                    fill
+                    sizes="(max-width: 768px) 80vw"
+                    className="object-cover"
+                  />
+                  <LucideGamepad2 className="sm:size-12 min-[425px]:size-16 min-[350px]:size-12 size-10 text-neutral-500" />
+                </>
               ) : (
                 <Image
                   src="/image-placeholder.webp"

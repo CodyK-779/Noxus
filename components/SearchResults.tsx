@@ -1,5 +1,5 @@
 import { GamesType } from "@/actions/games-action";
-import { ArrowRight, Gamepad2, SearchX } from "lucide-react";
+import { ArrowRight, Gamepad2, LucideGamepad2, SearchX } from "lucide-react";
 import Image from "next/image";
 import { platformIcons, platformIconByKey } from "./utils/utils";
 import Link from "next/link";
@@ -43,15 +43,18 @@ const SearchResults = ({
                     key={game.id}
                     className="flex items-center gap-3 mb p-2.5 rounded hover:bg-neutral-800 cursor-pointer transition"
                   >
-                    <div className="relative h-12 w-9 rounded overflow-hidden">
+                    <div className="relative h-12 w-9 rounded overflow-hidden flex items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-[#e91e3f]/20">
                       {game.background_image ? (
-                        <Image
-                          src={game.background_image}
-                          alt={game.name}
-                          fill
-                          sizes="80px"
-                          className="object-cover"
-                        />
+                        <>
+                          <Image
+                            src={game.background_image}
+                            alt={game.name}
+                            fill
+                            sizes="80px"
+                            className="object-cover"
+                          />
+                          <LucideGamepad2 className="size-4 text-neutral-500" />
+                        </>
                       ) : (
                         <Image
                           src="/image-placeholder.webp"

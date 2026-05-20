@@ -13,6 +13,7 @@ import {
   platformIcons,
 } from "@/components/utils/utils";
 import EmptyResults from "./EmptyResults";
+import { LucideGamepad2 } from "lucide-react";
 
 interface Props {
   games: RAWGResponse<GamesType>;
@@ -38,15 +39,18 @@ const GamesGrid = ({ games, wishlistItems, path, from }: Props) => {
               className="relative group min-[400px]:mb-10 mb-4"
             >
               <Link href={`/browse/games/${game.slug}?from=${from}`}>
-                <div className="relative aspect-[3/4] rounded-md overflow-hidden">
+                <div className="relative aspect-[3/4] rounded-md overflow-hidden flex items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-[#e91e3f]/20">
                   {game.background_image ? (
-                    <Image
-                      src={game.background_image}
-                      alt={game.name}
-                      fill
-                      sizes="(max-width: 768px) 80vw"
-                      className="object-cover"
-                    />
+                    <>
+                      <Image
+                        src={game.background_image}
+                        alt={game.name}
+                        fill
+                        sizes="(max-width: 768px) 80vw"
+                        className="object-cover"
+                      />
+                      <LucideGamepad2 className="sm:size-12 min-[425px]:size-16 min-[350px]:size-12 size-10 text-neutral-500" />
+                    </>
                   ) : (
                     <Image
                       src="/image-placeholder.webp"

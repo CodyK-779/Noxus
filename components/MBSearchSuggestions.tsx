@@ -7,7 +7,7 @@ import { GamesType, searchSuggestions } from "@/actions/games-action";
 import Image from "next/image";
 import { platformIconByKey, platformIcons } from "./utils/utils";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, LucideGamepad2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Skeleton } from "./ui/skeleton";
 import { addRecentSearch, getRecentSearches } from "./utils/recentSearches";
@@ -77,15 +77,18 @@ const MBSearchSuggestions = () => {
                     className="hover:bg-neutral-900 transition-colors cursor-pointer py-2.5"
                   >
                     <div className="max-container flex items-center gap-3 overflow-hidden">
-                      <div className="relative min-[350px]:size-[52px] size-[50px] rounded-lg overflow-hidden shrink-0">
+                      <div className="relative min-[350px]:size-[52px] size-[50px] rounded-lg overflow-hidden shrink-0 flex items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-[#e91e3f]/20">
                         {r.background_image ? (
-                          <Image
-                            src={r.background_image}
-                            alt={r.name}
-                            fill
-                            sizes="(min-width: 350px) 104px, 100px"
-                            className="object-cover"
-                          />
+                          <>
+                            <Image
+                              src={r.background_image}
+                              alt={r.name}
+                              fill
+                              sizes="(min-width: 350px) 104px, 100px"
+                              className="object-cover"
+                            />
+                            <LucideGamepad2 className="size-5 text-neutral-500" />
+                          </>
                         ) : (
                           <Image
                             src="/image-placeholder.webp"

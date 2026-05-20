@@ -11,6 +11,7 @@ import {
 import { useSwiperSlide } from "swiper/react";
 import WishlistButton from "./WishlistButton";
 import { WishlistItemType } from "@/components/utils/interfaceTypes";
+import { LucideGamepad2 } from "lucide-react";
 
 interface Props {
   data: GamesType;
@@ -30,15 +31,18 @@ const MBNewGameCard = ({ data, wishlistItems }: Props) => {
   return (
     <div className="relative group">
       <Link href={`/browse/games/${data.slug}?from=Discover`}>
-        <div className="relative aspect-[3/4] rounded-md overflow-hidden">
+        <div className="relative aspect-[3/4] rounded-md overflow-hidden flex items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-[#e91e3f]/20">
           {data.background_image ? (
-            <Image
-              src={data.background_image}
-              alt={data.name}
-              fill
-              sizes="(max-width: 768px) 80vw"
-              className="object-cover"
-            />
+            <>
+              <Image
+                src={data.background_image}
+                alt={data.name}
+                fill
+                sizes="(max-width: 768px) 80vw"
+                className="object-cover"
+              />
+              <LucideGamepad2 className="sm:size-12 min-[425px]:size-16 min-[350px]:size-12 size-10 text-neutral-500" />
+            </>
           ) : (
             <Image
               src="/image-placeholder.webp"
