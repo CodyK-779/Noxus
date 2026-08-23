@@ -6,49 +6,6 @@ import { headers } from "next/headers";
 import { connection } from "next/server";
 import { cache } from "react";
 
-// export async function getUser() {
-//   if (process.env.NEXT_PHASE === "phase-production-build") {
-//     console.log("Skipping getUser during build");
-//     return null;
-//   }
-
-//   try {
-//     await connection();
-
-//     const headerList = await headers();
-
-//     const session = await auth.api.getSession({
-//       headers: headerList,
-//     });
-
-//     if (!session) return null;
-
-//     const user = await prisma.user.findUnique({
-//       where: { id: session.user.id },
-//       include: {
-//         wishlist: {
-//           include: {
-//             items: {
-//               include: {
-//                 game: true,
-//               },
-//             },
-//             _count: true,
-//           },
-//         },
-//       },
-//     });
-
-//     if (!user) return null;
-//     return user;
-//   } catch (error) {
-//     console.error("Failed to get user", error);
-//     throw new Error(
-//       error instanceof Error ? error.message : "Failed to get user",
-//     );
-//   }
-// }
-
 export const getUser = cache(async () => {
   if (process.env.NEXT_PHASE === "phase-production-build") {
     console.log("Skipping getUser during build");
