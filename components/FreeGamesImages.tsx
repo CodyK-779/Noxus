@@ -47,6 +47,7 @@ const FreeGamesImages = ({
 
     try {
       const results = await toggleWishList(
+        session.user.id,
         data.id,
         data.name,
         data.image,

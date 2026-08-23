@@ -38,9 +38,12 @@ export async function getUser() {
       },
     });
 
+    if (!user) return null;
     return user;
   } catch (error) {
     console.error("Failed to get user", error);
-    return null;
+    throw new Error(
+      error instanceof Error ? error.message : "Failed to get user",
+    );
   }
 }

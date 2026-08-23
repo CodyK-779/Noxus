@@ -107,6 +107,7 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
 
     try {
       const result = await toggleWishList(
+        session.user.id,
         game.id,
         game.name,
         game.background_image,

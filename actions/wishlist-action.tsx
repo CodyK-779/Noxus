@@ -1,12 +1,10 @@
 "use server";
 
-import { auth } from "@/app/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
-import { connection } from "next/server";
 
 export async function toggleWishList(
+  userId: string,
   gameId: number,
   name: string,
   image: string | undefined,
@@ -17,43 +15,24 @@ export async function toggleWishList(
   genres: string[],
   path: string,
 ) {
-  if (process.env.NEXT_PHASE === "phase-production-build") {
-    console.log("Skipping getUser during build");
-    return null;
-  }
-
   try {
-    await connection();
-
-    const headerList = await headers();
-    const session = await auth.api.getSession({
-      headers: headerList,
-    });
-
-    if (!session) throw new Error("Unauthorized");
-
-    const existingItem = await prisma.wishlistItem.findFirst({
-      where: {
-        wishlist: { userId: session.user.id },
-        gameId,
-      },
-      select: { id: true },
-    });
-
-    if (existingItem) {
-      await prisma.wishlistItem.delete({
-        where: { id: existingItem.id },
-      });
-    } else {
-      const wishlist = await prisma.wishlist.upsert({
-        where: { userId: session.user.id },
-        update: {},
-        create: { userId: session.user.id },
-        select: { id: true },
+    await prisma.$transaction(async (tx) => {
+      const deleted = await tx.wishlistItem.deleteMany({
+        where: {
+          gameId,
+          wishlist: { userId },
+        },
       });
 
-      await prisma.$transaction([
-        prisma.game.upsert({
+      if (deleted.count === 0) {
+        const wishlist = await tx.wishlist.upsert({
+          where: { userId },
+          update: {},
+          create: { userId },
+          select: { id: true },
+        });
+
+        await tx.game.upsert({
           where: { id: gameId },
           update: {},
           create: {
@@ -62,25 +41,26 @@ export async function toggleWishList(
             image,
             slug,
             rating,
-            platforms,
             genres,
+            platforms,
             createdAt: new Date(createdAt),
           },
-        }),
-        prisma.wishlistItem.create({
+        });
+
+        await tx.wishlistItem.create({
           data: {
             wishlistId: wishlist.id,
             gameId,
           },
-        }),
-      ]);
-    }
+        });
+      }
+    });
 
     revalidatePath(path);
     revalidatePath("/wishlist");
     return { success: true };
   } catch (error) {
-    console.error("Error toggling wishlist:", error);
+    console.error(error);
     return {
       success: false,
       error:

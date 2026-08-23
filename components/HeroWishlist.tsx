@@ -50,6 +50,7 @@ const HeroWishlist = ({
 
     try {
       const results = await toggleWishList(
+        session.user.id,
         gameId,
         name,
         image,

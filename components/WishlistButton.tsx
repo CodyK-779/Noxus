@@ -57,6 +57,7 @@ const WishlistButton = ({
 
     try {
       const results = await toggleWishList(
+        session.user.id,
         gameId,
         name,
         image,
