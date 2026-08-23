@@ -6,8 +6,33 @@ import { exo2, orbitron } from "./font";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
-  title: "Noxus",
-  description: "Full-Stack Game Store App Powered by Next.js 16",
+  metadataBase: new URL(process.env.BETTER_AUTH_URL!),
+  title: "Nexora — Game Discovery Platform",
+  description:
+    "Noxus is a full-stack Game Discovery Platform Powered by Next.js 16, TypeScript, TailwindCSS, Prisma, PostgreSQL, and Better-auth.",
+  openGraph: {
+    title: "Noxus",
+    description:
+      "A full-stack Game Discovery Platform Powered by Next.js 16, TypeScript, TailwindCSS, Prisma, PostgreSQL, and Better-auth.",
+    url: process.env.BETTER_AUTH_URL,
+    siteName: "Noxus",
+    images: [
+      {
+        url: "/logo-red.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Noxus — Full-Stack E-Commerce Platform",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Noxus — Game Discovery Platform",
+    description:
+      "A full-stack Game Discovery Platform Powered by Next.js 16, TypeScript, TailwindCSS, Prisma, PostgreSQL, and Better-auth.",
+    images: ["/logo-red.jpg"],
+  },
 };
 
 export default function MainLayout({
