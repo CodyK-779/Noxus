@@ -4,7 +4,7 @@ import { Bookmark, Loader2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { WishlistItemType } from "@/components/utils/interfaceTypes";
 import { useSession } from "@/app/lib/auth-client";
-import { useState } from "react";
+import { useOptimistic, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { toggleWishList } from "@/actions/wishlist-action";
 import { toast } from "sonner";
@@ -43,19 +43,22 @@ const WishlistButton = ({
   path,
 }: Props) => {
   const { data: session } = useSession();
-  const [loading, setLoading] = useState(false);
+  const [loading, startTransition] = useTransition();
   const router = useRouter();
+
   const wishlisted =
     wishlistItems?.some((item) => item.game.id === gameId) || false;
+
+  const [hasLiked, setHasLiked] = useOptimistic(wishlisted);
 
   const handleWishlist = async () => {
     if (!session) {
       return router.push("/signIn");
     }
 
-    setLoading(true);
+    startTransition(async () => {
+      setHasLiked(!hasLiked);
 
-    try {
       const results = await toggleWishList(
         session.user.id,
         gameId,
@@ -74,29 +77,28 @@ const WishlistButton = ({
       } else {
         toast.error("Something went wrong");
       }
-    } finally {
-      setLoading(false);
-    }
+    });
   };
 
   return (
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
         <button
-          className={`absolute ${position} ${!hero && !loading && `${hidden}`} items-center justify-center bg-black border border-white p-1 rounded-full cursor-pointer z-10`}
+          className={`absolute ${position} ${!hero && !loading && `${hidden}`} items-center justify-center bg-black border border-white p-1 rounded-full ${loading ? "cursor-not-allowed" : "cursor-pointer"} z-10`}
           onClick={handleWishlist}
           disabled={loading}
+          aria-busy={loading}
         >
-          {loading ? (
-            <Loader2 className={`${size} animate-spin`} />
-          ) : (
-            <Bookmark className={`${size} ${wishlisted && "fill-white"}`} />
-          )}
+          <Bookmark className={`${size} ${hasLiked && "fill-white"}`} />
         </button>
       </TooltipTrigger>
       <TooltipContent>
         <p className="font-semibold">
-          {wishlisted ? "Remove Wishlist" : "Add to Wishlist"}
+          {loading
+            ? "Updating..."
+            : hasLiked
+              ? "Remove Wishlist"
+              : "Add to Wishlist"}
         </p>
       </TooltipContent>
     </Tooltip>

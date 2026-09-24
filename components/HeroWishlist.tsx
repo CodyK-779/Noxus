@@ -3,7 +3,7 @@
 import { WishlistItemType } from "@/components/utils/interfaceTypes";
 import { Bookmark, Loader2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { useState } from "react";
+import { startTransition, useOptimistic, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/app/lib/auth-client";
 import { toggleWishList } from "@/actions/wishlist-action";
@@ -34,11 +34,11 @@ const HeroWishlist = ({
 }: Props) => {
   const { data: session } = useSession();
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [loading, startTransition] = useTransition();
   const wishlisted =
     wishlistItems?.some((item) => item.gameId === gameId) || false;
 
-  const convertGenreArray = (genres: string[]) => {};
+  const [hasLiked, setHasLiked] = useOptimistic(wishlisted);
 
   const handleWishlist = async () => {
     if (!session) {
@@ -46,9 +46,9 @@ const HeroWishlist = ({
       return;
     }
 
-    setLoading(true);
+    startTransition(async () => {
+      setHasLiked(!hasLiked);
 
-    try {
       const results = await toggleWishList(
         session.user.id,
         gameId,
@@ -67,33 +67,27 @@ const HeroWishlist = ({
       } else {
         toast.error("Something went wrong");
       }
-    } finally {
-      setLoading(false);
-    }
+    });
   };
 
   return (
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
         <button
-          className="size-[38px] bg-white rounded-md flex items-center justify-center"
+          className={`size-[38px] bg-white rounded-md flex items-center justify-center ${loading ? "cursor-not-allowed" : "cursor-pointer"}`}
           onClick={handleWishlist}
           disabled={loading}
         >
-          {loading ? (
-            <Loader2 className="size-4 animate-spin text-neutral-900" />
-          ) : (
-            <Bookmark
-              className={`size-4 text-neutral-900 ${
-                wishlisted && "fill-neutral-900"
-              }`}
-            />
-          )}
+          <Bookmark
+            className={`size-4 text-neutral-900 ${
+              hasLiked && "fill-neutral-900"
+            }`}
+          />
         </button>
       </TooltipTrigger>
       <TooltipContent>
         <p className="font-semibold">
-          {wishlisted ? "Remove Wishlist" : "Add to Wishlist"}
+          {hasLiked ? "Remove Wishlist" : "Add to Wishlist"}
         </p>
       </TooltipContent>
     </Tooltip>

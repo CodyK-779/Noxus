@@ -1,10 +1,10 @@
 "use client";
 
-import { Eye, Bookmark, Loader2 } from "lucide-react";
+import { Eye, Bookmark } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { WishlistItemType } from "./utils/interfaceTypes";
-import { useState } from "react";
+import { useOptimistic, useTransition } from "react";
 import { free_game_data } from "@/data/free-data";
 import { useSession } from "@/app/lib/auth-client";
 import { useRouter } from "next/navigation";
@@ -30,12 +30,14 @@ const FreeGamesImages = ({
 }: Props) => {
   const { data: session } = useSession();
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [loading, startTransition] = useTransition();
   const data =
     game === "valorant" ? free_game_data.valorant : free_game_data.wuwa;
 
   const wishlisted =
     wishlistItems?.some((item) => item.gameId === data.id) || false;
+
+  const [hasWishlisted, setHasWishlisted] = useOptimistic(wishlisted);
 
   const handleWishlist = async () => {
     if (!session) {
@@ -43,9 +45,9 @@ const FreeGamesImages = ({
       return;
     }
 
-    setLoading(true);
+    startTransition(async () => {
+      setHasWishlisted(!hasWishlisted);
 
-    try {
       const results = await toggleWishList(
         session.user.id,
         data.id,
@@ -64,9 +66,7 @@ const FreeGamesImages = ({
       } else {
         toast.error("Something went wrong");
       }
-    } finally {
-      setLoading(false);
-    }
+    });
   };
 
   return (
@@ -101,19 +101,8 @@ const FreeGamesImages = ({
             onClick={handleWishlist}
             className="nox-white flex items-center gap-2 text-[10px] min-[350px]:text-[11px] sm:text-xs md:text-[11px] lg:text-xs xl:text-[13px] font-bold px-4 tracking-wide"
           >
-            {loading ? (
-              <>
-                <Loader2 className="size-3.5 animate-spin" />
-                Loading...
-              </>
-            ) : (
-              <>
-                <Bookmark
-                  className={`size-3.5 ${wishlisted && "fill-black"}`}
-                />
-                Wishlist
-              </>
-            )}
+            <Bookmark className={`size-3.5 ${hasWishlisted && "fill-black"}`} />
+            Wishlist
           </button>
         </div>
       </div>

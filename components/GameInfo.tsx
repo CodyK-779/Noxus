@@ -16,7 +16,7 @@ import {
   Users,
 } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useOptimistic, useState, useTransition } from "react";
 import {
   convertGenreArray,
   convertPlatformArray,
@@ -84,10 +84,14 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
   const { data: session } = useSession();
   const router = useRouter();
   const [largeScreen, setLargeScreen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, startTransition] = useTransition();
   const [showAllStores, setShowAllStores] = useState(false);
+
   const wishlisted =
     wishlistItem?.some((item) => item.gameId === game.id) || false;
+
+  const [hasLiked, setHasLiked] = useOptimistic(wishlisted);
+
   useEffect(() => {
     const updateSize = () => {
       setLargeScreen(window.innerWidth >= 1024);
@@ -103,9 +107,9 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
       return router.push("/signIn");
     }
 
-    setLoading(true);
+    startTransition(async () => {
+      setHasLiked(!hasLiked);
 
-    try {
       const result = await toggleWishList(
         session.user.id,
         game.id,
@@ -124,9 +128,7 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
       } else {
         toast.error("Something went wrong");
       }
-    } finally {
-      setLoading(false);
-    }
+    });
   };
 
   const scoreDetails = getScoreDetails(game.metacritic);
@@ -402,19 +404,10 @@ const GameInfo = ({ game, wishlistItem }: Props) => {
         size="lg"
         disabled={loading}
         onClick={handleWishlist}
-        className="flex items-center gap-2 w-full mt-6 font-semibold bg-gradient-to-r from-nox to-[#c01030] hover:from-[#c01030] hover:to-[#a00d26] text-white border-0 shadow-lg shadow-nox/25 transition-all hover:scale-[1.02]"
+        className={`flex items-center gap-2 w-full mt-6 font-semibold bg-gradient-to-r from-nox to-[#c01030] hover:from-[#c01030] hover:to-[#a00d26] text-white border-0 shadow-lg shadow-nox/25 transition-all hover:scale-[1.02] ${loading ? "cursor-not-allowed" : "cursor-pointer"}`}
       >
-        {loading ? (
-          <>
-            <Loader2 className="size-4 animate-spin" />
-            Loading...
-          </>
-        ) : (
-          <>
-            <Bookmark className={`size-4 ${wishlisted && "fill-white"}`} />
-            {wishlisted ? "Remove Wishlist" : "Add to Wishlist"}
-          </>
-        )}
+        <Bookmark className={`size-4 ${hasLiked && "fill-white"}`} />
+        {hasLiked ? "Remove Wishlist" : "Add to Wishlist"}
       </Button>
     </aside>
   );
